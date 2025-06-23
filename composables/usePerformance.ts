@@ -32,9 +32,8 @@ export const usePerformance = () => {
             loadTime.value = perf.loadTime || 0
         }
 
-        window.addEventListener("performance-update", handlePerformanceUpdate)
+        window.addEventListener("performance-update", handlePerformanceUpdate as EventListener)
 
-        // Get initial values from global state
         if (window.__GUARDIAN_PERF__) {
             const perf = window.__GUARDIAN_PERF__
             fps.value = perf.fps
@@ -44,7 +43,7 @@ export const usePerformance = () => {
         }
 
         return () => {
-            window.removeEventListener("performance-update", handlePerformanceUpdate)
+            window.removeEventListener("performance-update", handlePerformanceUpdate as EventListener)
             isMonitoring.value = false
         }
     }
