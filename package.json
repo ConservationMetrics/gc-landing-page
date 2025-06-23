@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^2.2.0",
     "@tailwindcss/vite": "^4.1.10",
     "nuxt": "^3.17.5",
     "tailwindcss": "^4.1.10",

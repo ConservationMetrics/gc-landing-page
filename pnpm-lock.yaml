@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@auth0/auth0-spa-js':
+        specifier: ^2.2.0
+        version: 2.2.0
       '@tailwindcss/vite':
         specifier: ^4.1.10
         version: 4.1.10(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
@@ -29,6 +32,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@auth0/auth0-spa-js@2.2.0':
+    resolution: {integrity: sha512-YaHHCxiSQxDb+Ju9gXOqcqgXWq8EkUSpZC4g24D3MoEBUaADKwOosrAnmjDZcslBZpnSFFdrl4dLYedAer3xlQ==}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -3613,6 +3619,8 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@auth0/auth0-spa-js@2.2.0': {}
 
   '@babel/code-frame@7.27.1':
     dependencies:
