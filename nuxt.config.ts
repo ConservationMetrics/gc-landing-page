@@ -5,6 +5,12 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
+  ssr: false, // spa mode for static deployment
+  nitro: {
+    prerender: {
+      routes: ['/']
+    }
+  },
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [
