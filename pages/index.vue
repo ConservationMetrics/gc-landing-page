@@ -153,7 +153,7 @@
   
   <script setup lang="ts">
   import { ref, onMounted } from 'vue'
-  import { usePerformance } from '../composables/usePerformance'
+  import { usePerformance } from '@/composables/usePerformance'
   import type { Auth0Client, User } from '@auth0/auth0-spa-js'
 
   const config = useRuntimeConfig()
