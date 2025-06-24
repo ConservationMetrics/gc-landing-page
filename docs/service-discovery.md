@@ -118,10 +118,13 @@ async function discoverServices() {
 // Environment-based community detection
 const communityName = process.env.COMMUNITY_NAME || "demo"
 
-// Template-based URL generation
-const generateServiceUrl = (serviceName, community) => {
-  return `https://${serviceName}.${community}.guardianconnector.net`
-}
+// Direct template literal usage in services array
+const services = [
+  { name: "Superset", url: `https://superset.${communityName}.guardianconnector.net` },
+  { name: "Windmill", url: `https://windmill.${communityName}.guardianconnector.net` },
+  { name: "Explorer", url: `https://explorer.${communityName}.guardianconnector.net` },
+  { name: "File Browser", url: `https://files.${communityName}.guardianconnector.net` },
+]
 
 // Example outputs:
 // COMMUNITY_NAME=demo     → https://superset.demo.guardianconnector.net

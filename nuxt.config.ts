@@ -35,8 +35,21 @@ export default defineNuxtConfig({
   hooks: {
     // build-time service discovery 
     "build:before": async () => {
-      console.log("🔍 Discovering available services...")
-      await discoverServices()
+      try {
+        console.log("🔍 Discovering available services...")
+        await discoverServices()
+      } catch (error) {
+        console.error('❌ Service discovery failed:', error)
+        // Continue build with empty services - never let service discovery break the build
+        try {
+          const fs = await import("fs/promises")
+          await fs.writeFile("./public/services.json", "[]")
+          console.log("💾 Created empty services.json to continue build")
+        } catch (writeError) {
+          console.error('❌ Failed to create empty services.json:', writeError)
+          // Even if we can't write the file, continue the build
+        }
+      }
     },
   }
 })
