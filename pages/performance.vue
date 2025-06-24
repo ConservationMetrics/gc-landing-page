@@ -49,12 +49,12 @@
               <h3 class="text-sm font-medium text-gray-400">Frames Per Second</h3>
               <div :class="[
                 'w-3 h-3 rounded-full',
-                fps.value >= 50 ? 'bg-green-500' : fps.value >= 30 ? 'bg-yellow-500' : 'bg-red-500'
+                fps >= 50 ? 'bg-green-500' : fps >= 30 ? 'bg-yellow-500' : 'bg-red-500'
               ]"></div>
             </div>
-            <div class="text-3xl font-bold text-white">{{ fps.value }}</div>
+            <div class="text-3xl font-bold text-white">{{ fps }}</div>
             <div class="text-xs text-gray-500 mt-1">
-              {{ fps.value >= 50 ? 'Excellent' : fps.value >= 30 ? 'Good' : 'Poor' }}
+              {{ fps >= 50 ? 'Excellent' : fps >= 30 ? 'Good' : 'Poor' }}
             </div>
           </div>
   
@@ -64,10 +64,10 @@
               <h3 class="text-sm font-medium text-gray-400">Memory Usage</h3>
               <div :class="[
                 'w-3 h-3 rounded-full',
-                memory.value < 50 ? 'bg-green-500' : memory.value < 100 ? 'bg-yellow-500' : 'bg-red-500'
+                memory < 50 ? 'bg-green-500' : memory < 100 ? 'bg-yellow-500' : 'bg-red-500'
               ]"></div>
             </div>
-            <div class="text-3xl font-bold text-white">{{ memory.value }}</div>
+            <div class="text-3xl font-bold text-white">{{ memory }}</div>
             <div class="text-xs text-gray-500 mt-1">MB used</div>
           </div>
   
@@ -77,10 +77,10 @@
               <h3 class="text-sm font-medium text-gray-400">Network</h3>
               <div :class="[
                 'w-3 h-3 rounded-full',
-                networkStatus.value === 'online' ? 'bg-green-500' : 'bg-red-500'
+                networkStatus === 'online' ? 'bg-green-500' : 'bg-red-500'
               ]"></div>
             </div>
-            <div class="text-3xl font-bold text-white capitalize">{{ networkStatus.value }}</div>
+            <div class="text-3xl font-bold text-white capitalize">{{ networkStatus }}</div>
             <div class="text-xs text-gray-500 mt-1">{{ connectionType }}</div>
           </div>
   
@@ -90,10 +90,10 @@
               <h3 class="text-sm font-medium text-gray-400">Load Time</h3>
               <div :class="[
                 'w-3 h-3 rounded-full',
-                loadTime.value < 1000 ? 'bg-green-500' : loadTime.value < 3000 ? 'bg-yellow-500' : 'bg-red-500'
+                loadTime < 1000 ? 'bg-green-500' : loadTime < 3000 ? 'bg-yellow-500' : 'bg-red-500'
               ]"></div>
             </div>
-            <div class="text-3xl font-bold text-white">{{ loadTime.value }}</div>
+            <div class="text-3xl font-bold text-white">{{ loadTime }}</div>
             <div class="text-xs text-gray-500 mt-1">milliseconds</div>
           </div>
         </div>
@@ -239,11 +239,6 @@
     memory, 
     networkStatus, 
     loadTime 
-  }: {
-    fps: { readonly value: number }
-    memory: { readonly value: number }
-    networkStatus: { readonly value: string }
-    loadTime: { readonly value: number }
   } = usePerformance()
   
   // Keep the detailed monitoring for the performance page

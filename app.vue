@@ -6,7 +6,7 @@
 
 <script setup>
 // Global performance tracking for the entire app
-if (process.client) {
+if (import.meta.client) {
   const globalPerf = {
     fps: 0,
     memory: 0,

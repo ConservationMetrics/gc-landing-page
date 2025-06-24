@@ -29,7 +29,7 @@ export default defineNuxtConfig({
       auth0Domain: process.env.AUTH0_DOMAIN || "",
       auth0ClientId: process.env.AUTH0_CLIENT_ID || "",
       auth0RedirectUri: process.env.AUTH0_REDIRECT_URI || "",
-      authEnabled: !!(process.env.AUTH0_DOMAIN && process.env.AUTH0_CLIENT_ID),
+      authEnabled: false,
     },
   },
   hooks: {
@@ -69,9 +69,13 @@ async function discoverServices() {
 
       clearTimeout(timeoutId)
 
-      // Consider service available if it responds (even with auth errors)
-      // 2xx = success, 3xx = redirects, 4xx = client errors (including 401/403), 5xx = server errors
-      const isAvailable = response.status < 500
+      // Consider service available if it responds with success, redirect, or auth required
+      // 2xx = success, 3xx = redirects
+      // 401/403 = auth required (service exists, just needs login)
+      // 404 = not found (endpoint doesn't exist)
+      // 5xx = server errors = not available
+      const isAvailable = (response.status >= 200 && response.status < 400) ||
+        (response.status === 401 || response.status === 403)
 
       if (isAvailable) {
         console.log(`✅ ${service.name} is available (${response.status})`)

@@ -139,7 +139,7 @@
       <footer class="border-t border-white/10 bg-black/20 backdrop-blur-sm mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div class="text-center text-gray-400">
-            <p>&copy; 2024 Guardian Connector. Built with Nuxt 3 & Tailwind CSS.</p>
+            <p>&copy; 2025 Guardian Connector.</p>
             <p class="text-sm mt-2">
               Community: {{ communityName }} | 
               Services: {{ availableServices.length }} | 
