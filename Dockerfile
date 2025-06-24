@@ -1,5 +1,5 @@
 # Use the official Node.js image from DockerHub
-FROM node:24-slim
+FROM node:20.15.0-slim
 
 # Set the working directory
 RUN mkdir -p /app
@@ -16,6 +16,16 @@ RUN pnpm install
 
 # Copy the application files into the container
 COPY . /app
+
+# Build arguments for environment variables
+ARG COMMUNITY_NAME=demo
+ARG AUTH0_DOMAIN=""
+ARG AUTH0_CLIENT_ID=""
+
+# Set environment variables for build
+ENV COMMUNITY_NAME=$COMMUNITY_NAME
+ENV AUTH0_DOMAIN=$AUTH0_DOMAIN
+ENV AUTH0_CLIENT_ID=$AUTH0_CLIENT_ID
 
 # Build the application
 RUN pnpm run build
