@@ -1,13 +1,6 @@
 <template>
     <div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <!-- Performance indicator -->
-      <div v-if="hasPerformanceAccess" class="fixed top-4 right-4 z-50">
-        <div class="bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1 text-xs text-white/70 space-y-1">
-          <div>{{ loadTime }}ms load</div>
-          <div>{{ fps }} FPS</div>
-          <div>{{ memory }}MB</div>
-        </div>
-      </div>
+    
   
       <!-- Header -->
       <header class="border-b border-white/10 bg-black/20 backdrop-blur-sm">
@@ -23,13 +16,7 @@
             
             <!-- Navigation -->
             <div class="flex items-center space-x-4">
-              <NuxtLink 
-                v-if="hasPerformanceAccess"
-                to="/performance" 
-                class="text-gray-400 hover:text-white transition-colors text-sm"
-              >
-                Performance
-              </NuxtLink>
+           
               
               <!-- Auth controls (only show if auth is enabled) -->
               <div v-if="authEnabled && !isAuthenticated">
@@ -145,7 +132,7 @@
               Community: {{ communityName }} | 
               Services: {{ availableServices.length }} | 
               Auth: {{ authEnabled ? 'Enabled' : 'Disabled' }}
-              <span v-if="hasPerformanceAccess" class="text-green-400"> | Performance Access</span>
+             
             </p>
           </div>
         </div>
@@ -168,7 +155,7 @@
 
   const communityName = config.public.communityName
   const authEnabled = config.public.authEnabled
-  
+  console.log(config.public)
   // Auth state
   const isAuthenticated = ref(false)
   const user = ref<User | null>(null)
@@ -176,7 +163,7 @@
   // Generate services list based on environment variables
   const availableServices = computed(() => {
     const services = []
-    
+   
     if (config.public.supersetEnabled) {
       services.push({
         name: 'Superset',
@@ -208,13 +195,7 @@
     return services
   })
   
-  // Check if user has access to performance features
-  const hasPerformanceAccess = computed(() => {
-    if (!authEnabled || !isAuthenticated.value || !user.value?.email) {
-      return false
-    }
-    return user.value.email.includes('conservationmetrics.com')
-  })
+
 
   let auth0Client: Auth0Client | null = null
   
