@@ -1,12 +1,12 @@
 # Guardian Connector Landing Page
 
-A modern, lightweight landing page for Guardian Connector communities with real-time performance monitoring, build-time service discovery, and optional authentication.
+A modern, lightweight landing page for Guardian Connector communities with real-time performance monitoring, environment-based service configuration, and optional authentication.
 
 ## 🚀 Features
 
 ### Core Functionality
-- **Multi-tenant Community Support** - Dynamic service discovery based on community name
-- **Build-time Service Discovery** - Zero runtime HTTP requests for optimal performance
+- **Multi-tenant Community Support** - Dynamic service URLs based on community name
+- **Environment-based Service Configuration** - Simple boolean flags for service availability
 - **Real-time Performance Monitoring** - App-wide FPS, memory, and network tracking
 - **Optional Auth0 Integration** - Secure authentication with role-based access control
 - **Static Site Generation** - Fast, CDN-friendly deployment
@@ -19,12 +19,12 @@ A modern, lightweight landing page for Guardian Connector communities with real-
 - **Role-based Access** - Performance features restricted to authorized users
 - **Minimal Overhead** - <1KB of monitoring code
 
-### Service Discovery
-- **Build-time Discovery** - Services checked during build, not runtime
+### Service Configuration
+- **Environment-based Flags** - Simple boolean variables to enable/disable services
 - **Community-aware URLs** - Dynamic service URLs based on `COMMUNITY_NAME`
-- **Auth-friendly Logic** - Properly handles 401/403 responses as "available"
-- **Graceful Degradation** - Never breaks builds, creates empty config if needed
-- **Parallel Checking** - Fast discovery with 5-second timeouts
+- **No Build-time Complexity** - Fast builds without network requests
+- **Predictable Configuration** - Services are either enabled or disabled explicitly
+- **Easy Deployment** - Just set environment variables in your deployment platform
 
 ## 🏗️ Architecture
 
@@ -93,6 +93,12 @@ COMMUNITY_NAME=demo
 # Optional: Auth0 Configuration (enables authentication)
 AUTH0_DOMAIN=your-tenant.auth0.com
 AUTH0_CLIENT_ID=your-client-id
+
+# Service Availability Flags (set to 'true' to enable each service)
+SUPERSET_ENABLED=true
+WINDMILL_ENABLED=true
+EXPLORER_ENABLED=false
+FILES_BROWSER_ENABLED=true
 ```
 
 **Create `.env.example` file:**
@@ -104,6 +110,12 @@ COMMUNITY_NAME=demo
 AUTH0_DOMAIN=your-tenant.auth0.com
 AUTH0_CLIENT_ID=your-client-id
 
+# Service Availability Flags (Optional - set to 'true' to enable each service)
+SUPERSET_ENABLED=true
+WINDMILL_ENABLED=true
+EXPLORER_ENABLED=false
+FILES_BROWSER_ENABLED=true
+
 # Note: AUTH0_REDIRECT_URI is not needed as we use /login automatically
 ```
 
@@ -114,7 +126,7 @@ AUTH0_CLIENT_ID=your-client-id
 ```
 gc-landing-experiment/
 ├── app.vue                    # Global performance monitoring
-├── nuxt.config.ts            # Build configuration & service discovery
+├── nuxt.config.ts            # Build configuration & environment variables
 ├── composables/
 │   └── usePerformance.ts     # Performance monitoring composable
 ├── pages/
@@ -124,10 +136,8 @@ gc-landing-experiment/
 ├── components/
 │   └── GlobalPerformanceIndicator.vue
 ├── docs/
-│   ├── service-discovery.md  # Service discovery documentation
 │   └── performance-monitoring.md
-└── public/
-    └── services.json         # Generated service configuration
+└── .env.example              # Environment variables template
 ```
 
 ### Available Scripts
@@ -147,30 +157,24 @@ pnpm lint             # Lint code
 pnpm lint:fix         # Fix linting issues
 ```
 
-### Service Discovery
+### Service Configuration
 
-Service discovery runs automatically during build:
+Services are configured via environment variables:
 
 ```bash
-# Development
-pnpm dev
-# Service discovery runs automatically
+# Enable specific services
+SUPERSET_ENABLED=true
+WINDMILL_ENABLED=true
+EXPLORER_ENABLED=false
+FILES_BROWSER_ENABLED=true
 
-# Production build
-COMMUNITY_NAME=your-community pnpm generate
-# Services checked and services.json generated
+# The app will show only enabled services
 ```
 
 **Example Output:**
 ```bash
-🔍 Discovering available services...
-🔍 Checking services for community: demo
-✅ Windmill is available (200)
-❌ File Browser is not available (404)
-✅ Superset is available (401)
-✅ Explorer is available (200)
-📊 Found 3/4 available services
-💾 Services configuration saved to public/services.json
+# With SUPERSET_ENABLED=true, WINDMILL_ENABLED=true, EXPLORER_ENABLED=false, FILES_BROWSER_ENABLED=true
+# The app will show: Superset, Windmill, and File Browser (3 services)
 ```
 
 ## 🔐 Authentication
@@ -233,7 +237,7 @@ Access detailed performance metrics at `/performance`:
 
 ```bash
 # Build static site
-COMMUNITY_NAME=your-community pnpm generate
+COMMUNITY_NAME=your-community SUPERSET_ENABLED=true WINDMILL_ENABLED=true pnpm generate
 
 # Deploy .output/public directory
 # (works with any static hosting: Netlify, Vercel, S3, etc.)
@@ -245,14 +249,22 @@ See [Dockerfile](./Dockerfile) for the complete configuration.
 
 **Build and run:**
 ```bash
-# Build with community name only
-docker build --build-arg COMMUNITY_NAME=your-community -t guardian-connector .
+# Build with community name and service flags
+docker build \
+  --build-arg COMMUNITY_NAME=your-community \
+  --build-arg SUPERSET_ENABLED=true \
+  --build-arg WINDMILL_ENABLED=true \
+  --build-arg EXPLORER_ENABLED=false \
+  --build-arg FILES_BROWSER_ENABLED=true \
+  -t guardian-connector .
 
 # Build with full auth setup
 docker build \
   --build-arg COMMUNITY_NAME=your-community \
   --build-arg AUTH0_DOMAIN=your-tenant.auth0.com \
   --build-arg AUTH0_CLIENT_ID=your-client-id \
+  --build-arg SUPERSET_ENABLED=true \
+  --build-arg WINDMILL_ENABLED=true \
   -t guardian-connector .
 
 # Run the container on port 8080
@@ -263,37 +275,36 @@ docker run -p 8080:8080 guardian-connector
 
 ```bash
 # Development
-COMMUNITY_NAME=demo pnpm generate
+COMMUNITY_NAME=demo SUPERSET_ENABLED=true WINDMILL_ENABLED=true pnpm generate
 
 # Staging
-COMMUNITY_NAME=staging pnpm generate
+COMMUNITY_NAME=staging SUPERSET_ENABLED=true WINDMILL_ENABLED=true EXPLORER_ENABLED=true pnpm generate
 
 # Production
-COMMUNITY_NAME=production pnpm generate
+COMMUNITY_NAME=production SUPERSET_ENABLED=true WINDMILL_ENABLED=true EXPLORER_ENABLED=true FILES_BROWSER_ENABLED=true pnpm generate
 ```
 
-## 🔍 Service Discovery Details
+## 🔍 Service Configuration Details
 
 ### How It Works
 
-1. **Build Hook Execution** - Runs during `nuxt build` or `nuxt generate`
-2. **Service Checking** - Parallel HEAD requests to all community services
-3. **Status Code Logic** - Accepts 200-399 and 401/403, rejects 404 and 500+
-4. **Output Generation** - Creates `public/services.json` with available services
+1. **Environment Variables** - Set boolean flags for each service
+2. **Runtime Generation** - Services list generated from enabled flags
+3. **Dynamic URLs** - Service URLs built using `COMMUNITY_NAME`
+4. **Conditional Rendering** - Only enabled services shown in UI
 
-### Service Status Handling
+### Service Flags
 
-| Status | Meaning | Action |
-|--------|---------|---------|
-| **200-299** | Success | ✅ Include service |
-| **300-399** | Redirect | ✅ Include service |
-| **401/403** | Auth Required | ✅ Include service |
-| **404** | Not Found | ❌ Exclude service |
-| **500+** | Server Error | ❌ Exclude service |
+| Flag | Service | URL Pattern |
+|------|---------|-------------|
+| `SUPERSET_ENABLED` | Superset | `https://superset.{community}.guardianconnector.net` |
+| `WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.guardianconnector.net` |
+| `EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.guardianconnector.net` |
+| `FILES_BROWSER_ENABLED` | File Browser | `https://files.{community}.guardianconnector.net` |
 
 ### Multi-Tenant Support
 
-Services are dynamically discovered based on community:
+Services are dynamically configured based on community:
 
 ```bash
 # Community: demo
@@ -309,16 +320,16 @@ https://windmill.acme.guardianconnector.net
 
 ### Common Issues
 
-#### Service Discovery Fails
+#### Services Not Showing
 ```bash
-# Check network connectivity
-curl -I https://superset.demo.guardianconnector.net
+# Check environment variables
+echo $SUPERSET_ENABLED
+echo $WINDMILL_ENABLED
+echo $EXPLORER_ENABLED
+echo $FILES_BROWSER_ENABLED
 
-# Verify environment variables
-echo $COMMUNITY_NAME
-
-# Check build logs
-pnpm generate 2>&1 | grep "Service discovery"
+# Verify they are set to 'true' (string)
+SUPERSET_ENABLED=true
 ```
 
 #### Performance Monitoring Not Working
@@ -346,13 +357,13 @@ echo $AUTH0_CLIENT_ID
 # Enable verbose logging
 DEBUG=nuxt:* pnpm dev
 
-# Check generated services
-cat public/services.json
+# Check environment variables
+echo $COMMUNITY_NAME
+echo $SUPERSET_ENABLED
 ```
 
 ## 📚 Documentation
 
-- [Service Discovery Implementation](./docs/service-discovery.md) - Detailed service discovery guide
 - [Performance Monitoring Guide](./docs/performance-monitoring.md) - Comprehensive performance monitoring documentation
 
 ## 🤝 Contributing
@@ -368,7 +379,7 @@ cat public/services.json
 - Follow Vue 3 Composition API patterns
 - Use TypeScript for type safety
 - Maintain performance monitoring standards
-- Test service discovery with different communities
+- Test service configuration with different environment variables
 - Ensure authentication flows work correctly
 
 ## 📄 License

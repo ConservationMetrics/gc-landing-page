@@ -172,7 +172,41 @@
   // Auth state
   const isAuthenticated = ref(false)
   const user = ref<User | null>(null)
-  const availableServices = ref<Array<Service>>([])
+  
+  // Generate services list based on environment variables
+  const availableServices = computed(() => {
+    const services = []
+    
+    if (config.public.supersetEnabled) {
+      services.push({
+        name: 'Superset',
+        url: `https://superset.${communityName}.guardianconnector.net`
+      })
+    }
+    
+    if (config.public.windmillEnabled) {
+      services.push({
+        name: 'Windmill',
+        url: `https://windmill.${communityName}.guardianconnector.net`
+      })
+    }
+    
+    if (config.public.explorerEnabled) {
+      services.push({
+        name: 'Explorer',
+        url: `https://explorer.${communityName}.guardianconnector.net`
+      })
+    }
+    
+    if (config.public.filesEnabled) {
+      services.push({
+        name: 'File Browser',
+        url: `https://files.${communityName}.guardianconnector.net`
+      })
+    }
+    
+    return services
+  })
   
   // Check if user has access to performance features
   const hasPerformanceAccess = computed(() => {
@@ -208,21 +242,6 @@
       // If auth is disabled, consider user as "authenticated"
       isAuthenticated.value = true
     }
-  
-    try {
-      const response = await fetch('/services.json')
-      availableServices.value = await response.json()
-    } catch (error) {
-      console.log('No services.json found, using empty array')
-    }
-  
-    // Calculate performance score
-    // if (process.client) {
-    //   setTimeout(() => {
-    //     const perfData = performance.getEntriesByType('navigation')[0]
-    //     performanceScore.value = Math.round(perfData.loadEventEnd - perfData.fetchStart)
-    //   }, 100)
-    // }
   })
   
   const login = async () => {
