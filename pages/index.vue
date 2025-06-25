@@ -182,12 +182,10 @@
     return user.value.email.includes('conservationmetrics.com')
   })
 
-  // Auth0 client (will be initialized on client-side if auth is enabled)
   let auth0Client: Auth0Client | null = null
   
   onMounted(async () => {
     console.log('onMounted', window.location.origin)
-    // Initialize Auth0 only if auth is enabled
     if (import.meta.client && authEnabled) {
       const { createAuth0Client } = await import('@auth0/auth0-spa-js')
         
