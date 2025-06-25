@@ -181,20 +181,7 @@
     }
     return user.value.email.includes('conservationmetrics.com')
   })
-  
-  // Remove local performance tracking and use global composable
-  
-  
-  // Remove this local implementation:
-  // const performanceScore = ref(0)
-  // ... local performance calculation code
-  
-  // Replace performanceScore with loadTime from composable
-  // Change template from {{ performanceScore }}ms to {{ loadTime }}ms
-  
-  // Performance tracking
-  // const performanceScore = ref(0)
-  
+
   // Auth0 client (will be initialized on client-side if auth is enabled)
   let auth0Client: Auth0Client | null = null
   
