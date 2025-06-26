@@ -40,6 +40,7 @@ A modern, lightweight landing page for Guardian Connector communities with envir
 - Node.js 18+ 
 - pnpm (recommended) or npm
 - Git
+- Docker and Docker Compose
 
 ### Quick Start
 
@@ -55,8 +56,8 @@ pnpm install
 cp .env.example .env
 # Edit .env with your configuration
 
-# Start development server
-pnpm dev
+# Start the application (builds and runs with docker-compose)
+make start
 ```
 
 ### Environment Variables
@@ -106,6 +107,8 @@ NUXT_FILES_BROWSER_ENABLED=true
 gc-landing-experiment/
 ├── app.vue                    # Main app layout
 ├── nuxt.config.ts            # Build configuration & environment variables
+├── docker-compose.yml        # Docker Compose configuration
+├── Makefile                  # Development and deployment commands
 ├── pages/
 │   ├── index.vue             # Main landing page
 │   └── login.vue             # Auth0 redirect handler
@@ -113,21 +116,29 @@ gc-landing-experiment/
 └── .env.example              # Environment variables template
 ```
 
-### Available Scripts
+### Available Commands
 
 ```bash
-# Development
-pnpm dev              # Start development server
-pnpm build            # Build for production
-pnpm generate         # Generate static site
-pnpm preview          # Preview production build
+# Docker Commands (Recommended)
+make start   # Build and start the application
+make up      # Start the application (if already built)
+make down    # Stop the application
+make logs    # Show application logs
+make restart # Restart the application
+make clean   # Remove containers and images
+
+# Development Commands
+make dev     # Start development server
+pnpm build   # Build for production
+pnpm generate # Generate static site
+pnpm preview # Preview production build
 
 # Testing
-pnpm test             # Run tests (if configured)
+pnpm test    # Run tests (if configured)
 
 # Linting
-pnpm lint             # Lint code
-pnpm lint:fix         # Fix linting issues
+pnpm lint    # Lint code
+pnpm lint:fix # Fix linting issues
 ```
 
 ### Service Configuration
@@ -174,6 +185,37 @@ NUXT_FILES_BROWSER_ENABLED=true
 
 ## 🚀 Deployment
 
+### Docker Compose (Recommended)
+
+The easiest way to deploy is using Docker Compose with the provided Makefile:
+
+```bash
+# Build and start with current .env configuration
+make start
+
+# Stop the application
+make down
+
+# View logs
+make logs
+```
+
+### Manual Docker Commands
+
+```bash
+# Build and start with docker-compose
+docker-compose up --build -d
+
+# Start without rebuilding
+docker-compose up -d
+
+# Stop the application
+docker-compose down
+
+# View logs
+docker-compose logs -f
+```
+
 ### Static Site Generation
 
 ```bash
@@ -182,28 +224,6 @@ NUXT_COMMUNITY_NAME=your-community NUXT_SUPERSET_ENABLED=true NUXT_WINDMILL_ENAB
 
 # Deploy .output/public directory
 # (works with any static hosting: Netlify, Vercel, S3, etc.)
-```
-
-### Docker Deployment
-
-See [Dockerfile](./Dockerfile) for the complete configuration.
-
-**Build and run:**
-```bash
-# Build the image
-docker build -t guardian-connector .
-
-# Run with environment variables
-docker run -p 8080:8080 --env-file .env guardian-connector
-
-# Or run with individual environment variables
-docker run -p 8080:8080 \
-  -e NUXT_COMMUNITY_NAME=your-community \
-  -e NUXT_AUTH0_DOMAIN=your-tenant.auth0.com \
-  -e NUXT_AUTH0_CLIENT_ID=your-client-id \
-  -e NUXT_SUPERSET_ENABLED=true \
-  -e NUXT_WINDMILL_ENABLED=true \
-  guardian-connector
 ```
 
 ### Environment-Specific Builds
@@ -275,6 +295,16 @@ echo $NUXT_AUTH0_DOMAIN
 echo $NUXT_AUTH0_CLIENT_ID
 
 # Check browser network tab for redirect issues
+```
+
+#### Docker Issues
+```bash
+# Clean up and rebuild
+make clean
+make start
+
+# Check logs
+make logs
 ```
 
 ### Debug Mode
