@@ -19,22 +19,22 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // Server-side (build-time) config
-    communityName: process.env.NUXT_COMMUNITY_NAME || "demo",
-    auth0Domain: process.env.NUXT_AUTH0_DOMAIN || "",
-    auth0ClientId: process.env.NUXT_AUTH0_CLIENT_ID || "",
+    communityName: "demo",
+    auth0Domain: "",
+    auth0ClientId: "",
 
-    // Public config (client-side) - uses NUXT_PUBLIC_ prefix
+    // Public config (client-side) - Nuxt automatically handles NUXT_PUBLIC_ prefixed env vars
     public: {
-      communityName: process.env.NUXT_PUBLIC_COMMUNITY_NAME || process.env.NUXT_COMMUNITY_NAME || "demo",
-      auth0Domain: process.env.NUXT_PUBLIC_AUTH0_DOMAIN || process.env.NUXT_AUTH0_DOMAIN || "",
-      auth0ClientId: process.env.NUXT_PUBLIC_AUTH0_CLIENT_ID || process.env.NUXT_AUTH0_CLIENT_ID || "",
-      auth0RedirectUri: process.env.NUXT_PUBLIC_AUTH0_REDIRECT_URI || process.env.NUXT_AUTH0_REDIRECT_URI || "",
-      authEnabled: !!(process.env.NUXT_PUBLIC_AUTH0_DOMAIN || process.env.NUXT_AUTH0_DOMAIN) && !!(process.env.NUXT_PUBLIC_AUTH0_CLIENT_ID || process.env.NUXT_AUTH0_CLIENT_ID),
+      communityName: "demo",
+      auth0Domain: "",
+      auth0ClientId: "",
+      auth0RedirectUri: "",
+      authEnabled: true,
       // Service availability flags
-      supersetEnabled: (process.env.NUXT_PUBLIC_SUPERSET_ENABLED || process.env.NUXT_SUPERSET_ENABLED) === 'true',
-      windmillEnabled: (process.env.NUXT_PUBLIC_WINDMILL_ENABLED || process.env.NUXT_WINDMILL_ENABLED) === 'true',
-      explorerEnabled: (process.env.NUXT_PUBLIC_EXPLORER_ENABLED || process.env.NUXT_EXPLORER_ENABLED) === 'true',
-      filesEnabled: (process.env.NUXT_PUBLIC_FILES_BROWSER_ENABLED || process.env.NUXT_FILES_BROWSER_ENABLED) === 'true',
+      supersetEnabled: false,
+      windmillEnabled: false,
+      explorerEnabled: false,
+      filesEnabled: false,
     },
   },
 })
