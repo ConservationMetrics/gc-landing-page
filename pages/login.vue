@@ -51,11 +51,7 @@ const error = ref('')
 
 onMounted(async () => {
   try {
-    // Only handle Auth0 if it's enabled
-    if (!config.public.authEnabled) {
-      router.push('/')
-      return
-    }
+
 
     // Initialize Auth0 client
     const { createAuth0Client } = await import('@auth0/auth0-spa-js')
