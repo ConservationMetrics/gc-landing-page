@@ -19,22 +19,22 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // Server-side (build-time) config
-    communityName: process.env.COMMUNITY_NAME || "demo",
-    auth0Domain: process.env.AUTH0_DOMAIN || "",
-    auth0ClientId: process.env.AUTH0_CLIENT_ID || "",
+    communityName: "demo",
+    auth0Domain: "",
+    auth0ClientId: "",
 
     // Public config (client-side)
     public: {
-      communityName: process.env.COMMUNITY_NAME || "demo",
-      auth0Domain: process.env.AUTH0_DOMAIN || "",
-      auth0ClientId: process.env.AUTH0_CLIENT_ID || "",
-      auth0RedirectUri: process.env.AUTH0_REDIRECT_URI || "",
-      authEnabled: !!(process.env.AUTH0_DOMAIN && process.env.AUTH0_CLIENT_ID),
+      communityName: "demo",
+      auth0Domain: "",
+      auth0ClientId: "",
+      auth0RedirectUri: "",
+      authEnabled: true,
       // Service availability flags
-      supersetEnabled: process.env.SUPERSET_ENABLED === 'true',
-      windmillEnabled: process.env.WINDMILL_ENABLED === 'true',
-      explorerEnabled: process.env.EXPLORER_ENABLED === 'true',
-      filesEnabled: process.env.FILES_BROWSER_ENABLED === 'true',
+      supersetEnabled: process.env.NUXT_SUPERSET_ENABLED === 'true',
+      windmillEnabled: process.env.NUXT_WINDMILL_ENABLED === 'true',
+      explorerEnabled: process.env.NUXT_EXPLORER_ENABLED === 'true',
+      filesEnabled: process.env.NUXT_FILES_BROWSER_ENABLED === 'true',
     },
   },
 })
