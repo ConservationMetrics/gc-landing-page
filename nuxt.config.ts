@@ -29,7 +29,6 @@ export default defineNuxtConfig({
       auth0Domain: "",
       auth0ClientId: "",
       auth0RedirectUri: "",
-      authEnabled: true,
       // Service availability flags
       supersetEnabled: false,
       windmillEnabled: false,

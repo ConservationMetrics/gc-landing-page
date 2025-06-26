@@ -18,8 +18,8 @@
             <div class="flex items-center space-x-4">
            
               
-              <!-- Auth controls (only show if auth is enabled) -->
-              <div v-if="authEnabled && !isAuthenticated">
+              <!-- Auth controls -->
+              <div v-if="!isAuthenticated">
                 <button
                   @click="login"
                   class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -28,7 +28,7 @@
                 </button>
               </div>
               
-              <div v-else-if="authEnabled && isAuthenticated" class="flex items-center space-x-4">
+              <div v-else class="flex items-center space-x-4">
                 <div class="text-sm text-gray-300">
                   Welcome, {{ user?.name || user?.email }}
                 </div>
@@ -38,11 +38,6 @@
                 >
                   Sign Out
                 </button>
-              </div>
-  
-              <!-- Show auth status when disabled -->
-              <div v-else-if="!authEnabled" class="text-xs text-gray-500">
-                Auth Disabled
               </div>
             </div>
           </div>
@@ -58,15 +53,10 @@
           <p class="text-xl text-gray-300 max-w-2xl mx-auto">
             Access your community tools and resources in one place
           </p>
-          <div v-if="!authEnabled" class="mt-4">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-              Open Access Mode
-            </span>
-          </div>
         </div>
   
-        <!-- Authentication Gate (only show if auth is enabled and user not authenticated) -->
-        <div v-if="authEnabled && !isAuthenticated" class="text-center py-16">
+        <!-- Authentication Gate (show when user not authenticated) -->
+        <div v-if="!isAuthenticated" class="text-center py-16">
           <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto">
             <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +74,7 @@
           </div>
         </div>
   
-        <!-- Services Grid (show when authenticated OR when auth is disabled) -->
+        <!-- Services Grid (show when authenticated) -->
         <div v-else-if="availableServices.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="service in availableServices"
@@ -131,7 +121,7 @@
             <p class="text-sm mt-2">
               Community: {{ communityName }} | 
               Services: {{ availableServices.length }} | 
-              Auth: {{ authEnabled ? 'Enabled' : 'Disabled' }}
+              Auth: Enabled
              
             </p>
           </div>
@@ -146,16 +136,11 @@
   import type { Auth0Client, User } from '@auth0/auth0-spa-js'
 
   const config = useRuntimeConfig()
-  const { fps, memory, networkStatus, loadTime } = usePerformance()
-
-  interface Service {
-    name: string
-    url: string
-  }
+ 
 
   const communityName = config.public.communityName
-  const authEnabled = config.public.authEnabled
   console.log(config.public)
+  console.log(config)
   // Auth state
   const isAuthenticated = ref(false)
   const user = ref<User | null>(null)
@@ -201,7 +186,7 @@
   
   onMounted(async () => {
     console.log('onMounted', window.location.origin)
-    if (import.meta.client && authEnabled) {
+    if (import.meta.client) {
       const { createAuth0Client } = await import('@auth0/auth0-spa-js')
         
       auth0Client = await createAuth0Client({
@@ -219,9 +204,6 @@
         console.log('User is authenticated')
         console.log(user.value)
       }
-    } else if (!authEnabled) {
-      // If auth is disabled, consider user as "authenticated"
-      isAuthenticated.value = true
     }
   })
   

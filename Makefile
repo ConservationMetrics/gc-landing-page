@@ -14,31 +14,36 @@ help:
 
 # Build and start the application (recommended)
 start:
-	docker-compose up --build -d
+	docker build -t gc-landing-experiment .
+	docker run -d --name gc-landing-experiment-container -p 8080:8080 --env-file .env gc-landing-experiment
 
 # Start the application (if already built)
 up:
-	docker-compose up -d
+	docker run -d --name gc-landing-experiment-container -p 8080:8080 --env-file .env gc-landing-experiment
 
 # Build the Docker image with current .env
 build:
-	docker-compose build
+	docker build -t gc-landing-experiment .
 
 # Stop the application
 down:
-	docker-compose down
+	docker stop gc-landing-experiment-container || true
+	docker rm gc-landing-experiment-container || true
 
 # Restart the application
 restart:
-	docker-compose restart
+	make down
+	make up
 
 # Show logs
 logs:
-	docker-compose logs -f
+	docker logs -f gc-landing-experiment-container
 
 # Clean up containers and images
 clean:
-	docker-compose down --rmi all --volumes --remove-orphans
+	docker stop gc-landing-experiment-container || true
+	docker rm gc-landing-experiment-container || true
+	docker rmi gc-landing-experiment || true
 
 # Development server
 dev:
