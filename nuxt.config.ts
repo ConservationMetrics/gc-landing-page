@@ -7,9 +7,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false, // spa mode for static deployment
   nitro: {
-    prerender: {
-      routes: ['/']
-    }
+    prerender: {}
   },
   css: ['~/assets/css/main.css'],
   vite: {
@@ -22,13 +20,11 @@ export default defineNuxtConfig({
     communityName: "demo",
     auth0Domain: "",
     auth0ClientId: "",
+    auth0RedirectUri: "",
 
     // Public config (client-side) - Nuxt automatically handles NUXT_PUBLIC_ prefixed env vars
     public: {
       communityName: "demo",
-      auth0Domain: "",
-      auth0ClientId: "",
-      auth0RedirectUri: "",
       // Service availability flags
       supersetEnabled: false,
       windmillEnabled: false,

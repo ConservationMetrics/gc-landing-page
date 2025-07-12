@@ -143,7 +143,11 @@
   const communityName = config.public.communityName
 
   console.log(config.public)
-  console.log(config)
+   const domain = config.auth0Domain
+   const clientId = config.auth0ClientId
+
+   console.log(domain, clientId)
+
   // Auth state
   const isAuthenticated = ref(false)
   const user = ref<User | null>(null)
@@ -192,8 +196,8 @@
       const { createAuth0Client } = await import('@auth0/auth0-spa-js')
         
       auth0Client = await createAuth0Client({
-        domain: config.public.auth0Domain as string,
-        clientId: config.public.auth0ClientId as string,
+        domain: domain as string,
+        clientId: clientId as string,
         authorizationParams: {
           redirect_uri: `${window.location.origin}/login`
         }
