@@ -7,7 +7,7 @@
   },
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx,vue}": [
-      "eslint --fix",
+      "npx eslint --fix",
       "npx prettier --write"
     ],
     "./**/*.{json,css}": [
