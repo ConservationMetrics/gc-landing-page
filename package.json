@@ -30,10 +30,13 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.2.0",
+    "@nuxt/eslint": "1.5.2",
     "@tailwindcss/vite": "^4.1.10",
+    "eslint": "^9.31.0",
     "nuxt": "^3.17.5",
     "tailwindcss": "^4.1.10",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1"
-  }
+  },
+  "packageManager": "pnpm@10.12.2+sha512.a32540185b964ee30bb4e979e405adc6af59226b438ee4cc19f9e8773667a66d302f5bfee60a39d3cac69e35e4b96e708a71dd002b7e9359c4112a1722ac323f"
 }

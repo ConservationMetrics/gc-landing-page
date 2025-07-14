@@ -5,16 +5,22 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  ssr: false, // spa mode for static deployment
+
+  // spa mode for static deployment
+  ssr: false,
+
   nitro: {
     prerender: {}
   },
+
   css: ['~/assets/css/main.css'],
+
   vite: {
     plugins: [
       tailwindcss()
     ]
   },
+
   runtimeConfig: {
     // Server-side (build-time) config
     communityName: "demo",
@@ -32,4 +38,6 @@ export default defineNuxtConfig({
       filesEnabled: false,
     },
   },
+
+  modules: ["@nuxt/eslint"],
 })

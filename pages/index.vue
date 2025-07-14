@@ -146,8 +146,7 @@
    const domain = config.auth0Domain
    const clientId = config.auth0ClientId
 
-   console.log(domain, clientId)
-
+   
   // Auth state
   const isAuthenticated = ref(false)
   const user = ref<User | null>(null)
