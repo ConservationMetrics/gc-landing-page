@@ -148,11 +148,11 @@
 
    console.log(domain, clientId)
 
-  // Auth state
+         // Auth state
   const isAuthenticated = ref(false)
   const user = ref<User | null>(null)
-  
-  // Generate services list based on environment variables
+
+        // Generate services list based on environment variables
   const availableServices = computed(() => {
     const services = []
    
