@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.2.0",
-    "@nuxt/eslint": "1.5.2",
     "@tailwindcss/vite": "^4.1.10",
     "eslint": "^9.31.0",
     "eslint-plugin-vue": "^10.3.0",
