@@ -8,10 +8,10 @@
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx,vue}": [
       "eslint --fix",
-      "prettier --write"
+      "npx prettier --write"
     ],
     "./**/*.{json,css}": [
-      "prettier --write"
+      "npx prettier --write"
     ]
   },
   "scripts": {
