@@ -22,13 +22,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Server-side (build-time) config
-    communityName: "demo",
     auth0Domain: "",
     auth0ClientId: "",
     auth0RedirectUri: "",
 
-    // Public config (client-side) - Nuxt automatically handles NUXT_PUBLIC_ prefixed env vars
     public: {
       communityName: "demo",
       // Service availability flags
