@@ -2,19 +2,46 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "20.15.0"
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,vue}": [
+      "npx eslint . --cache --fix",
+      "npx prettier --write"
+    ],
+    "./**/*.{json,css}": [
+      "npx prettier --write"
+    ]
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 8080",
-    "generate": "nuxt generate",
     "preview": "nuxt preview --port 8080",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "format": "prettier \"**/*.{js,ts,jsx,tsx,vue}\" --write",
+    "generate": "nuxt generate",
+    "link-module": "pnpm link ../gc-shared-components",
+    "lint:prettier": "prettier ./ --check --ignore-path .prettierignore",
+    "lint:eslint": "eslint . --cache",
+    "lint:eslint:fix": "eslint . --cache --fix",
+    "lint": "pnpm run lint:prettier && pnpm run lint:eslint",
+    "lint:fix": "pnpm run lint:eslint:fix && pnpm run format"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.2.0",
     "@tailwindcss/vite": "^4.1.10",
+    "eslint": "^9.31.0",
+    "eslint-plugin-vue": "^10.3.0",
     "nuxt": "^3.17.5",
     "tailwindcss": "^4.1.10",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "eslint-config-flat-gitignore": "^2.1.0",
+    "globals": "^16.3.0",
+    "typescript-eslint": "^8.36.0"
   }
 }
