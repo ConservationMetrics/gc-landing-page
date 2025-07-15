@@ -1,6 +1,5 @@
 {
-  "name": "nuxt-app",
-  "private": true,
+  "name": "guardianconnector-landing-page",
   "type": "module",
   "engines": {
     "node": "20.15.0"
@@ -14,6 +13,7 @@
       "npx prettier --write"
     ]
   },
+  "description": "A Nuxt.js application to build a landing page for a Guardian Connector instance.",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 8080",
@@ -43,5 +43,7 @@
     "eslint-config-flat-gitignore": "^2.1.0",
     "globals": "^16.3.0",
     "typescript-eslint": "^8.36.0"
-  }
+  },
+  "author": "Conservation Metrics",
+  "license": "MIT"
 }
