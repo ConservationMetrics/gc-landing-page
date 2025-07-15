@@ -6,11 +6,8 @@ const config = useRuntimeConfig();
 
 const communityName = config.public.communityName;
 
-console.log(config.public);
 const domain = config.auth0Domain;
 const clientId = config.auth0ClientId;
-
-console.log(domain, clientId);
 
 // Auth state
 const isAuthenticated = ref(false);
