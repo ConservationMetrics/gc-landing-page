@@ -6,15 +6,14 @@ const config = useRuntimeConfig();
 console.log("config",config);
 const communityName = config.public.communityName;
 
-const domain = config.auth0Domain;
-const clientId = config.auth0ClientId;
+const domain = config.public.auth0Domain;
+const clientId = config.public.auth0ClientId;
 
 // Auth state
 const isAuthenticated = ref(false);
 const user = ref<User | null>(null);
-console.log("domain and clientId",domain, clientId, domain?.length, clientId?.length)
 // Check if Auth0 is properly configured
-const isAuth0Configured = domain?.length > 1 && clientId?.length > 1;
+const isAuth0Configured = domain && clientId
 
 // Check if user should see the app (either authenticated or auth is disabled)
 const shouldShowApp = computed(() => {
