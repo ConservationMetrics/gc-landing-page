@@ -3,22 +3,20 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
 
   // spa mode for static deployment
   ssr: false,
 
   nitro: {
-    prerender: {}
+    prerender: {},
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
 
   vite: {
-    plugins: [
-      tailwindcss()
-    ]
+    plugins: [tailwindcss()],
   },
 
   runtimeConfig: {
@@ -37,4 +35,4 @@ export default defineNuxtConfig({
   },
 
   modules: [],
-})
+});
