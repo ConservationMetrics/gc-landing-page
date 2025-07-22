@@ -21,12 +21,12 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    auth0Domain: "",
-    auth0ClientId: "",
     auth0RedirectUri: "",
 
     public: {
       communityName: "demo",
+      auth0Domain: "",
+      auth0ClientId: "",
       // Service availability flags
       supersetEnabled: false,
       windmillEnabled: false,
