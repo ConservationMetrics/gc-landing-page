@@ -3,17 +3,15 @@ import { ref, onMounted, computed } from "vue";
 import type { Auth0Client, User } from "@auth0/auth0-spa-js";
 
 const config = useRuntimeConfig();
-console.log("config",config);
 const communityName = config.public.communityName;
 
 const domain = config.public.auth0Domain;
 const clientId = config.public.auth0ClientId;
-
 // Auth state
 const isAuthenticated = ref(false);
 const user = ref<User | null>(null);
 // Check if Auth0 is properly configured
-const isAuth0Configured = domain && clientId
+const isAuth0Configured = domain.length > 0 && clientId.length > 0
 
 // Check if user should see the app (either authenticated or auth is disabled)
 const shouldShowApp = computed(() => {
