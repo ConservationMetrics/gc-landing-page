@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
 
-  // spa mode for static deployment
   ssr: false,
 
   nitro: {

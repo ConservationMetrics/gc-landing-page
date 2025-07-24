@@ -3,15 +3,20 @@ import { ref, onMounted, computed } from "vue";
 import type { Auth0Client, User } from "@auth0/auth0-spa-js";
 
 const config = useRuntimeConfig();
-
 const communityName = config.public.communityName;
 
 const domain = config.public.auth0Domain;
 const clientId = config.public.auth0ClientId;
-
 // Auth state
 const isAuthenticated = ref(false);
 const user = ref<User | null>(null);
+// Check if Auth0 is properly configured
+const isAuth0Configured = domain.length > 0 && clientId.length > 0
+
+// Check if user should see the app (either authenticated or auth is disabled)
+const shouldShowApp = computed(() => {
+  return isAuth0Configured ? isAuthenticated.value : true;
+});
 
 // Generate services list based on environment variables
 const availableServices = computed(() => {
@@ -51,7 +56,7 @@ const availableServices = computed(() => {
 let auth0Client: Auth0Client | null = null;
 
 onMounted(async () => {
-  if (import.meta.client) {
+  if (import.meta.client && isAuth0Configured) {
     const { createAuth0Client } = await import("@auth0/auth0-spa-js");
 
     auth0Client = await createAuth0Client({
@@ -127,7 +132,7 @@ const getServiceDescription = (serviceName: string) => {
           <!-- Navigation -->
           <div class="flex items-center space-x-4">
             <!-- Auth controls (only show if auth is enabled) -->
-            <div v-if="!isAuthenticated">
+            <div v-if="isAuth0Configured && !isAuthenticated">
               <button
                 @click="login"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -136,7 +141,7 @@ const getServiceDescription = (serviceName: string) => {
               </button>
             </div>
 
-            <div v-if="isAuthenticated" class="flex items-center space-x-4">
+            <div v-if="isAuth0Configured && isAuthenticated" class="flex items-center space-x-4">
               <div class="text-sm text-gray-300">
                 Welcome, {{ user?.name || user?.email }}
               </div>
@@ -164,7 +169,7 @@ const getServiceDescription = (serviceName: string) => {
       </div>
 
       <!-- Authentication Gate (only show if auth is enabled and user not authenticated) -->
-      <div v-if="!isAuthenticated" class="text-center py-16">
+      <div v-if="isAuth0Configured && !isAuthenticated" class="text-center py-16">
         <div
           class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto"
         >
@@ -202,7 +207,7 @@ const getServiceDescription = (serviceName: string) => {
 
       <!-- Services Grid (show when authenticated OR when auth is disabled) -->
       <div
-        v-else-if="availableServices.length > 0"
+        v-if="shouldShowApp && availableServices.length > 0"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         <div
@@ -255,7 +260,7 @@ const getServiceDescription = (serviceName: string) => {
       </div>
 
       <!-- No Services Available -->
-      <div v-else class="text-center py-16">
+      <div v-if="shouldShowApp && availableServices.length === 0" class="text-center py-16">
         <div
           class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto"
         >
