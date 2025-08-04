@@ -58,6 +58,10 @@ onMounted(async () => {
 const goHome = () => {
   router.push("/");
 };
+
+useHead({
+  title: "Guardian Connector Login",
+});
 </script>
 
 <template>

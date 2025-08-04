@@ -11,7 +11,7 @@ const clientId = config.public.auth0ClientId;
 const isAuthenticated = ref(false);
 const user = ref<User | null>(null);
 // Check if Auth0 is properly configured
-const isAuth0Configured = domain.length > 0 && clientId.length > 0
+const isAuth0Configured = domain.length > 0 && clientId.length > 0;
 
 // Check if user should see the app (either authenticated or auth is disabled)
 const shouldShowApp = computed(() => {
@@ -43,9 +43,9 @@ const availableServices = computed(() => {
     });
   }
 
-  if (config.public.filesEnabled) {
+  if (config.public.filebrowserEnabled) {
     services.push({
-      name: "File Browser",
+      name: "Filebrowser",
       url: `https://files.${communityName}.guardianconnector.net`,
     });
   }
@@ -102,13 +102,17 @@ const getServiceDescription = (serviceName: string) => {
     Superset: "Business intelligence and data visualization platform",
     Windmill: "Workflow automation and script execution platform",
     Explorer: "Data exploration and analysis tools",
-    "File Browser": "Secure file management and sharing",
+    Filebrowser: "Secure file management and sharing",
   };
   return (
     descriptions[serviceName as keyof typeof descriptions] ||
     "Community service"
   );
 };
+
+useHead({
+  title: "Guardian Connector Landing Page",
+});
 </script>
 
 <template>
@@ -141,7 +145,10 @@ const getServiceDescription = (serviceName: string) => {
               </button>
             </div>
 
-            <div v-if="isAuth0Configured && isAuthenticated" class="flex items-center space-x-4">
+            <div
+              v-if="isAuth0Configured && isAuthenticated"
+              class="flex items-center space-x-4"
+            >
               <div class="text-sm text-gray-300">
                 Welcome, {{ user?.name || user?.email }}
               </div>
@@ -169,7 +176,10 @@ const getServiceDescription = (serviceName: string) => {
       </div>
 
       <!-- Authentication Gate (only show if auth is enabled and user not authenticated) -->
-      <div v-if="isAuth0Configured && !isAuthenticated" class="text-center py-16">
+      <div
+        v-if="isAuth0Configured && !isAuthenticated"
+        class="text-center py-16"
+      >
         <div
           class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto"
         >
@@ -260,7 +270,10 @@ const getServiceDescription = (serviceName: string) => {
       </div>
 
       <!-- No Services Available -->
-      <div v-if="shouldShowApp && availableServices.length === 0" class="text-center py-16">
+      <div
+        v-if="shouldShowApp && availableServices.length === 0"
+        class="text-center py-16"
+      >
         <div
           class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto"
         >

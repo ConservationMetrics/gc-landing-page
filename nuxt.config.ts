@@ -29,7 +29,7 @@ export default defineNuxtConfig({
       supersetEnabled: false,
       windmillEnabled: false,
       explorerEnabled: false,
-      filesEnabled: false,
+      filebrowserEnabled: false,
     },
   },
 

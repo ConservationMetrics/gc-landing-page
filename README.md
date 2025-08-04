@@ -85,7 +85,7 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 | `NUXT_PUBLIC_SUPERSET_ENABLED` | Superset | `https://superset.{community}.guardianconnector.net` |
 | `NUXT_PUBLIC_WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.guardianconnector.net` |
 | `NUXT_PUBLIC_EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.guardianconnector.net` |
-| `NUXT_PUBLIC_FILES_BROWSER_ENABLED` | File Browser | `https://files.{community}.guardianconnector.net` |
+| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | Filebrowser | `https://files.{community}.guardianconnector.net` |
 
 ### Multi-Tenant Support
 
