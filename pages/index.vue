@@ -69,9 +69,9 @@ const login = () => {
   window.location.href = "/api/auth/auth0";
 };
 
-const logout = async () => {
-  await $fetch("/api/auth/session", { method: "DELETE" });
-  window.location.href = "/";
+const logout = () => {
+  // Redirect to logout flow via middleware
+  window.location.href = "/?logout=true";
 };
 
 const openService = (url: string) => {

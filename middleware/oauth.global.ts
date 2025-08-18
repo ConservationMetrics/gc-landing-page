@@ -1,9 +1,19 @@
-import { defineNuxtRouteMiddleware } from "#imports";
+import { defineNuxtRouteMiddleware, navigateTo } from "#imports";
 
 // Following example: https://github.com/atinux/atidone/blob/main/app/middleware/auth.ts
 export default defineNuxtRouteMiddleware(async (to) => {
   const { loggedIn } = useUserSession();
   const router = useRouter();
+
+  // Handle logout flow
+  if (to.query.logout === "true") {
+    // Clear the session cookie
+    const sessionCookie = useCookie("nuxt-session");
+    sessionCookie.value = null;
+
+    // Redirect to home page without the logout parameter
+    return navigateTo("/");
+  }
 
   // In order to redirect the user back to the page they were on when unauthenticated, we need to store the redirect url in session storage
   // We use the window object to get where the user was before they were redirected to the login page
@@ -29,6 +39,4 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (loggedIn.value && to.path === "/login") {
     return router.push("/");
   }
-
-
 });
