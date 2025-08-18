@@ -67,7 +67,6 @@ The landing page was migrated from client-side Auth0 SPA to server-side authenti
 
 1. **Client-side limitations**: Auth0 SPA applications cannot access the Management API for role data
 2. **Security requirements**: Server-side auth provides better security model
-3. **Role-based visibility**: Need server-side role fetching to control service visibility
 
 ### Migration Impact
 
