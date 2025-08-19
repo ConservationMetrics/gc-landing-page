@@ -10,7 +10,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const sessionCookie = useCookie("nuxt-session");
     sessionCookie.value = null;
 
-    // Redirect to home page without the logout parameter
     return navigateTo("/");
   }
 
