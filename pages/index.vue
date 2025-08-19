@@ -70,7 +70,6 @@ const login = () => {
 };
 
 const logout = () => {
-  // Redirect to logout flow via middleware
   window.location.href = "/?logout=true";
 };
 
