@@ -139,30 +139,6 @@ curl --request GET \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
 
-## Environment Variables
-
-### Required Environment Variables
-
-```bash
-# Auth0 Configuration
-NUXT_OAUTH_AUTH0_DOMAIN=your-domain.auth0.com
-NUXT_OAUTH_AUTH0_CLIENT_ID=your-client-id
-NUXT_OAUTH_AUTH0_CLIENT_SECRET=your-client-secret
-
-# Enable Auth0 authentication
-NUXT_PUBLIC_AUTH0_ENABLED=true
-
-# Community configuration
-NUXT_PUBLIC_COMMUNITY_NAME=your-community-name
-NUXT_PUBLIC_BASE_URL=http://localhost:8080
-
-# Service availability flags
-NUXT_PUBLIC_SUPERSET_ENABLED=false
-NUXT_PUBLIC_WINDMILL_ENABLED=true
-NUXT_PUBLIC_EXPLORER_ENABLED=false
-NUXT_PUBLIC_FILEBROWSER_ENABLED=false
-```
-
 ## API References
 
 ### Auth0 Documentation References
