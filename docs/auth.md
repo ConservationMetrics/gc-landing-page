@@ -59,23 +59,6 @@ if (config.public.windmillEnabled) {
 }
 ```
 
-## Migration from SPA to SSR
-
-The landing page was migrated from client-side Auth0 SPA to server-side authentication to enable role-based access control:
-
-### Why SSR Migration Was Necessary
-
-1. **Client-side limitations**: Auth0 SPA applications cannot access the Management API for role data
-2. **Security requirements**: Server-side auth provides better security model
-
-### Migration Impact
-
-- **Image size increase**: +8MB (from 341MB to 349MB)
-- **Memory usage**: Comparable to existing SSR applications
-- **Functionality**: Maintained same auth capabilities with enhanced security
-
-For detailed migration analysis, see [GitHub discussion #24](https://github.com/ConservationMetrics/gc-landing-page/discussions/24).
-
 ## Auth0 Configuration
 
 ### Prerequisites
