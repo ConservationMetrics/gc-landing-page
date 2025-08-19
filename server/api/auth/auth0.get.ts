@@ -11,7 +11,6 @@ interface Auth0User {
 // Cache for Management API access token
 let managementTokenCache: { token: string; expiresAt: number } | null = null;
 
-// Function to get or generate Management API access token
 async function getManagementApiToken(): Promise<string | null> {
   try {
     const config = useRuntimeConfig();
