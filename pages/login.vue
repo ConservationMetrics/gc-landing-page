@@ -11,7 +11,7 @@ onMounted(() => {
 });
 
 useHead({
-  title: "GuardianConnector Landing: Login",
+  title: "GuardianConnector: Login",
 });
 </script>
 
