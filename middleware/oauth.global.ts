@@ -7,7 +7,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // Handle logout flow
   if (to.query.logout === "true") {
-    // Clear the session cookie
     const sessionCookie = useCookie("nuxt-session");
     sessionCookie.value = null;
 
