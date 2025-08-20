@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
 
-  ssr: false,
+  ssr: true,
 
   nitro: {
     prerender: {},
@@ -18,13 +18,27 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
+  modules: [
+    "nuxt-auth-utils",
+  ],
+
   runtimeConfig: {
-    auth0RedirectUri: "",
+    // Session secret for nuxt-auth-utils
+    sessionSecret: "your-session-secret-key-change-in-production",
+    // OAuth configuration for nuxt-auth-utils
+    oauth: {
+      auth0: {
+        clientId: "",
+        clientSecret: "",
+        domain: "",
+      },
+    },
 
     public: {
       communityName: "demo",
-      auth0Domain: "",
-      auth0ClientId: "",
+      baseUrl: "http://localhost:8080",
+      // Auth configuration flag
+      auth0Enabled: true,
       // Service availability flags
       supersetEnabled: false,
       windmillEnabled: false,
@@ -32,6 +46,4 @@ export default defineNuxtConfig({
       filebrowserEnabled: false,
     },
   },
-
-  modules: [],
 });

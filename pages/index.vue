@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
-import type { Auth0Client, User } from "@auth0/auth0-spa-js";
+import { useUserSession } from "#imports";
+import { computed } from "vue";
+
+interface User {
+  auth0: string;
+  roles?: Array<{ id: string; name: string; description: string }>;
+}
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
 
-const domain = config.public.auth0Domain;
-const clientId = config.public.auth0ClientId;
-// Auth state
-const isAuthenticated = ref(false);
-const user = ref<User | null>(null);
-// Check if Auth0 is properly configured
-const isAuth0Configured = domain.length > 0 && clientId.length > 0;
+// Auth state using nuxt-auth-utils
+const { loggedIn, user } = useUserSession();
+
+// Check if Auth0 is enabled
+const isAuth0Configured = config.public.auth0Enabled;
 
 // Check if user should see the app (either authenticated or auth is disabled)
 const shouldShowApp = computed(() => {
-  return isAuth0Configured ? isAuthenticated.value : true;
+  return isAuth0Configured ? loggedIn.value : true;
 });
 
-// Generate services list based on environment variables
+// Generate services list based on environment variables and user roles
 const availableServices = computed(() => {
   const services = [];
 
@@ -29,11 +32,20 @@ const availableServices = computed(() => {
     });
   }
 
+  // Only show Windmill if user has Admin role
   if (config.public.windmillEnabled) {
-    services.push({
-      name: "Windmill",
-      url: `https://windmill.${communityName}.guardianconnector.net`,
-    });
+    const typedUser = user.value as User;
+    const userRoles = typedUser?.roles || [];
+    const hasAdminRole = userRoles.some(
+      (role: { name: string }) => role.name === "Admin",
+    );
+
+    if (hasAdminRole) {
+      services.push({
+        name: "Windmill",
+        url: `https://windmill.${communityName}.guardianconnector.net`,
+      });
+    }
   }
 
   if (config.public.explorerEnabled) {
@@ -53,44 +65,12 @@ const availableServices = computed(() => {
   return services;
 });
 
-let auth0Client: Auth0Client | null = null;
-
-onMounted(async () => {
-  if (import.meta.client && isAuth0Configured) {
-    const { createAuth0Client } = await import("@auth0/auth0-spa-js");
-
-    auth0Client = await createAuth0Client({
-      domain: domain as string,
-      clientId: clientId as string,
-      authorizationParams: {
-        redirect_uri: `${window.location.origin}/login`,
-      },
-    });
-
-    isAuthenticated.value = await auth0Client.isAuthenticated();
-
-    if (isAuthenticated.value) {
-      user.value = (await auth0Client.getUser()) || null;
-      console.log("User is authenticated");
-      console.log(user.value);
-    }
-  }
-});
-
-const login = async () => {
-  if (auth0Client) {
-    await auth0Client.loginWithRedirect();
-  }
+const login = () => {
+  window.location.href = "/api/auth/auth0";
 };
 
-const logout = async () => {
-  if (auth0Client) {
-    await auth0Client.logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-      },
-    });
-  }
+const logout = () => {
+  window.location.href = "/?logout=true";
 };
 
 const openService = (url: string) => {
@@ -136,7 +116,7 @@ useHead({
           <!-- Navigation -->
           <div class="flex items-center space-x-4">
             <!-- Auth controls (only show if auth is enabled) -->
-            <div v-if="isAuth0Configured && !isAuthenticated">
+            <div v-if="isAuth0Configured && !loggedIn">
               <button
                 @click="login"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -146,11 +126,14 @@ useHead({
             </div>
 
             <div
-              v-if="isAuth0Configured && isAuthenticated"
+              v-if="isAuth0Configured && loggedIn"
               class="flex items-center space-x-4"
             >
               <div class="text-sm text-gray-300">
-                Welcome, {{ user?.name || user?.email }}
+                Welcome, {{ (user as User)?.auth0 || 'User' }}
+                <span v-if="(user as User)?.roles?.length" class="text-xs text-gray-400">
+                  ({{ (user as User)?.roles?.map(role => role.name).join(', ') }})
+                </span>
               </div>
               <button
                 @click="logout"
@@ -177,7 +160,7 @@ useHead({
 
       <!-- Authentication Gate (only show if auth is enabled and user not authenticated) -->
       <div
-        v-if="isAuth0Configured && !isAuthenticated"
+        v-if="isAuth0Configured && !loggedIn"
         class="text-center py-16"
       >
         <div
