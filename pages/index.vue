@@ -13,7 +13,6 @@ const communityName = config.public.communityName;
 // Auth state using nuxt-auth-utils
 const { loggedIn, user } = useUserSession();
 
-// Check if Auth0 is enabled
 const isAuth0Configured = config.public.auth0Enabled;
 
 // Check if user should see the app (either authenticated or auth is disabled)

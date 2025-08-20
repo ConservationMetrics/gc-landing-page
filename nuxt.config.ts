@@ -37,7 +37,6 @@ export default defineNuxtConfig({
     public: {
       communityName: "demo",
       baseUrl: "http://localhost:8080",
-      // Auth configuration flag
       auth0Enabled: true,
       // Service availability flags
       supersetEnabled: false,

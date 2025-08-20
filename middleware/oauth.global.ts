@@ -32,7 +32,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return router.push("/login");
   }
 
-  // If user is logged in and on login page, redirect to home
   if (loggedIn.value && to.path === "/login") {
     return router.push("/");
   }
