@@ -47,6 +47,7 @@ const availableServices = computed(() => {
     }
   }
 
+
   if (config.public.explorerEnabled) {
     services.push({
       name: "Explorer",
@@ -73,7 +74,13 @@ const logout = () => {
 };
 
 const openService = (url: string) => {
-  window.open(url, "_blank");
+  // If it's an internal link (starts with /), navigate to it
+  if (url.startsWith("/")) {
+    window.location.href = url;
+  } else {
+    // External links open in new tab
+    window.open(url, "_blank");
+  }
 };
 
 const getServiceDescription = (serviceName: string) => {
@@ -128,6 +135,16 @@ useHead({
               v-if="isAuth0Configured && loggedIn"
               class="flex items-center space-x-4"
             >
+              <!-- User Management link for Admin users -->
+              <div v-if="(user as User)?.roles?.some((role: { name: string }) => role.name === 'Admin')">
+                <NuxtLink
+                  to="/admin/users"
+                  class="text-gray-400 hover:text-white transition-colors text-sm"
+                >
+                  User Management
+                </NuxtLink>
+              </div>
+              
               <div class="text-sm text-gray-300">
                 Welcome, {{ (user as User)?.auth0 || 'User' }}
                 <span v-if="(user as User)?.roles?.length" class="text-xs text-gray-400">
