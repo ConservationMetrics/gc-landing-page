@@ -3,6 +3,7 @@ import { getManagementApiToken, fetchUserRoles } from "~/server/utils/auth0Manag
 
 export default defineEventHandler(async (event) => {
     try {
+        
         const config = useRuntimeConfig();
         const { oauth } = config;
 

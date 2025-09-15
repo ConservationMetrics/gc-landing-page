@@ -1,8 +1,9 @@
 import { defineNuxtRouteMiddleware, navigateTo } from "#imports";
-
+import type { User } from "~/types/types";
+import { createError } from "h3";
 // Following example: https://github.com/atinux/atidone/blob/main/app/middleware/auth.ts
 export default defineNuxtRouteMiddleware(async (to) => {
-  const { loggedIn } = useUserSession();
+  const { loggedIn, user } = useUserSession();
   const router = useRouter();
 
   // Handle logout flow
@@ -34,5 +35,17 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   if (loggedIn.value && to.path === "/login") {
     return router.push("/");
+  }
+
+  // Admin route protection
+  if (loggedIn.value && to.path.startsWith("/admin")) {
+    const hasAdminRole = (user.value as User)?.roles?.some((role: { name: string }) => role.name === "Admin");
+    
+    if (!hasAdminRole) {
+      throw createError({
+        statusCode: 403,
+        statusMessage: "Access denied. Admin privileges required.",
+      });
+    }
   }
 });
