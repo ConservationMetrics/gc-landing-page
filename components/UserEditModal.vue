@@ -19,8 +19,8 @@ interface User {
   logins_count: number;
   roles: Role[];
   isApproved: boolean;
-  app_metadata: any;
-  user_metadata: any;
+  app_metadata: Record<string, unknown>;
+  user_metadata: Record<string, unknown>;
 }
 
 interface Props {
@@ -32,13 +32,15 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  update: [user: User, roles: string[], isApproved: boolean];
+  update: [user: User, roles: string[], isApproved: boolean, callback: (_result: { success: boolean; error?: string }) => void];
 }>();
 
 const isOpen = ref(false);
 const selectedRoles = ref<string[]>([]);
 const isApproved = ref(false);
 const imageError = ref(false);
+const isSaving = ref(false);
+const saveError = ref("");
 
 // Computed properties
 const selectedRoleNames = computed(() => {
@@ -53,6 +55,8 @@ const openModal = () => {
   selectedRoles.value = props.user.roles.map(role => role.id);
   isApproved.value = props.user.isApproved;
   imageError.value = false; // Reset image error state
+  isSaving.value = false;
+  saveError.value = "";
   isOpen.value = true;
 };
 
@@ -61,21 +65,31 @@ const handleImageError = () => {
 };
 
 const closeModal = () => {
-  isOpen.value = false;
-};
-
-const handleRoleToggle = (roleId: string) => {
-  const index = selectedRoles.value.indexOf(roleId);
-  if (index > -1) {
-    selectedRoles.value.splice(index, 1);
-  } else {
-    selectedRoles.value.push(roleId);
+  if (!isSaving.value) {
+    isOpen.value = false;
   }
 };
 
-const handleSave = () => {
-  emit("update", props.user, selectedRoles.value, isApproved.value);
-  closeModal();
+const handleSave = async () => {
+  isSaving.value = true;
+  saveError.value = "";
+  
+  try {
+    const result = await new Promise<{ success: boolean; error?: string }>((resolve) => {
+      emit("update", props.user, selectedRoles.value, isApproved.value, resolve);
+    });
+    
+    if (result.success) {
+      isOpen.value = false;
+    } else {
+      saveError.value = result.error || "Failed to save user";
+    }
+  } catch (error) {
+    saveError.value = "An unexpected error occurred";
+    console.error("Save error:", error);
+  } finally {
+    isSaving.value = false;
+  }
 };
 
 const formatDate = (dateString: string) => {
@@ -197,6 +211,11 @@ const formatDate = (dateString: string) => {
                     Selected roles: {{ selectedRoleNames.join(", ") || "None" }}
                   </p>
                 </div>
+
+                <!-- Error Display -->
+                <div v-if="saveError" class="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p class="text-sm text-red-600">{{ saveError }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -205,14 +224,14 @@ const formatDate = (dateString: string) => {
           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               @click="handleSave"
-              :disabled="saving"
+              :disabled="isSaving"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {{ saving ? "Saving..." : "Save Changes" }}
+              {{ isSaving ? "Saving..." : "Save Changes" }}
             </button>
             <button
               @click="closeModal"
-              :disabled="saving"
+              :disabled="isSaving"
               class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel

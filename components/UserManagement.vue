@@ -19,8 +19,8 @@ interface User {
   logins_count: number;
   roles: Role[];
   isApproved: boolean;
-  app_metadata: object;
-  user_metadata: object;
+  app_metadata: Record<string, unknown>;
+  user_metadata: Record<string, unknown>;
 }
 
 interface UsersResponse {
@@ -102,7 +102,7 @@ const fetchUsers = async (page = 0) => {
   }
 };
 
-const updateUser = async (user: User, newRoles: string[], isApproved: boolean) => {
+const updateUser = async (user: User, newRoles: string[], isApproved: boolean, callback?: (_result: { success: boolean; error?: string }) => void) => {
   saving.value = true;
   error.value = "";
   success.value = "";
@@ -127,10 +127,25 @@ const updateUser = async (user: User, newRoles: string[], isApproved: boolean) =
       }
       success.value = `User ${user.email} updated successfully`;
       setTimeout(() => { success.value = ""; }, 3000);
+      
+      // Call the callback with success result
+      if (callback) {
+        callback({ success: true });
+      }
+    } else {
+      const errorMsg = `Failed to update user ${user.email}`;
+      error.value = errorMsg;
+      if (callback) {
+        callback({ success: false, error: errorMsg });
+      }
     }
   } catch (err) {
     console.error("Failed to update user:", err);
-    error.value = `Failed to update user ${user.email}`;
+    const errorMsg = `Failed to update user ${user.email}`;
+    error.value = errorMsg;
+    if (callback) {
+      callback({ success: false, error: errorMsg });
+    }
   } finally {
     saving.value = false;
   }
