@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Session secret for nuxt-auth-utils
     sessionSecret: "your-session-secret-key-change-in-production",
-    // OAuth configuration for nuxt-auth-utils
+    // OAuth configuration for nuxt-auth-utils and Auth0 management API
     oauth: {
       auth0: {
         clientId: "",

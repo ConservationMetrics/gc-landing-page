@@ -12,4 +12,39 @@ export const Role = {
     roles?: Array<{ id: string; name: string; description: string }>;
     userRole?: Role;
   }
+
+// User Management Types
+export interface UserRole {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface UserManagementUser {
+  id: string;
+  email: string;
+  name: string;
+  nickname: string;
+  picture: string;
+  created_at: string;
+  last_login: string;
+  logins_count: number;
+  roles: UserRole[];
+  isApproved: boolean;
+  app_metadata: Record<string, unknown>;
+  user_metadata: Record<string, unknown>;
+}
+
+export interface UsersResponse {
+  success: boolean;
+  users: UserManagementUser[];
+  total: number;
+  page: number;
+  per_page: number;
+}
+
+export interface RolesResponse {
+  success: boolean;
+  roles: UserRole[];
+}
   

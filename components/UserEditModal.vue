@@ -1,38 +1,18 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 import Avatar from "vue-boring-avatars";
-
-interface Role {
-  id: string;
-  name: string;
-  description: string;
-}
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  nickname: string;
-  picture: string;
-  created_at: string;
-  last_login: string;
-  logins_count: number;
-  roles: Role[];
-  isApproved: boolean;
-  app_metadata: Record<string, unknown>;
-  user_metadata: Record<string, unknown>;
-}
+import type { UserRole, UserManagementUser } from "~/types/types";
 
 interface Props {
-  user: User;
-  availableRoles: Role[];
+  user: UserManagementUser;
+  availableRoles: UserRole[];
   saving: boolean;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  update: [user: User, roles: string[], isApproved: boolean, callback: (_result: { success: boolean; error?: string }) => void];
+  update: [user: UserManagementUser, roles: string[], isApproved: boolean, callback: (_result: { success: boolean; error?: string }) => void];
 }>();
 
 const isOpen = ref(false);

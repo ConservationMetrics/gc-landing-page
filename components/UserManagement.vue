@@ -1,43 +1,10 @@
 <script lang="ts" setup>
 import { ref, onMounted, computed } from "vue";
 import Avatar from "vue-boring-avatars";
+import type { UserRole, UserManagementUser, UsersResponse, RolesResponse } from "~/types/types";
 
-interface Role {
-  id: string;
-  name: string;
-  description: string;
-}
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  nickname: string;
-  picture: string;
-  created_at: string;
-  last_login: string;
-  logins_count: number;
-  roles: Role[];
-  isApproved: boolean;
-  app_metadata: Record<string, unknown>;
-  user_metadata: Record<string, unknown>;
-}
-
-interface UsersResponse {
-  success: boolean;
-  users: User[];
-  total: number;
-  page: number;
-  per_page: number;
-}
-
-interface RolesResponse {
-  success: boolean;
-  roles: Role[];
-}
-
-const users = ref<User[]>([]);
-const roles = ref<Role[]>([]);
+const users = ref<UserManagementUser[]>([]);
+const roles = ref<UserRole[]>([]);
 const loading = ref(false);
 const saving = ref(false);
 const error = ref("");
@@ -102,7 +69,7 @@ const fetchUsers = async (page = 0) => {
   }
 };
 
-const updateUser = async (user: User, newRoles: string[], isApproved: boolean, callback?: (_result: { success: boolean; error?: string }) => void) => {
+const updateUser = async (user: UserManagementUser, newRoles: string[], isApproved: boolean, callback?: (_result: { success: boolean; error?: string }) => void) => {
   saving.value = true;
   error.value = "";
   success.value = "";
