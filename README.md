@@ -42,16 +42,6 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 
 **Important Note:** This application is configured for **server-side rendering (SSR)** rather than static site generation (SSG) due to environment variable constraints encountered during development.
 
-**Why SSR instead of SSG:**
-- **Environment Variable Issues**: When attempting to prerender routes at build time (SSG), we encountered complex problems with environment variables that required runtime evaluation
-- **Docker Complexity**: SSG would require docker-compose and additional complexity to handle environment variable injection at build time
-- **Runtime Flexibility**: SSR allows for dynamic service configuration based on environment variables without build-time constraints
-
-**Current Approach:**
-- Uses Nuxt's SSR mode with `ssr: false` (SPA mode) for client-side rendering
-- Requires a Node.js server runtime (contributing to Docker image size)
-- Environment variables are evaluated at runtime, providing flexibility for multi-tenant deployments
-- Docker image size optimized to ~341MB using distroless base image
 
 ## 🔐 Authentication
 
@@ -100,6 +90,17 @@ https://windmill.demo.guardianconnector.net
 https://superset.acme.guardianconnector.net
 https://windmill.acme.guardianconnector.net
 ```
+
+## User Management
+
+User management is available at `/admin/users`.
+
+### User Management Features
+
+- View all users
+- View user metadata e.g. last login, email etc
+- Edit user roles (Admin, Member, Public)
+- Edit user approval status
 
 ---
 
