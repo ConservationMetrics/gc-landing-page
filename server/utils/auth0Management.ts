@@ -1,9 +1,18 @@
 import { useRuntimeConfig } from "#imports";
 
-// Cache for Management API access token
+/**
+ * Cache for Management API access token
+ */
 let managementTokenCache: { token: string; expiresAt: number } | null = null;
 
-// Function to get or generate Management API access token
+/**
+ * Gets or generates a Management API access token for Auth0
+ * Uses client credentials flow to obtain a token for API v2 access
+ * Implements token caching to avoid unnecessary API calls
+ * 
+ * @returns {Promise<string | null>} The access token string, or null if failed
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const getManagementApiToken = async (): Promise<string | null> => {
     try {
         const config = useRuntimeConfig();
@@ -66,7 +75,14 @@ export const getManagementApiToken = async (): Promise<string | null> => {
     }
 };
 
-// Function to fetch user ID by email from Auth0 Management API
+/**
+ * Fetches a user ID by email address from Auth0 Management API
+ * Searches for users with the specified email and returns the first match
+ * 
+ * @param {string} email - The email address to search for
+ * @returns {Promise<string | null>} The user ID if found, null otherwise
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const fetchUserIdByEmail = async (email: string): Promise<string | null> => {
     try {
         const config = useRuntimeConfig();
@@ -119,7 +135,13 @@ export const fetchUserIdByEmail = async (email: string): Promise<string | null> 
     }
 };
 
-// Function to fetch user roles from Auth0 Management API
+/**
+ * Fetches all roles assigned to a specific user from Auth0 Management API
+ * 
+ * @param {string} userId - The Auth0 user ID to fetch roles for
+ * @returns {Promise<Array<{id: string, name: string, description: string}>>} Array of role objects with id, name, and description
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const fetchUserRoles = async (
     userId: string,
 ): Promise<Array<{ id: string; name: string; description: string }>> => {
@@ -168,7 +190,12 @@ export const fetchUserRoles = async (
     }
 };
 
-// Function to fetch all roles from Auth0 Management API
+/**
+ * Fetches all available roles from Auth0 Management API
+ * 
+ * @returns {Promise<Array<{id: string, name: string, description: string}>>} Array of all role objects with id, name, and description
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const fetchAllRoles = async (): Promise<Array<{ id: string; name: string; description: string }>> => {
     try {
         const config = useRuntimeConfig();
@@ -218,7 +245,14 @@ export const fetchAllRoles = async (): Promise<Array<{ id: string; name: string;
     }
 };
 
-// Function to get current user roles
+/**
+ * Gets the current user's role IDs from Auth0 Management API
+ * Returns only the role IDs, not the full role objects
+ * 
+ * @param {string} userId - The Auth0 user ID to get roles for
+ * @returns {Promise<string[]>} Array of role IDs assigned to the user
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const getCurrentUserRoles = async (
     userId: string,
 ): Promise<string[]> => {
@@ -260,7 +294,14 @@ export const getCurrentUserRoles = async (
     }
 };
 
-// Function to remove all roles from user
+/**
+ * Removes all specified roles from a user in Auth0
+ * 
+ * @param {string} userId - The Auth0 user ID to remove roles from
+ * @param {string[]} roleIds - Array of role IDs to remove from the user
+ * @returns {Promise<boolean>} True if successful, false otherwise
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const removeAllUserRoles = async (
     userId: string,
     roleIds: string[],
@@ -298,7 +339,14 @@ export const removeAllUserRoles = async (
     }
 };
 
-// Function to assign roles to user
+/**
+ * Assigns specified roles to a user in Auth0
+ * 
+ * @param {string} userId - The Auth0 user ID to assign roles to
+ * @param {string[]} roleIds - Array of role IDs to assign to the user
+ * @returns {Promise<boolean>} True if successful, false otherwise
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const assignUserRoles = async (
     userId: string,
     roleIds: string[],
@@ -336,7 +384,14 @@ export const assignUserRoles = async (
     }
 };
 
-// Function to update user metadata
+/**
+ * Updates user metadata in Auth0 using the Management API
+ * 
+ * @param {string} userId - The Auth0 user ID to update metadata for
+ * @param {any} metadata - The metadata object to update (can include user_metadata, app_metadata, etc.)
+ * @returns {Promise<boolean>} True if successful, false otherwise
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
 export const updateUserMetadata = async (
     userId: string,
     metadata: any,
