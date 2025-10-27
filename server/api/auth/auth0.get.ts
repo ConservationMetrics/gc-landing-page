@@ -1,5 +1,6 @@
 import type { H3Event } from "h3";
 import { useRuntimeConfig } from "#imports";
+import { Role } from "~/types/types";
 
 interface Auth0User {
   email: string;
@@ -126,9 +127,15 @@ const fetchUserIdByEmail = async (email: string): Promise<string | null> => {
   }
 };
 
-// Function to fetch user roles from Auth0 Management API
-const fetchUserRoles = async (
-  userId: string,
+/**
+ * Fetches roles from Auth0 Management API
+ * Can fetch either all available roles or roles assigned to a specific user
+ *
+ * @param {string} [userId] - Optional user ID to fetch user-specific roles
+ * @returns {Promise<Array<{id: string, name: string, description: string}>>} Array of role objects
+ */
+const fetchRoles = async (
+  userId?: string,
 ): Promise<Array<{ id: string; name: string; description: string }>> => {
   try {
     const config = useRuntimeConfig();
@@ -145,19 +152,25 @@ const fetchUserRoles = async (
       return [];
     }
 
-    // Fetch user roles using the provided Management API token
-    const rolesResponse = await fetch(
-      `https://${oauth.auth0.domain}/api/v2/users/${userId}/roles`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
+    // Build URL - either user-specific roles or all roles
+    const url = userId
+      ? `https://${oauth.auth0.domain}/api/v2/users/${userId}/roles`
+      : `https://${oauth.auth0.domain}/api/v2/roles`;
+
+    const rolesResponse = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (!rolesResponse.ok) {
-      console.error("🔍 Failed to fetch user roles from Management API");
+      const errorText = await rolesResponse.text();
+      console.error(
+        "🔍 Failed to fetch roles from Management API. Status:",
+        rolesResponse.status,
+      );
+      console.error("🔍 Error response:", errorText);
       return [];
     }
 
@@ -165,13 +178,57 @@ const fetchUserRoles = async (
     return rolesData.map(
       (role: { id: string; name: string; description: string }) => ({
         id: role.id,
-        name: role.name,
+        name: role.name.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase()),
         description: role.description,
       }),
     );
   } catch (error) {
-    console.error("🔍 Error fetching user roles:", error);
+    console.error("🔍 Error fetching roles:", error);
     return [];
+  }
+};
+
+/**
+ * Assigns roles to a user via Auth0 Management API
+ *
+ * @param {string} userId - The Auth0 user ID to assign roles to
+ * @param {string[]} roleIds - Array of role IDs to assign to the user
+ * @returns {Promise<boolean>} True if successful, false otherwise
+ */
+const assignUserRoles = async (
+  userId: string,
+  roleIds: string[],
+): Promise<boolean> => {
+  try {
+    const config = useRuntimeConfig();
+    const { oauth } = config;
+
+    if (!oauth?.auth0?.domain || roleIds.length === 0) return true;
+
+    const accessToken = await getManagementApiToken();
+    if (!accessToken) {
+      console.error("🔍 Failed to get Management API access token");
+      return false;
+    }
+
+    const response = await fetch(
+      `https://${oauth.auth0.domain}/api/v2/users/${userId}/roles`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          roles: roleIds,
+        }),
+      },
+    );
+
+    return response.ok;
+  } catch (error) {
+    console.error("🔍 Error assigning user roles:", error);
+    return false;
   }
 };
 
@@ -181,6 +238,13 @@ export default oauthAuth0EventHandler({
     redirectURL: `${useRuntimeConfig().public.baseUrl}/login`,
   },
 
+  /**
+   * Handles successful Auth0 authentication
+   * Processes user roles, assigns default SignedIn role if needed, and creates user session
+   *
+   * @param {H3Event} event - The H3 event object
+   * @param {{user: Auth0User}} params - Object containing the authenticated user data
+   */
   async onSuccess(event: H3Event, { user }: { user: Auth0User }) {
     try {
       // Log user info for debugging
@@ -194,7 +258,7 @@ export default oauthAuth0EventHandler({
         if (user.email) {
           const userId = await fetchUserIdByEmail(user.email);
           if (userId) {
-            userRoles = await fetchUserRoles(userId);
+            userRoles = await fetchRoles(userId);
             console.log("🔍 Fetched roles from Management API:", userRoles);
           } else {
             console.log("🔍 Could not find user ID for email:", user.email);
@@ -209,10 +273,101 @@ export default oauthAuth0EventHandler({
         }));
       }
 
+      // Determine user role level
+      let userRole: Role = Role.SignedIn; // Default to SignedIn (signed in but no elevated access)
+      if (userRoles.length > 0) {
+        const hasAdminRole = userRoles.some((role) => role.name === "Admin");
+        const hasMemberRole = userRoles.some((role) => role.name === "Member");
+        const hasGuestRole = userRoles.some((role) => role.name === "Guest");
+
+        if (hasAdminRole) {
+          userRole = Role.Admin;
+        } else if (hasMemberRole) {
+          userRole = Role.Member;
+        } else if (hasGuestRole) {
+          userRole = Role.Guest;
+        } else {
+          // User has roles but none of the expected ones, treat as SignedIn
+          userRole = Role.SignedIn;
+        }
+      } else {
+        // If user has no roles, assign them the "SignedIn" role via Management API
+        // This creates a "SignedIn" role in Auth0 for users who are logged in but not approved
+        if (user.email) {
+          const userId = await fetchUserIdByEmail(user.email);
+          if (userId) {
+            try {
+              const allRoles = await fetchRoles();
+              console.log("🔍 All roles from Auth0:", allRoles);
+              const signedInRole = allRoles.find(
+                (role) => role.name === "SignedIn" || role.name === "Signedin",
+              );
+
+              if (signedInRole) {
+                const assignSuccess = await assignUserRoles(userId, [
+                  signedInRole.id,
+                ]);
+
+                if (assignSuccess) {
+                  console.log(
+                    "🔍 Successfully assigned SignedIn role to user:",
+                    user.email,
+                  );
+                  userRoles = [signedInRole];
+                  userRole = Role.SignedIn; // Internal role is SignedIn for logged-in users with no elevated permissions
+                } else {
+                  console.error(
+                    "🔍 Failed to assign SignedIn role to user:",
+                    user.email,
+                  );
+                  // Fallback: create local role object
+                  userRoles = [
+                    {
+                      id: "signedin-role",
+                      name: "SignedIn",
+                      description:
+                        "User is logged in but not yet approved for higher access",
+                    },
+                  ];
+                  userRole = Role.SignedIn;
+                }
+              } else {
+                console.warn(
+                  "🔍 No SignedIn role found in Auth0, creating fallback role",
+                );
+                // Fallback: create local role object
+                userRoles = [
+                  {
+                    id: "signedin-role",
+                    name: "SignedIn",
+                    description:
+                      "User is logged in but not yet approved for higher access",
+                  },
+                ];
+                userRole = Role.SignedIn;
+              }
+            } catch (error) {
+              console.error("🔍 Error assigning SignedIn role:", error);
+              // Fallback: create local role object
+              userRoles = [
+                {
+                  id: "signedin-role",
+                  name: "SignedIn",
+                  description:
+                    "User is logged in but not yet approved for higher access",
+                },
+              ];
+              userRole = Role.SignedIn;
+            }
+          }
+        }
+      }
+
       await setUserSession(event, {
         user: {
           auth0: user.email,
           roles: userRoles,
+          userRole,
         },
         loggedInAt: Date.now(),
       });

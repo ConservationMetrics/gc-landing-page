@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useUserSession } from "#imports";
 import { computed } from "vue";
+import { Role } from "~/types/types";
 
 interface User {
   auth0: string;
   roles?: Array<{ id: string; name: string; description: string }>;
+  userRole?: Role;
 }
 
 const config = useRuntimeConfig();
@@ -23,39 +25,35 @@ const shouldShowApp = computed(() => {
 // Generate services list based on environment variables and user roles
 const availableServices = computed(() => {
   const services = [];
+  const typedUser = user.value as User;
+  const userRole = typedUser?.userRole ?? Role.SignedIn;
 
-  if (config.public.supersetEnabled) {
+  // Superset: Guest and higher (Guest, Member, Admin)
+  if (config.public.supersetEnabled && userRole >= Role.Guest) {
     services.push({
       name: "Superset",
       url: `https://superset.${communityName}.guardianconnector.net`,
     });
   }
 
-  // Only show Windmill if user has Admin role
-  if (config.public.windmillEnabled) {
-    const typedUser = user.value as User;
-    const userRoles = typedUser?.roles || [];
-    const hasAdminRole = userRoles.some(
-      (role: { name: string }) => role.name === "Admin",
-    );
-
-    if (hasAdminRole) {
-      services.push({
-        name: "Windmill",
-        url: `https://windmill.${communityName}.guardianconnector.net`,
-      });
-    }
+  // Windmill: Admin only
+  if (config.public.windmillEnabled && userRole >= Role.Admin) {
+    services.push({
+      name: "Windmill",
+      url: `https://windmill.${communityName}.guardianconnector.net`,
+    });
   }
 
-
-  if (config.public.explorerEnabled) {
+  // Explorer: SignedIn and higher (SignedIn, Guest, Member, Admin)
+  if (config.public.explorerEnabled && userRole >= Role.SignedIn) {
     services.push({
       name: "Explorer",
       url: `https://explorer.${communityName}.guardianconnector.net`,
     });
   }
 
-  if (config.public.filebrowserEnabled) {
+  // Filebrowser: Member and higher (Member, Admin)
+  if (config.public.filebrowserEnabled && userRole >= Role.Member) {
     services.push({
       name: "Filebrowser",
       url: `https://files.${communityName}.guardianconnector.net`,
@@ -136,7 +134,7 @@ useHead({
               class="flex items-center space-x-4"
             >
               <!-- User Management link for Admin users -->
-              <div v-if="(user as User)?.roles?.some((role: { name: string }) => role.name === 'Admin')">
+              <div v-if="(user as User)?.userRole && (user as User)!.userRole! >= Role.Admin">
                 <NuxtLink
                   to="/admin/users"
                   class="text-gray-400 hover:text-white transition-colors text-sm"
