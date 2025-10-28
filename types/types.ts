@@ -1,6 +1,6 @@
 export const Role = {
-    Public: 0, // Not signed in, no permissions
-    Viewer: 1, // Signed in but no special permissions
+    SignedIn: 0, // Signed in but no elevated access
+    Guest: 1, // Signed in with guest permissions
     Member: 2, // Signed in with member permissions
     Admin: 3, // Signed in with admin permissions
   } as const;
