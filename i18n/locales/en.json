@@ -2,7 +2,7 @@
   "app": {
     "title": "Guardian Connector Landing Page",
     "community": "Community",
-    "welcome": "Welcome to {communityName} Community",
+    "welcome": "Welcome to the Guardian Connector platform for {communityName}",
     "welcomeSubtitle": "Access your community tools and resources in one place"
   },
   "auth": {
