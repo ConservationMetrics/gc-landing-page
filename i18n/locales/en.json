@@ -17,7 +17,7 @@
   },
   "services": {
     "superset": "Superset",
-    "supersetDescription": "Business intelligence and data visualization platform",
+    "supersetDescription": "Data analytics and visualization platform",
     "windmill": "Windmill", 
     "windmillDescription": "Workflow automation and script execution platform",
     "explorer": "Explorer",
