@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from "vue";
 import Avatar from "vue-boring-avatars";
 import type { UserRole, UserManagementUser, UsersResponse, RolesResponse } from "~/types/types";
 import LanguagePicker from "@/components/shared/LanguagePicker.vue";
+import { translateRoleName } from "@/utils/roleTranslations";
 const { t } = useI18n();
 
 const users = ref<UserManagementUser[]>([]);
@@ -136,6 +137,7 @@ const formatDate = (dateString: string) => {
 };
 
 
+
 const handleImageError = (userId: string) => {
   imageErrors.value.add(userId);
 };
@@ -155,7 +157,7 @@ onMounted(async () => {
           <p class="text-gray-600">{{ t('userManagement.subtitle') }}</p>
         </div>
         <div class="ml-4">
-          <LanguagePicker />
+          <LanguagePicker theme="white" />
         </div>
       </div>
     </div>
@@ -292,7 +294,7 @@ onMounted(async () => {
                     :key="role.id"
                     class="inline-flex px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
                   >
-                    {{ role.name }}
+                    {{ translateRoleName(role.name, t) }}
                   </span>
                   <span v-if="user.roles.length === 0" class="text-sm text-gray-500">
                     {{ t('userManagement.noRoles') }}

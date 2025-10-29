@@ -24,7 +24,7 @@ onMounted(() => {
   <div class="container relative">
     <!-- Header with Language Picker -->
     <div class="absolute top-4 right-4">
-      <LanguagePicker />
+      <LanguagePicker theme="white" />
     </div>
     
     <div class="flex flex-col items-center justify-center h-screen">

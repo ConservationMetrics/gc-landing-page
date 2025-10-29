@@ -3,6 +3,7 @@ import { useUserSession, useRuntimeConfig, useHead } from "#imports";
 import { computed } from "vue";
 import { Role } from "~/types/types";
 import LanguagePicker from "@/components/shared/LanguagePicker.vue";
+import { translateRoleName } from "@/utils/roleTranslations";
 interface User {
   auth0: string;
   roles?: Array<{ id: string; name: string; description: string }>;
@@ -95,6 +96,7 @@ const getServiceDescription = (serviceName: string) => {
   );
 };
 
+
 useHead({
   title: t('app.title'),
 });
@@ -152,7 +154,7 @@ useHead({
               <div class="text-sm text-gray-300">
                 {{ t('auth.welcome', { user: (user as User)?.auth0 || 'User' }) }}
                 <span v-if="(user as User)?.roles?.length" class="text-xs text-gray-400">
-                  ({{ (user as User)?.roles?.map(role => role.name).join(', ') }})
+                  ({{ (user as User)?.roles?.map(role => translateRoleName(role.name, t)).join(', ') }})
                 </span>
               </div>
               <button

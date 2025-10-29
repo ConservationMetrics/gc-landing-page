@@ -4,6 +4,14 @@ import type { SupportedLocale } from "~/types/types";
 
 const { locale, locales, setLocale } = useI18n();
 
+interface Props {
+  theme?: 'purple' | 'white' | 'dark';
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  theme: 'purple'
+});
+
 // Populate available locales from i18n plugin
 const availableLocales = computed(() => locales.value);
 const currentLocaleName = computed(() => {
@@ -28,13 +36,50 @@ const changeLocale = (locale: { code: string }): void => {
   sessionStorage.setItem("locale", locale.code);
   dropdownOpen.value = false;
 };
+
+// Theme-based styling
+const buttonClasses = computed(() => {
+  switch (props.theme) {
+    case 'white':
+      return "inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors";
+    case 'dark':
+      return "inline-flex justify-center w-full rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-800 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none transition-colors";
+    case 'purple':
+    default:
+      return "inline-flex justify-center w-full rounded-md border border-white/20 shadow-sm px-4 py-2 bg-white/10 backdrop-blur-sm text-sm font-medium text-white hover:bg-white/20 focus:outline-none transition-colors";
+  }
+});
+
+const dropdownClasses = computed(() => {
+  switch (props.theme) {
+    case 'white':
+      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50";
+    case 'dark':
+      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-600 z-50";
+    case 'purple':
+    default:
+      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-black/70 backdrop-blur-sm ring-1 ring-white/30 z-50";
+  }
+});
+
+const itemClasses = computed(() => {
+  switch (props.theme) {
+    case 'white':
+      return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
+    case 'dark':
+      return "block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors";
+    case 'purple':
+    default:
+      return "block px-4 py-2 text-sm text-white hover:bg-white/30 transition-colors";
+  }
+});
 </script>
 
 <template>
   <div class="relative inline-block text-left">
     <div>
       <button
-        class="inline-flex justify-center w-full rounded-md border border-white/20 shadow-sm px-4 py-2 bg-white/10 backdrop-blur-sm text-sm font-medium text-white hover:bg-white/20 focus:outline-none transition-colors"
+        :class="buttonClasses"
         @click="dropdownOpen = !dropdownOpen"
       >
         {{ currentLocaleName }}
@@ -55,14 +100,14 @@ const changeLocale = (locale: { code: string }): void => {
     </div>
     <div
       v-if="dropdownOpen"
-      class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-black/70 backdrop-blur-sm ring-1 ring-white/30 z-50"
+      :class="dropdownClasses"
     >
       <div class="py-1">
         <a
           v-for="lang in availableLocales"
           :key="lang.code"
           href="#"
-          class="block px-4 py-2 text-sm text-white hover:bg-white/30 transition-colors"
+          :class="itemClasses"
           @click="
             ($event.preventDefault(),
             $event.stopPropagation(),

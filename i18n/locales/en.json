@@ -56,6 +56,12 @@
     "failedToUpdateUser": "Failed to update user {email}",
     "never": "Never"
   },
+  "roles": {
+    "admin": "Admin",
+    "member": "Member", 
+    "guest": "Guest",
+    "signedIn": "Signed In"
+  },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",
     "community": "Community: {communityName}",
