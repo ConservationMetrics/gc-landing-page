@@ -2,6 +2,8 @@
 import { ref, onMounted, computed } from "vue";
 import Avatar from "vue-boring-avatars";
 import type { UserRole, UserManagementUser, UsersResponse, RolesResponse } from "~/types/types";
+import LanguagePicker from "@/components/shared/LanguagePicker.vue";
+const { t } = useI18n();
 
 const users = ref<UserManagementUser[]>([]);
 const roles = ref<UserRole[]>([]);
@@ -35,7 +37,7 @@ const fetchRoles = async () => {
     }
   } catch (err) {
     console.error("Failed to fetch roles:", err);
-    error.value = "Failed to load available roles";
+    error.value = t('userManagement.failedToLoadRoles');
   }
 };
 
@@ -63,7 +65,7 @@ const fetchUsers = async (page = 0) => {
     }
   } catch (err) {
     console.error("Failed to fetch users:", err);
-    error.value = "Failed to load users";
+    error.value = t('userManagement.failedToLoadUsers');
   } finally {
     loading.value = false;
   }
@@ -92,7 +94,7 @@ const updateUser = async (user: UserManagementUser, newRoles: string[], isApprov
           newRoles.includes(role.id)
         );
       }
-      success.value = `User ${user.email} updated successfully`;
+      success.value = t('userManagement.userUpdatedSuccessfully', { email: user.email });
       setTimeout(() => { success.value = ""; }, 3000);
       
       // Call the callback with success result
@@ -100,7 +102,7 @@ const updateUser = async (user: UserManagementUser, newRoles: string[], isApprov
         callback({ success: true });
       }
     } else {
-      const errorMsg = `Failed to update user ${user.email}`;
+      const errorMsg = t('userManagement.failedToUpdateUser', { email: user.email });
       error.value = errorMsg;
       if (callback) {
         callback({ success: false, error: errorMsg });
@@ -108,7 +110,7 @@ const updateUser = async (user: UserManagementUser, newRoles: string[], isApprov
     }
   } catch (err) {
     console.error("Failed to update user:", err);
-    const errorMsg = `Failed to update user ${user.email}`;
+    const errorMsg = t('userManagement.failedToUpdateUser', { email: user.email });
     error.value = errorMsg;
     if (callback) {
       callback({ success: false, error: errorMsg });
@@ -129,14 +131,10 @@ const handlePageChange = (page: number) => {
 };
 
 const formatDate = (dateString: string) => {
-  if (!dateString) return "Never";
+  if (!dateString) return t('userManagement.never');
   return new Date(dateString).toLocaleDateString();
 };
 
-const getRoleName = (roleId: string) => {
-  const role = roles.value.find(r => r.id === roleId);
-  return role ? role.name : "Unknown";
-};
 
 const handleImageError = (userId: string) => {
   imageErrors.value.add(userId);
@@ -151,8 +149,15 @@ onMounted(async () => {
 <template>
   <div class="max-w-7xl mx-auto p-6">
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">User Management</h1>
-      <p class="text-gray-600">Manage user roles and approval status</p>
+      <div class="flex justify-between items-start">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ t('userManagement.title') }}</h1>
+          <p class="text-gray-600">{{ t('userManagement.subtitle') }}</p>
+        </div>
+        <div class="ml-4">
+          <LanguagePicker />
+        </div>
+      </div>
     </div>
 
     <!-- Search and Controls -->
@@ -163,7 +168,7 @@ onMounted(async () => {
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="Search users by email or name..."
+              :placeholder="t('userManagement.searchPlaceholder')"
               class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               @keyup.enter="handleSearch"
             />
@@ -179,7 +184,7 @@ onMounted(async () => {
           :disabled="loading"
           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {{ loading ? "Searching..." : "Search" }}
+          {{ loading ? t('userManagement.searching') : t('userManagement.search') }}
         </button>
       </div>
     </div>
@@ -214,31 +219,31 @@ onMounted(async () => {
           <thead class="bg-gray-50">
             <tr>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                User
+                {{ t('userManagement.user') }}
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
+                {{ t('userManagement.status') }}
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Roles
+                {{ t('userManagement.roles') }}
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Last Login
+                {{ t('userManagement.lastLogin') }}
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+                {{ t('userManagement.actions') }}
               </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-if="loading" class="animate-pulse">
               <td colspan="5" class="px-6 py-12 text-center text-gray-500">
-                Loading users...
+                {{ t('userManagement.loadingUsers') }}
               </td>
             </tr>
             <tr v-else-if="filteredUsers.length === 0">
               <td colspan="5" class="px-6 py-12 text-center text-gray-500">
-                No users found
+                {{ t('userManagement.noUsersFound') }}
               </td>
             </tr>
             <tr v-else v-for="user in filteredUsers" :key="user.id" class="hover:bg-gray-50">
@@ -277,7 +282,7 @@ onMounted(async () => {
                       : 'bg-yellow-100 text-yellow-800'
                   ]"
                 >
-                  {{ user.isApproved ? "Approved" : "Pending" }}
+                  {{ user.isApproved ? t('userManagement.approved') : t('userManagement.pending') }}
                 </span>
               </td>
               <td class="px-6 py-4">
@@ -290,7 +295,7 @@ onMounted(async () => {
                     {{ role.name }}
                   </span>
                   <span v-if="user.roles.length === 0" class="text-sm text-gray-500">
-                    No roles
+                    {{ t('userManagement.noRoles') }}
                   </span>
                 </div>
               </td>
@@ -318,26 +323,26 @@ onMounted(async () => {
             :disabled="currentPage === 0"
             class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Previous
+            {{ t('userManagement.previous') }}
           </button>
           <button
             @click="handlePageChange(currentPage + 1)"
             :disabled="currentPage >= totalPages - 1"
             class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Next
+            {{ t('userManagement.next') }}
           </button>
         </div>
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div>
             <p class="text-sm text-gray-700">
-              Showing
+              {{ t('userManagement.showing') }}
               <span class="font-medium">{{ currentPage * perPage + 1 }}</span>
-              to
+              {{ t('userManagement.to') }}
               <span class="font-medium">{{ Math.min((currentPage + 1) * perPage, totalUsers) }}</span>
-              of
+              {{ t('userManagement.of') }}
               <span class="font-medium">{{ totalUsers }}</span>
-              results
+              {{ t('userManagement.results') }}
             </p>
           </div>
           <div>

@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "Guardian Connector Landing Page",
+    "community": "Community",
+    "welcome": "Welcome to {communityName} Community",
+    "welcomeSubtitle": "Access your community tools and resources in one place"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signInWithAuth0": "Sign In with Auth0",
+    "pleaseSignIn": "Please sign in to continue.",
+    "welcome": "Welcome, {user}",
+    "userManagement": "User Management",
+    "secureAccessRequired": "Secure Access Required",
+    "pleaseSignInToAccess": "Please sign in to access your community tools"
+  },
+  "services": {
+    "superset": "Superset",
+    "supersetDescription": "Business intelligence and data visualization platform",
+    "windmill": "Windmill", 
+    "windmillDescription": "Workflow automation and script execution platform",
+    "explorer": "Explorer",
+    "explorerDescription": "Data exploration and analysis tools",
+    "filebrowser": "Filebrowser",
+    "filebrowserDescription": "Secure file management and sharing",
+    "noServicesAvailable": "No Services Available",
+    "noServicesDescription": "No community services are currently deployed or accessible.",
+    "communityService": "Community service"
+  },
+  "userManagement": {
+    "title": "User Management",
+    "subtitle": "Manage user roles and approval status",
+    "searchPlaceholder": "Search users by email or name...",
+    "search": "Search",
+    "searching": "Searching...",
+    "user": "User",
+    "status": "Status",
+    "roles": "Roles",
+    "lastLogin": "Last Login",
+    "actions": "Actions",
+    "loadingUsers": "Loading users...",
+    "noUsersFound": "No users found",
+    "approved": "Approved",
+    "pending": "Pending",
+    "noRoles": "No roles",
+    "previous": "Previous",
+    "next": "Next",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "failedToLoadUsers": "Failed to load users",
+    "failedToLoadRoles": "Failed to load available roles",
+    "userUpdatedSuccessfully": "User {email} updated successfully",
+    "failedToUpdateUser": "Failed to update user {email}",
+    "never": "Never"
+  },
+  "footer": {
+    "copyright": "© 2025 Guardian Connector.",
+    "community": "Community: {communityName}",
+    "services": "Services: {count}"
+  }
+}

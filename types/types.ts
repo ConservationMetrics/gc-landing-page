@@ -47,4 +47,7 @@ export interface RolesResponse {
   success: boolean;
   roles: UserRole[];
 }
+
+// I18n Types
+export type SupportedLocale = 'en' | 'pt' | 'es' | 'nl';
   

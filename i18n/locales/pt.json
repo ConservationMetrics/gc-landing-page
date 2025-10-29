@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "Página Inicial do Guardian Connector",
+    "community": "Comunidade",
+    "welcome": "Bem-vindo à Comunidade {communityName}",
+    "welcomeSubtitle": "Acesse suas ferramentas e recursos da comunidade em um só lugar"
+  },
+  "auth": {
+    "signIn": "Entrar",
+    "signOut": "Sair",
+    "signInWithAuth0": "Entrar com Auth0",
+    "pleaseSignIn": "Por favor, entre para continuar.",
+    "welcome": "Bem-vindo, {user}",
+    "userManagement": "Gerenciamento de Usuários",
+    "secureAccessRequired": "Acesso Seguro Necessário",
+    "pleaseSignInToAccess": "Por favor, entre para acessar suas ferramentas da comunidade"
+  },
+  "services": {
+    "superset": "Superset",
+    "supersetDescription": "Plataforma de inteligência de negócios e visualização de dados",
+    "windmill": "Windmill",
+    "windmillDescription": "Plataforma de automação de fluxo de trabalho e execução de scripts",
+    "explorer": "Explorador",
+    "explorerDescription": "Ferramentas de exploração e análise de dados",
+    "filebrowser": "Navegador de Arquivos",
+    "filebrowserDescription": "Gerenciamento e compartilhamento seguro de arquivos",
+    "noServicesAvailable": "Nenhum Serviço Disponível",
+    "noServicesDescription": "Nenhum serviço da comunidade está atualmente implantado ou acessível.",
+    "communityService": "Serviço da comunidade"
+  },
+  "userManagement": {
+    "title": "Gerenciamento de Usuários",
+    "subtitle": "Gerencie funções e status de aprovação dos usuários",
+    "searchPlaceholder": "Pesquisar usuários por email ou nome...",
+    "search": "Pesquisar",
+    "searching": "Pesquisando...",
+    "user": "Usuário",
+    "status": "Status",
+    "roles": "Funções",
+    "lastLogin": "Último Login",
+    "actions": "Ações",
+    "loadingUsers": "Carregando usuários...",
+    "noUsersFound": "Nenhum usuário encontrado",
+    "approved": "Aprovado",
+    "pending": "Pendente",
+    "noRoles": "Nenhuma função",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "showing": "Mostrando",
+    "to": "até",
+    "of": "de",
+    "results": "resultados",
+    "failedToLoadUsers": "Falha ao carregar usuários",
+    "failedToLoadRoles": "Falha ao carregar funções disponíveis",
+    "userUpdatedSuccessfully": "Usuário {email} atualizado com sucesso",
+    "failedToUpdateUser": "Falha ao atualizar usuário {email}",
+    "never": "Nunca"
+  },
+  "footer": {
+    "copyright": "© 2025 Guardian Connector.",
+    "community": "Comunidade: {communityName}",
+    "services": "Serviços: {count}"
+  }
+}
