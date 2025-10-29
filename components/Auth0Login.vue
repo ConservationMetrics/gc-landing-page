@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useUserSession, onMounted } from "#imports";
-// i18n is auto-imported by @nuxtjs/i18n
 
 interface Props {
   errorMessage: string;
