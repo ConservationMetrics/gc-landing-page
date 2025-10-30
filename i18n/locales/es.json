@@ -1,0 +1,70 @@
+{
+  "app": {
+    "title": "Página de Inicio de Guardian Connector",
+    "community": "Comunidad",
+    "welcome": "Bienvenido a la plataforma Guardian Connector para {communityName}",
+    "welcomeSubtitle": "Accede a las herramientas y recursos de tu comunidad en un solo lugar"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signOut": "Cerrar Sesión",
+    "signInWithAuth0": "Iniciar Sesión con Auth0",
+    "pleaseSignIn": "Por favor, inicia sesión para continuar.",
+    "welcome": "Bienvenido, {user}",
+    "userManagement": "Gestión de Usuarios",
+    "secureAccessRequired": "Acceso Seguro Requerido",
+    "pleaseSignInToAccess": "Por favor, inicia sesión para acceder a las herramientas de tu comunidad"
+  },
+  "services": {
+    "superset": "Superset",
+    "supersetDescription": "Plataforma de inteligencia de negocios y visualización de datos",
+    "windmill": "Windmill",
+    "windmillDescription": "Plataforma de automatización de flujos de trabajo y ejecución de scripts",
+    "explorer": "Explorador",
+    "explorerDescription": "Herramientas de exploración y análisis de datos",
+    "filebrowser": "Navegador de Archivos",
+    "filebrowserDescription": "Gestión y compartición segura de archivos",
+    "noServicesAvailable": "No Hay Servicios Disponibles",
+    "noServicesDescription": "No hay servicios de la comunidad actualmente desplegados o accesibles.",
+    "communityService": "Servicio de la comunidad"
+  },
+  "userManagement": {
+    "title": "Gestión de Usuarios",
+    "subtitle": "Gestiona roles de usuario y estado de aprobación",
+    "searchPlaceholder": "Buscar usuarios por email o nombre...",
+    "search": "Buscar",
+    "searching": "Buscando...",
+    "user": "Usuario",
+    "status": "Estado",
+    "roles": "Roles",
+    "lastLogin": "Último Inicio de Sesión",
+    "actions": "Acciones",
+    "loadingUsers": "Cargando usuarios...",
+    "noUsersFound": "No se encontraron usuarios",
+    "approved": "Aprobado",
+    "pending": "Pendiente",
+    "noRoles": "Sin roles",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "showing": "Mostrando",
+    "to": "a",
+    "of": "de",
+    "results": "resultados",
+    "failedToLoadUsers": "Error al cargar usuarios",
+    "failedToLoadRoles": "Error al cargar roles disponibles",
+    "userUpdatedSuccessfully": "Usuario {email} actualizado exitosamente",
+    "failedToUpdateUser": "Error al actualizar usuario {email}",
+    "never": "Nunca"
+  },
+  "roles": {
+    "admin": "Administrador",
+    "member": "Miembro", 
+    "guest": "Invitado",
+    "signedIn": "Conectado"
+  },
+  "footer": {
+    "copyright": "© 2025 Guardian Connector.",
+    "community": "Comunidad: {communityName}",
+    "services": "Servicios: {count}"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "app": {
+    "title": "Guardian Connector Startpagina",
+    "community": "Gemeenschap",
+    "welcome": "Welkom bij het Guardian Connector‑platform voor {communityName}",
+    "welcomeSubtitle": "Toegang tot uw gemeenschapstools en -bronnen op één plek"
+  },
+  "auth": {
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen",
+    "signInWithAuth0": "Inloggen met Auth0",
+    "pleaseSignIn": "Gelieve in te loggen om door te gaan.",
+    "welcome": "Welkom, {user}",
+    "userManagement": "Gebruikersbeheer",
+    "secureAccessRequired": "Veilige Toegang Vereist",
+    "pleaseSignInToAccess": "Gelieve in te loggen om toegang te krijgen tot uw gemeenschapstools"
+  },
+  "services": {
+    "superset": "Superset",
+    "supersetDescription": "Business intelligence en data visualisatie platform",
+    "windmill": "Windmill",
+    "windmillDescription": "Workflow automatisering en script uitvoering platform",
+    "explorer": "Verkenner",
+    "explorerDescription": "Data exploratie en analyse tools",
+    "filebrowser": "Bestandsbrowser",
+    "filebrowserDescription": "Veilig bestandsbeheer en -deling",
+    "noServicesAvailable": "Geen Services Beschikbaar",
+    "noServicesDescription": "Geen gemeenschapsservices zijn momenteel geïmplementeerd of toegankelijk.",
+    "communityService": "Gemeenschapsservice"
+  },
+  "userManagement": {
+    "title": "Gebruikersbeheer",
+    "subtitle": "Beheer gebruikersrollen en goedkeuringsstatus",
+    "searchPlaceholder": "Zoek gebruikers op email of naam...",
+    "search": "Zoeken",
+    "searching": "Zoeken...",
+    "user": "Gebruiker",
+    "status": "Status",
+    "roles": "Rollen",
+    "lastLogin": "Laatste Login",
+    "actions": "Acties",
+    "loadingUsers": "Gebruikers laden...",
+    "noUsersFound": "Geen gebruikers gevonden",
+    "approved": "Goedgekeurd",
+    "pending": "In behandeling",
+    "noRoles": "Geen rollen",
+    "previous": "Vorige",
+    "next": "Volgende",
+    "showing": "Toont",
+    "to": "tot",
+    "of": "van",
+    "results": "resultaten",
+    "failedToLoadUsers": "Gebruikers laden mislukt",
+    "failedToLoadRoles": "Beschikbare rollen laden mislukt",
+    "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt",
+    "failedToUpdateUser": "Gebruiker {email} bijwerken mislukt",
+    "never": "Nooit"
+  },
+  "roles": {
+    "admin": "Beheerder",
+    "member": "Lid", 
+    "guest": "Gast",
+    "signedIn": "Ingelogd"
+  },
+  "footer": {
+    "copyright": "© 2025 Guardian Connector.",
+    "community": "Gemeenschap: {communityName}",
+    "services": "Services: {count}"
+  }
+}

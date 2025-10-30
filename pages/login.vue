@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { useUserSession } from "#imports";
+import { useUserSession, useHead } from "#imports";
 import { useAuth } from "~/composables/useAuth";
+import { ref, onMounted } from "vue";
 
 const { loggedIn } = useUserSession();
+const { t } = useI18n();
 const errorMessage = ref("");
 
 onMounted(() => {
@@ -11,7 +13,7 @@ onMounted(() => {
 });
 
 useHead({
-  title: "GuardianConnector: Login",
+  title: t('auth.signIn'),
 });
 </script>
 

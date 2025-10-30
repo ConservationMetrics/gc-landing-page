@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useUserSession } from "#imports";
+import { useUserSession, useRuntimeConfig, useHead } from "#imports";
 import { computed } from "vue";
 import { Role } from "~/types/types";
-
+import LanguagePicker from "@/components/shared/LanguagePicker.vue";
+import { translateRoleName } from "@/utils/roleTranslations";
 interface User {
   auth0: string;
   roles?: Array<{ id: string; name: string; description: string }>;
@@ -11,6 +12,7 @@ interface User {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
+const { t } = useI18n();
 
 // Auth state using nuxt-auth-utils
 const { loggedIn, user } = useUserSession();
@@ -83,19 +85,20 @@ const openService = (url: string) => {
 
 const getServiceDescription = (serviceName: string) => {
   const descriptions = {
-    Superset: "Business intelligence and data visualization platform",
-    Windmill: "Workflow automation and script execution platform",
-    Explorer: "Data exploration and analysis tools",
-    Filebrowser: "Secure file management and sharing",
+    Superset: t('services.supersetDescription'),
+    Windmill: t('services.windmillDescription'),
+    Explorer: t('services.explorerDescription'),
+    Filebrowser: t('services.filebrowserDescription'),
   };
   return (
     descriptions[serviceName as keyof typeof descriptions] ||
-    "Community service"
+    t('services.communityService')
   );
 };
 
+
 useHead({
-  title: "Guardian Connector Landing Page",
+  title: t('app.title'),
 });
 </script>
 
@@ -113,19 +116,24 @@ useHead({
             ></div>
             <div>
               <h1 class="text-xl font-bold text-white">Guardian Connector</h1>
-              <p class="text-sm text-gray-400">{{ communityName }} Community</p>
+              <p class="text-sm text-gray-400">{{ communityName }} {{ t('app.community') }}</p>
             </div>
           </div>
 
           <!-- Navigation -->
           <div class="flex items-center space-x-4">
+            <!-- Language Picker -->
+            <div class="mr-4">
+              <LanguagePicker />
+            </div>
+            
             <!-- Auth controls (only show if auth is enabled) -->
             <div v-if="isAuth0Configured && !loggedIn">
               <button
                 @click="login"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
               >
-                Sign In
+                {{ t('auth.signIn') }}
               </button>
             </div>
 
@@ -139,21 +147,21 @@ useHead({
                   to="/admin/users"
                   class="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  User Management
+                  {{ t('auth.userManagement') }}
                 </NuxtLink>
               </div>
               
               <div class="text-sm text-gray-300">
-                Welcome, {{ (user as User)?.auth0 || 'User' }}
+                {{ t('auth.welcome', { user: (user as User)?.auth0 || 'User' }) }}
                 <span v-if="(user as User)?.roles?.length" class="text-xs text-gray-400">
-                  ({{ (user as User)?.roles?.map(role => role.name).join(', ') }})
+                  ({{ (user as User)?.roles?.map(role => translateRoleName(role.name, t)).join(', ') }})
                 </span>
               </div>
               <button
                 @click="logout"
                 class="text-gray-400 hover:text-white transition-colors"
               >
-                Sign Out
+                {{ t('auth.signOut') }}
               </button>
             </div>
           </div>
@@ -165,10 +173,10 @@ useHead({
       <!-- Welcome Section -->
       <div class="text-center mb-16">
         <h2 class="text-4xl font-bold text-white mb-4">
-          Welcome to {{ communityName }} Community
+          {{ t('app.welcome', { communityName }) }}
         </h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-          Access your community tools and resources in one place
+          {{ t('app.welcomeSubtitle') }}
         </p>
       </div>
 
@@ -198,16 +206,16 @@ useHead({
             </svg>
           </div>
           <h3 class="text-2xl font-bold text-white mb-4">
-            Secure Access Required
+            {{ t('auth.secureAccessRequired') }}
           </h3>
           <p class="text-gray-400 mb-6">
-            Please sign in to access your community tools
+            {{ t('auth.pleaseSignInToAccess') }}
           </p>
           <button
             @click="login"
             class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200"
           >
-            Sign In with Auth0
+            {{ t('auth.signInWithAuth0') }}
           </button>
         </div>
       </div>
@@ -292,10 +300,10 @@ useHead({
             </svg>
           </div>
           <h3 class="text-xl font-semibold text-white mb-2">
-            No Services Available
+            {{ t('services.noServicesAvailable') }}
           </h3>
           <p class="text-gray-400">
-            No community services are currently deployed or accessible.
+            {{ t('services.noServicesDescription') }}
           </p>
         </div>
       </div>
@@ -305,10 +313,9 @@ useHead({
     <footer class="border-t border-white/10 bg-black/20 backdrop-blur-sm mt-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="text-center text-gray-400">
-          <p>&copy; 2025 Guardian Connector.</p>
+          <p>{{ t('footer.copyright') }}</p>
           <p class="text-sm mt-2">
-            Community: {{ communityName }} | Services:
-            {{ availableServices.length }} |
+            {{ t('footer.community', { communityName }) }} | {{ t('footer.services', { count: availableServices.length }) }}
           </p>
         </div>
       </div>

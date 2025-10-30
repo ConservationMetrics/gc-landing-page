@@ -20,7 +20,27 @@ export default defineNuxtConfig({
 
   modules: [
     "nuxt-auth-utils",
+    "@nuxtjs/i18n",
   ],
+
+  i18n: {
+    locales: [
+      { code: "en", name: "English", language: "en-US", file: "en.json" },
+      { code: "es", name: "Español", language: "es-ES", file: "es.json" },
+      { code: "pt", name: "Português", language: "pt-PT", file: "pt.json" },
+      { code: "nl", name: "Nederlands", language: "nl-NL", file: "nl.json" },
+    ],
+    defaultLocale: "en",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      alwaysRedirect: true,
+      redirectOn: "all",
+    },
+    strategy: "no_prefix",
+    skipSettingLocaleOnNavigate: true, // persists locale when route changes
+  },
+
 
   runtimeConfig: {
     // Session secret for nuxt-auth-utils
