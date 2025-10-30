@@ -2,7 +2,7 @@
   "app": {
     "title": "Página de Inicio de Guardian Connector",
     "community": "Comunidad",
-    "welcome": "Bienvenido a la Comunidad {communityName}",
+    "welcome": "Bienvenido a la plataforma Guardian Connector para {communityName}",
     "welcomeSubtitle": "Accede a las herramientas y recursos de tu comunidad en un solo lugar"
   },
   "auth": {

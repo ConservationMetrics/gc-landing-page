@@ -2,7 +2,7 @@
   "app": {
     "title": "Guardian Connector Startpagina",
     "community": "Gemeenschap",
-    "welcome": "Welkom bij de {communityName} Gemeenschap",
+    "welcome": "Welkom bij het Guardian Connector‑platform voor {communityName}",
     "welcomeSubtitle": "Toegang tot uw gemeenschapstools en -bronnen op één plek"
   },
   "auth": {
