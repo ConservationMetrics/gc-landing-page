@@ -406,45 +406,45 @@ useHead({
             <!-- Explorer: Use actual logo (compass-style) -->
             <div
               v-if="service.icon === 'explorer'"
-              class="w-16 h-16 flex items-center justify-center"
+              class="w-[67px] h-[67px] flex items-center justify-center"
             >
               <img
                 src="/gcexplorer.png"
                 :alt="service.name"
-                class="w-16 h-16 object-contain"
+                class="w-[67px] h-[67px] object-contain"
               />
             </div>
             <!-- Superset: Official Apache Superset logo -->
             <div
               v-else-if="service.icon === 'superset'"
-              class="w-20 h-20 flex items-center justify-center"
+              class="w-[83px] h-[83px] flex items-center justify-center"
             >
               <img
-                src="https://superset.apache.org/img/superset-logo-horiz.svg"
+                src="/apache.png"
                 :alt="service.name"
-                class="w-20 h-20 max-w-24 object-contain"
+                class="w-[83px] h-[83px] max-w-24 object-contain"
               />
             </div>
             <!-- Windmill: Official Windmill logo -->
             <div
               v-else-if="service.icon === 'windmill'"
-              class="w-16 h-16 flex items-center justify-center"
+              class="w-[67px] h-[67px] flex items-center justify-center"
             >
               <img
                 src="https://www.windmill.dev/img/windmill.svg"
                 :alt="service.name"
-                class="w-16 h-16 object-contain"
+                class="w-[67px] h-[67px] object-contain"
               />
             </div>
             <!-- Filebrowser: Official Filebrowser logo -->
             <div
               v-else-if="service.icon === 'filebrowser'"
-              class="w-16 h-16 flex items-center justify-center"
+              class="w-[67px] h-[67px] flex items-center justify-center"
             >
               <img
                 src="https://filebrowser.org/static/logo.png"
                 :alt="service.name"
-                class="w-16 h-16 object-contain"
+                class="w-[67px] h-[67px] object-contain"
               />
             </div>
           </div>
