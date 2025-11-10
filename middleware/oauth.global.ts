@@ -19,24 +19,24 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // We use the window object to get where the user was before they were redirected to the login page
   // Store it in the session storage and in the Auth0 component we grab and redirect
 
-  if (import.meta.client) {
-    if (to.path.includes("/login")) {
-      const back = window.history.state.back;
-      const current = window.history.state.current;
+  // if (import.meta.client) {
+  //   if (to.path.includes("/login")) {
+  //     const back = window.history.state.back;
+  //     const current = window.history.state.current;
 
-      if (!current.includes("/login") && !back) {
-        sessionStorage.setItem("redirect_url", current);
-      }
-    }
-  }
+  //     if (!current.includes("/login") && !back) {
+  //       sessionStorage.setItem("redirect_url", current);
+  //     }
+  //   }
+  // }
 
-  if (!loggedIn.value && to.path !== "/login") {
-    return router.push("/login");
-  }
+  // if (!loggedIn.value && to.path !== "/login") {
+  //   return router.push("/login");
+  // }
 
-  if (loggedIn.value && to.path === "/login") {
-    return router.push("/");
-  }
+  // if (loggedIn.value && to.path === "/login") {
+  //   return router.push("/");
+  // }
 
   // Admin route protection
   if (loggedIn.value && to.path.startsWith("/admin")) {

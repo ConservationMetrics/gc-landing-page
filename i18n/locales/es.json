@@ -1,9 +1,9 @@
 {
   "app": {
     "title": "Página de Inicio de Guardian Connector",
-    "community": "Comunidad",
-    "welcome": "Bienvenido a la plataforma Guardian Connector para {communityName}",
-    "welcomeSubtitle": "Accede a las herramientas y recursos de tu comunidad en un solo lugar"
+    "partner": "Socio",
+    "welcome": "Empodera a {communityName} con soberanía de datos y autodeterminación.",
+    "welcomeSubtitle": "Aquí puedes encontrar datos y gestionar los activos de {communityName}."
   },
   "auth": {
     "signIn": "Iniciar Sesión",
@@ -13,7 +13,7 @@
     "welcome": "Bienvenido, {user}",
     "userManagement": "Gestión de Usuarios",
     "secureAccessRequired": "Acceso Seguro Requerido",
-    "pleaseSignInToAccess": "Por favor, inicia sesión para acceder a las herramientas de tu comunidad"
+    "pleaseSignInToAccess": "Por favor, inicia sesión para acceder a las herramientas de tu socio"
   },
   "services": {
     "superset": "Superset",
@@ -25,8 +25,8 @@
     "filebrowser": "Navegador de Archivos",
     "filebrowserDescription": "Gestión y compartición segura de archivos",
     "noServicesAvailable": "No Hay Servicios Disponibles",
-    "noServicesDescription": "No hay servicios de la comunidad actualmente desplegados o accesibles.",
-    "communityService": "Servicio de la comunidad"
+    "noServicesDescription": "No hay servicios del socio actualmente desplegados o accesibles.",
+    "communityService": "Servicio del socio"
   },
   "userManagement": {
     "title": "Gestión de Usuarios",
@@ -64,7 +64,11 @@
   },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",
-    "community": "Comunidad: {communityName}",
+    "partner": "Socio: {communityName}",
     "services": "Servicios: {count}"
+  },
+  "header": {
+    "adminAccess": "Acceso de Administrador",
+    "languagePicker": "Selector de Idioma"
   }
 }
