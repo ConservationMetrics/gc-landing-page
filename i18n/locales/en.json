@@ -54,7 +54,8 @@
     "failedToLoadRoles": "Failed to load available roles",
     "userUpdatedSuccessfully": "User {email} updated successfully",
     "failedToUpdateUser": "Failed to update user {email}",
-    "never": "Never"
+    "never": "Never",
+    "returnToHomepage": "Return to Homepage"
   },
   "roles": {
     "admin": "Admin",

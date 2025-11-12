@@ -54,7 +54,8 @@
     "failedToLoadRoles": "Falha ao carregar funções disponíveis",
     "userUpdatedSuccessfully": "Usuário {email} atualizado com sucesso",
     "failedToUpdateUser": "Falha ao atualizar usuário {email}",
-    "never": "Nunca"
+    "never": "Nunca",
+    "returnToHomepage": "Voltar à Página Inicial"
   },
   "roles": {
     "admin": "Administrador",

@@ -54,7 +54,8 @@
     "failedToLoadRoles": "Beschikbare rollen laden mislukt",
     "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt",
     "failedToUpdateUser": "Gebruiker {email} bijwerken mislukt",
-    "never": "Nooit"
+    "never": "Nooit",
+    "returnToHomepage": "Terug naar Startpagina"
   },
   "roles": {
     "admin": "Beheerder",
