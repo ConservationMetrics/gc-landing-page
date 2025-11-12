@@ -440,7 +440,6 @@ useHead({
           class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-200 cursor-pointer border border-purple-200 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm flex flex-col"
           @click="openService(service.url)"
         >
-          <!-- Service Icon -->
           <div class="mb-4 flex justify-center">
             <!-- Explorer: Use actual logo (compass-style) -->
             <div
