@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import Avatar from "vue-boring-avatars";
 import type { UserRole, UserManagementUser } from "~/types/types";
+const { t } = useI18n();
 
 interface Props {
   user: UserManagementUser;
@@ -31,7 +32,7 @@ const saveError = ref("");
 const selectedRoleNames = computed(() => {
   return selectedRoles.value.map((roleId) => {
     const role = props.availableRoles.find((r) => r.id === roleId);
-    return role ? role.name : "Unknown";
+    return role ? role.name : t("userManagement.unknown");
   });
 });
 
@@ -75,10 +76,10 @@ const handleSave = async () => {
     if (result.success) {
       isOpen.value = false;
     } else {
-      saveError.value = result.error || "Failed to save user";
+      saveError.value = result.error || t("userManagement.failedToSaveUser");
     }
   } catch (error) {
-    saveError.value = "An unexpected error occurred";
+    saveError.value = t("userManagement.unexpectedError");
     console.error("Save error:", error);
   } finally {
     isSaving.value = false;
@@ -86,7 +87,7 @@ const handleSave = async () => {
 };
 
 const formatDate = (dateString: string) => {
-  if (!dateString) return "Never";
+  if (!dateString) return t("userManagement.never");
   return new Date(dateString).toLocaleString();
 };
 </script>
@@ -98,7 +99,7 @@ const formatDate = (dateString: string) => {
       :disabled="saving"
       class="text-blue-600 hover:text-blue-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      Edit
+      {{ t("userManagement.edit") }}
     </button>
 
     <!-- Modal -->
@@ -130,7 +131,7 @@ const formatDate = (dateString: string) => {
                   class="text-lg leading-6 font-medium text-gray-900 mb-4"
                   id="modal-title"
                 >
-                  Edit User: {{ user.email }}
+                  {{ t("userManagement.editUserTitle", { email: user.email }) }}
                 </h3>
 
                 <!-- User Info -->
@@ -152,15 +153,27 @@ const formatDate = (dateString: string) => {
                     />
                     <div>
                       <div class="text-sm font-medium text-gray-900">
-                        {{ user.name || user.nickname || "Unknown" }}
+                        {{
+                          user.name ||
+                          user.nickname ||
+                          t("userManagement.unknown")
+                        }}
                       </div>
                       <div class="text-sm text-gray-500">{{ user.email }}</div>
                     </div>
                   </div>
                   <div class="text-xs text-gray-500">
-                    <div>Created: {{ formatDate(user.created_at) }}</div>
-                    <div>Last Login: {{ formatDate(user.last_login) }}</div>
-                    <div>Logins: {{ user.logins_count }}</div>
+                    <div>
+                      {{ t("userManagement.created") }}:
+                      {{ formatDate(user.created_at) }}
+                    </div>
+                    <div>
+                      {{ t("userManagement.lastLoginLabel") }}:
+                      {{ formatDate(user.last_login) }}
+                    </div>
+                    <div>
+                      {{ t("userManagement.logins") }}: {{ user.logins_count }}
+                    </div>
                   </div>
                 </div>
 
@@ -172,20 +185,19 @@ const formatDate = (dateString: string) => {
                       type="checkbox"
                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
-                    <span class="ml-2 text-sm text-gray-700"
-                      >User is approved</span
-                    >
+                    <span class="ml-2 text-sm text-gray-700">{{
+                      t("userManagement.userIsApproved")
+                    }}</span>
                   </label>
                   <p class="text-xs text-gray-500 mt-1">
-                    Approved users can access the application with their
-                    assigned roles
+                    {{ t("userManagement.approvedUsersDescription") }}
                   </p>
                 </div>
 
                 <!-- Roles Selection -->
                 <div class="mb-6">
                   <label class="block text-sm font-medium text-gray-700 mb-3">
-                    User Roles
+                    {{ t("userManagement.userRoles") }}
                   </label>
                   <div
                     class="space-y-2 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3"
@@ -219,7 +231,10 @@ const formatDate = (dateString: string) => {
                     </div>
                   </div>
                   <p class="text-xs text-gray-500 mt-2">
-                    Selected roles: {{ selectedRoleNames.join(", ") || "None" }}
+                    {{ t("userManagement.selectedRoles") }}:
+                    {{
+                      selectedRoleNames.join(", ") || t("userManagement.none")
+                    }}
                   </p>
                 </div>
 
@@ -241,14 +256,18 @@ const formatDate = (dateString: string) => {
               :disabled="isSaving"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {{ isSaving ? "Saving..." : "Save Changes" }}
+              {{
+                isSaving
+                  ? t("userManagement.saving")
+                  : t("userManagement.saveChanges")
+              }}
             </button>
             <button
               @click="closeModal"
               :disabled="isSaving"
               class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Cancel
+              {{ t("userManagement.cancel") }}
             </button>
           </div>
         </div>
