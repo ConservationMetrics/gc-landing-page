@@ -96,7 +96,7 @@ const getServiceDescription = (serviceName: string) => {
   const descriptions = {
     Superset: t('services.supersetDescription'),
     Windmill: t('services.windmillDescription'),
-    "Dataset Explorer": t('services.explorerDescription'),
+    "Explorer": t('services.explorerDescription'),
     Explorer: t('services.explorerDescription'),
     Filebrowser: t('services.filebrowserDescription'),
   };
