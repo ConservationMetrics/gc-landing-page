@@ -129,7 +129,7 @@ useHead({
 
 <template>
   <div class="min-h-screen flex flex-col bg-white">
-    <!-- Header with Microsoft-style design -->
+    <!-- Header with tab design -->
     <header class="bg-gradient-to-r mb-2 from-purple-100 to-purple-50 w-5/6 place-self-center mt-2 rounded-xl p-3">
 
         <!-- Desktop Layout - show above 1000px -->
