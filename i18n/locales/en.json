@@ -25,7 +25,7 @@
     "filebrowser": "Filebrowser",
     "filebrowserDescription": "Secure file management and sharing",
     "noServicesAvailable": "No Services Available",
-    "noServicesDescription": "No partner services are currently deployed or accessible.",
+    "noServicesDescription": "No services are currently deployed or accessible.",
     "service": "Service"
   },
   "userManagement": {
