@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import Avatar from "vue-boring-avatars";
 import type { UserRole, UserManagementUser } from "~/types/types";
+const { t } = useI18n();
 
 interface Props {
   user: UserManagementUser;
@@ -12,7 +13,12 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  update: [user: UserManagementUser, roles: string[], isApproved: boolean, callback: (_result: { success: boolean; error?: string }) => void];
+  update: [
+    user: UserManagementUser,
+    roles: string[],
+    isApproved: boolean,
+    callback: (_result: { success: boolean; error?: string }) => void,
+  ];
 }>();
 
 const isOpen = ref(false);
@@ -24,15 +30,15 @@ const saveError = ref("");
 
 // Computed properties
 const selectedRoleNames = computed(() => {
-  return selectedRoles.value.map(roleId => {
-    const role = props.availableRoles.find(r => r.id === roleId);
-    return role ? role.name : "Unknown";
+  return selectedRoles.value.map((roleId) => {
+    const role = props.availableRoles.find((r) => r.id === roleId);
+    return role ? role.name : t("userManagement.unknown");
   });
 });
 
 // Methods
 const openModal = () => {
-  selectedRoles.value = props.user.roles.map(role => role.id);
+  selectedRoles.value = props.user.roles.map((role) => role.id);
   isApproved.value = props.user.isApproved;
   imageError.value = false; // Reset image error state
   isSaving.value = false;
@@ -53,19 +59,27 @@ const closeModal = () => {
 const handleSave = async () => {
   isSaving.value = true;
   saveError.value = "";
-  
+
   try {
-    const result = await new Promise<{ success: boolean; error?: string }>((resolve) => {
-      emit("update", props.user, selectedRoles.value, isApproved.value, resolve);
-    });
-    
+    const result = await new Promise<{ success: boolean; error?: string }>(
+      (resolve) => {
+        emit(
+          "update",
+          props.user,
+          selectedRoles.value,
+          isApproved.value,
+          resolve,
+        );
+      },
+    );
+
     if (result.success) {
       isOpen.value = false;
     } else {
-      saveError.value = result.error || "Failed to save user";
+      saveError.value = result.error || t("userManagement.failedToSaveUser");
     }
   } catch (error) {
-    saveError.value = "An unexpected error occurred";
+    saveError.value = t("userManagement.unexpectedError");
     console.error("Save error:", error);
   } finally {
     isSaving.value = false;
@@ -73,7 +87,7 @@ const handleSave = async () => {
 };
 
 const formatDate = (dateString: string) => {
-  if (!dateString) return "Never";
+  if (!dateString) return t("userManagement.never");
   return new Date(dateString).toLocaleString();
 };
 </script>
@@ -83,9 +97,9 @@ const formatDate = (dateString: string) => {
     <button
       @click="openModal"
       :disabled="saving"
-      class="text-blue-600 hover:text-blue-900 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="text-blue-600 hover:text-blue-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      Edit
+      {{ t("userManagement.edit") }}
     </button>
 
     <!-- Modal -->
@@ -96,7 +110,9 @@ const formatDate = (dateString: string) => {
       role="dialog"
       aria-modal="true"
     >
-      <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
         <!-- Background overlay -->
         <div
           class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -105,12 +121,17 @@ const formatDate = (dateString: string) => {
         ></div>
 
         <!-- Modal panel -->
-        <div class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div
+          class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
               <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title">
-                  Edit User: {{ user.email }}
+                <h3
+                  class="text-lg leading-6 font-medium text-gray-900 mb-4"
+                  id="modal-title"
+                >
+                  {{ t("userManagement.editUserTitle", { email: user.email }) }}
                 </h3>
 
                 <!-- User Info -->
@@ -132,15 +153,27 @@ const formatDate = (dateString: string) => {
                     />
                     <div>
                       <div class="text-sm font-medium text-gray-900">
-                        {{ user.name || user.nickname || "Unknown" }}
+                        {{
+                          user.name ||
+                          user.nickname ||
+                          t("userManagement.unknown")
+                        }}
                       </div>
                       <div class="text-sm text-gray-500">{{ user.email }}</div>
                     </div>
                   </div>
                   <div class="text-xs text-gray-500">
-                    <div>Created: {{ formatDate(user.created_at) }}</div>
-                    <div>Last Login: {{ formatDate(user.last_login) }}</div>
-                    <div>Logins: {{ user.logins_count }}</div>
+                    <div>
+                      {{ t("userManagement.created") }}:
+                      {{ formatDate(user.created_at) }}
+                    </div>
+                    <div>
+                      {{ t("userManagement.lastLoginLabel") }}:
+                      {{ formatDate(user.last_login) }}
+                    </div>
+                    <div>
+                      {{ t("userManagement.logins") }}: {{ user.logins_count }}
+                    </div>
                   </div>
                 </div>
 
@@ -152,19 +185,23 @@ const formatDate = (dateString: string) => {
                       type="checkbox"
                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
-                    <span class="ml-2 text-sm text-gray-700">User is approved</span>
+                    <span class="ml-2 text-sm text-gray-700">{{
+                      t("userManagement.userIsApproved")
+                    }}</span>
                   </label>
                   <p class="text-xs text-gray-500 mt-1">
-                    Approved users can access the application with their assigned roles
+                    {{ t("userManagement.approvedUsersDescription") }}
                   </p>
                 </div>
 
                 <!-- Roles Selection -->
                 <div class="mb-6">
                   <label class="block text-sm font-medium text-gray-700 mb-3">
-                    User Roles
+                    {{ t("userManagement.userRoles") }}
                   </label>
-                  <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                  <div
+                    class="space-y-2 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3"
+                  >
                     <div
                       v-for="role in availableRoles"
                       :key="role.id"
@@ -178,22 +215,34 @@ const formatDate = (dateString: string) => {
                         class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-0.5"
                       />
                       <div class="ml-3">
-                        <label :for="`role-${role.id}`" class="text-sm font-medium text-gray-700 cursor-pointer">
+                        <label
+                          :for="`role-${role.id}`"
+                          class="text-sm font-medium text-gray-700 cursor-pointer"
+                        >
                           {{ role.name }}
                         </label>
-                        <p v-if="role.description" class="text-xs text-gray-500">
+                        <p
+                          v-if="role.description"
+                          class="text-xs text-gray-500"
+                        >
                           {{ role.description }}
                         </p>
                       </div>
                     </div>
                   </div>
                   <p class="text-xs text-gray-500 mt-2">
-                    Selected roles: {{ selectedRoleNames.join(", ") || "None" }}
+                    {{ t("userManagement.selectedRoles") }}:
+                    {{
+                      selectedRoleNames.join(", ") || t("userManagement.none")
+                    }}
                   </p>
                 </div>
 
                 <!-- Error Display -->
-                <div v-if="saveError" class="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <div
+                  v-if="saveError"
+                  class="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg"
+                >
                   <p class="text-sm text-red-600">{{ saveError }}</p>
                 </div>
               </div>
@@ -205,16 +254,20 @@ const formatDate = (dateString: string) => {
             <button
               @click="handleSave"
               :disabled="isSaving"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {{ isSaving ? "Saving..." : "Save Changes" }}
+              {{
+                isSaving
+                  ? t("userManagement.saving")
+                  : t("userManagement.saveChanges")
+              }}
             </button>
             <button
               @click="closeModal"
               :disabled="isSaving"
-              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Cancel
+              {{ t("userManagement.cancel") }}
             </button>
           </div>
         </div>
