@@ -1,4 +1,5 @@
 export default defineI18nConfig(() => ({
-  fallbackLocale: "en",
-  silentFallbackWarn: true,
-}));
+    fallbackLocale: "en",
+    silentFallbackWarn: true,
+  }));
+  

@@ -25,15 +25,15 @@ onMounted(() => {
     <div class="absolute top-4 right-4">
       <LanguagePicker theme="white" />
     </div>
-
+    
     <div class="flex flex-col items-center justify-center h-screen">
-      <p class="italic">{{ t("auth.pleaseSignIn") }}</p>
+      <p class="italic">{{ t('auth.pleaseSignIn') }}</p>
       <button
         data-testid="login-button"
         class="px-4 py-2 mt-4 mb-4 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
         @click="loginWithAuth0"
       >
-        {{ t("auth.signIn") }}
+        {{ t('auth.signIn') }}
       </button>
       <p v-if="props.errorMessage" class="text-red-500 text-xs italic">
         {{ props.errorMessage }}

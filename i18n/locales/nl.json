@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Guardian Connector Startpagina",
-    "community": "Gemeenschap",
+    "partner": "Partner",
     "welcome": "Geef {communityName} macht met data soevereiniteit en zelfbeschikking.",
     "welcomeSubtitle": "Hier kunt u gegevens vinden en de activa van {communityName} beheren."
   },
@@ -13,7 +13,7 @@
     "welcome": "Welkom, {user}",
     "userManagement": "Gebruikersbeheer",
     "secureAccessRequired": "Veilige Toegang Vereist",
-    "pleaseSignInToAccess": "Gelieve in te loggen om toegang te krijgen tot uw gemeenschap tools"
+    "pleaseSignInToAccess": "Gelieve in te loggen om toegang te krijgen tot uw partner tools"
   },
   "services": {
     "superset": "Superset",
@@ -25,10 +25,8 @@
     "filebrowser": "Bestandsbrowser",
     "filebrowserDescription": "Veilig bestandsbeheer en -deling",
     "noServicesAvailable": "Geen Services Beschikbaar",
-    "noServicesDescription": "Geen gemeenschapsservices zijn momenteel geïmplementeerd of toegankelijk.",
-    "needHelp": "Hulp nodig? Bezoek de",
-    "documentationWebsite": "Guardian Connector documentatie website",
-    "communityService": "Gemeenschapsservice"
+    "noServicesDescription": "Geen partnerservices zijn momenteel geïmplementeerd of toegankelijk.",
+    "communityService": "Partnerservice"
   },
   "userManagement": {
     "title": "Gebruikersbeheer",
@@ -60,13 +58,13 @@
   },
   "roles": {
     "admin": "Beheerder",
-    "member": "Lid",
+    "member": "Lid", 
     "guest": "Gast",
     "signedIn": "Ingelogd"
   },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",
-    "community": "Gemeenschap: {communityName}",
+    "partner": "Partner: {communityName}",
     "services": "Services: {count}"
   },
   "header": {
