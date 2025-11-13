@@ -67,7 +67,7 @@ const availableServices = computed(() => {
       name: "Filebrowser",
       url: `https://files.${communityName}.guardianconnector.net`,
       icon: "filebrowser",
-      tags: ["Files explorations"],
+      tags: ["Files", "Raw Data", "Archives"],
     });
   }
 
