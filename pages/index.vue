@@ -54,7 +54,7 @@ const availableServices = computed(() => {
   // Explorer: SignedIn and higher (SignedIn, Guest, Member, Admin)
   if (config.public.explorerEnabled && userRole >= Role.SignedIn) {
     services.push({
-      name: "Dataset Explorer",
+      name: "Explorer",
       url: `https://explorer.${communityName}.guardianconnector.net`,
       icon: "explorer",
       tags: ["Maps", "Alerts", "Wildlife", "Dashboard"],
