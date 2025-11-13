@@ -2,8 +2,8 @@
   "app": {
     "title": "Guardian Connector Landing Page",
     "partner": "Partner",
-    "welcome": "Empower {communityName} with data sovereignty and self-determination.",
-    "welcomeSubtitle": "Here you can find data, and manage {communityName}'s assets."
+    "welcome": "Your community’s data, your control.",
+    "welcomeSubtitle": "Access your dashboards, manage workflows, and explore data securely within your Guardian Connector."
   },
   "auth": {
     "signIn": "Sign In",
