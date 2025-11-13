@@ -2,7 +2,7 @@
   "app": {
     "title": "Página Inicial do Guardian Connector",
     "community": "Comunidade",
-    "welcome": "Capacite {communityName} com soberania de dados e autodeterminação.",
+    "welcome": "Sua comunidade, seu controle.",
     "welcomeSubtitle": "Aqui você pode encontrar dados e gerenciar os ativos de {communityName}."
   },
   "auth": {
@@ -28,7 +28,23 @@
     "noServicesDescription": "Nenhum serviço da comunidade está atualmente implantado ou acessível.",
     "needHelp": "Precisa de ajuda? Visite o",
     "documentationWebsite": "site de documentação do Guardian Connector",
-    "communityService": "Serviço da comunidade"
+    "communityService": "Serviço da comunidade",
+    "tags": {
+      "maps": "Mapas",
+      "alertsDashboard": "Painel de Alertas",
+      "wildlifeExplorer": "Explorador de Vida Selvagem",
+      "mediaGalleries": "Galeria de Mídia",
+      "charts": "Gráficos",
+      "analysis": "Análise",
+      "visualizations": "Visualizações",
+      "dashboards": "Painéis",
+      "dataFlows": "Fluxos de Dados",
+      "scheduledJobs": "Trabalhos Agendados",
+      "dataApps": "Aplicativos de Dados",
+      "files": "Arquivos",
+      "rawData": "Dados Brutos",
+      "archives": "Arquivos"
+    }
   },
   "userManagement": {
     "title": "Gerenciamento de Usuários",

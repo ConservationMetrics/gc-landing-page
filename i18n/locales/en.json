@@ -2,7 +2,7 @@
   "app": {
     "title": "Guardian Connector Landing Page",
     "community": "Community",
-    "welcome": "Your community's data, your control.",
+    "welcome": "Your community, your control.",
     "welcomeSubtitle": "Access your dashboards, manage workflows, and explore data securely within your Guardian Connector."
   },
   "auth": {
@@ -28,7 +28,23 @@
     "noServicesDescription": "No services are currently deployed or accessible.",
     "needHelp": "Need help? Visit the Guardian Connector",
     "documentationWebsite": "documentation website",
-    "service": "Service"
+    "service": "Service",
+    "tags": {
+      "maps": "Maps",
+      "alertsDashboard": "Alerts Dashboard",
+      "wildlifeExplorer": "Wildlife Explorer",
+      "mediaGalleries": "Media Galleries",
+      "charts": "Charts",
+      "analysis": "Analysis",
+      "visualizations": "Visualizations",
+      "dashboards": "Dashboards",
+      "dataFlows": "Data Flows",
+      "scheduledJobs": "Scheduled Jobs",
+      "dataApps": "Data Apps",
+      "files": "Files",
+      "rawData": "Raw Data",
+      "archives": "Archives"
+    }
   },
   "userManagement": {
     "title": "User Management",

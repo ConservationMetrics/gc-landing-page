@@ -2,7 +2,7 @@
   "app": {
     "title": "Guardian Connector Startpagina",
     "community": "Gemeenschap",
-    "welcome": "Geef {communityName} macht met data soevereiniteit en zelfbeschikking.",
+    "welcome": "Uw gemeenschap, uw controle.",
     "welcomeSubtitle": "Hier kunt u gegevens vinden en de activa van {communityName} beheren."
   },
   "auth": {
@@ -28,7 +28,23 @@
     "noServicesDescription": "Geen gemeenschapsservices zijn momenteel geïmplementeerd of toegankelijk.",
     "needHelp": "Hulp nodig? Bezoek de",
     "documentationWebsite": "Guardian Connector documentatie website",
-    "communityService": "Gemeenschapsservice"
+    "communityService": "Gemeenschapsservice",
+    "tags": {
+      "maps": "Kaarten",
+      "alertsDashboard": "Waarschuwingen Dashboard",
+      "wildlifeExplorer": "Wildlife Verkenner",
+      "mediaGalleries": "Media Galerijen",
+      "charts": "Grafieken",
+      "analysis": "Analyse",
+      "visualizations": "Visualisaties",
+      "dashboards": "Dashboards",
+      "dataFlows": "Gegevensstromen",
+      "scheduledJobs": "Geplande Taken",
+      "dataApps": "Gegevens Apps",
+      "files": "Bestanden",
+      "rawData": "Ruwe Gegevens",
+      "archives": "Archieven"
+    }
   },
   "userManagement": {
     "title": "Gebruikersbeheer",
