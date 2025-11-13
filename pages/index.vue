@@ -47,7 +47,7 @@ const availableServices = computed(() => {
       name: "Windmill",
       url: `https://windmill.${communityName}.guardianconnector.net`,
       icon: "windmill",
-      tags: ["Data Flows", "Scheduled Jobs"],
+      tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
     });
   }
 
