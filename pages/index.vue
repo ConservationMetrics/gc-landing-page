@@ -37,7 +37,7 @@ const availableServices = computed(() => {
       name: "Superset",
       url: `https://superset.${communityName}.guardianconnector.net`,
       icon: "superset",
-      tags: ["Charts", "Visualization"],
+      tags: ["Charts", "Analysis", "Visualizations", "Dashboards"],
     });
   }
 
