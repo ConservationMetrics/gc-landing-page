@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Guardian Connector Landing Page",
-    "partner": "Partner",
+    "community": "Community",
     "welcome": "Your community’s data, your control.",
     "welcomeSubtitle": "Access your dashboards, manage workflows, and explore data securely within your Guardian Connector."
   },
@@ -13,12 +13,12 @@
     "welcome": "Welcome, {user}",
     "userManagement": "User Management",
     "secureAccessRequired": "Secure Access Required",
-    "pleaseSignInToAccess": "Please sign in to access your partner tools"
+    "pleaseSignInToAccess": "Please sign in to access your community tools"
   },
   "services": {
     "superset": "Superset",
     "supersetDescription": "Data analytics and visualization platform",
-    "windmill": "Windmill", 
+    "windmill": "Windmill",
     "windmillDescription": "Workflow automation and script execution platform",
     "explorer": "Explorer",
     "explorerDescription": "Map, gallery, alerts, wildlife, and other data exploration views",
@@ -26,6 +26,8 @@
     "filebrowserDescription": "Secure file management and sharing",
     "noServicesAvailable": "No Services Available",
     "noServicesDescription": "No services are currently deployed or accessible.",
+    "needHelp": "Need help? Visit the Guardian Connector",
+    "documentationWebsite": "documentation website",
     "service": "Service"
   },
   "userManagement": {
@@ -58,13 +60,13 @@
   },
   "roles": {
     "admin": "Admin",
-    "member": "Member", 
+    "member": "Member",
     "guest": "Guest",
     "signedIn": "Signed In"
   },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",
-    "partner": "Partner: {communityName}",
+    "community": "Community: {communityName}",
     "services": "Services: {count}"
   },
   "header": {

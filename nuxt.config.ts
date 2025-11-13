@@ -18,10 +18,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: [
-    "nuxt-auth-utils",
-    "@nuxtjs/i18n",
-  ],
+  modules: ["nuxt-auth-utils", "@nuxtjs/i18n"],
 
   i18n: {
     locales: [
@@ -40,7 +37,6 @@ export default defineNuxtConfig({
     strategy: "no_prefix",
     skipSettingLocaleOnNavigate: true, // persists locale when route changes
   },
-
 
   runtimeConfig: {
     // Session secret for nuxt-auth-utils

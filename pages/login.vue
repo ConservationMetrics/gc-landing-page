@@ -13,7 +13,7 @@ onMounted(() => {
 });
 
 useHead({
-  title: t('auth.signIn'),
+  title: t("auth.signIn"),
 });
 </script>
 

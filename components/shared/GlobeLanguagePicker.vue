@@ -6,11 +6,11 @@ const { locale, locales, setLocale } = useI18n();
 const { t } = useI18n();
 
 interface Props {
-  theme?: 'purple' | 'white' | 'dark';
+  theme?: "purple" | "white" | "dark";
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  theme: 'white'
+  theme: "white",
 });
 
 // Populate available locales from i18n plugin
@@ -27,7 +27,7 @@ const dropdownOpen = ref(false);
 // Close dropdown when clicking outside
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement;
-  if (!target.closest('.language-picker-container')) {
+  if (!target.closest(".language-picker-container")) {
     dropdownOpen.value = false;
   }
 };
@@ -38,11 +38,11 @@ onMounted(() => {
   if (savedLocale && locales.value.some((lang) => lang.code === savedLocale)) {
     setLocale(savedLocale as SupportedLocale);
   }
-  document.addEventListener('click', handleClickOutside);
+  document.addEventListener("click", handleClickOutside);
 });
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
+  document.removeEventListener("click", handleClickOutside);
 });
 
 const changeLocale = (locale: { code: string }): void => {
@@ -53,11 +53,11 @@ const changeLocale = (locale: { code: string }): void => {
 
 const dropdownClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50";
-    case 'dark':
+    case "dark":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-600 z-50";
-    case 'purple':
+    case "purple":
     default:
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-gray-200 z-50";
   }
@@ -65,11 +65,11 @@ const dropdownClasses = computed(() => {
 
 const itemClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
-    case 'dark':
+    case "dark":
       return "block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors";
-    case 'purple':
+    case "purple":
     default:
       return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
   }
@@ -101,11 +101,7 @@ const itemClasses = computed(() => {
         </svg>
       </button>
     </div>
-    <div
-      v-if="dropdownOpen"
-      :class="dropdownClasses"
-      @click.stop
-    >
+    <div v-if="dropdownOpen" :class="dropdownClasses" @click.stop>
       <div class="py-1">
         <a
           v-for="lang in availableLocales"
