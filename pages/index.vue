@@ -57,7 +57,7 @@ const availableServices = computed(() => {
       name: "Explorer",
       url: `https://explorer.${communityName}.guardianconnector.net`,
       icon: "explorer",
-      tags: ["Maps", "Alerts", "Wildlife", "Dashboard"],
+      tags: ["Maps", "Alerts Dashboard", "Wildlife Explorer", "Media Galleries"],
     });
   }
 
