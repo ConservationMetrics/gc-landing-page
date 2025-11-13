@@ -26,3 +26,31 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
+/* Tab trigger styles */
+.tab-trigger {
+  border: 0px;
+  outline: none;
+  padding: 0px 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+}
+
+.tab-trigger svg {
+  position: absolute;
+  height: 40px;
+  color: #fff;
+}
+
+.tab-trigger .left-curve {
+  left: 1px;
+  transform: translateX(-100%) rotateY(180deg);
+}
+
+.tab-trigger .right-curve {
+  right: 1px;
+  transform: translateX(100%);
+}

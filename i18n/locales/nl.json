@@ -2,8 +2,8 @@
   "app": {
     "title": "Guardian Connector Startpagina",
     "community": "Gemeenschap",
-    "welcome": "Welkom bij het Guardian Connector‑platform voor {communityName}",
-    "welcomeSubtitle": "Toegang tot uw gemeenschapstools en -bronnen op één plek"
+    "welcome": "Uw gemeenschap, uw controle.",
+    "welcomeSubtitle": "Hier kunt u gegevens vinden en de activa van {communityName} beheren."
   },
   "auth": {
     "signIn": "Inloggen",
@@ -13,7 +13,7 @@
     "welcome": "Welkom, {user}",
     "userManagement": "Gebruikersbeheer",
     "secureAccessRequired": "Veilige Toegang Vereist",
-    "pleaseSignInToAccess": "Gelieve in te loggen om toegang te krijgen tot uw gemeenschapstools"
+    "pleaseSignInToAccess": "Gelieve in te loggen om toegang te krijgen tot uw gemeenschap tools"
   },
   "services": {
     "superset": "Superset",
@@ -26,7 +26,25 @@
     "filebrowserDescription": "Veilig bestandsbeheer en -deling",
     "noServicesAvailable": "Geen Services Beschikbaar",
     "noServicesDescription": "Geen gemeenschapsservices zijn momenteel geïmplementeerd of toegankelijk.",
-    "communityService": "Gemeenschapsservice"
+    "needHelp": "Hulp nodig? Bezoek de",
+    "documentationWebsite": "Guardian Connector documentatie website",
+    "communityService": "Gemeenschapsservice",
+    "tags": {
+      "maps": "Kaarten",
+      "alertsDashboard": "Waarschuwingen Dashboard",
+      "wildlifeExplorer": "Wildlife Verkenner",
+      "mediaGalleries": "Media Galerijen",
+      "charts": "Grafieken",
+      "analysis": "Analyse",
+      "visualizations": "Visualisaties",
+      "dashboards": "Dashboards",
+      "dataFlows": "Gegevensstromen",
+      "scheduledJobs": "Geplande Taken",
+      "dataApps": "Gegevens Apps",
+      "files": "Bestanden",
+      "rawData": "Ruwe Gegevens",
+      "archives": "Archieven"
+    }
   },
   "userManagement": {
     "title": "Gebruikersbeheer",
@@ -83,5 +101,9 @@
     "copyright": "© 2025 Guardian Connector.",
     "community": "Gemeenschap: {communityName}",
     "services": "Services: {count}"
+  },
+  "header": {
+    "adminAccess": "Beheerders Toegang",
+    "languagePicker": "Taal Selector"
   }
 }

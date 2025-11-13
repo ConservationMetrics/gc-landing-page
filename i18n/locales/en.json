@@ -2,8 +2,8 @@
   "app": {
     "title": "Guardian Connector Landing Page",
     "community": "Community",
-    "welcome": "Welcome to the Guardian Connector platform for {communityName}",
-    "welcomeSubtitle": "Access your community tools and resources in one place"
+    "welcome": "Your community, your control.",
+    "welcomeSubtitle": "Access your dashboards, manage workflows, and explore data securely within your Guardian Connector."
   },
   "auth": {
     "signIn": "Sign In",
@@ -25,8 +25,26 @@
     "filebrowser": "Filebrowser",
     "filebrowserDescription": "Secure file management and sharing",
     "noServicesAvailable": "No Services Available",
-    "noServicesDescription": "No community services are currently deployed or accessible.",
-    "communityService": "Community service"
+    "noServicesDescription": "No services are currently deployed or accessible.",
+    "needHelp": "Need help? Visit the Guardian Connector",
+    "documentationWebsite": "documentation website",
+    "service": "Service",
+    "tags": {
+      "maps": "Maps",
+      "alertsDashboard": "Alerts Dashboard",
+      "wildlifeExplorer": "Wildlife Explorer",
+      "mediaGalleries": "Media Galleries",
+      "charts": "Charts",
+      "analysis": "Analysis",
+      "visualizations": "Visualizations",
+      "dashboards": "Dashboards",
+      "dataFlows": "Data Flows",
+      "scheduledJobs": "Scheduled Jobs",
+      "dataApps": "Data Apps",
+      "files": "Files",
+      "rawData": "Raw Data",
+      "archives": "Archives"
+    }
   },
   "userManagement": {
     "title": "User Management",
@@ -83,5 +101,9 @@
     "copyright": "© 2025 Guardian Connector.",
     "community": "Community: {communityName}",
     "services": "Services: {count}"
+  },
+  "header": {
+    "adminAccess": "Admin Access",
+    "languagePicker": "Language Picker"
   }
 }

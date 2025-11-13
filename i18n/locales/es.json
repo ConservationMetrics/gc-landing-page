@@ -2,8 +2,8 @@
   "app": {
     "title": "Página de Inicio de Guardian Connector",
     "community": "Comunidad",
-    "welcome": "Bienvenido a la plataforma Guardian Connector para {communityName}",
-    "welcomeSubtitle": "Accede a las herramientas y recursos de tu comunidad en un solo lugar"
+    "welcome": "Tu comunidad, tu control.",
+    "welcomeSubtitle": "Aquí puedes encontrar datos y gestionar los activos de {communityName}."
   },
   "auth": {
     "signIn": "Iniciar Sesión",
@@ -26,7 +26,25 @@
     "filebrowserDescription": "Gestión y compartición segura de archivos",
     "noServicesAvailable": "No Hay Servicios Disponibles",
     "noServicesDescription": "No hay servicios de la comunidad actualmente desplegados o accesibles.",
-    "communityService": "Servicio de la comunidad"
+    "needHelp": "¿Necesitas ayuda? Visita el",
+    "documentationWebsite": "sitio web de documentación de Guardian Connector",
+    "communityService": "Servicio de la comunidad",
+    "tags": {
+      "maps": "Mapas",
+      "alertsDashboard": "Panel de Alertas",
+      "wildlifeExplorer": "Explorador de Vida Silvestre",
+      "mediaGalleries": "Galerías de Medios",
+      "charts": "Gráficos",
+      "analysis": "Análisis",
+      "visualizations": "Visualizaciones",
+      "dashboards": "Paneles",
+      "dataFlows": "Flujos de Datos",
+      "scheduledJobs": "Trabajos Programados",
+      "dataApps": "Aplicaciones de Datos",
+      "files": "Archivos",
+      "rawData": "Datos Sin Procesar",
+      "archives": "Archivos"
+    }
   },
   "userManagement": {
     "title": "Gestión de Usuarios",
@@ -83,5 +101,9 @@
     "copyright": "© 2025 Guardian Connector.",
     "community": "Comunidad: {communityName}",
     "services": "Servicios: {count}"
+  },
+  "header": {
+    "adminAccess": "Acceso de Administrador",
+    "languagePicker": "Selector de Idioma"
   }
 }
