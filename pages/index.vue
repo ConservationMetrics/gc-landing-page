@@ -126,6 +126,14 @@ const toggleLanguagePicker = () => {
   languagePickerOpen.value = !languagePickerOpen.value;
 };
 
+const changeLanguage = (langCode: string) => {
+  setLocale(langCode as 'en' | 'es' | 'pt' | 'nl');
+  if (import.meta.client) {
+    sessionStorage.setItem('locale', langCode);
+  }
+  languagePickerOpen.value = false;
+};
+
 useHead({
   title: t("app.title"),
 });
@@ -506,11 +514,7 @@ useHead({
             <button
               v-for="lang in locales"
               :key="lang.code"
-              @click="
-                setLocale(lang.code);
-                sessionStorage.setItem('locale', lang.code);
-                languagePickerOpen = false;
-              "
+              @click="changeLanguage(lang.code)"
               :class="[
                 'w-full text-left px-4 py-2 rounded-lg text-sm transition-colors',
                 locale === lang.code
