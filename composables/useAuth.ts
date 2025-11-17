@@ -8,9 +8,7 @@ export const useAuth = (loggedIn: { value: boolean }) => {
   const router = useRouter();
 
   const redirect = router.currentRoute.value.query.redirect;
-  redirectPath.value = redirect
-    ? decodeURIComponent(redirect as string)
-    : "/";
+  redirectPath.value = redirect ? decodeURIComponent(redirect as string) : "/";
 
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get("code");

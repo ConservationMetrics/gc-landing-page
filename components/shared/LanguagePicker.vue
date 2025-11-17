@@ -5,11 +5,11 @@ import type { SupportedLocale } from "~/types/types";
 const { locale, locales, setLocale } = useI18n();
 
 interface Props {
-  theme?: 'purple' | 'white' | 'dark';
+  theme?: "purple" | "white" | "dark";
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  theme: 'purple'
+  theme: "purple",
 });
 
 // Populate available locales from i18n plugin
@@ -40,11 +40,11 @@ const changeLocale = (locale: { code: string }): void => {
 // Theme-based styling
 const buttonClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors";
-    case 'dark':
+    case "dark":
       return "inline-flex justify-center w-full rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-800 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none transition-colors";
-    case 'purple':
+    case "purple":
     default:
       return "inline-flex justify-center w-full rounded-md border border-white/20 shadow-sm px-4 py-2 bg-white/10 backdrop-blur-sm text-sm font-medium text-white hover:bg-white/20 focus:outline-none transition-colors";
   }
@@ -52,11 +52,11 @@ const buttonClasses = computed(() => {
 
 const dropdownClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50";
-    case 'dark':
+    case "dark":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-600 z-50";
-    case 'purple':
+    case "purple":
     default:
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-black/70 backdrop-blur-sm ring-1 ring-white/30 z-50";
   }
@@ -64,11 +64,11 @@ const dropdownClasses = computed(() => {
 
 const itemClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
-    case 'dark':
+    case "dark":
       return "block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors";
-    case 'purple':
+    case "purple":
     default:
       return "block px-4 py-2 text-sm text-white hover:bg-white/30 transition-colors";
   }
@@ -78,10 +78,7 @@ const itemClasses = computed(() => {
 <template>
   <div class="relative inline-block text-left">
     <div>
-      <button
-        :class="buttonClasses"
-        @click="dropdownOpen = !dropdownOpen"
-      >
+      <button :class="buttonClasses" @click="dropdownOpen = !dropdownOpen">
         {{ currentLocaleName }}
         <svg
           class="-mr-1 ml-2 h-5 w-5"
@@ -98,10 +95,7 @@ const itemClasses = computed(() => {
         </svg>
       </button>
     </div>
-    <div
-      v-if="dropdownOpen"
-      :class="dropdownClasses"
-    >
+    <div v-if="dropdownOpen" :class="dropdownClasses">
       <div class="py-1">
         <a
           v-for="lang in availableLocales"

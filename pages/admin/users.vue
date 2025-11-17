@@ -18,7 +18,9 @@ if (!loggedIn.value) {
 }
 
 // Check if user has admin role
-const hasAdminRole = (user.value as UserWithRoles)?.roles?.some((role) => role.name === "Admin");
+const hasAdminRole = (user.value as UserWithRoles)?.roles?.some(
+  (role) => role.name === "Admin",
+);
 
 if (!hasAdminRole) {
   throw createError({
@@ -29,10 +31,8 @@ if (!hasAdminRole) {
 
 // Set page metadata
 useHead({
-  title: t('userManagement.title') + " - Admin",
-  meta: [
-    { name: "description", content: t('userManagement.subtitle') },
-  ],
+  title: t("userManagement.title") + " - Admin",
+  meta: [{ name: "description", content: t("userManagement.subtitle") }],
 });
 </script>
 
@@ -44,7 +44,7 @@ useHead({
         <LanguagePicker />
       </div>
     </div>
-    
+
     <UserManagement />
   </div>
 </template>
