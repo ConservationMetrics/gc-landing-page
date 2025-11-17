@@ -41,7 +41,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // Admin route protection
   if (loggedIn.value && to.path.startsWith("/admin")) {
     const userRole = (user.value as User)?.userRole;
-    
+
     if (!userRole || userRole < Role.Admin) {
       throw createError({
         statusCode: 403,
