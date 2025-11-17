@@ -6,13 +6,13 @@ const { locale, locales, setLocale } = useI18n();
 const { t } = useI18n();
 
 interface Props {
-  theme?: 'purple' | 'white' | 'dark';
-  variant?: 'icon' | 'mobile';
+  theme?: "purple" | "white" | "dark";
+  variant?: "icon" | "mobile";
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  theme: 'white',
-  variant: 'icon'
+  theme: "white",
+  variant: "icon",
 });
 
 // Populate available locales from i18n plugin
@@ -30,7 +30,7 @@ const languagePickerOpen = ref(false);
 // Close dropdown when clicking outside (for desktop)
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement;
-  if (!target.closest('.language-picker-container')) {
+  if (!target.closest(".language-picker-container")) {
     dropdownOpen.value = false;
   }
 };
@@ -41,14 +41,14 @@ onMounted(() => {
   if (savedLocale && locales.value.some((lang) => lang.code === savedLocale)) {
     setLocale(savedLocale as SupportedLocale);
   }
-  if (props.variant !== 'mobile') {
-    document.addEventListener('click', handleClickOutside);
+  if (props.variant !== "mobile") {
+    document.addEventListener("click", handleClickOutside);
   }
 });
 
 onUnmounted(() => {
-  if (props.variant !== 'mobile') {
-    document.removeEventListener('click', handleClickOutside);
+  if (props.variant !== "mobile") {
+    document.removeEventListener("click", handleClickOutside);
   }
 });
 
@@ -65,11 +65,11 @@ const toggleLanguagePicker = () => {
 
 const dropdownClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50";
-    case 'dark':
+    case "dark":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-600 z-50";
-    case 'purple':
+    case "purple":
     default:
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-gray-200 z-50";
   }
@@ -77,11 +77,11 @@ const dropdownClasses = computed(() => {
 
 const itemClasses = computed(() => {
   switch (props.theme) {
-    case 'white':
+    case "white":
       return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
-    case 'dark':
+    case "dark":
       return "block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors";
-    case 'purple':
+    case "purple":
     default:
       return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
   }
@@ -90,10 +90,10 @@ const itemClasses = computed(() => {
 // Mobile item classes
 const mobileItemClasses = computed(() => {
   return (langCode: string) => [
-    'w-full text-left px-4 py-2 rounded-lg text-sm transition-colors',
+    "w-full text-left px-4 py-2 rounded-lg text-sm transition-colors",
     locale.value === langCode
-      ? 'bg-purple-100 text-purple-700 font-medium'
-      : 'text-gray-700 hover:bg-purple-50',
+      ? "bg-purple-100 text-purple-700 font-medium"
+      : "text-gray-700 hover:bg-purple-50",
   ];
 });
 </script>
@@ -127,11 +127,7 @@ const mobileItemClasses = computed(() => {
         </svg>
       </button>
     </div>
-    <div
-      v-if="dropdownOpen"
-      :class="dropdownClasses"
-      @click.stop
-    >
+    <div v-if="dropdownOpen" :class="dropdownClasses" @click.stop>
       <div class="py-1">
         <a
           v-for="lang in availableLocales"

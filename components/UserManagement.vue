@@ -183,7 +183,9 @@ onMounted(async () => {
           <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             {{ t("userManagement.title") }}
           </h1>
-          <p class="text-sm sm:text-base text-gray-600">{{ t("userManagement.subtitle") }}</p>
+          <p class="text-sm sm:text-base text-gray-600">
+            {{ t("userManagement.subtitle") }}
+          </p>
         </div>
         <div class="ml-4 flex items-center gap-3">
           <button
@@ -260,7 +262,9 @@ onMounted(async () => {
     </div>
 
     <!-- Search and Controls -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-6 mb-4 sm:mb-6">
+    <div
+      class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-6 mb-4 sm:mb-6"
+    >
       <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div class="flex-1 max-w-md">
           <div class="relative">
@@ -384,12 +388,18 @@ onMounted(async () => {
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-if="loading" class="animate-pulse">
-              <td colspan="5" class="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm">
+              <td
+                colspan="5"
+                class="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm"
+              >
                 {{ t("userManagement.loadingUsers") }}
               </td>
             </tr>
             <tr v-else-if="filteredUsers.length === 0">
-              <td colspan="5" class="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm">
+              <td
+                colspan="5"
+                class="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm"
+              >
                 {{ t("userManagement.noUsersFound") }}
               </td>
             </tr>
@@ -428,7 +438,9 @@ onMounted(async () => {
                     <div class="text-xs sm:text-sm font-medium text-gray-900">
                       {{ user.name || user.nickname || "Unknown" }}
                     </div>
-                    <div class="text-xs sm:text-sm text-gray-500">{{ user.email }}</div>
+                    <div class="text-xs sm:text-sm text-gray-500">
+                      {{ user.email }}
+                    </div>
                   </div>
                 </div>
               </td>
@@ -465,10 +477,14 @@ onMounted(async () => {
                   </span>
                 </div>
               </td>
-              <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+              <td
+                class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500"
+              >
                 {{ formatDate(user.last_login) }}
               </td>
-              <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
+              <td
+                class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium"
+              >
                 <UserEditModal
                   :user="user"
                   :available-roles="roles"
@@ -486,7 +502,9 @@ onMounted(async () => {
         v-if="totalPages > 1"
         class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
       >
-        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+        <div
+          class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
+        >
           <div>
             <p class="text-xs sm:text-sm text-gray-700">
               {{ t("userManagement.showing") }}
@@ -557,7 +575,10 @@ onMounted(async () => {
       <div v-if="loading" class="text-center py-8 text-sm text-gray-500">
         {{ t("userManagement.loadingUsers") }}
       </div>
-      <div v-else-if="filteredUsers.length === 0" class="text-center py-8 text-sm text-gray-500">
+      <div
+        v-else-if="filteredUsers.length === 0"
+        class="text-center py-8 text-sm text-gray-500"
+      >
         {{ t("userManagement.noUsersFound") }}
       </div>
       <div
@@ -622,10 +643,7 @@ onMounted(async () => {
           >
             {{ translateRoleName(role.name, t) }}
           </span>
-          <span
-            v-if="user.roles.length === 0"
-            class="text-xs text-gray-500"
-          >
+          <span v-if="user.roles.length === 0" class="text-xs text-gray-500">
             {{ t("userManagement.noRoles") }}
           </span>
         </div>
@@ -635,10 +653,7 @@ onMounted(async () => {
       </div>
 
       <!-- Pagination - Mobile -->
-      <div
-        v-if="totalPages > 1"
-        class="flex justify-between pt-3"
-      >
+      <div v-if="totalPages > 1" class="flex justify-between pt-3">
         <button
           @click="handlePageChange(currentPage - 1)"
           :disabled="currentPage === 0"
