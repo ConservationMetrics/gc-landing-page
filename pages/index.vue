@@ -13,7 +13,7 @@ interface User {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
-const { t, locale, locales, setLocale } = useI18n();
+const { t } = useI18n();
 
 // Auth state using nuxt-auth-utils
 const { loggedIn, user } = useUserSession();
@@ -136,22 +136,9 @@ const isAdmin = computed(() => {
 });
 
 const mobileMenuOpen = ref(false);
-const languagePickerOpen = ref(false);
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
-};
-
-const toggleLanguagePicker = () => {
-  languagePickerOpen.value = !languagePickerOpen.value;
-};
-
-const changeLanguage = (langCode: string) => {
-  setLocale(langCode as 'en' | 'es' | 'pt' | 'nl');
-  if (import.meta.client) {
-    sessionStorage.setItem('locale', langCode);
-  }
-  languagePickerOpen.value = false;
 };
 
 useHead({
@@ -312,7 +299,7 @@ useHead({
 
           <!-- Language Picker (Globe Icon) -->
           <div class="relative group">
-            <GlobeLanguagePicker theme="white" />
+            <GlobeLanguagePicker theme="white" variant="icon" />
             <!-- Tooltip -->
             <div
               class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
@@ -490,62 +477,7 @@ useHead({
         </NuxtLink>
 
         <!-- Language Picker -->
-        <div class="px-4 py-3 mb-2">
-          <button
-            @click="toggleLanguagePicker"
-            class="w-full flex items-center justify-between space-x-3 hover:bg-purple-50 rounded-lg px-2 py-2 transition-colors"
-          >
-            <div class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 text-gray-600"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span class="text-sm text-gray-700 font-medium">{{
-                t("header.languagePicker")
-              }}</span>
-            </div>
-            <svg
-              class="w-4 h-4 text-gray-600 transition-transform"
-              :class="{ 'rotate-180': languagePickerOpen }"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-          <div v-if="languagePickerOpen" class="mt-2 space-y-1">
-            <button
-              v-for="lang in locales"
-              :key="lang.code"
-              @click="changeLanguage(lang.code)"
-              :class="[
-                'w-full text-left px-4 py-2 rounded-lg text-sm transition-colors',
-                locale === lang.code
-                  ? 'bg-purple-100 text-purple-700 font-medium'
-                  : 'text-gray-700 hover:bg-purple-50',
-              ]"
-            >
-              {{ lang.name }}
-            </button>
-          </div>
-        </div>
+        <GlobeLanguagePicker variant="mobile" />
 
         <!-- Sign Out -->
         <button

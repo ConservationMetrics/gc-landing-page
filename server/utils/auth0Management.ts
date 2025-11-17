@@ -137,13 +137,16 @@ export const fetchUserIdByEmail = async (email: string): Promise<string | null> 
 
 /**
  * Fetches all roles assigned to a specific user from Auth0 Management API
+ * Includes retry logic with exponential backoff for rate limiting
  * 
  * @param {string} userId - The Auth0 user ID to fetch roles for
+ * @param {number} retries - Number of retries remaining (default: 3)
  * @returns {Promise<Array<{id: string, name: string, description: string}>>} Array of role objects with id, name, and description
  * @throws {Error} When Auth0 configuration is missing or API call fails
  */
 export const fetchUserRoles = async (
     userId: string,
+    retries: number = 3,
 ): Promise<Array<{ id: string; name: string; description: string }>> => {
     try {
         const config = useRuntimeConfig();
@@ -171,8 +174,32 @@ export const fetchUserRoles = async (
             },
         );
 
+        // Handle different response statuses
+        if (rolesResponse.status === 404) {
+            // User has no roles - this is not an error, just return empty array
+            return [];
+        }
+
+        if (rolesResponse.status === 429) {
+            // Rate limited - retry with exponential backoff
+            if (retries > 0) {
+                const delay = Math.pow(2, 4 - retries) * 1000; // 1s, 2s, 4s
+                await new Promise((resolve) => setTimeout(resolve, delay));
+                return fetchUserRoles(userId, retries - 1);
+            } else {
+                console.error(
+                    `🔍 Rate limited when fetching roles for user ${userId} after retries`,
+                );
+                return [];
+            }
+        }
+
         if (!rolesResponse.ok) {
-            console.error("🔍 Failed to fetch user roles from Management API");
+            const errorText = await rolesResponse.text();
+            console.error(
+                `🔍 Failed to fetch user roles from Management API for user ${userId}. Status: ${rolesResponse.status}`,
+            );
+            console.error(`🔍 Error response: ${errorText}`);
             return [];
         }
 
@@ -185,7 +212,13 @@ export const fetchUserRoles = async (
             }),
         );
     } catch (error) {
-        console.error("🔍 Error fetching user roles:", error);
+        // Retry on network errors
+        if (retries > 0 && error instanceof Error) {
+            const delay = Math.pow(2, 4 - retries) * 1000;
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            return fetchUserRoles(userId, retries - 1);
+        }
+        console.error(`🔍 Error fetching user roles for user ${userId}:`, error);
         return [];
     }
 };

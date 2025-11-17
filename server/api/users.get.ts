@@ -1,5 +1,6 @@
 import { useRuntimeConfig } from "#imports";
 import { getManagementApiToken, fetchUserRoles } from "~/server/utils/auth0Management";
+import type { UserManagementUser, Auth0ManagementUser } from "~/types/types";
 
 export default defineEventHandler(async (event) => {
     try {
@@ -58,30 +59,44 @@ export default defineEventHandler(async (event) => {
 
         const usersData = await usersResponse.json();
 
-        // Fetch roles for each user
-        const usersWithRoles = await Promise.all(
-            usersData.users.map(async (user: any) => {
-                const roles = await fetchUserRoles(user.user_id);
+        // Fetch roles for each user with batching to avoid rate limits
+        // Process users in batches of 10 with a small delay between batches
+        const batchSize = 10;
+        const batchDelay = 100; // 100ms delay between batches
+        const usersWithRoles: UserManagementUser[] = [];
 
-                // Check if user is approved (has app_metadata.approved = "true")
-                const isApproved = user.app_metadata?.approved === "true" || user.app_metadata?.approved === true;
+        for (let i = 0; i < usersData.users.length; i += batchSize) {
+            const batch = usersData.users.slice(i, i + batchSize) as Auth0ManagementUser[];
+            const batchResults = await Promise.all(
+                batch.map(async (user: Auth0ManagementUser): Promise<UserManagementUser> => {
+                    const roles = await fetchUserRoles(user.user_id);
 
-                return {
-                    id: user.user_id,
-                    email: user.email,
-                    name: user.name,
-                    nickname: user.nickname,
-                    picture: user.picture,
-                    created_at: user.created_at,
-                    last_login: user.last_login,
-                    logins_count: user.logins_count,
-                    roles,
-                    isApproved,
-                    app_metadata: user.app_metadata,
-                    user_metadata: user.user_metadata,
-                };
-            }),
-        );
+                    // Check if user is approved (has app_metadata.approved = "true")
+                    const isApproved = user.app_metadata?.approved === "true" || user.app_metadata?.approved === true;
+
+                    return {
+                        id: user.user_id,
+                        email: user.email,
+                        name: user.name ?? "",
+                        nickname: user.nickname ?? "",
+                        picture: user.picture ?? "",
+                        created_at: user.created_at,
+                        last_login: user.last_login ?? "",
+                        logins_count: user.logins_count ?? 0,
+                        roles,
+                        isApproved,
+                        app_metadata: user.app_metadata ?? {},
+                        user_metadata: user.user_metadata ?? {},
+                    };
+                }),
+            );
+            usersWithRoles.push(...batchResults);
+
+            // Add delay between batches (except for the last batch)
+            if (i + batchSize < usersData.users.length) {
+                await new Promise((resolve) => setTimeout(resolve, batchDelay));
+            }
+        }
 
         return {
             success: true,

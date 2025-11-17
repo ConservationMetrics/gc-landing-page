@@ -20,6 +20,20 @@ export interface UserRole {
   description: string;
 }
 
+// Auth0 Management API User Response
+export interface Auth0ManagementUser {
+  user_id: string;
+  email: string;
+  name?: string;
+  nickname?: string;
+  picture?: string;
+  created_at: string;
+  last_login?: string;
+  logins_count?: number;
+  app_metadata?: Record<string, unknown>;
+  user_metadata?: Record<string, unknown>;
+}
+
 export interface UserManagementUser {
   id: string;
   email: string;
