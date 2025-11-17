@@ -18,7 +18,7 @@
   "services": {
     "superset": "Superset",
     "supersetDescription": "Data analytics and visualization platform",
-    "windmill": "Windmill", 
+    "windmill": "Windmill",
     "windmillDescription": "Workflow automation and script execution platform",
     "explorer": "Explorer",
     "explorerDescription": "Map, gallery, alerts, wildlife, and other data exploration views",
@@ -93,7 +93,7 @@
   },
   "roles": {
     "admin": "Admin",
-    "member": "Member", 
+    "member": "Member",
     "guest": "Guest",
     "signedIn": "Signed In"
   },
