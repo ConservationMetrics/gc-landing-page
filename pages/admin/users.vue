@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useUserSession, navigateTo, createError, useHead } from "#imports";
 import UserManagement from "~/components/UserManagement.vue";
+import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 // i18n is auto-imported by @nuxtjs/i18n
 
 const { t } = useI18n();
@@ -41,7 +42,7 @@ useHead({
     <!-- Header with Language Picker -->
     <div class="bg-white border-b border-gray-200 px-6 py-4">
       <div class="flex justify-end">
-        <LanguagePicker />
+        <GlobeLanguagePicker theme="white" variant="icon" />
       </div>
     </div>
 
