@@ -7,7 +7,7 @@ import type {
   UsersResponse,
   RolesResponse,
 } from "~/types/types";
-import LanguagePicker from "@/components/shared/LanguagePicker.vue";
+import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 import { translateRoleName } from "@/utils/roleTranslations";
 import { navigateTo } from "#imports";
 const { t } = useI18n();
@@ -23,6 +23,11 @@ const currentPage = ref(0);
 const totalUsers = ref(0);
 const perPage = ref(20);
 const imageErrors = ref<Set<string>>(new Set());
+const mobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value;
+};
 
 // Computed properties
 const filteredUsers = computed(() => {
@@ -170,14 +175,17 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto p-6">
-    <div class="mb-8">
+  <div class="max-w-7xl mx-auto p-3 sm:p-6">
+    <!-- Desktop Header -->
+    <div class="mb-6 sm:mb-8 hidden sm:block">
       <div class="flex justify-between items-start">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">
+          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             {{ t("userManagement.title") }}
           </h1>
-          <p class="text-gray-600">{{ t("userManagement.subtitle") }}</p>
+          <p class="text-sm sm:text-base text-gray-600">
+            {{ t("userManagement.subtitle") }}
+          </p>
         </div>
         <div class="ml-4 flex items-center gap-3">
           <button
@@ -186,13 +194,77 @@ onMounted(async () => {
           >
             {{ t("userManagement.returnToHomepage") }}
           </button>
-          <LanguagePicker theme="white" />
+          <GlobeLanguagePicker theme="white" variant="icon" />
         </div>
       </div>
     </div>
 
+    <!-- Mobile Header -->
+    <div class="mb-4 sm:hidden">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <h1 class="text-xl font-bold text-gray-900">
+            {{ t("userManagement.title") }}
+          </h1>
+        </div>
+        <!-- Hamburger Menu Button -->
+        <button
+          @click="toggleMobileMenu"
+          class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
+          aria-label="Menu"
+        >
+          <svg
+            class="w-6 h-6 text-gray-700"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div
+      v-if="mobileMenuOpen"
+      class="sm:hidden mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-lg"
+    >
+      <button
+        @click="navigateTo('/')"
+        class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors text-left mb-2"
+      >
+        <svg
+          class="w-5 h-5 text-gray-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+        <span class="text-sm text-gray-700 font-medium">{{
+          t("userManagement.returnToHomepage")
+        }}</span>
+      </button>
+
+      <!-- Language Picker -->
+      <GlobeLanguagePicker variant="mobile" />
+    </div>
+
     <!-- Search and Controls -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <div
+      class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-6 mb-4 sm:mb-6"
+    >
       <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div class="flex-1 max-w-md">
           <div class="relative">
@@ -200,14 +272,14 @@ onMounted(async () => {
               v-model="searchQuery"
               type="text"
               :placeholder="t('userManagement.searchPlaceholder')"
-              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              class="w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               @keyup.enter="handleSearch"
             />
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
             >
               <svg
-                class="h-5 w-5 text-gray-400"
+                class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -225,7 +297,7 @@ onMounted(async () => {
         <button
           @click="handleSearch"
           :disabled="loading"
-          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{
             loading ? t("userManagement.searching") : t("userManagement.search")
@@ -237,11 +309,11 @@ onMounted(async () => {
     <!-- Messages -->
     <div
       v-if="error"
-      class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg"
+      class="mb-3 sm:mb-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg"
     >
       <div class="flex">
         <svg
-          class="h-5 w-5 text-red-400"
+          class="h-4 w-4 sm:h-5 sm:w-5 text-red-400 flex-shrink-0 mt-0.5"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -251,19 +323,19 @@ onMounted(async () => {
             clip-rule="evenodd"
           />
         </svg>
-        <div class="ml-3">
-          <p class="text-sm text-red-800">{{ error }}</p>
+        <div class="ml-2 sm:ml-3">
+          <p class="text-xs sm:text-sm text-red-800">{{ error }}</p>
         </div>
       </div>
     </div>
 
     <div
       v-if="success"
-      class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg"
+      class="mb-3 sm:mb-4 p-3 sm:p-4 bg-green-50 border border-green-200 rounded-lg"
     >
       <div class="flex">
         <svg
-          class="h-5 w-5 text-green-400"
+          class="h-4 w-4 sm:h-5 sm:w-5 text-green-400 flex-shrink-0 mt-0.5"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -273,42 +345,42 @@ onMounted(async () => {
             clip-rule="evenodd"
           />
         </svg>
-        <div class="ml-3">
-          <p class="text-sm text-green-800">{{ success }}</p>
+        <div class="ml-2 sm:ml-3">
+          <p class="text-xs sm:text-sm text-green-800">{{ success }}</p>
         </div>
       </div>
     </div>
 
-    <!-- Users Table -->
+    <!-- Users Table - Desktop -->
     <div
-      class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+      class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hidden sm:block"
     >
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 {{ t("userManagement.user") }}
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 {{ t("userManagement.status") }}
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 {{ t("userManagement.roles") }}
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 {{ t("userManagement.lastLogin") }}
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 {{ t("userManagement.actions") }}
               </th>
@@ -316,12 +388,18 @@ onMounted(async () => {
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-if="loading" class="animate-pulse">
-              <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+              <td
+                colspan="5"
+                class="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm"
+              >
                 {{ t("userManagement.loadingUsers") }}
               </td>
             </tr>
             <tr v-else-if="filteredUsers.length === 0">
-              <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+              <td
+                colspan="5"
+                class="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm"
+              >
                 {{ t("userManagement.noUsersFound") }}
               </td>
             </tr>
@@ -331,33 +409,42 @@ onMounted(async () => {
               :key="user.id"
               class="hover:bg-gray-50"
             >
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div class="flex-shrink-0 h-10 w-10">
+                  <div class="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
                     <img
                       v-if="user.picture && !imageErrors.has(user.id)"
                       :src="user.picture"
                       :alt="user.name || user.email"
-                      class="h-10 w-10 rounded-full"
+                      class="h-8 w-8 sm:h-10 sm:w-10 rounded-full"
                       @error="handleImageError(user.id)"
                     />
-                    <Avatar
-                      v-else
-                      :size="40"
-                      :name="user.name || user.email"
-                      variant="marble"
-                      class="rounded-full"
-                    />
+                    <template v-else>
+                      <Avatar
+                        :size="32"
+                        :name="user.name || user.email"
+                        variant="marble"
+                        class="rounded-full sm:hidden"
+                      />
+                      <Avatar
+                        :size="40"
+                        :name="user.name || user.email"
+                        variant="marble"
+                        class="rounded-full hidden sm:block"
+                      />
+                    </template>
                   </div>
-                  <div class="ml-4">
-                    <div class="text-sm font-medium text-gray-900">
+                  <div class="ml-2 sm:ml-4">
+                    <div class="text-xs sm:text-sm font-medium text-gray-900">
                       {{ user.name || user.nickname || "Unknown" }}
                     </div>
-                    <div class="text-sm text-gray-500">{{ user.email }}</div>
+                    <div class="text-xs sm:text-sm text-gray-500">
+                      {{ user.email }}
+                    </div>
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                 <span
                   :class="[
                     'inline-flex px-2 py-1 text-xs font-semibold rounded-full',
@@ -373,27 +460,31 @@ onMounted(async () => {
                   }}
                 </span>
               </td>
-              <td class="px-6 py-4">
+              <td class="px-4 sm:px-6 py-3 sm:py-4">
                 <div class="flex flex-wrap gap-1">
                   <span
                     v-for="role in user.roles"
                     :key="role.id"
-                    class="inline-flex px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
+                    class="inline-flex px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
                   >
                     {{ translateRoleName(role.name, t) }}
                   </span>
                   <span
                     v-if="user.roles.length === 0"
-                    class="text-sm text-gray-500"
+                    class="text-xs sm:text-sm text-gray-500"
                   >
                     {{ t("userManagement.noRoles") }}
                   </span>
                 </div>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td
+                class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500"
+              >
                 {{ formatDate(user.last_login) }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <td
+                class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium"
+              >
                 <UserEditModal
                   :user="user"
                   :available-roles="roles"
@@ -406,32 +497,16 @@ onMounted(async () => {
         </table>
       </div>
 
-      <!-- Pagination -->
+      <!-- Pagination - Desktop -->
       <div
         v-if="totalPages > 1"
         class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
       >
-        <div class="flex-1 flex justify-between sm:hidden">
-          <button
-            @click="handlePageChange(currentPage - 1)"
-            :disabled="currentPage === 0"
-            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {{ t("userManagement.previous") }}
-          </button>
-          <button
-            @click="handlePageChange(currentPage + 1)"
-            :disabled="currentPage >= totalPages - 1"
-            class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {{ t("userManagement.next") }}
-          </button>
-        </div>
         <div
           class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
         >
           <div>
-            <p class="text-sm text-gray-700">
+            <p class="text-xs sm:text-sm text-gray-700">
               {{ t("userManagement.showing") }}
               <span class="font-medium">{{ currentPage * perPage + 1 }}</span>
               {{ t("userManagement.to") }}
@@ -492,6 +567,107 @@ onMounted(async () => {
             </nav>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Users Cards - Mobile -->
+    <div class="sm:hidden space-y-3">
+      <div v-if="loading" class="text-center py-8 text-sm text-gray-500">
+        {{ t("userManagement.loadingUsers") }}
+      </div>
+      <div
+        v-else-if="filteredUsers.length === 0"
+        class="text-center py-8 text-sm text-gray-500"
+      >
+        {{ t("userManagement.noUsersFound") }}
+      </div>
+      <div
+        v-else
+        v-for="user in filteredUsers"
+        :key="user.id"
+        class="bg-white rounded-lg shadow-sm border border-gray-200 p-3"
+      >
+        <div class="flex items-start justify-between mb-2">
+          <div class="flex items-center flex-1 min-w-0">
+            <div class="flex-shrink-0 h-8 w-8 mr-2">
+              <img
+                v-if="user.picture && !imageErrors.has(user.id)"
+                :src="user.picture"
+                :alt="user.name || user.email"
+                class="h-8 w-8 rounded-full"
+                @error="handleImageError(user.id)"
+              />
+              <Avatar
+                v-else
+                :size="32"
+                :name="user.name || user.email"
+                variant="marble"
+                class="rounded-full"
+              />
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="text-xs font-medium text-gray-900 truncate">
+                {{ user.name || user.nickname || "Unknown" }}
+              </div>
+              <div class="text-xs text-gray-500 truncate">{{ user.email }}</div>
+            </div>
+          </div>
+          <div class="ml-2">
+            <UserEditModal
+              :user="user"
+              :available-roles="roles"
+              :saving="saving"
+              @update="updateUser"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 mt-2">
+          <span
+            :class="[
+              'inline-flex px-2 py-0.5 text-xs font-semibold rounded-full',
+              user.isApproved
+                ? 'bg-green-100 text-green-800'
+                : 'bg-yellow-100 text-yellow-800',
+            ]"
+          >
+            {{
+              user.isApproved
+                ? t("userManagement.approved")
+                : t("userManagement.pending")
+            }}
+          </span>
+          <span
+            v-for="role in user.roles"
+            :key="role.id"
+            class="inline-flex px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
+          >
+            {{ translateRoleName(role.name, t) }}
+          </span>
+          <span v-if="user.roles.length === 0" class="text-xs text-gray-500">
+            {{ t("userManagement.noRoles") }}
+          </span>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">
+          {{ t("userManagement.lastLogin") }}: {{ formatDate(user.last_login) }}
+        </div>
+      </div>
+
+      <!-- Pagination - Mobile -->
+      <div v-if="totalPages > 1" class="flex justify-between pt-3">
+        <button
+          @click="handlePageChange(currentPage - 1)"
+          :disabled="currentPage === 0"
+          class="relative inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {{ t("userManagement.previous") }}
+        </button>
+        <button
+          @click="handlePageChange(currentPage + 1)"
+          :disabled="currentPage >= totalPages - 1"
+          class="relative inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {{ t("userManagement.next") }}
+        </button>
       </div>
     </div>
   </div>

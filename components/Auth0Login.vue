@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useUserSession, onMounted } from "#imports";
+import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 
 interface Props {
   errorMessage: string;
@@ -23,7 +24,7 @@ onMounted(() => {
   <div class="container relative">
     <!-- Header with Language Picker -->
     <div class="absolute top-4 right-4">
-      <LanguagePicker theme="white" />
+      <GlobeLanguagePicker theme="white" variant="icon" />
     </div>
 
     <div class="flex flex-col items-center justify-center h-screen">

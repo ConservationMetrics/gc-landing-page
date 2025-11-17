@@ -1,8 +1,10 @@
 import { useRuntimeConfig } from "#imports";
 import {
   getManagementApiToken,
-  fetchUserRoles,
+  fetchAllRoles,
+  buildUserRolesMap,
 } from "~/server/utils/auth0Management";
+import type { UserManagementUser, Auth0ManagementUser } from "~/types/types";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -60,10 +62,14 @@ export default defineEventHandler(async (event) => {
 
     const usersData = await usersResponse.json();
 
-    // Fetch roles for each user
-    const usersWithRoles = await Promise.all(
-      usersData.users.map(async (user: any) => {
-        const roles = await fetchUserRoles(user.user_id);
+    // Fetch all roles and build a user->roles map
+    const allRoles = await fetchAllRoles();
+    const userRolesMap = await buildUserRolesMap(allRoles);
+
+    // Map users with their roles from the pre-built map
+    const usersWithRoles: UserManagementUser[] = usersData.users.map(
+      (user: Auth0ManagementUser): UserManagementUser => {
+        const roles = userRolesMap.get(user.user_id) || [];
 
         // Check if user is approved (has app_metadata.approved = "true")
         const isApproved =
@@ -73,18 +79,18 @@ export default defineEventHandler(async (event) => {
         return {
           id: user.user_id,
           email: user.email,
-          name: user.name,
-          nickname: user.nickname,
-          picture: user.picture,
+          name: user.name ?? "",
+          nickname: user.nickname ?? "",
+          picture: user.picture ?? "",
           created_at: user.created_at,
-          last_login: user.last_login,
-          logins_count: user.logins_count,
+          last_login: user.last_login ?? "",
+          logins_count: user.logins_count ?? 0,
           roles,
           isApproved,
-          app_metadata: user.app_metadata,
-          user_metadata: user.user_metadata,
+          app_metadata: user.app_metadata ?? {},
+          user_metadata: user.user_metadata ?? {},
         };
-      }),
+      },
     );
 
     return {
