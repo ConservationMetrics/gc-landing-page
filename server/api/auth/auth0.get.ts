@@ -349,7 +349,8 @@ export default oauthAuth0EventHandler({
       const config = useRuntimeConfig();
       const baseUrl = config.public.baseUrl || "";
       const isHttps = baseUrl.startsWith("https://");
-
+      console.log("🔍 isHttps:", isHttps);
+      console.log("🔍 baseUrl:", baseUrl);
       const cookieOptions = isHttps
         ? {
             // Production/HTTPS: Use SameSite=None for cross-site Auth0 redirects
@@ -361,7 +362,7 @@ export default oauthAuth0EventHandler({
             sameSite: "lax" as const,
             secure: false,
           };
-
+      console.log("🔍 cookieOptions:", cookieOptions);
       await setUserSession(
         event,
         {
