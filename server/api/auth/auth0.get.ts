@@ -45,14 +45,14 @@ const getManagementApiToken = async (): Promise<string | null> => {
           client_secret: oauth.auth0.clientSecret,
           audience: `https://${oauth.auth0.domain}/api/v2/`,
         }),
-      },
+      }
     );
 
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
       console.error(
         "🔍 Failed to generate Management API token. Status:",
-        tokenResponse.status,
+        tokenResponse.status
       );
       console.error("🔍 Error response:", errorText);
       return null;
@@ -99,14 +99,14 @@ const fetchUserIdByEmail = async (email: string): Promise<string | null> => {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
-      },
+      }
     );
 
     if (!userResponse.ok) {
       const errorText = await userResponse.text();
       console.error(
         "🔍 Failed to fetch user by email from Management API. Status:",
-        userResponse.status,
+        userResponse.status
       );
       console.error("🔍 Error response:", errorText);
       return null;
@@ -135,7 +135,7 @@ const fetchUserIdByEmail = async (email: string): Promise<string | null> => {
  * @returns {Promise<Array<{id: string, name: string, description: string}>>} Array of role objects
  */
 const fetchRoles = async (
-  userId?: string,
+  userId?: string
 ): Promise<Array<{ id: string; name: string; description: string }>> => {
   try {
     const config = useRuntimeConfig();
@@ -168,7 +168,7 @@ const fetchRoles = async (
       const errorText = await rolesResponse.text();
       console.error(
         "🔍 Failed to fetch roles from Management API. Status:",
-        rolesResponse.status,
+        rolesResponse.status
       );
       console.error("🔍 Error response:", errorText);
       return [];
@@ -180,7 +180,7 @@ const fetchRoles = async (
         id: role.id,
         name: role.name.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase()),
         description: role.description,
-      }),
+      })
     );
   } catch (error) {
     console.error("🔍 Error fetching roles:", error);
@@ -197,7 +197,7 @@ const fetchRoles = async (
  */
 const assignUserRoles = async (
   userId: string,
-  roleIds: string[],
+  roleIds: string[]
 ): Promise<boolean> => {
   try {
     const config = useRuntimeConfig();
@@ -222,7 +222,7 @@ const assignUserRoles = async (
         body: JSON.stringify({
           roles: roleIds,
         }),
-      },
+      }
     );
 
     return response.ok;
@@ -247,10 +247,6 @@ export default oauthAuth0EventHandler({
    */
   async onSuccess(event: H3Event, { user }: { user: Auth0User }) {
     try {
-      // Log user info for debugging
-      console.log("🔍 Auth0 User:", { email: user.email, sub: user.sub });
-      console.log("🔍 User roles from Auth0:", user.roles);
-
       // If roles aren't in the user object, fetch them from Management API
       let userRoles: Array<{ id: string; name: string; description: string }> =
         [];
@@ -259,9 +255,6 @@ export default oauthAuth0EventHandler({
           const userId = await fetchUserIdByEmail(user.email);
           if (userId) {
             userRoles = await fetchRoles(userId);
-            console.log("🔍 Fetched roles from Management API:", userRoles);
-          } else {
-            console.log("🔍 Could not find user ID for email:", user.email);
           }
         }
       } else {
@@ -298,9 +291,8 @@ export default oauthAuth0EventHandler({
           if (userId) {
             try {
               const allRoles = await fetchRoles();
-              console.log("🔍 All roles from Auth0:", allRoles);
               const signedInRole = allRoles.find(
-                (role) => role.name === "SignedIn" || role.name === "Signedin",
+                (role) => role.name === "SignedIn" || role.name === "Signedin"
               );
 
               if (signedInRole) {
@@ -309,17 +301,9 @@ export default oauthAuth0EventHandler({
                 ]);
 
                 if (assignSuccess) {
-                  console.log(
-                    "🔍 Successfully assigned SignedIn role to user:",
-                    user.email,
-                  );
                   userRoles = [signedInRole];
                   userRole = Role.SignedIn; // Internal role is SignedIn for logged-in users with no elevated permissions
                 } else {
-                  console.error(
-                    "🔍 Failed to assign SignedIn role to user:",
-                    user.email,
-                  );
                   // Fallback: create local role object
                   userRoles = [
                     {
@@ -332,9 +316,6 @@ export default oauthAuth0EventHandler({
                   userRole = Role.SignedIn;
                 }
               } else {
-                console.warn(
-                  "🔍 No SignedIn role found in Auth0, creating fallback role",
-                );
                 // Fallback: create local role object
                 userRoles = [
                   {
@@ -346,8 +327,7 @@ export default oauthAuth0EventHandler({
                 ];
                 userRole = Role.SignedIn;
               }
-            } catch (error) {
-              console.error("🔍 Error assigning SignedIn role:", error);
+            } catch {
               // Fallback: create local role object
               userRoles = [
                 {
@@ -363,19 +343,46 @@ export default oauthAuth0EventHandler({
         }
       }
 
-      await setUserSession(event, {
-        user: {
-          auth0: user.email,
-          roles: userRoles,
-          userRole,
+      // Determine cookie settings based on environment
+      // For cross-site redirects from Auth0, we need SameSite=None with Secure=true (HTTPS only)
+      // In development (HTTP), use SameSite=Lax
+      const config = useRuntimeConfig();
+      const baseUrl = config.public.baseUrl || "";
+      const isHttps = baseUrl.startsWith("https://");
+
+      const cookieOptions = isHttps
+        ? {
+            // Production/HTTPS: Use SameSite=None for cross-site Auth0 redirects
+            sameSite: "none" as const,
+            secure: true,
+          }
+        : {
+            // Development/HTTP: Use Lax (None requires Secure, which requires HTTPS)
+            sameSite: "lax" as const,
+            secure: false,
+          };
+
+      await setUserSession(
+        event,
+        {
+          user: {
+            auth0: user.email,
+            roles: userRoles,
+            userRole,
+          },
+          loggedInAt: Date.now(),
         },
-        loggedInAt: Date.now(),
-      });
+        {
+          cookie: cookieOptions,
+        }
+      );
+      // Redirect directly to the target page instead of login
+      return sendRedirect(event, "/login");
     } catch (error) {
       console.error("🔍 Auth0 Error: Error setting user session", error);
+      // Still redirect on error to show login page
+      return sendRedirect(event, "/login");
     }
-    // Redirect directly to the target page instead of login
-    return sendRedirect(event, "/login");
   },
   onError(event: H3Event) {
     console.error("OAuth error:", event);

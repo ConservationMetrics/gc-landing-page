@@ -11,7 +11,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (to.query.logout === "true") {
     const sessionCookie = useCookie("nuxt-session");
     sessionCookie.value = null;
-
     return navigateTo("/");
   }
 
