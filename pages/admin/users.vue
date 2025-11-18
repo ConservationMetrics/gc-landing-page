@@ -20,7 +20,7 @@ if (!loggedIn.value) {
 
 // Check if user has admin role
 const hasAdminRole = (user.value as UserWithRoles)?.roles?.some(
-  (role) => role.name === "Admin",
+  (role) => role.name === "Admin"
 );
 
 if (!hasAdminRole) {
@@ -39,13 +39,6 @@ useHead({
 
 <template>
   <div>
-    <!-- Header with Language Picker -->
-    <div class="bg-white border-b border-gray-200 px-6 py-4">
-      <div class="flex justify-end">
-        <GlobeLanguagePicker theme="white" variant="icon" />
-      </div>
-    </div>
-
     <UserManagement />
   </div>
 </template>
