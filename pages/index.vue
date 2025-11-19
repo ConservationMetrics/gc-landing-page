@@ -13,6 +13,7 @@ interface User {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
+const logoUrl = config.public.logoUrl as string | undefined;
 const { t } = useI18n();
 
 // Auth state using nuxt-auth-utils
@@ -522,13 +523,22 @@ useHead({
 
     <main class="max-w-7xl mt-10 mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-12">
       <div class="pt-0">
+        <!-- Community Logo -->
+        <div v-if="logoUrl" class="flex justify-center mb-8">
+          <img
+            :src="logoUrl"
+            :alt="communityName + ' logo'"
+            class="max-h-32 w-auto object-contain"
+          />
+        </div>
+
         <!-- Welcome Section -->
         <div class="text-center mb-12">
           <h2 class="text-4xl font-bold text-gray-900 mb-4">
-            {{ t("app.welcome", { communityName }) }}
+            {{ t("app.welcome") }}
           </h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            {{ t("app.welcomeSubtitle", { communityName }) }}
+            {{ t("app.welcomeSubtitle") }}
           </p>
         </div>
 
