@@ -79,7 +79,7 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 
 ### Multi-Tenant Support
 
-Service URLs are dynamically configured based on `NUXT_COMMUNITY_NAME`:
+Service URLs are dynamically configured based on `NUXT_PUBLIC_COMMUNITY_NAME`:
 
 ```bash
 # Community: demo
