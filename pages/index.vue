@@ -609,7 +609,7 @@ useHead({
                 class="w-[67px] h-[67px] flex items-center justify-center"
               >
                 <img
-                  src="https://www.windmill.dev/img/windmill.svg"
+                  src="/windmill.svg"
                   :alt="service.name"
                   class="w-[67px] h-[67px] object-contain"
                 />
@@ -620,7 +620,7 @@ useHead({
                 class="w-[67px] h-[67px] flex items-center justify-center"
               >
                 <img
-                  src="https://filebrowser.org/static/logo.png"
+                  src="/filebrowser.png"
                   :alt="service.name"
                   class="w-[67px] h-[67px] object-contain"
                 />
