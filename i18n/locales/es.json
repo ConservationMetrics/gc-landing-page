@@ -93,7 +93,7 @@
   },
   "roles": {
     "admin": "Administrador",
-    "member": "Miembro", 
+    "member": "Miembro",
     "guest": "Invitado",
     "signedIn": "Conectado"
   },

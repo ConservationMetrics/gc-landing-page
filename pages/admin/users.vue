@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useUserSession, navigateTo, createError, useHead } from "#imports";
 import UserManagement from "~/components/UserManagement.vue";
+import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 // i18n is auto-imported by @nuxtjs/i18n
 
 const { t } = useI18n();
@@ -18,7 +19,9 @@ if (!loggedIn.value) {
 }
 
 // Check if user has admin role
-const hasAdminRole = (user.value as UserWithRoles)?.roles?.some((role) => role.name === "Admin");
+const hasAdminRole = (user.value as UserWithRoles)?.roles?.some(
+  (role) => role.name === "Admin"
+);
 
 if (!hasAdminRole) {
   throw createError({
@@ -29,22 +32,13 @@ if (!hasAdminRole) {
 
 // Set page metadata
 useHead({
-  title: t('userManagement.title') + " - Admin",
-  meta: [
-    { name: "description", content: t('userManagement.subtitle') },
-  ],
+  title: t("userManagement.title") + " - Admin",
+  meta: [{ name: "description", content: t("userManagement.subtitle") }],
 });
 </script>
 
 <template>
   <div>
-    <!-- Header with Language Picker -->
-    <div class="bg-white border-b border-gray-200 px-6 py-4">
-      <div class="flex justify-end">
-        <LanguagePicker />
-      </div>
-    </div>
-    
     <UserManagement />
   </div>
 </template>

@@ -13,7 +13,7 @@ interface User {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
-const { t, locale, locales, setLocale } = useI18n();
+const { t } = useI18n();
 
 // Auth state using nuxt-auth-utils
 const { loggedIn, user } = useUserSession();
@@ -112,20 +112,20 @@ const getServiceDescription = (serviceName: string) => {
 
 const translateTag = (tag: string) => {
   const tagMap: Record<string, string> = {
-    "Maps": t("services.tags.maps"),
+    Maps: t("services.tags.maps"),
     "Alerts Dashboard": t("services.tags.alertsDashboard"),
     "Wildlife Explorer": t("services.tags.wildlifeExplorer"),
     "Media Galleries": t("services.tags.mediaGalleries"),
-    "Charts": t("services.tags.charts"),
-    "Analysis": t("services.tags.analysis"),
-    "Visualizations": t("services.tags.visualizations"),
-    "Dashboards": t("services.tags.dashboards"),
+    Charts: t("services.tags.charts"),
+    Analysis: t("services.tags.analysis"),
+    Visualizations: t("services.tags.visualizations"),
+    Dashboards: t("services.tags.dashboards"),
     "Data Flows": t("services.tags.dataFlows"),
     "Scheduled Jobs": t("services.tags.scheduledJobs"),
     "Data Apps": t("services.tags.dataApps"),
-    "Files": t("services.tags.files"),
+    Files: t("services.tags.files"),
     "Raw Data": t("services.tags.rawData"),
-    "Archives": t("services.tags.archives"),
+    Archives: t("services.tags.archives"),
   };
   return tagMap[tag] || tag;
 };
@@ -136,22 +136,9 @@ const isAdmin = computed(() => {
 });
 
 const mobileMenuOpen = ref(false);
-const languagePickerOpen = ref(false);
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
-};
-
-const toggleLanguagePicker = () => {
-  languagePickerOpen.value = !languagePickerOpen.value;
-};
-
-const changeLanguage = (langCode: string) => {
-  setLocale(langCode as 'en' | 'es' | 'pt' | 'nl');
-  if (import.meta.client) {
-    sessionStorage.setItem('locale', langCode);
-  }
-  languagePickerOpen.value = false;
 };
 
 useHead({
@@ -182,14 +169,14 @@ useHead({
                 d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
               />
             </svg>
-            </div>
+          </div>
           <div class="rounded-lg px-4 py-2">
             <h1 class="text-lg max-[1200px]:text-xs font-bold">
               Guardian Connector
             </h1>
           </div>
-            </div>
-            
+        </div>
+
         <!-- Tab with Community Name -->
         <div
           class="flex absolute left-[25%] -bottom-3 flex-col items-center t-[32%]"
@@ -237,18 +224,18 @@ useHead({
         <!-- Right: Action buttons -->
         <div class="flex items-center space-x-3 ml-auto mr-2">
           <!-- Auth controls -->
-            <div v-if="isAuth0Configured && !loggedIn">
-              <button
-                @click="login"
+          <div v-if="isAuth0Configured && !loggedIn">
+            <button
+              @click="login"
               class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
-              >
+            >
               {{ t("auth.signIn") }}
-              </button>
-            </div>
+            </button>
+          </div>
 
           <!-- User info and controls -->
-            <div
-              v-if="isAuth0Configured && loggedIn"
+          <div
+            v-if="isAuth0Configured && loggedIn"
             class="flex items-center space-x-3"
           >
             <div class="text-sm max-[1200px]:text-xs text-gray-700">
@@ -262,10 +249,10 @@ useHead({
                     ?.map((role) => translateRoleName(role.name, t))
                     .join(", ")
                 }})
-                </span>
-              </div>
-              <button
-                @click="logout"
+              </span>
+            </div>
+            <button
+              @click="logout"
               class="text-gray-600 hover:text-gray-900 transition-colors text-sm max-[1200px]:text-xs"
             >
               {{ t("auth.signOut") }}
@@ -312,7 +299,7 @@ useHead({
 
           <!-- Language Picker (Globe Icon) -->
           <div class="relative group">
-            <GlobeLanguagePicker theme="white" />
+            <GlobeLanguagePicker theme="white" variant="icon" />
             <!-- Tooltip -->
             <div
               class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
@@ -343,7 +330,7 @@ useHead({
           <div class="rounded-lg px-2">
             <h1 class="text-sm font-bold">Guardian Connector</h1>
           </div>
-      </div>
+        </div>
 
         <!-- Right: User Icon and Hamburger Menu -->
         <div class="flex items-center space-x-2">
@@ -490,62 +477,7 @@ useHead({
         </NuxtLink>
 
         <!-- Language Picker -->
-        <div class="px-4 py-3 mb-2">
-          <button
-            @click="toggleLanguagePicker"
-            class="w-full flex items-center justify-between space-x-3 hover:bg-purple-50 rounded-lg px-2 py-2 transition-colors"
-          >
-            <div class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 text-gray-600"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span class="text-sm text-gray-700 font-medium">{{
-                t("header.languagePicker")
-              }}</span>
-            </div>
-            <svg
-              class="w-4 h-4 text-gray-600 transition-transform"
-              :class="{ 'rotate-180': languagePickerOpen }"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-          <div v-if="languagePickerOpen" class="mt-2 space-y-1">
-            <button
-              v-for="lang in locales"
-              :key="lang.code"
-              @click="changeLanguage(lang.code)"
-              :class="[
-                'w-full text-left px-4 py-2 rounded-lg text-sm transition-colors',
-                locale === lang.code
-                  ? 'bg-purple-100 text-purple-700 font-medium'
-                  : 'text-gray-700 hover:bg-purple-50',
-              ]"
-            >
-              {{ lang.name }}
-            </button>
-          </div>
-        </div>
+        <GlobeLanguagePicker variant="mobile" />
 
         <!-- Sign Out -->
         <button
@@ -697,13 +629,13 @@ useHead({
 
             <!-- Service Title -->
             <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">
-            {{ service.name }}
-          </h3>
+              {{ service.name }}
+            </h3>
 
             <!-- Service Description -->
             <p class="text-gray-600 text-sm mb-4 text-center min-h-[3rem]">
-            {{ getServiceDescription(service.name) }}
-          </p>
+              {{ getServiceDescription(service.name) }}
+            </p>
 
             <!-- Tags -->
             <div class="flex flex-wrap gap-2 justify-center">
@@ -753,10 +685,7 @@ useHead({
         </div>
 
         <!-- Help Paragraph (always shown, centered) -->
-        <div
-          v-if="shouldShowApp"
-          class="text-center mt-8 mb-8"
-        >
+        <div v-if="shouldShowApp" class="text-center mt-8 mb-8">
           <p class="text-gray-600 italic text-sm">
             {{ t("services.needHelp") }}
             <a
@@ -765,8 +694,8 @@ useHead({
               rel="noopener noreferrer"
               class="text-purple-600 hover:text-purple-700 underline"
             >
-              {{ t("services.documentationWebsite") }}
-            </a>.
+              {{ t("services.documentationWebsite") }} </a
+            >.
           </p>
         </div>
       </div>

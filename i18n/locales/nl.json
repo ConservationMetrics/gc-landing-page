@@ -93,7 +93,7 @@
   },
   "roles": {
     "admin": "Beheerder",
-    "member": "Lid", 
+    "member": "Lid",
     "guest": "Gast",
     "signedIn": "Ingelogd"
   },

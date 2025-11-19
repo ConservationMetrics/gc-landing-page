@@ -1,23 +1,37 @@
 export const Role = {
-    SignedIn: 0, // Signed in but no elevated access
-    Guest: 1, // Signed in with guest permissions
-    Member: 2, // Signed in with member permissions
-    Admin: 3, // Signed in with admin permissions
-  } as const;
-  
-  export type Role = (typeof Role)[keyof typeof Role];
-  
-  export interface User {
-    auth0: string;
-    roles?: Array<{ id: string; name: string; description: string }>;
-    userRole?: Role;
-  }
+  SignedIn: 0, // Signed in but no elevated access
+  Guest: 1, // Signed in with guest permissions
+  Member: 2, // Signed in with member permissions
+  Admin: 3, // Signed in with admin permissions
+} as const;
+
+export type Role = (typeof Role)[keyof typeof Role];
+
+export interface User {
+  auth0: string;
+  roles?: Array<{ id: string; name: string; description: string }>;
+  userRole?: Role;
+}
 
 // User Management Types
 export interface UserRole {
   id: string;
   name: string;
   description: string;
+}
+
+// Auth0 Management API User Response
+export interface Auth0ManagementUser {
+  user_id: string;
+  email: string;
+  name?: string;
+  nickname?: string;
+  picture?: string;
+  created_at: string;
+  last_login?: string;
+  logins_count?: number;
+  app_metadata?: Record<string, unknown>;
+  user_metadata?: Record<string, unknown>;
 }
 
 export interface UserManagementUser {
@@ -49,5 +63,4 @@ export interface RolesResponse {
 }
 
 // I18n Types
-export type SupportedLocale = 'en' | 'pt' | 'es' | 'nl';
-  
+export type SupportedLocale = "en" | "pt" | "es" | "nl";
