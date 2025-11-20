@@ -54,6 +54,7 @@ export default defineNuxtConfig({
       communityName: "demo",
       baseUrl: "http://localhost:8080",
       auth0Enabled: true,
+      logoUrl: "",
       // Service availability flags
       supersetEnabled: false,
       windmillEnabled: false,
