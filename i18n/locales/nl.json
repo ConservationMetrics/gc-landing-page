@@ -95,7 +95,11 @@
     "admin": "Beheerder",
     "member": "Lid",
     "guest": "Gast",
-    "signedIn": "Ingelogd"
+    "signedIn": "Ingelogd",
+    "adminDescription": "Alle routes inclusief '/config'",
+    "memberDescription": "Beperkte routes (geen toegang tot '/config')",
+    "guestDescription": "Alleen gast en onbeperkte routes",
+    "signedInDescription": "Ingelogd maar zonder speciale privileges"
   },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",

@@ -95,7 +95,11 @@
     "admin": "Admin",
     "member": "Member",
     "guest": "Guest",
-    "signedIn": "Signed In"
+    "signedIn": "Signed In",
+    "adminDescription": "All routes including '/config'",
+    "memberDescription": "Restricted routes (cannot access '/config')",
+    "guestDescription": "Guest and unrestricted routes only",
+    "signedInDescription": "Signed in but with no special privileges"
   },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",

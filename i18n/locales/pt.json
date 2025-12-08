@@ -95,7 +95,11 @@
     "admin": "Administrador",
     "member": "Membro",
     "guest": "Convidado",
-    "signedIn": "Conectado"
+    "signedIn": "Conectado",
+    "adminDescription": "Todas as rotas incluindo '/config'",
+    "memberDescription": "Rotas restritas (não pode acessar '/config')",
+    "guestDescription": "Apenas rotas de convidado e não restritas",
+    "signedInDescription": "Conectado mas sem privilégios especiais"
   },
   "footer": {
     "copyright": "© 2025 Guardian Connector.",
