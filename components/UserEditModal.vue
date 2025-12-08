@@ -2,6 +2,10 @@
 import { ref, computed } from "vue";
 import Avatar from "vue-boring-avatars";
 import type { UserRole, UserManagementUser } from "~/types/types";
+import {
+  translateRoleName,
+  translateRoleDescription,
+} from "@/utils/roleTranslations";
 const { t } = useI18n();
 
 interface Props {
@@ -22,23 +26,22 @@ const emit = defineEmits<{
 }>();
 
 const isOpen = ref(false);
-const selectedRoles = ref<string[]>([]);
+const selectedRole = ref<string>("");
 const isApproved = ref(false);
 const imageError = ref(false);
 const isSaving = ref(false);
 const saveError = ref("");
 
 // Computed properties
-const selectedRoleNames = computed(() => {
-  return selectedRoles.value.map((roleId) => {
-    const role = props.availableRoles.find((r) => r.id === roleId);
-    return role ? role.name : t("userManagement.unknown");
-  });
+const selectedRoleName = computed(() => {
+  if (!selectedRole.value) return t("userManagement.none");
+  const role = props.availableRoles.find((r) => r.id === selectedRole.value);
+  return role ? translateRoleName(role.name, t) : t("userManagement.unknown");
 });
 
 // Methods
 const openModal = () => {
-  selectedRoles.value = props.user.roles.map((role) => role.id);
+  selectedRole.value = props.user.roles[0]?.id || "";
   isApproved.value = props.user.isApproved;
   imageError.value = false; // Reset image error state
   isSaving.value = false;
@@ -66,7 +69,7 @@ const handleSave = async () => {
         emit(
           "update",
           props.user,
-          selectedRoles.value,
+          selectedRole.value ? [selectedRole.value] : [],
           isApproved.value,
           resolve,
         );
@@ -209,32 +212,28 @@ const formatDate = (dateString: string) => {
                     >
                       <input
                         :id="`role-${role.id}`"
-                        v-model="selectedRoles"
+                        v-model="selectedRole"
                         :value="role.id"
-                        type="checkbox"
-                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-0.5"
+                        type="radio"
+                        name="user-role"
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 mt-0.5"
                       />
                       <div class="ml-3">
                         <label
                           :for="`role-${role.id}`"
                           class="text-sm font-medium text-gray-700 cursor-pointer"
                         >
-                          {{ role.name }}
+                          {{ translateRoleName(role.name, t) }}
                         </label>
-                        <p
-                          v-if="role.description"
-                          class="text-xs text-gray-500"
-                        >
-                          {{ role.description }}
+                        <p class="text-xs text-gray-500">
+                          {{ translateRoleDescription(role.name, t) }}
                         </p>
                       </div>
                     </div>
                   </div>
                   <p class="text-xs text-gray-500 mt-2">
                     {{ t("userManagement.selectedRoles") }}:
-                    {{
-                      selectedRoleNames.join(", ") || t("userManagement.none")
-                    }}
+                    {{ selectedRoleName }}
                   </p>
                 </div>
 

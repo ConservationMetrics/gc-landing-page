@@ -8,17 +8,7 @@ export const translateRoleName = (
   roleName: string,
   t: (key: string) => string,
 ): string => {
-  // Normalize the role name: lowercase, replace underscores with spaces, then capitalize first letter
-  const normalizedRole = roleName
-    .toLowerCase()
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (l) => l.toUpperCase());
-
-  // Handle special case for SignedIn - convert "Signed In" back to "SignedIn" (camelCase)
-  const finalRole =
-    normalizedRole === "Signed In" ? "SignedIn" : normalizedRole;
-
-  // Map normalized role names to translation keys
+  // Map role names directly to translation keys
   const roleMap: Record<string, string> = {
     Admin: "roles.admin",
     Member: "roles.member",
@@ -26,6 +16,28 @@ export const translateRoleName = (
     SignedIn: "roles.signedIn",
   };
 
-  const translationKey = roleMap[finalRole] || roleName;
+  const translationKey = roleMap[roleName] || roleName;
   return t(translationKey);
+};
+
+/**
+ * Utility function to translate role descriptions using i18n
+ * @param roleName - The role name to get description for
+ * @param t - The i18n translation function
+ * @returns Translated role description
+ */
+export const translateRoleDescription = (
+  roleName: string,
+  t: (key: string) => string,
+): string => {
+  // Map role names directly to description translation keys
+  const descriptionMap: Record<string, string> = {
+    Admin: "roles.adminDescription",
+    Member: "roles.memberDescription",
+    Guest: "roles.guestDescription",
+    SignedIn: "roles.signedInDescription",
+  };
+
+  const translationKey = descriptionMap[roleName];
+  return translationKey ? t(translationKey) : "";
 };
