@@ -35,7 +35,7 @@ const filteredUsers = computed(() => {
   return users.value.filter(
     (user) =>
       user.email.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      user.name?.toLowerCase().includes(searchQuery.value.toLowerCase())
+      user.name?.toLowerCase().includes(searchQuery.value.toLowerCase()),
   );
 });
 
@@ -88,7 +88,7 @@ const updateUser = async (
   user: UserManagementUser,
   newRoles: string[],
   isApproved: boolean,
-  callback?: (_result: { success: boolean; error?: string }) => void
+  callback?: (_result: { success: boolean; error?: string }) => void,
 ) => {
   saving.value = true;
   error.value = "";
@@ -103,7 +103,7 @@ const updateUser = async (
           roles: newRoles,
           isApproved,
         },
-      }
+      },
     );
 
     if (response.success) {
@@ -112,7 +112,7 @@ const updateUser = async (
       if (userIndex !== -1) {
         users.value[userIndex].isApproved = isApproved;
         users.value[userIndex].roles = roles.value.filter((role) =>
-          newRoles.includes(role.id)
+          newRoles.includes(role.id),
         );
       }
       success.value = t("userManagement.userUpdatedSuccessfully", {

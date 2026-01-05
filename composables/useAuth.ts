@@ -30,3 +30,18 @@ export const useAuth = (loggedIn: { value: boolean }) => {
 
   return errorMessage;
 };
+
+export const useAuthActions = () => {
+  const login = () => {
+    window.location.href = "/api/auth/auth0";
+  };
+
+  const logout = () => {
+    window.location.href = "/?logout=true";
+  };
+
+  return {
+    login,
+    logout,
+  };
+};

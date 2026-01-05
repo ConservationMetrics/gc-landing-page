@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useUserSession, navigateTo, createError, useHead } from "#imports";
 import UserManagement from "~/components/UserManagement.vue";
-import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
+import AppHeader from "@/components/shared/AppHeader.vue";
 // i18n is auto-imported by @nuxtjs/i18n
 
 const { t } = useI18n();
@@ -20,7 +20,7 @@ if (!loggedIn.value) {
 
 // Check if user has admin role
 const hasAdminRole = (user.value as UserWithRoles)?.roles?.some(
-  (role) => role.name === "Admin"
+  (role) => role.name === "Admin",
 );
 
 if (!hasAdminRole) {
@@ -38,7 +38,8 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col bg-white">
+    <AppHeader />
     <UserManagement />
   </div>
 </template>
