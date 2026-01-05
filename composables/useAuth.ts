@@ -31,6 +31,10 @@ export const useAuth = (loggedIn: { value: boolean }) => {
   return errorMessage;
 };
 
+/**
+ * Composable that provides authentication action functions.
+ * @returns An object containing login and logout functions.
+ */
 export const useAuthActions = () => {
   const login = () => {
     window.location.href = "/api/auth/auth0";
