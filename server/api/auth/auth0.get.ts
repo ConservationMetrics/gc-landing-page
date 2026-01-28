@@ -247,10 +247,6 @@ export default oauthAuth0EventHandler({
    */
   async onSuccess(event: H3Event, { user }: { user: Auth0User }) {
     try {
-      // Log user info for debugging
-      console.log("🔍 Auth0 User:", { email: user.email, sub: user.sub });
-      console.log("🔍 User roles from Auth0:", user.roles);
-
       // If roles aren't in the user object, fetch them from Management API
       let userRoles: Array<{ id: string; name: string; description: string }> =
         [];
@@ -259,7 +255,6 @@ export default oauthAuth0EventHandler({
           const userId = await fetchUserIdByEmail(user.email);
           if (userId) {
             userRoles = await fetchRoles(userId);
-            console.log("🔍 Fetched roles from Management API:", userRoles);
           } else {
             console.log("🔍 Could not find user ID for email:", user.email);
           }
