@@ -27,6 +27,9 @@ export default defineNuxtConfig({
       { code: "pt", name: "Português", language: "pt-PT", file: "pt.json" },
       { code: "nl", name: "Nederlands", language: "nl-NL", file: "nl.json" },
     ],
+    bundle: {
+      optimizeTranslationDirective: false,
+    },  // https://github.com/nuxt-modules/i18n/issues/3238#issuecomment-2672492536
     defaultLocale: "en",
     detectBrowserLanguage: {
       useCookie: true,
