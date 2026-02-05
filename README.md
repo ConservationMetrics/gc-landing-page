@@ -2,16 +2,15 @@
 
 A modern, lightweight landing page for Guardian Connector communities with environment-based service configuration and optional authentication.
 
-## 🚀 Features
+## Features
 
 ### Core Functionality
 - **Multi-tenant Community Support** - Dynamic service URLs based on community name
-- **Optional Auth0 Integration** - Secure authentication with role-based access control
+- **Auth0 Integration** - Secure authentication with role-based access control
 - **Environment-based Service Configuration** - Simple boolean flags for service availability
 - **Conditional Rendering** - Only enabled services shown in UI
-- **Static Site Generation** - Fast, CDN-friendly deployment
 
-## 📦 Installation and Deployment
+## Installation and Deployment
 
 ### Quick Start
 
@@ -38,12 +37,7 @@ Local deployment of Docker:
 docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 ```
 
-### Build Constraints & Environment Variables
-
-**Important Note:** This application is configured for **server-side rendering (SSR)** rather than static site generation (SSG) due to environment variable constraints encountered during development.
-
-
-## 🔐 Authentication
+## Authentication
 
 ### Auth0 Setup
 
@@ -58,15 +52,7 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
    NUXT_AUTH0_CLIENT_ID=your-client-id
    ```
 
-### Authentication Flow
-
-1. User clicks "Sign In" → Redirected to Auth0
-2. Auth0 authenticates user → Redirects to `/login`
-3. `/login` handles auth code → Redirects to main page
-4. User authenticated → Can access community services
-
-
-## 🔍 Service Configuration Details
+## Service Configuration Details
 
 ### Service Flags
 
@@ -90,17 +76,6 @@ https://windmill.demo.guardianconnector.net
 https://superset.acme.guardianconnector.net
 https://windmill.acme.guardianconnector.net
 ```
-
-## User Management
-
-User management is available at `/admin/users`.
-
-### User Management Features
-
-- View all users
-- View user metadata e.g. last login, email etc
-- Edit user roles (Admin, Member, Public)
-- Edit user approval status
 
 ---
 
