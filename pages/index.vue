@@ -13,6 +13,7 @@ interface User {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
+const domain = config.public.domain;
 const logoUrl = config.public.logoUrl as string | undefined;
 const { t } = useI18n();
 
@@ -38,7 +39,7 @@ const availableServices = computed(() => {
   if (config.public.explorerEnabled && userRole >= Role.SignedIn) {
     services.push({
       name: "Explorer",
-      url: `https://explorer.${communityName}.guardianconnector.net`,
+      url: `https://explorer.${communityName}.${domain}`,
       icon: "explorer",
       tags: [
         "Maps",
@@ -53,7 +54,7 @@ const availableServices = computed(() => {
   if (config.public.supersetEnabled && userRole >= Role.Guest) {
     services.push({
       name: "Superset",
-      url: `https://superset.${communityName}.guardianconnector.net`,
+      url: `https://superset.${communityName}.${domain}`,
       icon: "superset",
       tags: ["Charts", "Analysis", "Visualizations", "Dashboards"],
     });
@@ -63,7 +64,7 @@ const availableServices = computed(() => {
   if (config.public.windmillEnabled && userRole >= Role.Admin) {
     services.push({
       name: "Windmill",
-      url: `https://windmill.${communityName}.guardianconnector.net`,
+      url: `https://windmill.${communityName}.${domain}`,
       icon: "windmill",
       tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
     });
@@ -73,7 +74,7 @@ const availableServices = computed(() => {
   if (config.public.filebrowserEnabled && userRole >= Role.Member) {
     services.push({
       name: "Filebrowser",
-      url: `https://files.${communityName}.guardianconnector.net`,
+      url: `https://files.${communityName}.${domain}`,
       icon: "filebrowser",
       tags: ["Files", "Raw Data", "Archives"],
     });
