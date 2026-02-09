@@ -58,10 +58,10 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 
 | Flag | Service | URL Pattern |
 |------|---------|-------------|
-| `NUXT_PUBLIC_SUPERSET_ENABLED` | Superset | `https://superset.{community}.guardianconnector.net` |
-| `NUXT_PUBLIC_WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.guardianconnector.net` |
-| `NUXT_PUBLIC_EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.guardianconnector.net` |
-| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | Filebrowser | `https://files.{community}.guardianconnector.net` |
+| `NUXT_PUBLIC_SUPERSET_ENABLED` | Superset | `https://superset.{community}.{domain}` |
+| `NUXT_PUBLIC_WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.{domain}` |
+| `NUXT_PUBLIC_EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.{domain}` |
+| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | Filebrowser | `https://files.{community}.{domain}` |
 
 ### Multi-Tenant Support
 
@@ -69,12 +69,12 @@ Service URLs are dynamically configured based on `NUXT_PUBLIC_COMMUNITY_NAME`:
 
 ```bash
 # Community: demo
-https://superset.demo.guardianconnector.net
-https://windmill.demo.guardianconnector.net
+https://superset.demo.{domain}
+https://windmill.demo.{domain}
 
 # Community: acme
-https://superset.acme.guardianconnector.net
-https://windmill.acme.guardianconnector.net
+https://superset.acme.{domain}
+https://windmill.acme.{domain}
 ```
 
 ---
