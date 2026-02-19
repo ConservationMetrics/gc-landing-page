@@ -43,7 +43,7 @@ const { login, logout } = useAuthActions();
     <!-- Desktop Layout - show above 1000px -->
     <div class="flex max-[1000px]:hidden relative items-end justify-around">
       <!-- Left: Guardian Connector Logo -->
-      <div class="flex items-center">
+      <NuxtLink to="/" class="flex items-center">
         <div
           class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center"
         >
@@ -61,13 +61,13 @@ const { login, logout } = useAuthActions();
             Guardian Connector
           </h1>
         </div>
-      </div>
+      </NuxtLink>
 
       <!-- Tab with Community Name -->
       <div
         class="tab-container flex absolute left-[28%] min-[1109px]:left-[26%] min-[1230px]:left-[25%] -bottom-3 flex-col items-center t-[32%]"
       >
-        <button class="tab-trigger active">
+        <NuxtLink to="/" class="tab-trigger active">
           <svg
             class="left-curve"
             xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ const { login, logout } = useAuthActions();
               transform="translate(-740 -2113.0982)"
             />
           </svg>
-        </button>
+        </NuxtLink>
       </div>
       <!-- Right: Action buttons -->
       <div class="flex items-center space-x-3 ml-auto mr-2">
@@ -180,7 +180,7 @@ const { login, logout } = useAuthActions();
     <!-- Mobile Layout - show below 1000px -->
     <div class="hidden max-[1000px]:flex items-center justify-between">
       <!-- Left: Guardian Connector Logo -->
-      <div class="flex items-center">
+      <NuxtLink to="/" class="flex items-center">
         <div
           class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center"
         >
@@ -195,7 +195,7 @@ const { login, logout } = useAuthActions();
         <div class="rounded-lg px-2">
           <h1 class="text-sm font-bold">Guardian Connector</h1>
         </div>
-      </div>
+      </NuxtLink>
 
       <!-- Right: User Icon and Hamburger Menu -->
       <div class="flex items-center space-x-2">
