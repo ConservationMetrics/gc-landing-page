@@ -29,6 +29,17 @@ jobs:
       - name: Generate date for image tag
         id: imgtag_date
         run: echo "DATE_FOR_IMGTAG=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+      - name: Compute tag components
+        id: tagvars
+        run: |
+          SAFE_REF=$(echo "${GITHUB_REF_NAME}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9._-]+#-#g')
+          echo "SAFE_REF=$SAFE_REF" >> $GITHUB_OUTPUT
+
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            echo "IS_MAIN=true" >> $GITHUB_OUTPUT
+          else
+            echo "IS_MAIN=false" >> $GITHUB_OUTPUT
+          fi
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
@@ -43,8 +54,9 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ${{ github.ref == 'refs/heads/main' && 'communityfirst/guardianconnector-landing-page:latest' || '' }}
-            ${{ github.ref == 'refs/heads/main' && format('communityfirst/guardianconnector-landing-page:{0}-{1}', steps.imgtag_date.outputs.DATE_FOR_IMGTAG, github.run_number) || '' }}
+
+            ${{ steps.tagvars.outputs.IS_MAIN == 'true' && 'communityfirst/guardianconnector-landing-page:latest' || '' }}
+            ${{ steps.tagvars.outputs.IS_MAIN == 'true' && format('communityfirst/guardianconnector-landing-page:{0}-{1}', steps.imgtag_date.outputs.DATE_FOR_IMGTAG, github.run_number) || '' }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Docker Hub Description
         if: github.event_name == 'release'
