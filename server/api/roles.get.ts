@@ -1,7 +1,10 @@
 import { fetchAllRoles } from "~/server/utils/auth0Management";
+import { requireAdminSession } from "~/server/utils/auth";
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
   try {
+    await requireAdminSession(event);
+
     const roles = await fetchAllRoles();
 
     if (roles.length === 0) {
@@ -17,6 +20,9 @@ export default defineEventHandler(async () => {
     };
   } catch (error) {
     console.error("🔍 Error fetching roles:", error);
+    if (error && typeof error === "object" && "statusCode" in error) {
+      throw error;
+    }
     throw createError({
       statusCode: 500,
       statusMessage: "Internal server error",

@@ -4,10 +4,13 @@ import {
   fetchAllRoles,
   buildUserRolesMap,
 } from "~/server/utils/auth0Management";
+import { requireAdminSession } from "~/server/utils/auth";
 import type { UserManagementUser, Auth0ManagementUser } from "~/types/types";
 
 export default defineEventHandler(async (event) => {
   try {
+    await requireAdminSession(event);
+
     const config = useRuntimeConfig();
     const { oauth } = config;
 
@@ -102,6 +105,9 @@ export default defineEventHandler(async (event) => {
     };
   } catch (error) {
     console.error("🔍 Error fetching users:", error);
+    if (error && typeof error === "object" && "statusCode" in error) {
+      throw error;
+    }
     throw createError({
       statusCode: 500,
       statusMessage: "Internal server error",
