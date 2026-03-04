@@ -4,9 +4,12 @@ import {
   assignUserRoles,
   updateUserMetadata,
 } from "~/server/utils/auth0Management";
+import { requireAdminSession } from "~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
+    await requireAdminSession(event);
+
     // Get user ID from route params
     const userId = getRouterParam(event, "userId");
     if (!userId) {
@@ -77,6 +80,9 @@ export default defineEventHandler(async (event) => {
     };
   } catch (error) {
     console.error("🔍 Error updating user:", error);
+    if (error && typeof error === "object" && "statusCode" in error) {
+      throw error;
+    }
     throw createError({
       statusCode: 500,
       statusMessage: "Internal server error",
