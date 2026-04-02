@@ -6,6 +6,7 @@
     "welcomeSubtitle": "Hier kunt u gegevens vinden en de activa van {communityName} beheren."
   },
   "auth": {
+    "welcomeToGuardianConnector": "Welkom bij Guardian Connector",
     "pleaseSignIn": "Gelieve in te loggen om door te gaan.",
     "pleaseSignInToAccess": "Gelieve in te loggen om toegang te krijgen tot uw gemeenschap tools",
     "secureAccessRequired": "Veilige Toegang Vereist",

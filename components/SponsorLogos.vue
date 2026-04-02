@@ -4,10 +4,12 @@ const { t } = useI18n();
 
 <template>
   <footer
-    class="flex flex-col items-center gap-4 px-4 pb-8 pt-4 text-center text-sm text-neutral-600"
+    class="flex flex-col items-center gap-4 text-center text-neutral-700"
     data-testid="sponsor-logos"
   >
-    <p class="font-medium tracking-wide text-neutral-500">
+    <p
+      class="text-lg font-semibold tracking-wide text-stone-800 sm:text-xl"
+    >
       {{ t("auth.coCreatedBy") }}
     </p>
     <div

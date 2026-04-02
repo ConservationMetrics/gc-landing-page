@@ -6,6 +6,7 @@
     "welcomeSubtitle": "Access your dashboards, manage workflows, and explore data securely within your Guardian Connector."
   },
   "auth": {
+    "welcomeToGuardianConnector": "Welcome to Guardian Connector",
     "pleaseSignIn": "Please sign in to continue.",
     "pleaseSignInToAccess": "Please sign in to access your community tools",
     "secureAccessRequired": "Secure Access Required",

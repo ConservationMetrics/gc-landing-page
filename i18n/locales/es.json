@@ -6,6 +6,7 @@
     "welcomeSubtitle": "Aquí puedes encontrar datos y gestionar los activos de {communityName}."
   },
   "auth": {
+    "welcomeToGuardianConnector": "Bienvenido a Guardian Connector",
     "pleaseSignIn": "Por favor, inicia sesión para continuar.",
     "pleaseSignInToAccess": "Por favor, inicia sesión para acceder a las herramientas de tu comunidad",
     "secureAccessRequired": "Acceso Seguro Requerido",

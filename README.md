@@ -37,6 +37,10 @@ Local deployment of Docker:
 docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 ```
 
+## Login page
+
+- **Background image** — By default the sign-in page uses [`public/background.jpg`](public/background.jpg). To use another image, set **`BACKGROUND_IMAGE`** to a full URL (`https://…`) or a site path (`/my-bg.jpg` with the file in `public/`). The value is exposed to the app as `NUXT_PUBLIC_BACKGROUND_IMAGE`; if you only set `BACKGROUND_IMAGE`, `nuxt.config.ts` copies it when `NUXT_PUBLIC_BACKGROUND_IMAGE` is unset (handy for local `.env` and build-time CI). For **runtime-only** env on a Node server (e.g. Docker without rebuild), set **`NUXT_PUBLIC_BACKGROUND_IMAGE`** so the client and SSR stay in sync.
+
 ## Authentication
 
 ### Auth0 Setup
