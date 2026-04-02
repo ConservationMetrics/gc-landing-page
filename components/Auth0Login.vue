@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useUserSession, onMounted } from "#imports";
 import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
+import SponsorLogos from "@/components/SponsorLogos.vue";
 
 interface Props {
   errorMessage: string;
@@ -21,13 +22,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container relative">
+  <div class="container relative flex min-h-screen flex-col">
     <!-- Header with Language Picker -->
-    <div class="absolute top-4 right-4">
+    <div class="absolute top-4 right-4 z-10">
       <GlobeLanguagePicker theme="white" variant="icon" />
     </div>
 
-    <div class="flex flex-col items-center justify-center h-screen">
+    <div
+      class="flex flex-1 flex-col items-center justify-center px-4 py-16"
+    >
       <p class="italic">{{ t("auth.pleaseSignIn") }}</p>
       <button
         data-testid="login-button"
@@ -40,5 +43,7 @@ onMounted(() => {
         {{ props.errorMessage }}
       </p>
     </div>
+
+    <SponsorLogos />
   </div>
 </template>

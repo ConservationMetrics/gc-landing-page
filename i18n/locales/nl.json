@@ -13,7 +13,8 @@
     "signInWithAuth0": "Inloggen met Auth0",
     "signOut": "Uitloggen",
     "userManagement": "Gebruikersbeheer",
-    "welcome": "Welkom, {user}"
+    "welcome": "Welkom, {user}",
+    "coCreatedBy": "Mede ontwikkeld door"
   },
   "footer": {
     "community": "Gemeenschap: {communityName}",

@@ -13,7 +13,8 @@
     "signInWithAuth0": "Sign In with Auth0",
     "signOut": "Sign Out",
     "userManagement": "User Management",
-    "welcome": "Welcome, {user}"
+    "welcome": "Welcome, {user}",
+    "coCreatedBy": "Co-created by"
   },
   "footer": {
     "community": "Community: {communityName}",

@@ -13,7 +13,8 @@
     "signInWithAuth0": "Iniciar Sesión con Auth0",
     "signOut": "Cerrar Sesión",
     "userManagement": "Gestión de Usuarios",
-    "welcome": "Bienvenido, {user}"
+    "welcome": "Bienvenido, {user}",
+    "coCreatedBy": "Cocreado por"
   },
   "footer": {
     "community": "Comunidad: {communityName}",
