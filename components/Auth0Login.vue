@@ -29,10 +29,7 @@ onMounted(() => {
 <template>
   <!-- Background is absolute (not fixed) so the photo and translucent panel share one compositing stack; fixed backgrounds often break “see-through” panels in browsers. -->
   <div class="relative flex min-h-screen w-full flex-col">
-    <div
-      class="pointer-events-none absolute inset-0 z-0"
-      aria-hidden="true"
-    >
+    <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
       <img
         :src="loginBackgroundSrc"
         alt=""
@@ -50,27 +47,25 @@ onMounted(() => {
       <main
         class="flex flex-1 flex-col items-center justify-center px-4 py-12 sm:py-16"
       >
-        <div
-          class="login-glass-card w-full max-w-xl rounded-2xl border border-white/45 p-8 shadow-2xl shadow-stone-900/25 sm:p-10"
-        >
+        <div class="login-glass-card w-full max-w-xl rounded-3xl p-9 sm:p-12">
           <h1
-            class="text-center text-2xl font-semibold tracking-tight text-stone-800 sm:text-3xl"
+            class="text-balance text-center text-[1.65rem] font-medium leading-snug tracking-tight text-stone-800 sm:text-3xl sm:leading-tight"
           >
             {{ t("auth.welcomeToGuardianConnector") }}
           </h1>
           <div
-            class="mx-auto mt-5 h-1 w-14 rounded-full bg-teal-600/90"
+            class="mx-auto mt-7 h-0.5 w-20 bg-gradient-to-r from-transparent via-teal-600/55 to-transparent"
             aria-hidden="true"
           ></div>
           <p
-            class="mt-6 text-center text-sm leading-relaxed text-stone-600 sm:text-base"
+            class="mt-7 text-center text-sm leading-relaxed text-stone-700 sm:text-[0.95rem]"
           >
             {{ t("auth.pleaseSignIn") }}
           </p>
           <button
             data-testid="login-button"
             type="button"
-            class="mt-8 w-full rounded-lg bg-teal-700 px-4 py-3 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-[rgb(255_255_255/0.76)] sm:py-3.5"
+            class="mt-10 w-full rounded-xl bg-teal-800 px-5 py-3.5 text-center text-sm font-medium uppercase tracking-[0.12em] text-white shadow-[0_4px_14px_-2px_rgba(15,118,110,0.45)] transition-[box-shadow,background-color,transform] duration-200 hover:bg-teal-900 hover:shadow-[0_8px_22px_-4px_rgba(15,118,110,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(255_255_255/0.6)] active:translate-y-px sm:py-4"
             @click="loginWithAuth0"
           >
             {{ t("auth.signIn") }}
@@ -81,7 +76,7 @@ onMounted(() => {
           >
             {{ props.errorMessage }}
           </p>
-          <div class="mt-10">
+          <div class="mt-14">
             <SponsorLogos />
           </div>
         </div>
@@ -91,8 +86,15 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Semi-transparent panel: alpha blends with the photo underneath (Terrastories-style). No backdrop-filter so we never depend on compositor quirks with fixed layers. */
+/* Frosted panel: absolute bg layer lets backdrop-filter read the photo; soft shadow + hairline lift it off the weave. */
 .login-glass-card {
-  background-color: rgb(255 255 255 / 0.76);
+  background-color: rgb(255 255 255 / 0.6);
+  border: 1px solid rgb(255 255 255 / 0.42);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.45) inset,
+    0 24px 56px -16px rgb(28 25 23 / 0.32),
+    0 12px 24px -12px rgb(28 25 23 / 0.14);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 </style>

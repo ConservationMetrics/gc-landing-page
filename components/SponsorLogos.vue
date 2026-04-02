@@ -4,29 +4,27 @@ const { t } = useI18n();
 
 <template>
   <footer
-    class="flex flex-col items-center gap-4 text-center text-neutral-700"
+    class="flex flex-col items-center gap-5 text-center text-neutral-700"
     data-testid="sponsor-logos"
   >
-    <p class="text-lg font-semibold tracking-wide text-stone-800 sm:text-xl">
+    <p class="text-base font-semibold tracking-wide text-stone-700 sm:text-lg">
       {{ t("auth.coCreatedBy") }}
     </p>
     <div
-      class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 max-w-2xl"
+      class="flex max-w-2xl flex-wrap items-center justify-center gap-x-12 gap-y-5"
     >
       <img
         src="/cmi.png"
         alt="Conservation Metrics"
-        class="h-8 w-auto max-w-[min(100%,14rem)] object-contain sm:h-9"
+        class="h-8 w-auto max-w-[min(100%,14rem)] object-contain sm:h-11"
       />
       <img
         src="/niatero.png"
         alt="Nia Tero"
-        class="h-10 w-auto max-w-[min(100%,12rem)] object-contain sm:h-11"
+        class="h-10 w-auto max-w-[min(100%,14rem)] object-contain sm:h-11"
       />
     </div>
-    <p
-      class="mt-1 text-sm italic text-stone-600 sm:text-base"
-    >
+    <p class="mt-0.5 text-sm italic text-stone-500 sm:text-[0.95rem]">
       {{ t("auth.andIndigenousPartners") }}
     </p>
   </footer>
