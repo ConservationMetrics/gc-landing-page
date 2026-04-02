@@ -7,9 +7,7 @@ const { t } = useI18n();
     class="flex flex-col items-center gap-4 text-center text-neutral-700"
     data-testid="sponsor-logos"
   >
-    <p
-      class="text-lg font-semibold tracking-wide text-stone-800 sm:text-xl"
-    >
+    <p class="text-lg font-semibold tracking-wide text-stone-800 sm:text-xl">
       {{ t("auth.coCreatedBy") }}
     </p>
     <div
@@ -26,5 +24,10 @@ const { t } = useI18n();
         class="h-10 w-auto max-w-[min(100%,12rem)] object-contain sm:h-11"
       />
     </div>
+    <p
+      class="mt-1 text-sm italic text-stone-600 sm:text-base"
+    >
+      {{ t("auth.andIndigenousPartners") }}
+    </p>
   </footer>
 </template>

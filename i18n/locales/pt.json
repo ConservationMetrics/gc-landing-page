@@ -15,7 +15,8 @@
     "signOut": "Sair",
     "userManagement": "Gerenciamento de Usuários",
     "welcome": "Bem-vindo, {user}",
-    "coCreatedBy": "Co-criado por"
+    "coCreatedBy": "Co-criado por",
+    "andIndigenousPartners": "e parceiros indígenas"
   },
   "footer": {
     "community": "Comunidade: {communityName}",

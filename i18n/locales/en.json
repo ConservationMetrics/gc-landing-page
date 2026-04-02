@@ -15,7 +15,8 @@
     "signOut": "Sign Out",
     "userManagement": "User Management",
     "welcome": "Welcome, {user}",
-    "coCreatedBy": "Co-created by"
+    "coCreatedBy": "Co-created by",
+    "andIndigenousPartners": "and Indigenous partners"
   },
   "footer": {
     "community": "Community: {communityName}",

@@ -15,7 +15,8 @@
     "signOut": "Uitloggen",
     "userManagement": "Gebruikersbeheer",
     "welcome": "Welkom, {user}",
-    "coCreatedBy": "Mede ontwikkeld door"
+    "coCreatedBy": "Mede ontwikkeld door",
+    "andIndigenousPartners": "en inheemse partners"
   },
   "footer": {
     "community": "Gemeenschap: {communityName}",

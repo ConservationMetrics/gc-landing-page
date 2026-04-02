@@ -2,14 +2,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineNuxtConfig } from "nuxt/config";
 
-// BACKGROUND_IMAGE is copied to NUXT_PUBLIC_BACKGROUND_IMAGE so the login page can read it via runtimeConfig.public.backgroundImage (Nuxt only auto-exposes NUXT_PUBLIC_* to the client).
-if (
-  process.env.BACKGROUND_IMAGE?.trim() &&
-  !process.env.NUXT_PUBLIC_BACKGROUND_IMAGE?.trim()
-) {
-  process.env.NUXT_PUBLIC_BACKGROUND_IMAGE = process.env.BACKGROUND_IMAGE.trim();
-}
-
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
@@ -37,7 +29,7 @@ export default defineNuxtConfig({
     ],
     bundle: {
       optimizeTranslationDirective: false,
-    },  // https://github.com/nuxt-modules/i18n/issues/3238#issuecomment-2672492536
+    }, // https://github.com/nuxt-modules/i18n/issues/3238#issuecomment-2672492536
     defaultLocale: "en",
     detectBrowserLanguage: {
       useCookie: true,
@@ -72,7 +64,6 @@ export default defineNuxtConfig({
       windmillEnabled: false,
       explorerEnabled: false,
       filebrowserEnabled: false,
-      // Login page background URL or path; empty = /background.jpg from public/. Override with BACKGROUND_IMAGE or NUXT_PUBLIC_BACKGROUND_IMAGE.
       backgroundImage: "",
     },
   },

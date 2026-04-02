@@ -15,7 +15,8 @@
     "signOut": "Cerrar Sesión",
     "userManagement": "Gestión de Usuarios",
     "welcome": "Bienvenido, {user}",
-    "coCreatedBy": "Cocreado por"
+    "coCreatedBy": "Cocreado por",
+    "andIndigenousPartners": "y socios indígenas"
   },
   "footer": {
     "community": "Comunidad: {communityName}",
