@@ -42,7 +42,7 @@ onMounted(() => {
 
     <div class="relative z-10 flex min-h-screen flex-1 flex-col">
       <div class="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
-        <GlobeLanguagePicker theme="white" variant="icon" />
+        <GlobeLanguagePicker theme="hero" variant="icon" />
       </div>
       <main
         class="flex flex-1 flex-col items-center justify-center px-4 py-12 sm:py-16"

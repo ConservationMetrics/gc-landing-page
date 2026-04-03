@@ -6,7 +6,7 @@ const { locale, locales, setLocale } = useI18n();
 const { t } = useI18n();
 
 interface Props {
-  theme?: "purple" | "white" | "dark";
+  theme?: "purple" | "white" | "dark" | "hero";
   variant?: "icon" | "mobile";
 }
 
@@ -65,6 +65,8 @@ const toggleLanguagePicker = () => {
 
 const dropdownClasses = computed(() => {
   switch (props.theme) {
+    case "hero":
+      return "origin-top-right absolute right-0 z-50 mt-2 w-56 rounded-xl border border-white/25 bg-stone-900/90 py-1 shadow-xl shadow-stone-950/40 ring-1 ring-white/10 backdrop-blur-xl";
     case "white":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50";
     case "dark":
@@ -77,6 +79,8 @@ const dropdownClasses = computed(() => {
 
 const itemClasses = computed(() => {
   switch (props.theme) {
+    case "hero":
+      return "block px-4 py-2 text-sm text-stone-100 transition-colors hover:bg-white/15";
     case "white":
       return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
     case "dark":
@@ -107,12 +111,20 @@ const mobileItemClasses = computed(() => {
     <div>
       <button
         type="button"
-        class="relative w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+        :class="[
+          'relative flex h-10 w-10 items-center justify-center rounded-full transition-colors focus:outline-none',
+          theme === 'hero'
+            ? 'border border-white/40 bg-white/15 shadow-sm backdrop-blur-md hover:bg-white/25 focus-visible:ring-2 focus-visible:ring-white/50'
+            : 'bg-white hover:bg-gray-50 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',
+        ]"
         @click.stop="dropdownOpen = !dropdownOpen"
         :title="t('header.languagePicker')"
       >
         <svg
-          class="w-5 h-5 text-gray-600"
+          :class="[
+            'h-5 w-5',
+            theme === 'hero' ? 'text-white' : 'text-gray-600',
+          ]"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
