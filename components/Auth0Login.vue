@@ -27,8 +27,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Background is absolute (not fixed) so the photo and translucent panel share one compositing stack; fixed backgrounds often break “see-through” panels in browsers. -->
-  <div class="relative flex min-h-screen w-full flex-col">
+  <!-- h-dvh + overflow-hidden: avoid extra scrollable strip below the card on mobile. Main scrolls inside if content overflows. -->
+  <div
+    class="relative flex h-dvh min-h-0 w-full max-w-full flex-col overflow-hidden"
+  >
     <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
       <img
         :src="loginBackgroundSrc"
@@ -40,14 +42,16 @@ onMounted(() => {
       ></div>
     </div>
 
-    <div class="relative z-10 flex min-h-screen flex-1 flex-col">
+    <div class="relative z-10 flex min-h-0 flex-1 flex-col">
       <div class="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
         <GlobeLanguagePicker theme="hero" variant="icon" />
       </div>
       <main
-        class="flex flex-1 flex-col items-center justify-center px-4 py-12 sm:py-16"
+        class="flex min-h-0 flex-1 flex-col items-center justify-center overflow-y-auto overscroll-y-contain px-4 py-6 sm:py-12 md:py-16"
       >
-        <div class="login-glass-card w-full max-w-xl rounded-3xl p-9 sm:p-12">
+        <div
+          class="login-glass-card w-full max-w-xl rounded-3xl p-6 sm:p-9 md:p-12"
+        >
           <h1
             class="text-balance text-center text-[1.65rem] font-medium leading-snug tracking-tight text-stone-800 sm:text-3xl sm:leading-tight"
           >
@@ -76,7 +80,7 @@ onMounted(() => {
           >
             {{ props.errorMessage }}
           </p>
-          <div class="mt-14">
+          <div class="mt-8 sm:mt-14">
             <SponsorLogos />
           </div>
         </div>
