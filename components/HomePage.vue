@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useRuntimeConfig } from "#imports";
 import AppHeader from "@/components/shared/AppHeader.vue";
+import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
 
 const props = defineProps<{
@@ -40,7 +41,13 @@ const { t } = useI18n();
             {{ t("app.welcome") }}
           </h2>
           <p class="mx-auto max-w-3xl text-xl text-gray-600">
-            {{ t("app.welcomeSubtitle") }}
+            <i18n-t keypath="app.welcomeSubtitle" tag="span" :values="{ communityName }">
+              <template #gc>
+                <HoverTooltip :content="t('app.guardianConnectorTooltip')">
+                  Guardian Connector
+                </HoverTooltip>
+              </template>
+            </i18n-t>
           </p>
         </div>
 
