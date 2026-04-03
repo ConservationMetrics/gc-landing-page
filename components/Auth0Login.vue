@@ -27,7 +27,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- h-dvh + overflow-hidden: avoid extra scrollable strip below the card on mobile. Main scrolls inside if content overflows. -->
   <div
     class="relative flex h-dvh min-h-0 w-full max-w-full flex-col overflow-hidden"
   >
