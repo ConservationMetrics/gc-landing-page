@@ -8,6 +8,7 @@ import type {
   RolesResponse,
 } from "~/types/types";
 import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
+import UserEditModal from "@/components/userManagement/UserEditModal.vue";
 import { translateRoleName } from "@/utils/roleTranslations";
 import { navigateTo } from "#imports";
 const { t } = useI18n();

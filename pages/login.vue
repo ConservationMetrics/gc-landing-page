@@ -18,5 +18,5 @@ useHead({
 </script>
 
 <template>
-  <Auth0Login :error-message="errorMessage" />
+  <LoginScreen :error-message="errorMessage" />
 </template>
