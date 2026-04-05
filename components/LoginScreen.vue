@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useUserSession, onMounted } from "#imports";
+import GlassCard from "@/components/shared/GlassCard.vue";
 import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 import SponsorLogos from "@/components/SponsorLogos.vue";
 
@@ -48,9 +49,7 @@ onMounted(() => {
       <main
         class="flex min-h-0 flex-1 flex-col items-center justify-center overflow-y-auto overscroll-y-contain px-4 py-6 sm:py-12 md:py-16"
       >
-        <div
-          class="login-glass-card w-full max-w-xl rounded-3xl p-6 sm:p-9 md:p-12"
-        >
+        <GlassCard class="max-w-xl">
           <h1
             class="text-balance text-center text-[1.65rem] font-medium leading-snug tracking-tight text-stone-800 sm:text-3xl sm:leading-tight"
           >
@@ -82,22 +81,8 @@ onMounted(() => {
           <div class="mt-8 sm:mt-14">
             <SponsorLogos />
           </div>
-        </div>
+        </GlassCard>
       </main>
     </div>
   </div>
 </template>
-
-<style scoped>
-/* Frosted panel: absolute bg layer lets backdrop-filter read the photo; soft shadow + hairline lift it off the weave. */
-.login-glass-card {
-  background-color: rgb(255 255 255 / 0.6);
-  border: 1px solid rgb(255 255 255 / 0.42);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.45) inset,
-    0 24px 56px -16px rgb(28 25 23 / 0.32),
-    0 12px 24px -12px rgb(28 25 23 / 0.14);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-}
-</style>
