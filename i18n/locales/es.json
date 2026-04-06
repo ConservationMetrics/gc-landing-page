@@ -6,6 +6,7 @@
     "welcomeSubtitle": "Aquí puedes encontrar datos y gestionar los activos de {communityName}."
   },
   "auth": {
+    "welcomeToGuardianConnector": "Bienvenido a Guardian Connector",
     "pleaseSignIn": "Por favor, inicia sesión para continuar.",
     "pleaseSignInToAccess": "Por favor, inicia sesión para acceder a las herramientas de tu comunidad",
     "secureAccessRequired": "Acceso Seguro Requerido",
@@ -13,7 +14,9 @@
     "signInWithAuth0": "Iniciar Sesión con Auth0",
     "signOut": "Cerrar Sesión",
     "userManagement": "Gestión de Usuarios",
-    "welcome": "Bienvenido, {user}"
+    "welcome": "Bienvenido, {user}",
+    "coCreatedBy": "Cocreado por",
+    "andIndigenousPartners": "y socios indígenas"
   },
   "footer": {
     "community": "Comunidad: {communityName}",

@@ -37,6 +37,10 @@ Local deployment of Docker:
 docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 ```
 
+## Login page
+
+- **Background image** — By default the sign-in page uses [`public/background.jpg`](public/background.jpg). To override it, set **`NUXT_PUBLIC_BACKGROUND_IMAGE`** to a full image URL. Leave unset to keep the default asset.
+
 ## Authentication
 
 ### Auth0 Setup

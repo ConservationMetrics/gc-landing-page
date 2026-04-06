@@ -6,6 +6,7 @@
     "welcomeSubtitle": "Access your dashboards, manage workflows, and explore data securely within your Guardian Connector."
   },
   "auth": {
+    "welcomeToGuardianConnector": "Welcome to Guardian Connector",
     "pleaseSignIn": "Please sign in to continue.",
     "pleaseSignInToAccess": "Please sign in to access your community tools",
     "secureAccessRequired": "Secure Access Required",
@@ -13,7 +14,9 @@
     "signInWithAuth0": "Sign In with Auth0",
     "signOut": "Sign Out",
     "userManagement": "User Management",
-    "welcome": "Welcome, {user}"
+    "welcome": "Welcome, {user}",
+    "coCreatedBy": "Co-created by",
+    "andIndigenousPartners": "and Indigenous partners"
   },
   "footer": {
     "community": "Community: {communityName}",

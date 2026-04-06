@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     ],
     bundle: {
       optimizeTranslationDirective: false,
-    },  // https://github.com/nuxt-modules/i18n/issues/3238#issuecomment-2672492536
+    }, // https://github.com/nuxt-modules/i18n/issues/3238#issuecomment-2672492536
     defaultLocale: "en",
     detectBrowserLanguage: {
       useCookie: true,
@@ -64,6 +64,7 @@ export default defineNuxtConfig({
       windmillEnabled: false,
       explorerEnabled: false,
       filebrowserEnabled: false,
+      backgroundImage: "",
     },
   },
 });
