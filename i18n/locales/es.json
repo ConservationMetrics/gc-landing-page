@@ -3,7 +3,8 @@
     "community": "Comunidad",
     "title": "Página de Inicio de Guardian Connector",
     "welcome": "Tu comunidad, tu control.",
-    "welcomeSubtitle": "Aquí puedes encontrar datos y gestionar los activos de {communityName}."
+    "welcomeSubtitle": "Aquí puedes encontrar datos y gestionar los activos de {communityName} en {gc}.",
+    "guardianConnectorTooltip": "Guardian Connector is a free and open-source Indigenous data sovereignty platform for community organizations to securely centralize, access, and derive insights from their environmental and cultural data."
   },
   "auth": {
     "welcomeToGuardianConnector": "Bienvenido a Guardian Connector",
