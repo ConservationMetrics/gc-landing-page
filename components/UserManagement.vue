@@ -7,10 +7,18 @@ import type {
   UsersResponse,
   RolesResponse,
 } from "~/types/types";
-import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 import UserEditModal from "@/components/userManagement/UserEditModal.vue";
 import { translateRoleName } from "@/utils/roleTranslations";
-import { navigateTo } from "#imports";
+import { navigateTo, useI18n } from "#imports";
+import { $fetch } from "ofetch";
+import {
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  Search,
+  XCircle,
+} from "lucide-vue-next";
 const { t } = useI18n();
 
 const users = ref<UserManagementUser[]>([]);
@@ -24,11 +32,6 @@ const currentPage = ref(0);
 const totalUsers = ref(0);
 const perPage = ref(20);
 const imageErrors = ref<Set<string>>(new Set());
-const mobileMenuOpen = ref(false);
-
-const toggleMobileMenu = () => {
-  mobileMenuOpen.value = !mobileMenuOpen.value;
-};
 
 // Computed properties
 const filteredUsers = computed(() => {
@@ -195,7 +198,6 @@ onMounted(async () => {
           >
             {{ t("userManagement.returnToHomepage") }}
           </button>
-          <GlobeLanguagePicker theme="white" variant="icon" />
         </div>
       </div>
     </div>
@@ -208,58 +210,15 @@ onMounted(async () => {
             {{ t("userManagement.title") }}
           </h1>
         </div>
-        <!-- Hamburger Menu Button -->
         <button
-          @click="toggleMobileMenu"
+          type="button"
+          @click="navigateTo('/')"
           class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
-          aria-label="Menu"
+          :aria-label="t('userManagement.returnToHomepage')"
         >
-          <svg
-            class="w-6 h-6 text-gray-700"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <Home class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-    </div>
-
-    <!-- Mobile Menu Dropdown -->
-    <div
-      v-if="mobileMenuOpen"
-      class="sm:hidden mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-lg"
-    >
-      <button
-        @click="navigateTo('/')"
-        class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors text-left mb-2"
-      >
-        <svg
-          class="w-5 h-5 text-gray-600"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-          />
-        </svg>
-        <span class="text-sm text-gray-700 font-medium">{{
-          t("userManagement.returnToHomepage")
-        }}</span>
-      </button>
-
-      <!-- Language Picker -->
-      <GlobeLanguagePicker variant="mobile" />
     </div>
 
     <!-- Search and Controls -->
@@ -279,19 +238,7 @@ onMounted(async () => {
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
             >
-              <svg
-                class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+              <Search class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
             </div>
           </div>
         </div>
@@ -313,17 +260,9 @@ onMounted(async () => {
       class="mb-3 sm:mb-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg"
     >
       <div class="flex">
-        <svg
+        <XCircle
           class="h-4 w-4 sm:h-5 sm:w-5 text-red-400 flex-shrink-0 mt-0.5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-            clip-rule="evenodd"
-          />
-        </svg>
+        />
         <div class="ml-2 sm:ml-3">
           <p class="text-xs sm:text-sm text-red-800">{{ error }}</p>
         </div>
@@ -335,17 +274,9 @@ onMounted(async () => {
       class="mb-3 sm:mb-4 p-3 sm:p-4 bg-green-50 border border-green-200 rounded-lg"
     >
       <div class="flex">
-        <svg
+        <CheckCircle2
           class="h-4 w-4 sm:h-5 sm:w-5 text-green-400 flex-shrink-0 mt-0.5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-            clip-rule="evenodd"
-          />
-        </svg>
+        />
         <div class="ml-2 sm:ml-3">
           <p class="text-xs sm:text-sm text-green-800">{{ success }}</p>
         </div>
@@ -530,13 +461,7 @@ onMounted(async () => {
                 class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span class="sr-only">Previous</span>
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <ChevronLeft class="h-5 w-5" />
               </button>
               <button
                 v-for="page in Math.min(5, totalPages)"
@@ -557,13 +482,7 @@ onMounted(async () => {
                 class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span class="sr-only">Next</span>
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <ChevronRight class="h-5 w-5" />
               </button>
             </nav>
           </div>

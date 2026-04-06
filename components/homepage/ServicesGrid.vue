@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { useRuntimeConfig, useUserSession } from "#imports";
+import { useI18n, useRuntimeConfig, useUserSession } from "#imports";
+import { Smile } from "lucide-vue-next";
 import { Role, type User } from "~/types/types";
 
 const config = useRuntimeConfig();
@@ -187,19 +188,7 @@ const translateTag = (tag: string) => {
         <div
           class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-300"
         >
-          <svg
-            class="h-8 w-8 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47.881-6.08 2.33"
-            />
-          </svg>
+          <Smile class="h-8 w-8 text-gray-500" />
         </div>
         <h3 class="mb-2 text-xl font-semibold text-gray-900">
           {{ t("services.noServicesAvailable") }}
