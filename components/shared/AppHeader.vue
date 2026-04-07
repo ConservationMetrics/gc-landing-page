@@ -38,7 +38,7 @@ const { login, logout } = useAuthActions();
 
 <template>
   <header
-    class="bg-gradient-to-r mb-2 from-purple-100 to-purple-50 w-5/6 place-self-center mt-2 rounded-xl p-3"
+    class="bg-gradient-to-r mb-2 from-violet-100 to-violet-50 w-5/6 place-self-center mt-2 rounded-xl p-3"
   >
     <!-- Desktop Layout - show above 1000px -->
     <div class="flex max-[1000px]:hidden relative items-end justify-around">
@@ -152,7 +152,7 @@ const { login, logout } = useAuthActions();
         >
           <NuxtLink
             to="/admin/users"
-            class="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            class="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
           >
             <Users class="w-5 h-5 text-gray-600" />
           </NuxtLink>
@@ -234,7 +234,7 @@ const { login, logout } = useAuthActions();
         <!-- Hamburger Menu Button -->
         <button
           @click="toggleMobileMenu"
-          class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-purple-200 transition-colors"
+          class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-violet-200 transition-colors"
           aria-label="Menu"
         >
           <svg
@@ -257,10 +257,10 @@ const { login, logout } = useAuthActions();
     <!-- Mobile Menu Dropdown -->
     <div
       v-if="mobileMenuOpen && isAuth0Configured && loggedIn"
-      class="hidden max-[1000px]:block mt-4 p-4 bg-white rounded-lg border border-purple-200 shadow-lg"
+      class="hidden max-[1000px]:block mt-4 p-4 bg-white rounded-lg border border-violet-200 shadow-lg"
     >
       <!-- Welcome Message -->
-      <div class="mb-4 pb-4 border-b border-purple-200">
+      <div class="mb-4 pb-4 border-b border-violet-200">
         <div class="flex items-center space-x-3">
           <div
             class="w-10 h-10 rounded-full bg-white border-2 border-green-500 flex items-center justify-center relative"
@@ -313,7 +313,7 @@ const { login, logout } = useAuthActions();
         v-if="isAdmin"
         to="/admin/users"
         @click="mobileMenuOpen = false"
-        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-purple-50 transition-colors mb-2"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-violet-50 transition-colors mb-2"
       >
         <Users class="w-5 h-5 text-gray-600" />
         <span class="text-sm text-gray-700">{{

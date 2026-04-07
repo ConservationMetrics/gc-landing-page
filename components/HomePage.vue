@@ -24,9 +24,7 @@ const { t } = useI18n();
   <div class="flex min-h-screen flex-col bg-white">
     <AppHeader />
 
-    <main
-      class="mx-auto mt-10 max-w-7xl px-4 pb-12 pt-0 sm:px-6 lg:px-8"
-    >
+    <main class="mx-auto mt-10 max-w-7xl px-4 pb-12 pt-0 sm:px-6 lg:px-8">
       <div class="pt-0">
         <div v-if="logoUrl" class="mb-8 flex justify-center">
           <img
@@ -41,7 +39,11 @@ const { t } = useI18n();
             {{ t("app.welcome") }}
           </h2>
           <p class="mx-auto max-w-3xl text-xl text-gray-600">
-            <i18n-t keypath="app.welcomeSubtitle" tag="span" :values="{ communityName }">
+            <i18n-t
+              keypath="app.welcomeSubtitle"
+              tag="span"
+              :values="{ communityName }"
+            >
               <template #gc>
                 <HoverTooltip :content="t('app.guardianConnectorTooltip')">
                   Guardian Connector
@@ -59,7 +61,7 @@ const { t } = useI18n();
             class="mx-auto max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm"
           >
             <div
-              class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
+              class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-violet-600"
             >
               <svg
                 class="h-8 w-8 text-white"
@@ -83,7 +85,7 @@ const { t } = useI18n();
             </p>
             <button
               type="button"
-              class="w-full rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:from-blue-700 hover:to-purple-700"
+              class="w-full rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:from-blue-700 hover:to-violet-700"
               @click="emit('login')"
             >
               {{ t("auth.signInWithAuth0") }}
@@ -100,7 +102,7 @@ const { t } = useI18n();
               href="https://docs.guardianconnector.net"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-purple-600 underline hover:text-purple-700"
+              class="text-violet-600 underline hover:text-violet-700"
             >
               {{ t("services.documentationWebsite") }} </a
             >.

@@ -9,7 +9,9 @@ const tooltipId = useId();
 </script>
 
 <template>
-  <span class="group relative inline-block max-w-full align-baseline text-inherit">
+  <span
+    class="group relative inline-block max-w-full align-baseline text-inherit"
+  >
     <span
       class="cursor-help border-b border-dotted border-gray-500 outline-none"
       tabindex="0"
