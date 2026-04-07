@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { useUserSession, useRuntimeConfig } from "#imports";
+import { useI18n, useRuntimeConfig, useUserSession } from "#imports";
 import { computed, ref } from "vue";
 import { Role } from "~/types/types";
 import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 import { translateRoleName } from "@/utils/roleTranslations";
 import { useAuthActions } from "@/composables/useAuth";
-import { Users } from "lucide-vue-next";
+import {
+  BadgeCheck,
+  Layers,
+  LogOut,
+  Menu,
+  User as UserIcon,
+  Users,
+} from "lucide-vue-next";
 
 interface User {
   auth0: string;
@@ -45,16 +52,11 @@ const { login, logout } = useAuthActions();
       <!-- Left: Guardian Connector Logo -->
       <NuxtLink to="/" class="flex items-center">
         <div
-          class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center"
+          class="w-10 h-10 bg-gradient-to-r from-purple-400 to-purple-500 rounded-lg flex items-center justify-center"
         >
-          <!-- Guardian Connector logo (X symbol) -->
-          <svg
-            class="w-6 h-6 text-white"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
+          <!-- Guardian Connector placeholder icon -->
+          <!-- TODO: Replace with actual logo when available -->
+          <Layers class="w-6 h-6 text-white" />
         </div>
         <div class="rounded-lg px-4 py-2">
           <h1 class="text-lg max-[1200px]:text-xs font-bold">
@@ -164,7 +166,7 @@ const { login, logout } = useAuthActions();
           </div>
         </div>
 
-        <!-- Language Picker (Globe Icon) -->
+        <!-- Language Picker -->
         <div class="relative group">
           <GlobeLanguagePicker theme="white" variant="icon" />
           <!-- Tooltip -->
@@ -184,13 +186,7 @@ const { login, logout } = useAuthActions();
         <div
           class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center"
         >
-          <svg
-            class="w-6 h-6 text-white"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
+          <Layers class="w-6 h-6 text-white" />
         </div>
         <div class="rounded-lg px-2">
           <h1 class="text-sm font-bold">Guardian Connector</h1>
@@ -204,30 +200,10 @@ const { login, logout } = useAuthActions();
           <div
             class="w-10 h-10 rounded-full bg-white border-2 border-green-500 flex items-center justify-center relative"
           >
-            <svg
-              class="w-6 h-6 text-green-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-            <svg
+            <UserIcon class="w-6 h-6 text-green-500" />
+            <BadgeCheck
               class="absolute -top-1 -right-1 w-4 h-4 text-green-500 bg-white rounded-full"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            />
           </div>
         </div>
 
@@ -237,19 +213,7 @@ const { login, logout } = useAuthActions();
           class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-violet-200 transition-colors"
           aria-label="Menu"
         >
-          <svg
-            class="w-6 h-6 text-gray-700"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <Menu class="w-6 h-6 text-gray-700" />
         </button>
       </div>
     </div>
@@ -265,30 +229,10 @@ const { login, logout } = useAuthActions();
           <div
             class="w-10 h-10 rounded-full bg-white border-2 border-green-500 flex items-center justify-center relative"
           >
-            <svg
-              class="w-6 h-6 text-green-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-            <svg
+            <UserIcon class="w-6 h-6 text-green-500" />
+            <BadgeCheck
               class="absolute -top-1 -right-1 w-4 h-4 text-green-500 bg-white rounded-full"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            />
           </div>
           <div>
             <p class="text-sm font-semibold text-gray-900">
@@ -332,19 +276,7 @@ const { login, logout } = useAuthActions();
         "
         class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors text-left"
       >
-        <svg
-          class="w-5 h-5 text-red-600"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-          />
-        </svg>
+        <LogOut class="w-5 h-5 text-red-600" />
         <span class="text-sm text-red-600 font-medium">{{
           t("auth.signOut")
         }}</span>

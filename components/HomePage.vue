@@ -3,6 +3,7 @@ import { useRuntimeConfig } from "#imports";
 import AppHeader from "@/components/shared/AppHeader.vue";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
+import { Lock } from "lucide-vue-next";
 
 const props = defineProps<{
   isAuth0Configured: boolean;
@@ -63,19 +64,7 @@ const { t } = useI18n();
             <div
               class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-violet-600"
             >
-              <svg
-                class="h-8 w-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
+              <Lock class="h-8 w-8 text-white" />
             </div>
             <h3 class="mb-4 text-2xl font-bold text-gray-900">
               {{ t("auth.secureAccessRequired") }}
