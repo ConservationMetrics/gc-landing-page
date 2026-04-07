@@ -232,7 +232,7 @@ onMounted(async () => {
               v-model="searchQuery"
               type="text"
               :placeholder="t('userManagement.searchPlaceholder')"
-              class="w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              class="w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               @keyup.enter="handleSearch"
             />
             <div
@@ -245,7 +245,7 @@ onMounted(async () => {
         <button
           @click="handleSearch"
           :disabled="loading"
-          class="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{
             loading ? t("userManagement.searching") : t("userManagement.search")
@@ -397,7 +397,7 @@ onMounted(async () => {
                   <span
                     v-for="role in user.roles"
                     :key="role.id"
-                    class="inline-flex px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
+                    class="inline-flex px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs font-medium bg-violet-100 text-violet-800 rounded-full"
                   >
                     {{ translateRoleName(role.name, t) }}
                   </span>
@@ -470,7 +470,7 @@ onMounted(async () => {
                 :class="[
                   'relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer',
                   page - 1 === currentPage
-                    ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
+                    ? 'z-10 bg-violet-50 border-violet-500 text-violet-700'
                     : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
                 ]"
               >
@@ -559,7 +559,7 @@ onMounted(async () => {
           <span
             v-for="role in user.roles"
             :key="role.id"
-            class="inline-flex px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
+            class="inline-flex px-2 py-0.5 text-xs font-medium bg-violet-100 text-violet-800 rounded-full"
           >
             {{ translateRoleName(role.name, t) }}
           </span>

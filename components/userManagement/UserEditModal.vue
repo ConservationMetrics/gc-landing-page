@@ -100,7 +100,7 @@ const formatDate = (dateString: string) => {
     <button
       @click="openModal"
       :disabled="saving"
-      class="text-blue-600 hover:text-blue-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      class="text-violet-600 hover:text-violet-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {{ t("userManagement.edit") }}
     </button>
@@ -186,7 +186,7 @@ const formatDate = (dateString: string) => {
                     <input
                       v-model="isApproved"
                       type="checkbox"
-                      class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded"
                     />
                     <span class="ml-2 text-sm text-gray-700">{{
                       t("userManagement.userIsApproved")
@@ -216,7 +216,7 @@ const formatDate = (dateString: string) => {
                         :value="role.id"
                         type="radio"
                         name="user-role"
-                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 mt-0.5"
+                        class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 mt-0.5"
                       />
                       <div class="ml-3">
                         <label
@@ -253,7 +253,7 @@ const formatDate = (dateString: string) => {
             <button
               @click="handleSave"
               :disabled="isSaving"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-violet-600 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{
                 isSaving
@@ -264,7 +264,7 @@ const formatDate = (dateString: string) => {
             <button
               @click="closeModal"
               :disabled="isSaving"
-              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ t("userManagement.cancel") }}
             </button>
