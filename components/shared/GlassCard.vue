@@ -6,10 +6,7 @@ const props = defineProps<{
 
 <template>
   <div
-    :class="[
-      'glass-card w-full rounded-3xl p-6 sm:p-9 md:p-12',
-      props.class,
-    ]"
+    :class="['glass-card w-full rounded-3xl p-6 sm:p-9 md:p-12', props.class]"
   >
     <slot></slot>
   </div>
