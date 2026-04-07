@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from "@tailwindcss/vite";
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
@@ -14,11 +13,7 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
-  modules: ["nuxt-auth-utils", "@nuxtjs/i18n"],
+  modules: ["nuxt-auth-utils", "@nuxtjs/i18n", "@nuxtjs/tailwindcss"],
 
   i18n: {
     locales: [

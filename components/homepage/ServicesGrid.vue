@@ -114,7 +114,7 @@ const translateTag = (tag: string) => {
       <div
         v-for="service in availableServices"
         :key="service.name"
-        class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 to-purple-100 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+        class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-violet-100 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
         @click="openService(service.url)"
       >
         <div class="mb-4 flex justify-center">
