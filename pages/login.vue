@@ -15,6 +15,8 @@ onMounted(() => {
 useHead({
   title: "Guardian Connector: " + t("auth.signIn"),
 });
+
+definePageMeta({ layout: false });
 </script>
 
 <template>

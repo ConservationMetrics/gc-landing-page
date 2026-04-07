@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useRuntimeConfig } from "#imports";
-import AppHeader from "@/components/shared/AppHeader.vue";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
 import { Lock } from "lucide-vue-next";
@@ -23,8 +22,6 @@ const { t } = useI18n();
 
 <template>
   <div class="flex min-h-screen flex-col bg-white">
-    <AppHeader />
-
     <main class="mx-auto mt-10 max-w-7xl px-4 pb-12 pt-0 sm:px-6 lg:px-8">
       <div class="pt-0">
         <div v-if="logoUrl" class="mb-8 flex justify-center">
