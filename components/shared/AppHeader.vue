@@ -3,6 +3,7 @@ import { useI18n, useRuntimeConfig, useUserSession } from "#imports";
 import { computed, ref } from "vue";
 import { Role } from "~/types/types";
 import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
+import HeaderBrand from "@/components/shared/HeaderBrand.vue";
 import { translateRoleName } from "@/utils/roleTranslations";
 import { useAuthActions } from "@/composables/useAuth";
 import {
@@ -50,24 +51,11 @@ const { login, logout } = useAuthActions();
     <!-- Desktop Layout - show above 1000px -->
     <div class="flex max-[1000px]:hidden relative items-end justify-around">
       <!-- Left: Guardian Connector Logo -->
-      <NuxtLink to="/" class="flex items-center">
-        <div
-          class="w-10 h-10 bg-gradient-to-r from-purple-400 to-purple-500 rounded-lg flex items-center justify-center"
-        >
-          <!-- Guardian Connector placeholder icon -->
-          <!-- TODO: Replace with actual logo when available -->
-          <Layers class="w-6 h-6 text-white" />
-        </div>
-        <div class="rounded-lg px-4 py-2">
-          <h1 class="text-lg max-[1200px]:text-xs font-bold">
-            Guardian Connector
-          </h1>
-        </div>
-      </NuxtLink>
+      <HeaderBrand />
 
       <!-- Tab with Community Name -->
       <div
-        class="tab-container flex absolute left-[28%] min-[1109px]:left-[26%] min-[1230px]:left-[25%] -bottom-3 flex-col items-center t-[32%]"
+        class="tab-container flex absolute left-[32%] min-[1109px]:left-[29%] min-[1230px]:left-[27%] -bottom-3 flex-col items-center t-[32%]"
       >
         <NuxtLink to="/" class="tab-trigger active">
           <svg
@@ -147,7 +135,7 @@ const { login, logout } = useAuthActions();
           </button>
         </div>
 
-        <!-- User Management (Gear Icon) -->
+        <!-- User Management -->
         <div
           v-if="isAuth0Configured && loggedIn && isAdmin"
           class="relative group"
@@ -182,16 +170,7 @@ const { login, logout } = useAuthActions();
     <!-- Mobile Layout - show below 1000px -->
     <div class="hidden max-[1000px]:flex items-center justify-between">
       <!-- Left: Guardian Connector Logo -->
-      <NuxtLink to="/" class="flex items-center">
-        <div
-          class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center"
-        >
-          <Layers class="w-6 h-6 text-white" />
-        </div>
-        <div class="rounded-lg px-2">
-          <h1 class="text-sm font-bold">Guardian Connector</h1>
-        </div>
-      </NuxtLink>
+      <HeaderBrand />
 
       <!-- Right: User Icon and Hamburger Menu -->
       <div class="flex items-center space-x-2">
