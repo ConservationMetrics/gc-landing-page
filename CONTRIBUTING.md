@@ -13,6 +13,11 @@ Any additional or overriding rules specific to this repository are listed below.
 
 Use `lucide-vue-next` for UI icons (Vue components), rather than inline SVGs or other icon libraries.
 
+## Dependency cooldown policy
+
+New JavaScript package versions must be at least 7 days old before they can be introduced.
+If dependency resolution fails due to package age, wait and retry, or select an older version.
+
 
 # Contributor License Agreement
 
