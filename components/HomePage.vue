@@ -2,7 +2,8 @@
 import { useRuntimeConfig } from "#imports";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
-import { Lock } from "lucide-vue-next";
+import DataSourcesGrid from "@/components/homepage/DataSourcesGrid.vue";
+import { Lock, Workflow } from "lucide-vue-next";
 
 const props = defineProps<{
   isAuth0Configured: boolean;
@@ -52,6 +53,27 @@ const { t } = useI18n();
         </div>
 
         <ServicesGrid v-if="props.shouldShowApp" />
+
+        <div
+          v-if="props.shouldShowApp"
+          class="relative my-12"
+          aria-hidden="true"
+        >
+          <div class="absolute inset-0 flex items-center">
+            <div
+              class="h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent"
+            ></div>
+          </div>
+          <div class="relative flex justify-center">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-violet-100 to-emerald-100 ring-1 ring-gray-200"
+            >
+              <Workflow class="h-5 w-5 text-gray-600" />
+            </div>
+          </div>
+        </div>
+
+        <DataSourcesGrid v-if="props.shouldShowApp" />
 
         <div v-if="props.shouldShowApp" class="mb-8 mt-8 text-center">
           <p class="text-sm italic text-gray-600">

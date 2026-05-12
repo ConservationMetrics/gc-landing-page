@@ -18,6 +18,29 @@
     "coCreatedBy": "Mede ontwikkeld door",
     "andIndigenousPartners": "en inheemse partners"
   },
+  "dataSources": {
+    "andMore": "en meer",
+    "comapeoDescription": "Offline-first mobiele app voor door de gemeenschap geleide territoriumkartering en monitoring",
+    "heading": "Breng uw data naar Guardian Connector",
+    "kobotoolboxDescription": "Mobiele formulieren voor gegevensverzameling, voor enquêtes, tellingen en onderzoek",
+    "odkDescription": "Open-source formulierenplatform gebouwd op een open datastandaard",
+    "otherDescription": "Guardian Connector kan data uit veel bronnen opnemen, waaronder:",
+    "otherHeading": "En nog veel meer",
+    "subheading": "Guardian Connector komt tot leven met uw data. Gebruik de tools voor gegevensverzameling of -annotatie die u al gebruikt en vertrouwt — Guardian Connector is geïntegreerd met deze, en meer.",
+    "timelapseDescription": "Desktop tool voor het bekijken en taggen van cameraval-beelden",
+    "tags": {
+      "biodiversityMonitoring": "Biodiversiteitsmonitoring",
+      "cameraTraps": "Cameravallen",
+      "fieldMapping": "Veldkartering",
+      "forms": "Formulieren",
+      "imageAnnotation": "Beeldannotatie",
+      "mobile": "Mobiel",
+      "offlineFirst": "Offline-First",
+      "onlineAndOffline": "Online & Offline",
+      "surveys": "Enquêtes",
+      "threatMonitoring": "Dreigingsmonitoring"
+    }
+  },
   "footer": {
     "community": "Gemeenschap: {communityName}",
     "copyright": "© 2025 Guardian Connector.",

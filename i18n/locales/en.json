@@ -37,6 +37,29 @@
     "signedIn": "Signed In",
     "signedInDescription": "Signed in but with no special privileges"
   },
+  "dataSources": {
+    "andMore": "and more",
+    "comapeoDescription": "Offline-first mobile app for community-led territory mapping and monitoring",
+    "heading": "Bring your data into Guardian Connector",
+    "kobotoolboxDescription": "Mobile data collection forms for surveys, censuses, and research",
+    "odkDescription": "Open-source forms platform built on an open data standard",
+    "otherDescription": "Guardian Connector can ingest data from many sources, including:",
+    "otherHeading": "And many more",
+    "subheading": "Guardian Connector comes alive with your data. Use the data collection or annotation tools that you already use and trust — Guardian Connector is integrated with these, and more.",
+    "timelapseDescription": "Desktop tool for reviewing and tagging camera trap imagery",
+    "tags": {
+      "biodiversityMonitoring": "Biodiversity Monitoring",
+      "cameraTraps": "Camera Traps",
+      "fieldMapping": "Field Mapping",
+      "forms": "Forms",
+      "imageAnnotation": "Image Annotation",
+      "mobile": "Mobile",
+      "offlineFirst": "Offline-First",
+      "onlineAndOffline": "Online & Offline",
+      "surveys": "Surveys",
+      "threatMonitoring": "Threat Monitoring"
+    }
+  },
   "services": {
     "documentationWebsite": "documentation website",
     "explorer": "Explorer",

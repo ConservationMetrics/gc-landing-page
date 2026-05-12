@@ -18,6 +18,29 @@
     "coCreatedBy": "Co-criado por",
     "andIndigenousPartners": "e parceiros indígenas"
   },
+  "dataSources": {
+    "andMore": "e mais",
+    "comapeoDescription": "Aplicativo móvel offline-first para mapeamento e monitoramento de territórios liderado pela comunidade",
+    "heading": "Traga seus dados para o Guardian Connector",
+    "kobotoolboxDescription": "Formulários móveis de coleta de dados para pesquisas, censos e investigação",
+    "odkDescription": "Plataforma de formulários de código aberto baseada em um padrão aberto de dados",
+    "otherDescription": "O Guardian Connector pode ingerir dados de muitas fontes, incluindo:",
+    "otherHeading": "E muitas mais",
+    "subheading": "O Guardian Connector ganha vida com seus dados. Use as ferramentas de coleta ou anotação de dados que você já usa e confia — o Guardian Connector está integrado com estas, e mais.",
+    "timelapseDescription": "Ferramenta de desktop para revisar e marcar imagens de armadilhas fotográficas",
+    "tags": {
+      "biodiversityMonitoring": "Monitoramento de Biodiversidade",
+      "cameraTraps": "Armadilhas Fotográficas",
+      "fieldMapping": "Mapeamento de Campo",
+      "forms": "Formulários",
+      "imageAnnotation": "Anotação de Imagens",
+      "mobile": "Móvel",
+      "offlineFirst": "Offline-First",
+      "onlineAndOffline": "Online e Offline",
+      "surveys": "Pesquisas",
+      "threatMonitoring": "Monitoramento de Ameaças"
+    }
+  },
   "footer": {
     "community": "Comunidade: {communityName}",
     "copyright": "© 2025 Guardian Connector.",
