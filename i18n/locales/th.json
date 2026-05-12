@@ -19,6 +19,29 @@
     "coCreatedBy": "ร่วมสร้างโดย",
     "andIndigenousPartners": "และพันธมิตรชนพื้นเมือง"
   },
+  "dataSources": {
+    "andMore": "และอื่น ๆ",
+    "comapeoDescription": "แอปมือถือแบบออฟไลน์เป็นหลัก สำหรับการทำแผนที่และติดตามดูแลพื้นที่โดยชุมชน",
+    "heading": "นำข้อมูลของคุณเข้าสู่ Guardian Connector",
+    "kobotoolboxDescription": "แบบฟอร์มเก็บข้อมูลบนมือถือ สำหรับการสำรวจ การทำสำมะโน และการวิจัย",
+    "odkDescription": "แพลตฟอร์มแบบฟอร์มโอเพนซอร์สบนมาตรฐานข้อมูลแบบเปิด",
+    "otherDescription": "Guardian Connector สามารถนำเข้าข้อมูลจากแหล่งต่าง ๆ ได้มากมาย รวมถึง:",
+    "otherHeading": "และอีกมากมาย",
+    "subheading": "Guardian Connector มีชีวิตชีวาด้วยข้อมูลของคุณ ใช้เครื่องมือเก็บข้อมูลหรือใส่คำอธิบายข้อมูลที่คุณใช้และไว้วางใจอยู่แล้ว — Guardian Connector รวมเข้ากับเครื่องมือเหล่านี้และอื่น ๆ",
+    "timelapseDescription": "เครื่องมือเดสก์ท็อปสำหรับตรวจสอบและติดป้ายภาพจากกล้องดักถ่าย",
+    "tags": {
+      "biodiversityMonitoring": "การติดตามความหลากหลายทางชีวภาพ",
+      "cameraTraps": "กล้องดักถ่าย",
+      "fieldMapping": "การทำแผนที่ภาคสนาม",
+      "forms": "แบบฟอร์ม",
+      "imageAnnotation": "การใส่คำอธิบายภาพ",
+      "mobile": "มือถือ",
+      "offlineFirst": "ออฟไลน์เป็นหลัก",
+      "onlineAndOffline": "ออนไลน์และออฟไลน์",
+      "surveys": "แบบสำรวจ",
+      "threatMonitoring": "การติดตามภัยคุกคาม"
+    }
+  },
   "footer": {
     "community": "ชุมชน: {communityName}",
     "copyright": "© 2025 Guardian Connector.",
