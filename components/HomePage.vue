@@ -51,34 +51,6 @@ const { t } = useI18n();
           </p>
         </div>
 
-        <div
-          v-if="props.isAuth0Configured && !props.loggedIn"
-          class="py-16 text-center"
-        >
-          <div
-            class="mx-auto max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm"
-          >
-            <div
-              class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-violet-600"
-            >
-              <Lock class="h-8 w-8 text-white" />
-            </div>
-            <h3 class="mb-4 text-2xl font-bold text-gray-900">
-              {{ t("auth.secureAccessRequired") }}
-            </h3>
-            <p class="mb-6 text-gray-600">
-              {{ t("auth.pleaseSignInToAccess") }}
-            </p>
-            <button
-              type="button"
-              class="w-full rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:from-blue-700 hover:to-violet-700"
-              @click="emit('login')"
-            >
-              {{ t("auth.signInWithAuth0") }}
-            </button>
-          </div>
-        </div>
-
         <ServicesGrid v-if="props.shouldShowApp" />
 
         <div v-if="props.shouldShowApp" class="mb-8 mt-8 text-center">
