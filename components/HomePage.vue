@@ -3,7 +3,7 @@ import { useRuntimeConfig } from "#imports";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
 import DataSourcesGrid from "@/components/homepage/DataSourcesGrid.vue";
-import { Lock, Workflow } from "lucide-vue-next";
+import { Workflow } from "lucide-vue-next";
 
 const props = defineProps<{
   isAuth0Configured: boolean;
