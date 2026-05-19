@@ -3,10 +3,10 @@ import { computed } from "vue";
 import { useI18n, useRuntimeConfig, useUserSession } from "#imports";
 import { Smile } from "lucide-vue-next";
 import { Role, type User } from "~/types/types";
+import { buildServiceUrl } from "~/utils/serviceUrl";
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
-const domain = config.public.domain;
 const { t } = useI18n();
 const { user } = useUserSession();
 
@@ -23,7 +23,7 @@ const availableServices = computed(() => {
   if (config.public.explorerEnabled && userRole >= Role.SignedIn) {
     services.push({
       name: "Explorer",
-      url: `https://explorer.${communityName}.${domain}`,
+      url: buildServiceUrl("explorer", communityName),
       icon: "explorer",
       tags: [
         "Maps",
@@ -37,7 +37,7 @@ const availableServices = computed(() => {
   if (config.public.supersetEnabled && userRole >= Role.Guest) {
     services.push({
       name: "Superset",
-      url: `https://superset.${communityName}.${domain}`,
+      url: buildServiceUrl("superset", communityName),
       icon: "superset",
       tags: ["Charts", "Analysis", "Visualizations", "Dashboards"],
     });
@@ -46,7 +46,7 @@ const availableServices = computed(() => {
   if (config.public.windmillEnabled && userRole >= Role.Admin) {
     services.push({
       name: "Windmill",
-      url: `https://windmill.${communityName}.${domain}`,
+      url: buildServiceUrl("windmill", communityName),
       icon: "windmill",
       tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
     });
@@ -55,7 +55,7 @@ const availableServices = computed(() => {
   if (config.public.filebrowserEnabled && userRole >= Role.Member) {
     services.push({
       name: "Filebrowser",
-      url: `https://files.${communityName}.${domain}`,
+      url: buildServiceUrl("files", communityName),
       icon: "filebrowser",
       tags: ["Files", "Raw Data", "Archives"],
     });

@@ -53,7 +53,7 @@ if (config.public.windmillEnabled) {
   if (hasAdminRole) {
     services.push({
       name: "Windmill",
-      url: `https://windmill.${communityName}.${domain}`,
+      url: `https://windmill.${communityName}.guardianconnector.net`,
     });
   }
 }

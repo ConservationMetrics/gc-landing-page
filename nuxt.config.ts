@@ -52,7 +52,6 @@ export default defineNuxtConfig({
 
     public: {
       communityName: "demo",
-      domain: "guardianconnector.net",
       baseUrl: "http://localhost:8080",
       auth0Enabled: true,
       logoUrl: "",
