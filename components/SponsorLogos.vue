@@ -4,10 +4,12 @@ const { t } = useI18n();
 
 <template>
   <footer
-    class="flex flex-col items-center gap-5 text-center text-neutral-700"
+    class="flex flex-col items-center gap-5 text-center text-neutral-700 dark:text-stone-300"
     data-testid="sponsor-logos"
   >
-    <p class="text-base font-semibold tracking-wide text-stone-700 sm:text-lg">
+    <p
+      class="text-base font-semibold tracking-wide text-stone-700 dark:text-stone-200 sm:text-lg"
+    >
       {{ t("auth.coCreatedBy") }}
     </p>
     <div
@@ -24,7 +26,9 @@ const { t } = useI18n();
         class="h-10 w-auto max-w-[min(100%,14rem)] object-contain sm:h-11"
       />
     </div>
-    <p class="mt-0.5 text-sm italic text-stone-500 sm:text-[0.95rem]">
+    <p
+      class="mt-0.5 text-sm italic text-stone-500 dark:text-stone-400 sm:text-[0.95rem]"
+    >
       {{ t("auth.andIndigenousPartners") }}
     </p>
   </footer>

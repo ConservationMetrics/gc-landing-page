@@ -25,7 +25,14 @@
   },
   "header": {
     "adminAccess": "Admin Access",
-    "languagePicker": "Language Picker"
+    "languagePicker": "Language Picker",
+    "themeToggle": "Theme"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
   },
   "roles": {
     "admin": "Admin",

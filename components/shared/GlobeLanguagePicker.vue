@@ -69,12 +69,12 @@ const dropdownClasses = computed(() => {
     case "hero":
       return "origin-top-right absolute right-0 z-50 mt-2 w-56 rounded-xl border border-white/25 bg-stone-900/90 py-1 shadow-xl shadow-stone-950/40 ring-1 ring-white/10 backdrop-blur-xl";
     case "white":
-      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50";
+      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-stone-800 ring-1 ring-black ring-opacity-5 dark:ring-stone-700 z-50";
     case "dark":
       return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-600 z-50";
     case "violet":
     default:
-      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-gray-200 z-50";
+      return "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-stone-800 ring-1 ring-gray-200 dark:ring-stone-700 z-50";
   }
 });
 
@@ -83,22 +83,21 @@ const itemClasses = computed(() => {
     case "hero":
       return "block px-4 py-2 text-sm text-stone-100 transition-colors hover:bg-white/15";
     case "white":
-      return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
+      return "block px-4 py-2 text-sm text-gray-700 dark:text-stone-200 hover:bg-gray-100 dark:hover:bg-stone-700 transition-colors";
     case "dark":
       return "block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors";
     case "violet":
     default:
-      return "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors";
+      return "block px-4 py-2 text-sm text-gray-700 dark:text-stone-200 hover:bg-gray-100 dark:hover:bg-stone-700 transition-colors";
   }
 });
 
-// Mobile item classes
 const mobileItemClasses = computed(() => {
   return (langCode: string) => [
     "w-full text-left px-4 py-2 rounded-lg text-sm transition-colors",
     locale.value === langCode
-      ? "bg-violet-100 text-violet-700 font-medium"
-      : "text-gray-700 hover:bg-violet-50",
+      ? "bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-200 font-medium"
+      : "text-gray-700 dark:text-stone-200 hover:bg-violet-50 dark:hover:bg-stone-800",
   ];
 });
 </script>
@@ -116,14 +115,16 @@ const mobileItemClasses = computed(() => {
           'relative flex h-10 w-10 items-center justify-center rounded-full transition-colors focus:outline-none',
           theme === 'hero'
             ? 'border border-white/40 bg-white/15 shadow-sm backdrop-blur-md hover:bg-white/25 focus-visible:ring-2 focus-visible:ring-white/50'
-            : 'bg-white hover:bg-gray-50 focus:ring-2 focus:ring-violet-500 focus:ring-offset-2',
+            : 'bg-white hover:bg-gray-50 focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-stone-800 dark:hover:bg-stone-700 dark:focus:ring-offset-stone-900',
         ]"
         @click.stop="dropdownOpen = !dropdownOpen"
       >
         <Globe
           :class="[
             'h-5 w-5',
-            theme === 'hero' ? 'text-white' : 'text-gray-600',
+            theme === 'hero'
+              ? 'text-white'
+              : 'text-gray-600 dark:text-stone-300',
           ]"
         />
       </button>
@@ -151,16 +152,16 @@ const mobileItemClasses = computed(() => {
   <div v-else-if="variant === 'mobile'" class="px-4 py-3 mb-2">
     <button
       @click="toggleLanguagePicker"
-      class="w-full flex items-center justify-between space-x-3 hover:bg-violet-50 rounded-lg px-2 py-2 transition-colors"
+      class="w-full flex items-center justify-between space-x-3 hover:bg-violet-50 dark:hover:bg-stone-800 rounded-lg px-2 py-2 transition-colors"
     >
       <div class="flex items-center space-x-3">
-        <Globe class="w-5 h-5 text-gray-600" />
-        <span class="text-sm text-gray-700 font-medium">{{
+        <Globe class="w-5 h-5 text-gray-600 dark:text-stone-300" />
+        <span class="text-sm text-gray-700 dark:text-stone-200 font-medium">{{
           t("header.languagePicker")
         }}</span>
       </div>
       <ChevronDown
-        class="w-4 h-4 text-gray-600 transition-transform"
+        class="w-4 h-4 text-gray-600 dark:text-stone-300 transition-transform"
         :class="{ 'rotate-180': languagePickerOpen }"
       />
     </button>

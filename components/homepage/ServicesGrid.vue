@@ -115,7 +115,7 @@ const translateTag = (tag: string) => {
       <div
         v-for="service in availableServices"
         :key="service.name"
-        class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-violet-100 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+        class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-violet-200 dark:border-violet-900 bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/40 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
         @click="openService(service.url)"
       >
         <div class="mb-4 flex justify-center">
@@ -161,11 +161,15 @@ const translateTag = (tag: string) => {
           </div>
         </div>
 
-        <h3 class="mb-3 text-center text-xl font-bold text-gray-900">
+        <h3
+          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-stone-100"
+        >
           {{ service.name }}
         </h3>
 
-        <p class="mb-4 min-h-[3rem] text-center text-sm text-gray-600">
+        <p
+          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-stone-400"
+        >
           {{ getServiceDescription(service.name) }}
         </p>
 
@@ -173,7 +177,7 @@ const translateTag = (tag: string) => {
           <span
             v-for="tag in service.tags"
             :key="tag"
-            class="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-700"
+            class="rounded-full border border-gray-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-3 py-1 text-xs font-medium text-gray-700 dark:text-stone-300"
           >
             {{ translateTag(tag) }}
           </span>
@@ -183,17 +187,19 @@ const translateTag = (tag: string) => {
 
     <div v-else class="py-16 text-center">
       <div
-        class="mx-auto max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm"
+        class="mx-auto max-w-md rounded-2xl border border-gray-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-8 shadow-sm"
       >
         <div
-          class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-300"
+          class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-300 dark:bg-stone-700"
         >
-          <Smile class="h-8 w-8 text-gray-500" />
+          <Smile class="h-8 w-8 text-gray-500 dark:text-stone-400" />
         </div>
-        <h3 class="mb-2 text-xl font-semibold text-gray-900">
+        <h3
+          class="mb-2 text-xl font-semibold text-gray-900 dark:text-stone-100"
+        >
           {{ t("services.noServicesAvailable") }}
         </h3>
-        <p class="mb-4 text-gray-600">
+        <p class="mb-4 text-gray-600 dark:text-stone-400">
           {{ t("services.noServicesDescription") }}
         </p>
       </div>

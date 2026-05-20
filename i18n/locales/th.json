@@ -48,7 +48,14 @@
   },
   "header": {
     "adminAccess": "การเข้าถึงผู้ดูแล",
-    "languagePicker": "เลือกภาษา"
+    "languagePicker": "เลือกภาษา",
+    "themeToggle": "ธีม"
+  },
+  "theme": {
+    "light": "สว่าง",
+    "dark": "มืด",
+    "switchToLight": "เปลี่ยนเป็นโหมดสว่าง",
+    "switchToDark": "เปลี่ยนเป็นโหมดมืด"
   },
   "roles": {
     "admin": "ผู้ดูแล",
