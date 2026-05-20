@@ -129,7 +129,7 @@ const formatDate = (dateString: string) => {
         >
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
-              <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+              <div class="mt-3 sm:mt-0 text-left w-full">
                 <h3
                   class="text-lg leading-6 font-medium text-gray-900 mb-4"
                   id="modal-title"
