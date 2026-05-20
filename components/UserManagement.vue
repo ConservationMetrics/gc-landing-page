@@ -75,7 +75,6 @@ const fetchUsers = async (page = 0) => {
     const response = await $fetch<UsersResponse>(`/api/users?${params}`);
 
     if (response.success) {
-      console.log("Response users:", response.users);
       users.value = response.users;
       totalUsers.value = response.total;
       currentPage.value = response.page;
