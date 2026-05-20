@@ -3,7 +3,7 @@ import AppHeader from "@/components/shared/AppHeader.vue";
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-white dark:bg-stone-950">
+  <div class="min-h-screen flex flex-col bg-white dark:bg-slate-900">
     <AppHeader />
     <slot></slot>
   </div>

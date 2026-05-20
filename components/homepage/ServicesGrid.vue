@@ -162,13 +162,13 @@ const translateTag = (tag: string) => {
         </div>
 
         <h3
-          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-stone-100"
+          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-slate-100"
         >
           {{ service.name }}
         </h3>
 
         <p
-          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-stone-400"
+          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-slate-400"
         >
           {{ getServiceDescription(service.name) }}
         </p>
@@ -177,7 +177,7 @@ const translateTag = (tag: string) => {
           <span
             v-for="tag in service.tags"
             :key="tag"
-            class="rounded-full border border-gray-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-3 py-1 text-xs font-medium text-gray-700 dark:text-stone-300"
+            class="rounded-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-slate-300"
           >
             {{ translateTag(tag) }}
           </span>
@@ -187,19 +187,19 @@ const translateTag = (tag: string) => {
 
     <div v-else class="py-16 text-center">
       <div
-        class="mx-auto max-w-md rounded-2xl border border-gray-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-8 shadow-sm"
+        class="mx-auto max-w-md rounded-2xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm"
       >
         <div
-          class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-300 dark:bg-stone-700"
+          class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-300 dark:bg-slate-600"
         >
-          <Smile class="h-8 w-8 text-gray-500 dark:text-stone-400" />
+          <Smile class="h-8 w-8 text-gray-500 dark:text-slate-400" />
         </div>
         <h3
-          class="mb-2 text-xl font-semibold text-gray-900 dark:text-stone-100"
+          class="mb-2 text-xl font-semibold text-gray-900 dark:text-slate-100"
         >
           {{ t("services.noServicesAvailable") }}
         </h3>
-        <p class="mb-4 text-gray-600 dark:text-stone-400">
+        <p class="mb-4 text-gray-600 dark:text-slate-400">
           {{ t("services.noServicesDescription") }}
         </p>
       </div>

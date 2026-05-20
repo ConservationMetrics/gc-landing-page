@@ -53,10 +53,10 @@ const otherIntegrations = [
 <template>
   <section>
     <div class="mb-8 text-center">
-      <h2 class="mb-3 text-3xl font-bold text-gray-900 dark:text-stone-100">
+      <h2 class="mb-3 text-3xl font-bold text-gray-900 dark:text-slate-100">
         {{ t("dataSources.heading") }}
       </h2>
-      <p class="mx-auto max-w-2xl text-base text-gray-600 dark:text-stone-400">
+      <p class="mx-auto max-w-2xl text-base text-gray-600 dark:text-slate-400">
         {{ t("dataSources.subheading") }}
       </p>
     </div>
@@ -79,13 +79,13 @@ const otherIntegrations = [
         </div>
 
         <h3
-          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-stone-100"
+          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-slate-100"
         >
           {{ source.name }}
         </h3>
 
         <p
-          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-stone-400"
+          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-slate-400"
         >
           {{ t(`dataSources.${source.descriptionKey}`) }}
         </p>
@@ -94,7 +94,7 @@ const otherIntegrations = [
           <span
             v-for="tag in source.tags"
             :key="tag"
-            class="rounded-full border border-gray-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-3 py-1 text-xs font-medium text-gray-700 dark:text-stone-300"
+            class="rounded-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-slate-300"
           >
             {{ t(`dataSources.tags.${tag}`) }}
           </span>
@@ -114,13 +114,13 @@ const otherIntegrations = [
         </div>
 
         <h3
-          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-stone-100"
+          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-slate-100"
         >
           {{ t("dataSources.otherHeading") }}
         </h3>
 
         <p
-          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-stone-400"
+          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-slate-400"
         >
           {{ t("dataSources.otherDescription") }}
         </p>
@@ -129,7 +129,7 @@ const otherIntegrations = [
           <span
             v-for="example in otherIntegrations"
             :key="example"
-            class="rounded-full border border-gray-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-3 py-1 text-xs font-medium text-gray-700 dark:text-stone-300"
+            class="rounded-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-slate-300"
           >
             {{ example }}
           </span>

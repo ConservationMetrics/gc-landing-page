@@ -25,7 +25,7 @@ const props = defineProps<{
 }
 
 html.dark .glass-card {
-  --glass-bg: rgb(28 25 23 / 0.55);
+  --glass-bg: rgb(30 41 59 / 0.55);
   --glass-border: rgb(255 255 255 / 0.08);
   --glass-highlight: rgb(255 255 255 / 0.06);
 }

@@ -32,7 +32,7 @@ const ariaLabel = computed(() =>
       'relative flex h-10 w-10 items-center justify-center rounded-full transition-colors focus:outline-none',
       props.theme === 'hero'
         ? 'border border-white/40 bg-white/15 shadow-sm backdrop-blur-md hover:bg-white/25 focus-visible:ring-2 focus-visible:ring-white/50'
-        : 'bg-white hover:bg-gray-50 focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-stone-800 dark:hover:bg-stone-700 dark:focus:ring-offset-stone-900',
+        : 'bg-white hover:bg-gray-50 focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-slate-700 dark:hover:bg-slate-600 dark:focus:ring-offset-slate-800',
     ]"
     @click="toggleTheme"
   >
@@ -40,7 +40,7 @@ const ariaLabel = computed(() =>
       v-if="isDark"
       :class="[
         'h-5 w-5',
-        props.theme === 'hero' ? 'text-white' : 'text-stone-300',
+        props.theme === 'hero' ? 'text-white' : 'text-slate-300',
       ]"
     />
     <Moon
@@ -56,18 +56,18 @@ const ariaLabel = computed(() =>
   <div v-else-if="variant === 'mobile'" class="px-4 py-3 mb-2">
     <button
       @click="toggleTheme"
-      class="w-full flex items-center justify-between space-x-3 hover:bg-violet-50 dark:hover:bg-stone-800 rounded-lg px-2 py-2 transition-colors"
+      class="w-full flex items-center justify-between space-x-3 hover:bg-violet-50 dark:hover:bg-slate-700 rounded-lg px-2 py-2 transition-colors"
     >
       <div class="flex items-center space-x-3">
         <component
           :is="isDark ? Sun : Moon"
-          class="w-5 h-5 text-gray-600 dark:text-stone-300"
+          class="w-5 h-5 text-gray-600 dark:text-slate-300"
         />
-        <span class="text-sm text-gray-700 dark:text-stone-200 font-medium">
+        <span class="text-sm text-gray-700 dark:text-slate-200 font-medium">
           {{ t("header.themeToggle") }}
         </span>
       </div>
-      <span class="text-xs text-gray-500 dark:text-stone-400">
+      <span class="text-xs text-gray-500 dark:text-slate-400">
         {{ isDark ? t("theme.dark") : t("theme.light") }}
       </span>
     </button>
