@@ -118,27 +118,27 @@ const formatDate = (dateString: string) => {
       >
         <!-- Background overlay -->
         <div
-          class="fixed inset-0 bg-gray-500 dark:bg-slate-900 bg-opacity-75 dark:bg-opacity-80 transition-opacity"
+          class="fixed inset-0 bg-gray-500 dark:bg-dusk-900 bg-opacity-75 dark:bg-opacity-80 transition-opacity"
           aria-hidden="true"
           @click="closeModal"
         ></div>
 
         <!-- Modal panel -->
         <div
-          class="relative inline-block align-bottom bg-white dark:bg-slate-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          class="relative inline-block align-bottom bg-white dark:bg-dusk-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
         >
-          <div class="bg-white dark:bg-slate-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="bg-white dark:bg-dusk-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
               <div class="mt-3 sm:mt-0 text-left w-full">
                 <h3
-                  class="text-lg leading-6 font-medium text-gray-900 dark:text-slate-100 mb-4"
+                  class="text-lg leading-6 font-medium text-gray-900 dark:text-dusk-100 mb-4"
                   id="modal-title"
                 >
                   {{ t("userManagement.editUserTitle", { email: user.email }) }}
                 </h3>
 
                 <!-- User Info -->
-                <div class="mb-6 p-4 bg-gray-50 dark:bg-slate-700 rounded-lg">
+                <div class="mb-6 p-4 bg-gray-50 dark:bg-dusk-700 rounded-lg">
                   <div class="flex items-center mb-3">
                     <img
                       v-if="user.picture && !imageError"
@@ -156,7 +156,7 @@ const formatDate = (dateString: string) => {
                     />
                     <div>
                       <div
-                        class="text-sm font-medium text-gray-900 dark:text-slate-100"
+                        class="text-sm font-medium text-gray-900 dark:text-dusk-100"
                       >
                         {{
                           user.name ||
@@ -164,12 +164,12 @@ const formatDate = (dateString: string) => {
                           t("userManagement.unknown")
                         }}
                       </div>
-                      <div class="text-sm text-gray-500 dark:text-slate-400">
+                      <div class="text-sm text-gray-500 dark:text-dusk-400">
                         {{ user.email }}
                       </div>
                     </div>
                   </div>
-                  <div class="text-xs text-gray-500 dark:text-slate-400">
+                  <div class="text-xs text-gray-500 dark:text-dusk-400">
                     <div>
                       {{ t("userManagement.created") }}:
                       {{ formatDate(user.created_at) }}
@@ -190,14 +190,14 @@ const formatDate = (dateString: string) => {
                     <input
                       v-model="isApproved"
                       type="checkbox"
-                      class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 dark:border-slate-700 rounded"
+                      class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 dark:border-dusk-700 rounded"
                     />
                     <span
-                      class="ml-2 text-sm text-gray-700 dark:text-slate-300"
+                      class="ml-2 text-sm text-gray-700 dark:text-dusk-300"
                       >{{ t("userManagement.userIsApproved") }}</span
                     >
                   </label>
-                  <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">
+                  <p class="text-xs text-gray-500 dark:text-dusk-400 mt-1">
                     {{ t("userManagement.approvedUsersDescription") }}
                   </p>
                 </div>
@@ -205,12 +205,12 @@ const formatDate = (dateString: string) => {
                 <!-- Roles Selection -->
                 <div class="mb-6">
                   <label
-                    class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-3"
+                    class="block text-sm font-medium text-gray-700 dark:text-dusk-300 mb-3"
                   >
                     {{ t("userManagement.userRoles") }}
                   </label>
                   <div
-                    class="space-y-2 max-h-48 overflow-y-auto border border-gray-200 dark:border-slate-700 rounded-lg p-3"
+                    class="space-y-2 max-h-48 overflow-y-auto border border-gray-200 dark:border-dusk-700 rounded-lg p-3"
                   >
                     <div
                       v-for="role in availableRoles"
@@ -223,22 +223,22 @@ const formatDate = (dateString: string) => {
                         :value="role.id"
                         type="radio"
                         name="user-role"
-                        class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 dark:border-slate-700 mt-0.5"
+                        class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 dark:border-dusk-700 mt-0.5"
                       />
                       <div class="ml-3">
                         <label
                           :for="`role-${role.id}`"
-                          class="text-sm font-medium text-gray-700 dark:text-slate-300 cursor-pointer"
+                          class="text-sm font-medium text-gray-700 dark:text-dusk-300 cursor-pointer"
                         >
                           {{ translateRoleName(role.name, t) }}
                         </label>
-                        <p class="text-xs text-gray-500 dark:text-slate-400">
+                        <p class="text-xs text-gray-500 dark:text-dusk-400">
                           {{ translateRoleDescription(role.name, t) }}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <p class="text-xs text-gray-500 dark:text-slate-400 mt-2">
+                  <p class="text-xs text-gray-500 dark:text-dusk-400 mt-2">
                     {{ t("userManagement.selectedRoles") }}:
                     {{ selectedRoleName }}
                   </p>
@@ -259,12 +259,12 @@ const formatDate = (dateString: string) => {
 
           <!-- Modal Actions -->
           <div
-            class="bg-gray-50 dark:bg-slate-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+            class="bg-gray-50 dark:bg-dusk-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
           >
             <button
               @click="handleSave"
               :disabled="isSaving"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-violet-600 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-slate-700 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-violet-600 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-700 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{
                 isSaving
@@ -275,7 +275,7 @@ const formatDate = (dateString: string) => {
             <button
               @click="closeModal"
               :disabled="isSaving"
-              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-slate-700 shadow-sm px-4 py-2 bg-white dark:bg-slate-800 text-base font-medium text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-slate-700 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-dusk-700 shadow-sm px-4 py-2 bg-white dark:bg-dusk-800 text-base font-medium text-gray-700 dark:text-dusk-200 hover:bg-gray-50 dark:hover:bg-dusk-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-700 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ t("userManagement.cancel") }}
             </button>

@@ -47,7 +47,7 @@ const { login, logout } = useAuthActions();
 
 <template>
   <header
-    class="bg-gradient-to-r mb-2 from-violet-100 to-violet-50 dark:from-violet-950 dark:to-slate-800 w-5/6 place-self-center mt-2 rounded-xl p-3"
+    class="bg-gradient-to-r mb-2 from-violet-100 to-violet-50 dark:from-violet-950 dark:to-dusk-800 w-5/6 place-self-center mt-2 rounded-xl p-3"
   >
     <!-- Desktop Layout - show above 1000px -->
     <div class="flex max-[1000px]:hidden relative items-end justify-around">
@@ -116,12 +116,12 @@ const { login, logout } = useAuthActions();
           class="flex items-center space-x-3"
         >
           <div
-            class="text-sm max-[1200px]:text-xs text-gray-700 dark:text-slate-300"
+            class="text-sm max-[1200px]:text-xs text-gray-700 dark:text-dusk-300"
           >
             {{ t("auth.welcome", { user: (user as User)?.auth0 || "User" }) }}
             <span
               v-if="(user as User)?.roles?.length"
-              class="text-xs max-[1200px]:text-[10px] text-gray-500 dark:text-slate-400"
+              class="text-xs max-[1200px]:text-[10px] text-gray-500 dark:text-dusk-400"
             >
               ({{
                 (user as User)?.roles
@@ -132,7 +132,7 @@ const { login, logout } = useAuthActions();
           </div>
           <button
             @click="logout"
-            class="text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors text-sm max-[1200px]:text-xs"
+            class="text-gray-600 hover:text-gray-900 dark:text-dusk-400 dark:hover:text-dusk-100 transition-colors text-sm max-[1200px]:text-xs"
           >
             {{ t("auth.signOut") }}
           </button>
@@ -145,13 +145,13 @@ const { login, logout } = useAuthActions();
         >
           <NuxtLink
             to="/admin/users"
-            class="w-10 h-10 rounded-full bg-white dark:bg-slate-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-slate-800"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
           >
-            <Users class="w-5 h-5 text-gray-600 dark:text-slate-300" />
+            <Users class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
           </NuxtLink>
           <!-- Tooltip -->
           <div
-            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-slate-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
           >
             {{ t("auth.userManagement") }}
           </div>
@@ -162,7 +162,7 @@ const { login, logout } = useAuthActions();
           <ThemeToggle theme="white" variant="icon" />
           <!-- Tooltip -->
           <div
-            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-slate-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
           >
             {{ t("header.themeToggle") }}
           </div>
@@ -173,7 +173,7 @@ const { login, logout } = useAuthActions();
           <GlobeLanguagePicker theme="white" variant="icon" />
           <!-- Tooltip -->
           <div
-            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-slate-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
           >
             {{ t("header.languagePicker") }}
           </div>
@@ -191,11 +191,11 @@ const { login, logout } = useAuthActions();
         <!-- User Icon with Checkmark (if logged in) -->
         <div v-if="isAuth0Configured && loggedIn" class="relative">
           <div
-            class="w-10 h-10 rounded-full bg-white dark:bg-slate-700 border-2 border-green-500 flex items-center justify-center relative"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 border-2 border-green-500 flex items-center justify-center relative"
           >
             <UserIcon class="w-6 h-6 text-green-500" />
             <BadgeCheck
-              class="absolute -top-1 -right-1 w-4 h-4 text-green-500 bg-white dark:bg-slate-700 rounded-full"
+              class="absolute -top-1 -right-1 w-4 h-4 text-green-500 bg-white dark:bg-dusk-700 rounded-full"
             />
           </div>
         </div>
@@ -203,10 +203,10 @@ const { login, logout } = useAuthActions();
         <!-- Hamburger Menu Button -->
         <button
           @click="toggleMobileMenu"
-          class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-violet-200 dark:hover:bg-slate-600 transition-colors"
+          class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-violet-200 dark:hover:bg-dusk-600 transition-colors"
           aria-label="Menu"
         >
-          <Menu class="w-6 h-6 text-gray-700 dark:text-slate-200" />
+          <Menu class="w-6 h-6 text-gray-700 dark:text-dusk-200" />
         </button>
       </div>
     </div>
@@ -214,26 +214,26 @@ const { login, logout } = useAuthActions();
     <!-- Mobile Menu Dropdown -->
     <div
       v-if="mobileMenuOpen && isAuth0Configured && loggedIn"
-      class="hidden max-[1000px]:block mt-4 p-4 bg-white dark:bg-slate-800 rounded-lg border border-violet-200 dark:border-slate-700 shadow-lg"
+      class="hidden max-[1000px]:block mt-4 p-4 bg-white dark:bg-dusk-800 rounded-lg border border-violet-200 dark:border-dusk-700 shadow-lg"
     >
       <!-- Welcome Message -->
-      <div class="mb-4 pb-4 border-b border-violet-200 dark:border-slate-700">
+      <div class="mb-4 pb-4 border-b border-violet-200 dark:border-dusk-700">
         <div class="flex items-center space-x-3">
           <div
-            class="w-10 h-10 rounded-full bg-white dark:bg-slate-700 border-2 border-green-500 flex items-center justify-center relative"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 border-2 border-green-500 flex items-center justify-center relative"
           >
             <UserIcon class="w-6 h-6 text-green-500" />
             <BadgeCheck
-              class="absolute -top-1 -right-1 w-4 h-4 text-green-500 bg-white dark:bg-slate-700 rounded-full"
+              class="absolute -top-1 -right-1 w-4 h-4 text-green-500 bg-white dark:bg-dusk-700 rounded-full"
             />
           </div>
           <div>
-            <p class="text-sm font-semibold text-gray-900 dark:text-slate-100">
+            <p class="text-sm font-semibold text-gray-900 dark:text-dusk-100">
               {{ t("auth.welcome", { user: (user as User)?.auth0 || "User" }) }}
             </p>
             <p
               v-if="(user as User)?.roles?.length"
-              class="text-xs text-gray-500 dark:text-slate-400"
+              class="text-xs text-gray-500 dark:text-dusk-400"
             >
               {{
                 (user as User)?.roles
@@ -250,10 +250,10 @@ const { login, logout } = useAuthActions();
         v-if="isAdmin"
         to="/admin/users"
         @click="mobileMenuOpen = false"
-        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-violet-50 dark:hover:bg-slate-700 transition-colors mb-2"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-violet-50 dark:hover:bg-dusk-700 transition-colors mb-2"
       >
-        <Users class="w-5 h-5 text-gray-600 dark:text-slate-300" />
-        <span class="text-sm text-gray-700 dark:text-slate-200">{{
+        <Users class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
+        <span class="text-sm text-gray-700 dark:text-dusk-200">{{
           t("auth.userManagement")
         }}</span>
       </NuxtLink>

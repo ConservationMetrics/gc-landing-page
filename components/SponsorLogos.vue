@@ -4,11 +4,11 @@ const { t } = useI18n();
 
 <template>
   <footer
-    class="flex flex-col items-center gap-5 text-center text-neutral-700 dark:text-slate-300"
+    class="flex flex-col items-center gap-5 text-center text-neutral-700 dark:text-dusk-300"
     data-testid="sponsor-logos"
   >
     <p
-      class="text-base font-semibold tracking-wide text-stone-700 dark:text-slate-200 sm:text-lg"
+      class="text-base font-semibold tracking-wide text-stone-700 dark:text-dusk-200 sm:text-lg"
     >
       {{ t("auth.coCreatedBy") }}
     </p>
@@ -27,7 +27,7 @@ const { t } = useI18n();
       />
     </div>
     <p
-      class="mt-0.5 text-sm italic text-stone-500 dark:text-slate-400 sm:text-[0.95rem]"
+      class="mt-0.5 text-sm italic text-stone-500 dark:text-dusk-400 sm:text-[0.95rem]"
     >
       {{ t("auth.andIndigenousPartners") }}
     </p>
