@@ -51,7 +51,7 @@ onMounted(() => {
       >
         <GlassCard class="max-w-xl">
           <h1
-            class="text-balance text-center text-[1.65rem] font-medium leading-snug tracking-tight text-stone-800 sm:text-3xl sm:leading-tight"
+            class="text-balance text-center text-[1.65rem] font-medium leading-snug tracking-tight text-stone-800 dark:text-dusk-100 sm:text-3xl sm:leading-tight"
           >
             {{ t("auth.welcomeToGuardianConnector") }}
           </h1>
@@ -60,7 +60,7 @@ onMounted(() => {
             aria-hidden="true"
           ></div>
           <p
-            class="mt-7 text-center text-sm leading-relaxed text-stone-700 sm:text-[0.95rem]"
+            class="mt-7 text-center text-sm leading-relaxed text-stone-700 dark:text-dusk-200 sm:text-[0.95rem]"
           >
             {{ t("auth.pleaseSignIn") }}
           </p>
@@ -74,7 +74,7 @@ onMounted(() => {
           </button>
           <p
             v-if="props.errorMessage"
-            class="mt-4 text-center text-xs text-red-600"
+            class="mt-4 text-center text-xs text-red-600 dark:text-red-300"
           >
             {{ props.errorMessage }}
           </p>

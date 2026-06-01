@@ -25,7 +25,14 @@
   },
   "header": {
     "adminAccess": "Ufikiaji wa Msimamizi",
-    "languagePicker": "Chagua lugha"
+    "languagePicker": "Chagua lugha",
+    "themeToggle": "Mandhari"
+  },
+  "theme": {
+    "light": "Mwangaza",
+    "dark": "Giza",
+    "switchToLight": "Badilisha kuwa hali ya mwanga",
+    "switchToDark": "Badilisha kuwa hali ya giza"
   },
   "roles": {
     "admin": "Msimamizi",

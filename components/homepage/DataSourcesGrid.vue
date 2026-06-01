@@ -53,10 +53,10 @@ const otherIntegrations = [
 <template>
   <section>
     <div class="mb-8 text-center">
-      <h2 class="mb-3 text-3xl font-bold text-gray-900">
+      <h2 class="mb-3 text-3xl font-bold text-gray-900 dark:text-dusk-100">
         {{ t("dataSources.heading") }}
       </h2>
-      <p class="mx-auto max-w-2xl text-base text-gray-600">
+      <p class="mx-auto max-w-2xl text-base text-gray-600 dark:text-dusk-400">
         {{ t("dataSources.subheading") }}
       </p>
     </div>
@@ -68,7 +68,7 @@ const otherIntegrations = [
         :href="source.url"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+        class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/40 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
       >
         <div class="mb-4 flex h-[80px] items-center justify-center">
           <img
@@ -78,11 +78,15 @@ const otherIntegrations = [
           />
         </div>
 
-        <h3 class="mb-3 text-center text-xl font-bold text-gray-900">
+        <h3
+          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-dusk-100"
+        >
           {{ source.name }}
         </h3>
 
-        <p class="mb-4 min-h-[3rem] text-center text-sm text-gray-600">
+        <p
+          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-dusk-400"
+        >
           {{ t(`dataSources.${source.descriptionKey}`) }}
         </p>
 
@@ -90,7 +94,7 @@ const otherIntegrations = [
           <span
             v-for="tag in source.tags"
             :key="tag"
-            class="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-700"
+            class="rounded-full border border-gray-200 dark:border-dusk-700 bg-white dark:bg-dusk-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-dusk-300"
           >
             {{ t(`dataSources.tags.${tag}`) }}
           </span>
@@ -98,22 +102,26 @@ const otherIntegrations = [
       </a>
 
       <div
-        class="flex w-full max-w-sm cursor-default flex-col rounded-2xl border-2 border-dashed border-emerald-300 bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+        class="flex w-full max-w-sm cursor-default flex-col rounded-2xl border-2 border-dashed border-emerald-300 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/40 p-6 md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
       >
         <div class="mb-4 flex h-[80px] items-center justify-center">
           <span
-            class="select-none font-mono text-6xl font-bold leading-none text-emerald-700"
+            class="select-none font-mono text-6xl font-bold leading-none text-emerald-700 dark:text-emerald-200"
             aria-hidden="true"
           >
             {&nbsp;}
           </span>
         </div>
 
-        <h3 class="mb-3 text-center text-xl font-bold text-gray-900">
+        <h3
+          class="mb-3 text-center text-xl font-bold text-gray-900 dark:text-dusk-100"
+        >
           {{ t("dataSources.otherHeading") }}
         </h3>
 
-        <p class="mb-4 min-h-[3rem] text-center text-sm text-gray-600">
+        <p
+          class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-dusk-400"
+        >
           {{ t("dataSources.otherDescription") }}
         </p>
 
@@ -121,12 +129,12 @@ const otherIntegrations = [
           <span
             v-for="example in otherIntegrations"
             :key="example"
-            class="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-700"
+            class="rounded-full border border-gray-200 dark:border-dusk-700 bg-white dark:bg-dusk-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-dusk-300"
           >
             {{ example }}
           </span>
           <span
-            class="rounded-full bg-emerald-200 px-3 py-1 text-xs font-medium italic text-emerald-900"
+            class="rounded-full bg-emerald-200 dark:bg-emerald-900 px-3 py-1 text-xs font-medium italic text-emerald-900 dark:text-emerald-200"
           >
             {{ t("dataSources.andMore") }}
           </span>

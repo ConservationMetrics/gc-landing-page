@@ -48,7 +48,14 @@
   },
   "header": {
     "adminAccess": "Acesso de Administrador",
-    "languagePicker": "Seletor de Idioma"
+    "languagePicker": "Seletor de Idioma",
+    "themeToggle": "Tema"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "switchToLight": "Mudar para o modo claro",
+    "switchToDark": "Mudar para o modo escuro"
   },
   "roles": {
     "admin": "Administrador",

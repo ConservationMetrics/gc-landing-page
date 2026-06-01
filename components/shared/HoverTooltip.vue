@@ -13,7 +13,7 @@ const tooltipId = useId();
     class="group relative inline-block max-w-full align-baseline text-inherit"
   >
     <span
-      class="cursor-help border-b border-dotted border-gray-500 outline-none"
+      class="cursor-help border-b border-dotted border-gray-500 dark:border-dusk-400 outline-none"
       tabindex="0"
       :aria-describedby="tooltipId"
     >

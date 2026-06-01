@@ -48,7 +48,14 @@
   },
   "header": {
     "adminAccess": "Beheerders Toegang",
-    "languagePicker": "Taal Selector"
+    "languagePicker": "Taal Selector",
+    "themeToggle": "Thema"
+  },
+  "theme": {
+    "light": "Licht",
+    "dark": "Donker",
+    "switchToLight": "Schakel naar lichte modus",
+    "switchToDark": "Schakel naar donkere modus"
   },
   "roles": {
     "admin": "Beheerder",
