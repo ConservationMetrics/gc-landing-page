@@ -162,9 +162,15 @@ const handlePageChange = (page: number) => {
   fetchUsers(page);
 };
 
+/**
+ * Returns a local-time timestamp formatted as `dd/MM/yyyy HH:mm`.
+ * Falls back to the localized `"userManagement.never"` label when empty.
+ */
 const formatDate = (dateString: string) => {
   if (!dateString) return t("userManagement.never");
-  return new Date(dateString).toLocaleDateString();
+  const d = new Date(dateString);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 };
 
 const handleImageError = (userId: string) => {
