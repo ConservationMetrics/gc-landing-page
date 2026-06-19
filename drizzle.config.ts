@@ -1,5 +1,8 @@
 import { defineConfig } from "drizzle-kit";
 
+// Drizzle Kit runs outside Nuxt (via `pnpm db:generate` / `pnpm db:migrate`), so
+// useRuntimeConfig() is not available here. These read the same NUXT_* env vars
+// that nuxt.config.ts maps into runtimeConfig at app runtime (see gc-exp).
 export default defineConfig({
   dialect: "postgresql",
   schema: "./server/database/schema.ts",

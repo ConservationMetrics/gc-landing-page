@@ -25,16 +25,13 @@ const createConfigConnection = () => {
 
   let connectionString = `postgresql://${encodeURIComponent(dbUser)}:${encodeURIComponent(dbPassword)}@${dbHost}:${dbPort}/${encodeURIComponent(configDatabase)}`;
 
-  const isCI = process.env.CI === "true";
-  const useSSL = dbSsl && !isCI;
-
-  if (useSSL) {
+  if (dbSsl) {
     connectionString += "?sslmode=require";
   }
 
   const queryClient = postgres(connectionString, {
     prepare: false,
-    ssl: useSSL ? { rejectUnauthorized: false } : false,
+    ssl: dbSsl ? { rejectUnauthorized: false } : false,
   });
 
   return drizzle(queryClient, { schema });

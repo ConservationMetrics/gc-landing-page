@@ -23,7 +23,7 @@ The landing page connects to the shared `guardianconnector` Postgres database (s
 | `NUXT_CONFIG_DATABASE` | Database name (default: `guardianconnector`) |
 | `NUXT_DB_SSL` | Set to `true` to enable SSL |
 
-Schema changes are managed with Drizzle ORM. Migrations run automatically when the server starts — that is the preferred path in deployed environments.
+Schema changes are managed with Drizzle ORM. Migrations run automatically when the server starts — that is the preferred path in deployed environments. This follows **Option 4** from the [gc-explorer database-first migration discussion](https://github.com/ConservationMetrics/gc-explorer/issues/472#issuecomment-4625773992) (run migrations at app startup every time, rather than a separate migrate step or runtime table creation). See also [gc-landing-page#83](https://github.com/ConservationMetrics/gc-landing-page/issues/83).
 
 ```bash
 # generate a migration after editing server/database/schema.ts
