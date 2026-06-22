@@ -39,12 +39,12 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    configDatabase: "guardianconnector",
+    configDatabase: "",
     dbHost: "",
     dbUser: "",
     dbPassword: "",
-    dbPort: "5432",
-    dbSsl: true,
+    dbPort: "",
+    dbSsl: false,
     // Session secret for nuxt-auth-utils
     sessionSecret: "your-session-secret-key-change-in-production",
     // OAuth configuration for nuxt-auth-utils and Auth0 management API

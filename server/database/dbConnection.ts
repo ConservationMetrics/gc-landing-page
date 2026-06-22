@@ -23,13 +23,12 @@ const createConfigConnection = () => {
     `);
   }
 
-  let connectionString = `postgresql://${encodeURIComponent(dbUser)}:${encodeURIComponent(dbPassword)}@${dbHost}:${dbPort}/${encodeURIComponent(configDatabase)}`;
-
-  if (dbSsl) {
-    connectionString += "?sslmode=require";
-  }
-
-  const queryClient = postgres(connectionString, {
+  const queryClient = postgres({
+    host: dbHost,
+    port: Number(dbPort),
+    username: dbUser,
+    password: dbPassword,
+    database: configDatabase,
     prepare: false,
     ssl: dbSsl ? { rejectUnauthorized: false } : false,
   });
