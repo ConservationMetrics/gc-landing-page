@@ -12,16 +12,7 @@ A modern, lightweight landing page for Guardian Connector communities with envir
 
 ## Database
 
-The landing page connects to the shared `guardianconnector` Postgres database (same instance as gc-explorer). Configure these environment variables:
-
-| Variable | Description |
-|----------|-------------|
-| `NUXT_DB_HOST` | Postgres host |
-| `NUXT_DB_USER` | Postgres user |
-| `NUXT_DB_PASSWORD` | Postgres password |
-| `NUXT_DB_PORT` | Postgres port (see `.env.example`) |
-| `NUXT_CONFIG_DATABASE` | Database name (see `.env.example`) |
-| `NUXT_DB_SSL` | Set to `true` to enable SSL |
+The landing page connects to the shared `guardianconnector` Postgres database (same instance as gc-explorer). Configure these environment variables  — see the required env vars in `.env.example`.
 
 Schema changes are managed with Drizzle ORM. Migrations run automatically when the server starts — that is the preferred path in deployed environments. This follows **Option 4** from the [gc-explorer database-first migration discussion](https://github.com/ConservationMetrics/gc-explorer/issues/472#issuecomment-4625773992) (run migrations at app startup every time, rather than a separate migrate step or runtime table creation). See also [gc-landing-page#83](https://github.com/ConservationMetrics/gc-landing-page/issues/83).
 
