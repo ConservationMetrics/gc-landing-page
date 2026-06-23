@@ -3,9 +3,8 @@ import postgres from "postgres";
 import * as schema from "@/server/database/schema";
 
 const createConfigConnection = () => {
-  const { configDatabase, dbHost, dbUser, dbPassword, dbPort, dbSsl } =
+  const { dbHost, dbUser, dbPassword, dbPort, dbSsl } =
     useRuntimeConfig() as unknown as {
-      configDatabase: string;
       dbHost: string;
       dbUser: string;
       dbPassword: string;
@@ -13,13 +12,12 @@ const createConfigConnection = () => {
       dbSsl: boolean;
     };
 
-  if (!dbUser || !dbPassword || !dbHost || !dbPort || !configDatabase) {
+  if (!dbUser || !dbPassword || !dbHost || !dbPort) {
     throw new Error(`Missing required database environment variables:
       NUXT_DB_USER: ${dbUser ? "✓" : "✗"}
       NUXT_DB_PASSWORD: ${dbPassword ? "✓" : "✗"}
       NUXT_DB_HOST: ${dbHost ? "✓" : "✗"}
       NUXT_DB_PORT: ${dbPort ? "✓" : "✗"}
-      NUXT_CONFIG_DATABASE: ${configDatabase ? "✓" : "✗"}
     `);
   }
 
@@ -28,7 +26,7 @@ const createConfigConnection = () => {
     port: Number(dbPort),
     username: dbUser,
     password: dbPassword,
-    database: configDatabase,
+    database: "guardianconnector",
     prepare: false,
     ssl: dbSsl ? { rejectUnauthorized: false } : false,
   });

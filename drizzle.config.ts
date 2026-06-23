@@ -10,7 +10,7 @@ export default defineConfig({
     port: parseInt(process.env.NUXT_DB_PORT!),
     user: process.env.NUXT_DB_USER,
     password: process.env.NUXT_DB_PASSWORD,
-    database: process.env.NUXT_CONFIG_DATABASE,
+    database: "guardianconnector",
     ssl:
       process.env.NUXT_DB_SSL === "true"
         ? { rejectUnauthorized: false }

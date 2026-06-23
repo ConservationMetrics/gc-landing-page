@@ -39,7 +39,6 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    configDatabase: "",
     dbHost: "",
     dbUser: "",
     dbPassword: "",
