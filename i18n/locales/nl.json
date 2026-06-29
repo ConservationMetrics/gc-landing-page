@@ -59,13 +59,13 @@
   },
   "roles": {
     "admin": "Beheerder",
-    "adminDescription": "Alle routes inclusief '/config'",
+    "adminDescription": "Volledige toegang tot alles, inclusief instellingen en gebruikersbeheer",
     "guest": "Gast",
-    "guestDescription": "Alleen gast en onbeperkte routes",
+    "guestDescription": "Alleen toegang tot datasets die met gasten zijn gedeeld",
     "member": "Lid",
-    "memberDescription": "Beperkte routes (geen toegang tot '/config')",
+    "memberDescription": "Toegang tot alle datasets",
     "signedIn": "Ingelogd",
-    "signedInDescription": "Ingelogd maar zonder speciale privileges"
+    "signedInDescription": "Alleen toegang tot openbare datasets. Alleen inloggen geeft geen extra toegang"
   },
   "services": {
     "communityService": "Gemeenschapsservice",

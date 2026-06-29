@@ -59,13 +59,13 @@
   },
   "roles": {
     "admin": "Administrador",
-    "adminDescription": "Todas as rotas incluindo '/config'",
+    "adminDescription": "Acesso total a tudo, incluindo configurações e gestão de usuários",
     "guest": "Convidado",
-    "guestDescription": "Apenas rotas de convidado e não restritas",
+    "guestDescription": "Só pode acessar conjuntos de dados compartilhados com convidados",
     "member": "Membro",
-    "memberDescription": "Rotas restritas (não pode acessar '/config')",
+    "memberDescription": "Pode acessar todos os conjuntos de dados",
     "signedIn": "Conectado",
-    "signedInDescription": "Conectado mas sem privilégios especiais"
+    "signedInDescription": "Só pode acessar conjuntos de dados públicos. Fazer login sozinho não concede acesso adicional"
   },
   "services": {
     "communityService": "Serviço da comunidade",

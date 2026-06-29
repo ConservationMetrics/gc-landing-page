@@ -36,13 +36,13 @@
   },
   "roles": {
     "admin": "Admin",
-    "adminDescription": "All routes including '/config'",
+    "adminDescription": "Full access to everything, including settings and user management",
     "guest": "Guest",
-    "guestDescription": "Guest and unrestricted routes only",
+    "guestDescription": "Can access only the datasets that have been shared with guests",
     "member": "Member",
-    "memberDescription": "Restricted routes (cannot access '/config')",
+    "memberDescription": "Can access all datasets",
     "signedIn": "Signed In",
-    "signedInDescription": "Signed in but with no special privileges"
+    "signedInDescription": "Can access only public datasets. Signing in alone doesn't grant any additional access"
   },
   "dataSources": {
     "andMore": "and more",
