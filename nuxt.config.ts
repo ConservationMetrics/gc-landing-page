@@ -39,6 +39,11 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    dbHost: "",
+    dbUser: "",
+    dbPassword: "",
+    dbPort: "",
+    dbSsl: false,
     // Session secret for nuxt-auth-utils
     sessionSecret: "your-session-secret-key-change-in-production",
     // OAuth configuration for nuxt-auth-utils and Auth0 management API

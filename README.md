@@ -10,6 +10,20 @@ A modern, lightweight landing page for Guardian Connector communities with envir
 - **Environment-based Service Configuration** - Simple boolean flags for service availability
 - **Conditional Rendering** - Only enabled services shown in UI
 
+## Database
+
+The landing page connects to the shared `guardianconnector` Postgres database (same instance as gc-explorer). Configure these environment variables  — see the required env vars in `.env.example`.
+
+Schema changes are managed with Drizzle ORM. Migrations run automatically when the server starts — that is the preferred path in deployed environments. This follows **Option 4** from the [gc-explorer database-first migration discussion](https://github.com/ConservationMetrics/gc-explorer/issues/472#issuecomment-4625773992) (run migrations at app startup every time, rather than a separate migrate step or runtime table creation). See also [gc-landing-page#83](https://github.com/ConservationMetrics/gc-landing-page/issues/83).
+
+```bash
+# generate a migration after editing server/database/schema.ts
+$ pnpm db:generate
+
+# optional: apply migrations manually (e.g. local debugging without starting the server)
+$ pnpm db:migrate
+```
+
 ## Installation and Deployment
 
 ### Quick Start
