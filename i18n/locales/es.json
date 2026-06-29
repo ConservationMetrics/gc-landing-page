@@ -59,13 +59,13 @@
   },
   "roles": {
     "admin": "Administrador",
-    "adminDescription": "Todas las rutas incluyendo '/config'",
+    "adminDescription": "Acceso completo a todo, incluidos ajustes y gestión de usuarios",
     "guest": "Invitado",
-    "guestDescription": "Solo rutas de invitado y no restringidas",
+    "guestDescription": "Solo puede acceder a los conjuntos de datos compartidos con invitados",
     "member": "Miembro",
-    "memberDescription": "Rutas restringidas (no puede acceder a '/config')",
+    "memberDescription": "Puede acceder a todos los conjuntos de datos",
     "signedIn": "Conectado",
-    "signedInDescription": "Conectado pero sin privilegios especiales"
+    "signedInDescription": "Solo puede acceder a conjuntos de datos públicos. Iniciar sesión por sí solo no otorga acceso adicional"
   },
   "services": {
     "communityService": "Servicio de la comunidad",
@@ -130,7 +130,6 @@
     "search": "Buscar",
     "searchPlaceholder": "Buscar usuarios por email o nombre...",
     "searching": "Buscando...",
-    "selectedRoles": "Roles seleccionados",
     "showing": "Mostrando",
     "status": "Estado",
     "subtitle": "Gestiona roles de usuario y estado de aprobación",

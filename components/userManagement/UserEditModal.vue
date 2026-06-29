@@ -238,10 +238,6 @@ const formatDate = (dateString: string) => {
                       </div>
                     </div>
                   </div>
-                  <p class="text-xs text-gray-500 dark:text-dusk-400 mt-2">
-                    {{ t("userManagement.selectedRoles") }}:
-                    {{ selectedRoleName }}
-                  </p>
                 </div>
 
                 <!-- Error Display -->
