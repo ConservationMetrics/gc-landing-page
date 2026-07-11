@@ -148,6 +148,7 @@
     "userIsApproved": "Gebruiker is goedgekeurd",
     "userRemovedSuccessfully": "Gebruiker {email} succesvol verwijderd",
     "userRoles": "Gebruikersrollen",
-    "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt"
+    "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt",
+    "you": "Jij"
   }
 }

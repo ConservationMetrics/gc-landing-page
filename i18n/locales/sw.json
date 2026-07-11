@@ -148,6 +148,7 @@
     "userIsApproved": "Mtumiaji ameidhinishwa",
     "userRemovedSuccessfully": "Mtumiaji {email} ameondolewa kwa mafanikio",
     "userRoles": "Majukumu ya Mtumiaji",
-    "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio"
+    "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio",
+    "you": "Wewe"
   }
 }

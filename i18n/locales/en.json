@@ -148,6 +148,7 @@
     "userIsApproved": "User is approved",
     "userRemovedSuccessfully": "User {email} removed successfully",
     "userRoles": "User Roles",
-    "userUpdatedSuccessfully": "User {email} updated successfully"
+    "userUpdatedSuccessfully": "User {email} updated successfully",
+    "you": "You"
   }
 }
