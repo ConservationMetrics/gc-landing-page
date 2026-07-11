@@ -152,6 +152,49 @@ const updateUser = async (
   }
 };
 
+const deleteUser = async (
+  user: UserManagementUser,
+  callback?: (_result: { success: boolean; error?: string }) => void,
+) => {
+  saving.value = true;
+  error.value = "";
+  success.value = "";
+
+  try {
+    const response = await $fetch<{ success: boolean }>(
+      `/api/users/${user.id}`,
+      { method: "DELETE" },
+    );
+
+    if (response.success) {
+      users.value = users.value.filter((u) => u.id !== user.id);
+      totalUsers.value = Math.max(0, totalUsers.value - 1);
+      success.value = t("userManagement.userRemovedSuccessfully", {
+        email: user.email,
+      });
+      setTimeout(() => {
+        success.value = "";
+      }, 3000);
+      callback?.({ success: true });
+    } else {
+      const errorMsg = t("userManagement.failedToRemoveUser", {
+        email: user.email,
+      });
+      error.value = errorMsg;
+      callback?.({ success: false, error: errorMsg });
+    }
+  } catch (err) {
+    console.error("Failed to remove user:", err);
+    const errorMsg = t("userManagement.failedToRemoveUser", {
+      email: user.email,
+    });
+    error.value = errorMsg;
+    callback?.({ success: false, error: errorMsg });
+  } finally {
+    saving.value = false;
+  }
+};
+
 const handleSearch = () => {
   currentPage.value = 0;
   fetchUsers(0);
@@ -441,6 +484,7 @@ onMounted(async () => {
                   :available-roles="roles"
                   :saving="saving"
                   @update="updateUser"
+                  @delete="deleteUser"
                 />
               </td>
             </tr>
@@ -564,6 +608,7 @@ onMounted(async () => {
               :available-roles="roles"
               :saving="saving"
               @update="updateUser"
+              @delete="deleteUser"
             />
           </div>
         </div>

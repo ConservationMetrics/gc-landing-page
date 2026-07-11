@@ -538,3 +538,41 @@ export const updateUserMetadata = async (
     return false;
   }
 };
+
+/**
+ * Permanently deletes a user from Auth0 using the Management API
+ *
+ * @param {string} userId - The Auth0 user ID to delete
+ * @returns {Promise<boolean>} True if successful, false otherwise
+ * @throws {Error} When Auth0 configuration is missing or API call fails
+ */
+export const deleteUser = async (userId: string): Promise<boolean> => {
+  try {
+    const config = useRuntimeConfig();
+    const { oauth } = config;
+
+    if (!oauth?.auth0?.domain) return false;
+
+    const accessToken = await getManagementApiToken();
+    if (!accessToken) {
+      console.error("🔍 Failed to get Management API access token");
+      return false;
+    }
+
+    const response = await fetch(
+      `https://${oauth.auth0.domain}/api/v2/users/${userId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    return response.ok;
+  } catch (error) {
+    console.error("🔍 Error deleting user:", error);
+    return false;
+  }
+};
