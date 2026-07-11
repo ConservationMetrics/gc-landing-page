@@ -183,7 +183,7 @@ curl --request GET \
 3. **"Failed to fetch user roles"**: Check Management API authorization and scopes
 4. **"Windmill not visible"**: Verify user has Admin role assigned
 5. **"Auth0 not working"**: Check if `NUXT_PUBLIC_AUTH0_ENABLED` is set to `true`
-6. **"Failed to remove user"**: Ensure the application is granted the `delete:users` scope on the Auth0 Management API. Admins cannot remove their own account.
+6. **"Failed to remove user"**: Ensure the application is granted the `delete:users` scope on the Auth0 Management API.
 
 ### RBAC not working despite correct Auth0 configuration
 
