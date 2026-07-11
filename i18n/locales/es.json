@@ -103,6 +103,7 @@
     "approved": "Aprobado",
     "approvedUsersDescription": "Los usuarios aprobados pueden acceder a la aplicación con sus roles asignados",
     "cancel": "Cancelar",
+    "cannotRemoveSelf": "No puedes eliminar tu propia cuenta.",
     "confirmRemove": "Sí, Eliminar",
     "confirmRemoveUser": "¿Estás seguro de que deseas eliminar permanentemente a este usuario? Esta acción no se puede deshacer.",
     "created": "Creado",

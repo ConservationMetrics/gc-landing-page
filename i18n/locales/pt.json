@@ -103,6 +103,7 @@
     "approved": "Aprovado",
     "approvedUsersDescription": "Usuários aprovados podem acessar a aplicação com seus papéis atribuídos",
     "cancel": "Cancelar",
+    "cannotRemoveSelf": "Você não pode remover sua própria conta.",
     "confirmRemove": "Sim, Remover",
     "confirmRemoveUser": "Tem certeza de que deseja remover permanentemente este usuário? Esta ação não pode ser desfeita.",
     "created": "Criado",

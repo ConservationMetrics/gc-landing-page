@@ -103,6 +103,7 @@
     "approved": "Idhinishwa",
     "approvedUsersDescription": "Watumiaji walioidhinishwa wanaweza kufikia programu kwa majukumu yaliyowekwa",
     "cancel": "Ghairi",
+    "cannotRemoveSelf": "Huwezi kuondoa akaunti yako mwenyewe.",
     "confirmRemove": "Ndiyo, Ondoa",
     "confirmRemoveUser": "Una uhakika unataka kumwondoa mtumiaji huyu kabisa? Kitendo hiki hakiwezi kutenduliwa.",
     "created": "Imeundwa",
