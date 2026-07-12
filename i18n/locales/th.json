@@ -103,6 +103,7 @@
     "approved": "อนุมัติแล้ว",
     "approvedUsersDescription": "ผู้ใช้ที่อนุมัติแล้วสามารถเข้าถึงแอปพลิเคชันตามบทบาทที่ได้รับมอบหมาย",
     "cancel": "ยกเลิก",
+    "cannotRemoveSelf": "คุณไม่สามารถลบบัญชีของคุณเองได้",
     "confirmRemove": "ใช่ ลบออก",
     "confirmRemoveUser": "คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้นี้อย่างถาวร? การดำเนินการนี้ไม่สามารถย้อนกลับได้",
     "created": "สร้างเมื่อ",
@@ -147,6 +148,7 @@
     "userIsApproved": "ผู้ใช้ได้รับการอนุมัติแล้ว",
     "userRemovedSuccessfully": "ลบผู้ใช้ {email} สำเร็จแล้ว",
     "userRoles": "บทบาทของผู้ใช้",
-    "userUpdatedSuccessfully": "อัปเดตผู้ใช้ {email} สำเร็จแล้ว"
+    "userUpdatedSuccessfully": "อัปเดตผู้ใช้ {email} สำเร็จแล้ว",
+    "you": "คุณ"
   }
 }

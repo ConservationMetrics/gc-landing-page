@@ -12,6 +12,7 @@ interface Props {
   user: UserManagementUser;
   availableRoles: UserRole[];
   saving: boolean;
+  isSelf: boolean;
 }
 
 const props = defineProps<Props>();
@@ -289,8 +290,14 @@ const formatDate = (dateString: string) => {
                   <p class="text-xs text-gray-500 dark:text-dusk-400 mb-3">
                     {{ t("userManagement.removeUserDescription") }}
                   </p>
+                  <p
+                    v-if="isSelf"
+                    class="text-xs italic text-gray-500 dark:text-dusk-400"
+                  >
+                    {{ t("userManagement.cannotRemoveSelf") }}
+                  </p>
                   <button
-                    v-if="!confirmingRemove"
+                    v-else-if="!confirmingRemove"
                     @click="confirmingRemove = true"
                     :disabled="isBusy"
                     class="inline-flex justify-center rounded-md border border-red-300 dark:border-red-900 px-4 py-2 text-sm font-medium text-red-700 dark:text-red-300 bg-white dark:bg-dusk-800 hover:bg-red-50 dark:hover:bg-red-950/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-dusk-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"

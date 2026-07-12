@@ -103,6 +103,7 @@
     "approved": "Goedgekeurd",
     "approvedUsersDescription": "Goedgekeurde gebruikers hebben toegang tot de applicatie met hun toegewezen rollen",
     "cancel": "Annuleren",
+    "cannotRemoveSelf": "Je kunt je eigen account niet verwijderen.",
     "confirmRemove": "Ja, Verwijderen",
     "confirmRemoveUser": "Weet je zeker dat je deze gebruiker permanent wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
     "created": "Aangemaakt",
@@ -147,6 +148,7 @@
     "userIsApproved": "Gebruiker is goedgekeurd",
     "userRemovedSuccessfully": "Gebruiker {email} succesvol verwijderd",
     "userRoles": "Gebruikersrollen",
-    "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt"
+    "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt",
+    "you": "Jij"
   }
 }

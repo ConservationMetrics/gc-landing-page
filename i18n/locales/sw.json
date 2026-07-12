@@ -103,6 +103,7 @@
     "approved": "Idhinishwa",
     "approvedUsersDescription": "Watumiaji walioidhinishwa wanaweza kufikia programu kwa majukumu yaliyowekwa",
     "cancel": "Ghairi",
+    "cannotRemoveSelf": "Huwezi kuondoa akaunti yako mwenyewe.",
     "confirmRemove": "Ndiyo, Ondoa",
     "confirmRemoveUser": "Una uhakika unataka kumwondoa mtumiaji huyu kabisa? Kitendo hiki hakiwezi kutenduliwa.",
     "created": "Imeundwa",
@@ -147,6 +148,7 @@
     "userIsApproved": "Mtumiaji ameidhinishwa",
     "userRemovedSuccessfully": "Mtumiaji {email} ameondolewa kwa mafanikio",
     "userRoles": "Majukumu ya Mtumiaji",
-    "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio"
+    "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio",
+    "you": "Wewe"
   }
 }

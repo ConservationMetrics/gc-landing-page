@@ -103,6 +103,7 @@
     "approved": "Approved",
     "approvedUsersDescription": "Approved users can access the application with their assigned roles",
     "cancel": "Cancel",
+    "cannotRemoveSelf": "You cannot remove your own account.",
     "confirmRemove": "Yes, Remove",
     "confirmRemoveUser": "Are you sure you want to permanently remove this user? This action cannot be undone.",
     "created": "Created",
@@ -147,6 +148,7 @@
     "userIsApproved": "User is approved",
     "userRemovedSuccessfully": "User {email} removed successfully",
     "userRoles": "User Roles",
-    "userUpdatedSuccessfully": "User {email} updated successfully"
+    "userUpdatedSuccessfully": "User {email} updated successfully",
+    "you": "You"
   }
 }
