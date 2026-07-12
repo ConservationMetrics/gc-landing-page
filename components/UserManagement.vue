@@ -495,6 +495,7 @@ onMounted(async () => {
                   :user="user"
                   :available-roles="roles"
                   :saving="saving"
+                  :is-self="isSelf(user)"
                   @update="updateUser"
                   @delete="deleteUser"
                 />
@@ -627,6 +628,7 @@ onMounted(async () => {
               :user="user"
               :available-roles="roles"
               :saving="saving"
+              :is-self="isSelf(user)"
               @update="updateUser"
               @delete="deleteUser"
             />

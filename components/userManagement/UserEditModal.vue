@@ -1,19 +1,18 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
-import { useUserSession } from "#imports";
 import Avatar from "vue-boring-avatars";
-import type { UserRole, UserManagementUser, User } from "~/types/types";
+import type { UserRole, UserManagementUser } from "~/types/types";
 import {
   translateRoleName,
   translateRoleDescription,
 } from "@/utils/roleTranslations";
 const { t } = useI18n();
-const { user: currentUser } = useUserSession();
 
 interface Props {
   user: UserManagementUser;
   availableRoles: UserRole[];
   saving: boolean;
+  isSelf: boolean;
 }
 
 const props = defineProps<Props>();
@@ -41,11 +40,6 @@ const confirmingRemove = ref(false);
 const saveError = ref("");
 
 const isBusy = computed(() => isSaving.value || isRemoving.value);
-
-// Admins cannot remove their own account (session stores email in `auth0`)
-const isSelf = computed(
-  () => (currentUser.value as User | undefined)?.auth0 === props.user.email,
-);
 
 // Computed properties
 const selectedRoleName = computed(() => {
