@@ -12,6 +12,7 @@ interface Props {
   user: UserManagementUser;
   availableRoles: UserRole[];
   saving: boolean;
+  isSelf: boolean;
 }
 
 const props = defineProps<Props>();
@@ -23,6 +24,10 @@ const emit = defineEmits<{
     isApproved: boolean,
     callback: (_result: { success: boolean; error?: string }) => void,
   ];
+  delete: [
+    user: UserManagementUser,
+    callback: (_result: { success: boolean; error?: string }) => void,
+  ];
 }>();
 
 const isOpen = ref(false);
@@ -30,7 +35,11 @@ const selectedRole = ref<string>("");
 const isApproved = ref(false);
 const imageError = ref(false);
 const isSaving = ref(false);
+const isRemoving = ref(false);
+const confirmingRemove = ref(false);
 const saveError = ref("");
+
+const isBusy = computed(() => isSaving.value || isRemoving.value);
 
 // Computed properties
 const selectedRoleName = computed(() => {
@@ -45,6 +54,8 @@ const openModal = () => {
   isApproved.value = props.user.isApproved;
   imageError.value = false; // Reset image error state
   isSaving.value = false;
+  isRemoving.value = false;
+  confirmingRemove.value = false;
   saveError.value = "";
   isOpen.value = true;
 };
@@ -54,7 +65,7 @@ const handleImageError = () => {
 };
 
 const closeModal = () => {
-  if (!isSaving.value) {
+  if (!isBusy.value) {
     isOpen.value = false;
   }
 };
@@ -86,6 +97,33 @@ const handleSave = async () => {
     console.error("Save error:", error);
   } finally {
     isSaving.value = false;
+  }
+};
+
+const handleRemove = async () => {
+  isRemoving.value = true;
+  saveError.value = "";
+
+  try {
+    const result = await new Promise<{ success: boolean; error?: string }>(
+      (resolve) => {
+        emit("delete", props.user, resolve);
+      },
+    );
+
+    if (result.success) {
+      isOpen.value = false;
+    } else {
+      saveError.value =
+        result.error ||
+        t("userManagement.failedToRemoveUser", { email: props.user.email });
+    }
+  } catch (error) {
+    saveError.value = t("userManagement.unexpectedError");
+    console.error("Remove error:", error);
+  } finally {
+    isRemoving.value = false;
+    confirmingRemove.value = false;
   }
 };
 
@@ -125,7 +163,7 @@ const formatDate = (dateString: string) => {
 
         <!-- Modal panel -->
         <div
-          class="relative inline-block align-bottom bg-white dark:bg-dusk-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          class="relative inline-block align-bottom bg-white dark:bg-dusk-800 rounded-lg text-left whitespace-pre-wrap overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
         >
           <div class="bg-white dark:bg-dusk-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
@@ -240,6 +278,59 @@ const formatDate = (dateString: string) => {
                   </div>
                 </div>
 
+                <!-- Danger Zone -->
+                <div
+                  class="mb-6 p-4 border border-red-200 dark:border-red-900 rounded-lg whitespace-pre-wrap"
+                >
+                  <h4
+                    class="text-sm font-medium text-red-700 dark:text-red-300 mb-1"
+                  >
+                    {{ t("userManagement.removeUser") }}
+                  </h4>
+                  <p class="text-xs text-gray-500 dark:text-dusk-400 mb-3">
+                    {{ t("userManagement.removeUserDescription") }}
+                  </p>
+                  <p
+                    v-if="isSelf"
+                    class="text-xs italic text-gray-500 dark:text-dusk-400"
+                  >
+                    {{ t("userManagement.cannotRemoveSelf") }}
+                  </p>
+                  <button
+                    v-else-if="!confirmingRemove"
+                    @click="confirmingRemove = true"
+                    :disabled="isBusy"
+                    class="inline-flex justify-center rounded-md border border-red-300 dark:border-red-900 px-4 py-2 text-sm font-medium text-red-700 dark:text-red-300 bg-white dark:bg-dusk-800 hover:bg-red-50 dark:hover:bg-red-950/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-dusk-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {{ t("userManagement.removeUser") }}
+                  </button>
+                  <div v-else>
+                    <p class="text-sm text-red-600 dark:text-red-300 mb-3">
+                      {{ t("userManagement.confirmRemoveUser") }}
+                    </p>
+                    <div class="flex gap-2">
+                      <button
+                        @click="handleRemove"
+                        :disabled="isBusy"
+                        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-dusk-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {{
+                          isRemoving
+                            ? t("userManagement.removing")
+                            : t("userManagement.confirmRemove")
+                        }}
+                      </button>
+                      <button
+                        @click="confirmingRemove = false"
+                        :disabled="isBusy"
+                        class="inline-flex justify-center rounded-md border border-gray-300 dark:border-dusk-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-dusk-200 bg-white dark:bg-dusk-800 hover:bg-gray-50 dark:hover:bg-dusk-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {{ t("userManagement.cancel") }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Error Display -->
                 <div
                   v-if="saveError"
@@ -259,7 +350,7 @@ const formatDate = (dateString: string) => {
           >
             <button
               @click="handleSave"
-              :disabled="isSaving"
+              :disabled="isBusy"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-violet-600 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-700 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{
@@ -270,7 +361,7 @@ const formatDate = (dateString: string) => {
             </button>
             <button
               @click="closeModal"
-              :disabled="isSaving"
+              :disabled="isBusy"
               class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-dusk-700 shadow-sm px-4 py-2 bg-white dark:bg-dusk-800 text-base font-medium text-gray-700 dark:text-dusk-200 hover:bg-gray-50 dark:hover:bg-dusk-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-700 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ t("userManagement.cancel") }}

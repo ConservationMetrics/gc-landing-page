@@ -103,11 +103,15 @@
     "approved": "Idhinishwa",
     "approvedUsersDescription": "Watumiaji walioidhinishwa wanaweza kufikia programu kwa majukumu yaliyowekwa",
     "cancel": "Ghairi",
+    "cannotRemoveSelf": "Huwezi kuondoa akaunti yako mwenyewe.",
+    "confirmRemove": "Ndiyo, Ondoa",
+    "confirmRemoveUser": "Una uhakika unataka kumwondoa mtumiaji huyu kabisa? Kitendo hiki hakiwezi kutenduliwa.",
     "created": "Imeundwa",
     "edit": "Hariri",
     "editUserTitle": "Hariri Mtumiaji: {email}",
     "failedToLoadRoles": "Imeshindwa kupakia majukumu yanayopatikana",
     "failedToLoadUsers": "Imeshindwa kupakia watumiaji",
+    "failedToRemoveUser": "Imeshindwa kumwondoa mtumiaji {email}",
     "failedToSaveUser": "Imeshindwa kuhifadhi mtumiaji",
     "failedToUpdateUser": "Imeshindwa kusasisha mtumiaji {email}",
     "lastLogin": "Kuingia Mwisho",
@@ -122,6 +126,9 @@
     "of": "kati ya",
     "pending": "Inasubiri",
     "previous": "Iliyotangulia",
+    "removeUser": "Ondoa Mtumiaji",
+    "removeUserDescription": "Ondoa mtumiaji huyu kabisa kutoka Guardian Connector. Kitendo hiki hakiwezi kutenduliwa.",
+    "removing": "Inaondoa...",
     "results": "matokeo",
     "returnToHomepage": "Rudi kwenye Ukurasa wa Kuanzia",
     "roles": "Majukumu",
@@ -139,7 +146,9 @@
     "unknown": "Haijulikani",
     "user": "Mtumiaji",
     "userIsApproved": "Mtumiaji ameidhinishwa",
+    "userRemovedSuccessfully": "Mtumiaji {email} ameondolewa kwa mafanikio",
     "userRoles": "Majukumu ya Mtumiaji",
-    "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio"
+    "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio",
+    "you": "Wewe"
   }
 }

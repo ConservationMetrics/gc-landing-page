@@ -34,7 +34,8 @@ When a user logs in, the application:
 The application uses Auth0's Management API to fetch user roles. This requires:
 
 - **Management API authorization** for the application
-- **Required scopes**: `read:users`, `read:user_idp_tokens`
+- **Required scopes**: `read:users`, `read:user_idp_tokens`, `read:roles`
+- **Additional scopes for user management** (admin edit/remove actions): `update:users`, `delete:users`
 - **Access token generation** with client credentials flow
 
 ### 3. Service Visibility Control
@@ -99,6 +100,9 @@ Before implementing RBAC, ensure:
    - Select the required scopes:
      - `read:users` - to fetch user information
      - `read:user_idp_tokens` - to read user roles
+     - `read:roles` - to list available roles
+     - `update:users` - to change user roles and approval status
+     - `delete:users` - to permanently remove a user (Remove User action)
 
 ## Role Management
 
@@ -165,6 +169,11 @@ curl --request GET \
    POST /oauth/token
    ```
 
+4. **Delete User** (Remove User action, requires `delete:users`):
+   ```
+   DELETE /api/v2/users/{user_id}
+   ```
+
 ## Troubleshooting
 
 ### Common Issues
@@ -174,6 +183,7 @@ curl --request GET \
 3. **"Failed to fetch user roles"**: Check Management API authorization and scopes
 4. **"Windmill not visible"**: Verify user has Admin role assigned
 5. **"Auth0 not working"**: Check if `NUXT_PUBLIC_AUTH0_ENABLED` is set to `true`
+6. **"Failed to remove user"**: Ensure the application is granted the `delete:users` scope on the Auth0 Management API.
 
 ### RBAC not working despite correct Auth0 configuration
 

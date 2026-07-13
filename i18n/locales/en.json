@@ -103,11 +103,15 @@
     "approved": "Approved",
     "approvedUsersDescription": "Approved users can access the application with their assigned roles",
     "cancel": "Cancel",
+    "cannotRemoveSelf": "You cannot remove your own account.",
+    "confirmRemove": "Yes, Remove",
+    "confirmRemoveUser": "Are you sure you want to permanently remove this user? This action cannot be undone.",
     "created": "Created",
     "edit": "Edit",
     "editUserTitle": "Edit User: {email}",
     "failedToLoadRoles": "Failed to load available roles",
     "failedToLoadUsers": "Failed to load users",
+    "failedToRemoveUser": "Failed to remove user {email}",
     "failedToSaveUser": "Failed to save user",
     "failedToUpdateUser": "Failed to update user {email}",
     "lastLogin": "Last Login",
@@ -122,6 +126,9 @@
     "of": "of",
     "pending": "Pending",
     "previous": "Previous",
+    "removeUser": "Remove User",
+    "removeUserDescription": "Permanently remove this user from Guardian Connector. This action cannot be undone.",
+    "removing": "Removing...",
     "results": "results",
     "returnToHomepage": "Return to Homepage",
     "roles": "Roles",
@@ -139,7 +146,9 @@
     "unknown": "Unknown",
     "user": "User",
     "userIsApproved": "User is approved",
+    "userRemovedSuccessfully": "User {email} removed successfully",
     "userRoles": "User Roles",
-    "userUpdatedSuccessfully": "User {email} updated successfully"
+    "userUpdatedSuccessfully": "User {email} updated successfully",
+    "you": "You"
   }
 }

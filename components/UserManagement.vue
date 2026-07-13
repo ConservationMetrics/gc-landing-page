@@ -9,7 +9,8 @@ import type {
 } from "~/types/types";
 import UserEditModal from "@/components/userManagement/UserEditModal.vue";
 import { translateRoleName } from "@/utils/roleTranslations";
-import { navigateTo, useI18n } from "#imports";
+import { navigateTo, useI18n, useUserSession } from "#imports";
+import type { User } from "~/types/types";
 import { $fetch } from "ofetch";
 import {
   CheckCircle2,
@@ -20,6 +21,11 @@ import {
   XCircle,
 } from "lucide-vue-next";
 const { t } = useI18n();
+const { user: currentUser } = useUserSession();
+
+// Session stores the current user's email in `auth0`
+const isSelf = (user: UserManagementUser) =>
+  (currentUser.value as User | undefined)?.auth0 === user.email;
 
 const users = ref<UserManagementUser[]>([]);
 const roles = ref<UserRole[]>([]);
@@ -147,6 +153,49 @@ const updateUser = async (
     if (callback) {
       callback({ success: false, error: errorMsg });
     }
+  } finally {
+    saving.value = false;
+  }
+};
+
+const deleteUser = async (
+  user: UserManagementUser,
+  callback?: (_result: { success: boolean; error?: string }) => void,
+) => {
+  saving.value = true;
+  error.value = "";
+  success.value = "";
+
+  try {
+    const response = await $fetch<{ success: boolean }>(
+      `/api/users/${user.id}`,
+      { method: "DELETE" },
+    );
+
+    if (response.success) {
+      users.value = users.value.filter((u) => u.id !== user.id);
+      totalUsers.value = Math.max(0, totalUsers.value - 1);
+      success.value = t("userManagement.userRemovedSuccessfully", {
+        email: user.email,
+      });
+      setTimeout(() => {
+        success.value = "";
+      }, 3000);
+      callback?.({ success: true });
+    } else {
+      const errorMsg = t("userManagement.failedToRemoveUser", {
+        email: user.email,
+      });
+      error.value = errorMsg;
+      callback?.({ success: false, error: errorMsg });
+    }
+  } catch (err) {
+    console.error("Failed to remove user:", err);
+    const errorMsg = t("userManagement.failedToRemoveUser", {
+      email: user.email,
+    });
+    error.value = errorMsg;
+    callback?.({ success: false, error: errorMsg });
   } finally {
     saving.value = false;
   }
@@ -386,6 +435,12 @@ onMounted(async () => {
                       class="text-xs sm:text-sm font-medium text-gray-900 dark:text-dusk-100"
                     >
                       {{ user.name || user.nickname || "Unknown" }}
+                      <span
+                        v-if="isSelf(user)"
+                        class="ml-1.5 inline-flex px-1.5 py-0.5 text-[10px] font-semibold rounded-full bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-200 align-middle"
+                      >
+                        {{ t("userManagement.you") }}
+                      </span>
                     </div>
                     <div
                       class="text-xs sm:text-sm text-gray-500 dark:text-dusk-400"
@@ -440,7 +495,9 @@ onMounted(async () => {
                   :user="user"
                   :available-roles="roles"
                   :saving="saving"
+                  :is-self="isSelf(user)"
                   @update="updateUser"
+                  @delete="deleteUser"
                 />
               </td>
             </tr>
@@ -548,10 +605,18 @@ onMounted(async () => {
               />
             </div>
             <div class="min-w-0 flex-1">
-              <div
-                class="text-xs font-medium text-gray-900 dark:text-dusk-100 truncate"
-              >
-                {{ user.name || user.nickname || "Unknown" }}
+              <div class="flex items-center gap-1.5">
+                <span
+                  class="text-xs font-medium text-gray-900 dark:text-dusk-100 truncate"
+                >
+                  {{ user.name || user.nickname || "Unknown" }}
+                </span>
+                <span
+                  v-if="isSelf(user)"
+                  class="flex-shrink-0 inline-flex px-1.5 py-0.5 text-[10px] font-semibold rounded-full bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-200"
+                >
+                  {{ t("userManagement.you") }}
+                </span>
               </div>
               <div class="text-xs text-gray-500 dark:text-dusk-400 truncate">
                 {{ user.email }}
@@ -563,7 +628,9 @@ onMounted(async () => {
               :user="user"
               :available-roles="roles"
               :saving="saving"
+              :is-self="isSelf(user)"
               @update="updateUser"
+              @delete="deleteUser"
             />
           </div>
         </div>

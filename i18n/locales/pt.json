@@ -103,11 +103,15 @@
     "approved": "Aprovado",
     "approvedUsersDescription": "Usuários aprovados podem acessar a aplicação com seus papéis atribuídos",
     "cancel": "Cancelar",
+    "cannotRemoveSelf": "Você não pode remover sua própria conta.",
+    "confirmRemove": "Sim, Remover",
+    "confirmRemoveUser": "Tem certeza de que deseja remover permanentemente este usuário? Esta ação não pode ser desfeita.",
     "created": "Criado",
     "edit": "Editar",
     "editUserTitle": "Editar Usuário: {email}",
     "failedToLoadRoles": "Falha ao carregar funções disponíveis",
     "failedToLoadUsers": "Falha ao carregar usuários",
+    "failedToRemoveUser": "Falha ao remover usuário {email}",
     "failedToSaveUser": "Falha ao salvar usuário",
     "failedToUpdateUser": "Falha ao atualizar usuário {email}",
     "lastLogin": "Último Login",
@@ -122,6 +126,9 @@
     "of": "de",
     "pending": "Pendente",
     "previous": "Anterior",
+    "removeUser": "Remover Usuário",
+    "removeUserDescription": "Remover permanentemente este usuário do Guardian Connector. Esta ação não pode ser desfeita.",
+    "removing": "Removendo...",
     "results": "resultados",
     "returnToHomepage": "Voltar à Página Inicial",
     "roles": "Funções",
@@ -139,7 +146,9 @@
     "unknown": "Desconhecido",
     "user": "Usuário",
     "userIsApproved": "Usuário está aprovado",
+    "userRemovedSuccessfully": "Usuário {email} removido com sucesso",
     "userRoles": "Papéis do Usuário",
-    "userUpdatedSuccessfully": "Usuário {email} atualizado com sucesso"
+    "userUpdatedSuccessfully": "Usuário {email} atualizado com sucesso",
+    "you": "Você"
   }
 }
