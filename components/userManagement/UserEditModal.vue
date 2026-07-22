@@ -56,12 +56,6 @@ const sortedRoles = computed(() =>
   ),
 );
 
-const selectedRoleName = computed(() => {
-  if (!selectedRole.value) return t("userManagement.none");
-  const role = props.availableRoles.find((r) => r.id === selectedRole.value);
-  return role ? translateRoleName(role.name, t) : t("userManagement.unknown");
-});
-
 // Methods
 const openModal = () => {
   selectedRole.value = props.user.roles[0]?.id || "";
