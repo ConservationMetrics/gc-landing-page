@@ -41,12 +41,20 @@ const saveError = ref("");
 
 const isBusy = computed(() => isSaving.value || isRemoving.value);
 
+const ROLE_ORDER: Record<string, number> = {
+  Admin: 0,
+  Member: 1,
+  Guest: 2,
+  SignedIn: 3,
+};
+
 // Computed properties
-const selectedRoleName = computed(() => {
-  if (!selectedRole.value) return t("userManagement.none");
-  const role = props.availableRoles.find((r) => r.id === selectedRole.value);
-  return role ? translateRoleName(role.name, t) : t("userManagement.unknown");
-});
+const sortedRoles = computed(() =>
+  [...props.availableRoles].sort(
+    (a, b) =>
+      (ROLE_ORDER[a.name] ?? Infinity) - (ROLE_ORDER[b.name] ?? Infinity),
+  ),
+);
 
 // Methods
 const openModal = () => {
@@ -251,7 +259,7 @@ const formatDate = (dateString: string) => {
                     class="space-y-2 max-h-48 overflow-y-auto border border-gray-200 dark:border-dusk-700 rounded-lg p-3"
                   >
                     <div
-                      v-for="role in availableRoles"
+                      v-for="role in sortedRoles"
                       :key="role.id"
                       class="flex items-start"
                     >
