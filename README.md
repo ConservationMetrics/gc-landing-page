@@ -51,10 +51,6 @@ Local deployment of Docker:
 docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 ```
 
-## Login page
-
-- **Background image** — By default the sign-in page uses [`public/background.jpg`](public/background.jpg). Override it in **Theme Settings** (Admin → Theme) via the Background Image URL stored in `gc_settings`.
-
 ## Authentication
 
 ### Auth0 Setup
