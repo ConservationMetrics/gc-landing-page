@@ -9,9 +9,9 @@ import { translateRoleName } from "@/utils/roleTranslations";
 import { useAuthActions } from "@/composables/useAuth";
 import {
   BadgeCheck,
-  Layers,
   LogOut,
   Menu,
+  Palette,
   User as UserIcon,
   Users,
 } from "lucide-vue-next";
@@ -110,26 +110,11 @@ const { login, logout } = useAuthActions();
           </button>
         </div>
 
-        <!-- User info and controls -->
+        <!-- Auth controls when logged in -->
         <div
           v-if="isAuth0Configured && loggedIn"
           class="flex items-center space-x-3"
         >
-          <div
-            class="text-sm max-[1200px]:text-xs text-gray-700 dark:text-dusk-300"
-          >
-            {{ t("auth.welcome", { user: (user as User)?.auth0 || "User" }) }}
-            <span
-              v-if="(user as User)?.roles?.length"
-              class="text-xs max-[1200px]:text-[10px] text-gray-500 dark:text-dusk-400"
-            >
-              ({{
-                (user as User)?.roles
-                  ?.map((role) => translateRoleName(role.name, t))
-                  .join(", ")
-              }})
-            </span>
-          </div>
           <button
             @click="logout"
             class="text-gray-600 hover:text-gray-900 dark:text-dusk-400 dark:hover:text-dusk-100 transition-colors text-sm max-[1200px]:text-xs"
@@ -157,7 +142,26 @@ const { login, logout } = useAuthActions();
           </div>
         </div>
 
-        <!-- Theme Toggle -->
+        <!-- Theme Settings -->
+        <div
+          v-if="isAuth0Configured && loggedIn && isAdmin"
+          class="relative group"
+        >
+          <NuxtLink
+            to="/admin/theme"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
+          >
+            <Palette class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
+          </NuxtLink>
+          <!-- Tooltip -->
+          <div
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+          >
+            {{ t("auth.themeSettings") }}
+          </div>
+        </div>
+
+        <!-- Display (light / dark) Toggle -->
         <div class="relative group">
           <ThemeToggle theme="white" variant="icon" />
           <!-- Tooltip -->
@@ -258,7 +262,20 @@ const { login, logout } = useAuthActions();
         }}</span>
       </NuxtLink>
 
-      <!-- Theme Toggle -->
+      <!-- Theme Settings (if admin) -->
+      <NuxtLink
+        v-if="isAdmin"
+        to="/admin/theme"
+        @click="mobileMenuOpen = false"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-violet-50 dark:hover:bg-dusk-700 transition-colors mb-2"
+      >
+        <Palette class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
+        <span class="text-sm text-gray-700 dark:text-dusk-200">{{
+          t("auth.themeSettings")
+        }}</span>
+      </NuxtLink>
+
+      <!-- Display (light / dark) Toggle -->
       <ThemeToggle variant="mobile" />
 
       <!-- Language Picker -->
