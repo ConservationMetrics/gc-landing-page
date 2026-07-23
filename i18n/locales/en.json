@@ -14,6 +14,7 @@
     "signIn": "Log in or register",
     "signOut": "Sign Out",
     "userManagement": "User Management",
+    "themeSettings": "Theme",
     "welcome": "Welcome, {user}",
     "coCreatedBy": "Co-created by",
     "andIndigenousPartners": "and Indigenous partners"
@@ -26,13 +27,32 @@
   "header": {
     "adminAccess": "Admin Access",
     "languagePicker": "Language Picker",
-    "themeToggle": "Theme"
+    "themeToggle": "Display"
   },
   "theme": {
     "light": "Light",
     "dark": "Dark",
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode"
+  },
+  "themeSettings": {
+    "autosaveHint": "Changes save automatically a moment after you stop typing.",
+    "backgroundImage": "Background Image URL",
+    "backgroundImageHint": "Used on the login screen. Leave blank to use the default background.",
+    "backgroundImagePlaceholder": "https://example.com/background.jpg",
+    "error": "Error",
+    "failedToLoad": "Failed to load theme settings",
+    "failedToSave": "Failed to save. Check the URL and try again.",
+    "loading": "Loading theme settings...",
+    "logoUrl": "Logo URL",
+    "logoUrlHint": "Shown on the homepage. Leave blank to hide the logo.",
+    "logoUrlPlaceholder": "https://example.com/logo.png",
+    "preview": "Preview",
+    "returnToHomepage": "Return to Homepage",
+    "saved": "Saved",
+    "saving": "Saving…",
+    "subtitle": "Customize your community branding",
+    "title": "Theme Settings"
   },
   "roles": {
     "admin": "Admin",

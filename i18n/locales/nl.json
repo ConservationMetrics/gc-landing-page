@@ -14,6 +14,7 @@
     "signIn": "Log in of meld u aan",
     "signOut": "Uitloggen",
     "userManagement": "Gebruikersbeheer",
+    "themeSettings": "Thema",
     "welcome": "Welkom, {user}",
     "coCreatedBy": "Mede ontwikkeld door",
     "andIndigenousPartners": "en inheemse partners"
@@ -49,13 +50,32 @@
   "header": {
     "adminAccess": "Beheerders Toegang",
     "languagePicker": "Taal Selector",
-    "themeToggle": "Thema"
+    "themeToggle": "Weergave"
   },
   "theme": {
     "light": "Licht",
     "dark": "Donker",
     "switchToLight": "Schakel naar lichte modus",
     "switchToDark": "Schakel naar donkere modus"
+  },
+  "themeSettings": {
+    "autosaveHint": "Wijzigingen worden automatisch opgeslagen kort nadat je stopt met typen.",
+    "backgroundImage": "URL van achtergrondafbeelding",
+    "backgroundImageHint": "Gebruikt op het inlogscherm. Laat leeg om de standaardachtergrond te gebruiken.",
+    "backgroundImagePlaceholder": "https://example.com/background.jpg",
+    "error": "Fout",
+    "failedToLoad": "Thema-instellingen laden mislukt",
+    "failedToSave": "Opslaan mislukt. Controleer de URL en probeer opnieuw.",
+    "loading": "Thema-instellingen laden...",
+    "logoUrl": "Logo-URL",
+    "logoUrlHint": "Getoond op de homepage. Laat leeg om het logo te verbergen.",
+    "logoUrlPlaceholder": "https://example.com/logo.png",
+    "preview": "Voorbeeld",
+    "returnToHomepage": "Terug naar homepage",
+    "saved": "Opgeslagen",
+    "saving": "Opslaan…",
+    "subtitle": "Pas de branding van je community aan",
+    "title": "Thema-instellingen"
   },
   "roles": {
     "admin": "Beheerder",

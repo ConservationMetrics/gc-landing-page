@@ -14,6 +14,7 @@
     "signIn": "Faça login ou inscreva-se",
     "signOut": "Sair",
     "userManagement": "Gerenciamento de Usuários",
+    "themeSettings": "Tema",
     "welcome": "Bem-vindo, {user}",
     "coCreatedBy": "Co-criado por",
     "andIndigenousPartners": "e parceiros indígenas"
@@ -49,13 +50,32 @@
   "header": {
     "adminAccess": "Acesso de Administrador",
     "languagePicker": "Seletor de Idioma",
-    "themeToggle": "Tema"
+    "themeToggle": "Exibição"
   },
   "theme": {
     "light": "Claro",
     "dark": "Escuro",
     "switchToLight": "Mudar para o modo claro",
     "switchToDark": "Mudar para o modo escuro"
+  },
+  "themeSettings": {
+    "autosaveHint": "As alterações são salvas automaticamente um momento após você parar de digitar.",
+    "backgroundImage": "URL da imagem de fundo",
+    "backgroundImageHint": "Usada na tela de login. Deixe em branco para usar o fundo padrão.",
+    "backgroundImagePlaceholder": "https://example.com/background.jpg",
+    "error": "Erro",
+    "failedToLoad": "Falha ao carregar as configurações de tema",
+    "failedToSave": "Falha ao salvar. Verifique a URL e tente novamente.",
+    "loading": "Carregando configurações de tema...",
+    "logoUrl": "URL do logo",
+    "logoUrlHint": "Mostrado na página inicial. Deixe em branco para ocultar o logo.",
+    "logoUrlPlaceholder": "https://example.com/logo.png",
+    "preview": "Pré-visualização",
+    "returnToHomepage": "Voltar à página inicial",
+    "saved": "Salvo",
+    "saving": "Salvando…",
+    "subtitle": "Personalize a marca da sua comunidade",
+    "title": "Configurações de Tema"
   },
   "roles": {
     "admin": "Administrador",
