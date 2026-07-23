@@ -7,7 +7,7 @@ import {
   Home,
   Image,
   Loader2,
-  Palette,
+  Sparkles,
   XCircle,
 } from "lucide-vue-next";
 
@@ -66,7 +66,7 @@ const fieldDefs = computed(() => [
     label: t("themeSettings.logoUrl"),
     hint: t("themeSettings.logoUrlHint"),
     placeholder: t("themeSettings.logoUrlPlaceholder"),
-    icon: Palette,
+    icon: Sparkles,
   },
   {
     key: "background_image" as const,
@@ -258,11 +258,7 @@ onBeforeUnmount(clearTimers);
           {{ t("themeSettings.autosaveHint") }}
         </p>
 
-        <div
-          v-for="field in fieldDefs"
-          :key="field.key"
-          class="space-y-2"
-        >
+        <div v-for="field in fieldDefs" :key="field.key" class="space-y-2">
           <div class="flex items-center justify-between gap-3">
             <label
               :for="`theme-${field.key}`"
