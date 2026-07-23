@@ -3,6 +3,7 @@ import { useUserSession, onMounted } from "#imports";
 import GlassCard from "@/components/shared/GlassCard.vue";
 import GlobeLanguagePicker from "@/components/shared/GlobeLanguagePicker.vue";
 import SponsorLogos from "@/components/SponsorLogos.vue";
+import { useThemeSettings } from "@/composables/useThemeSettings";
 
 interface Props {
   errorMessage: string;
@@ -10,11 +11,7 @@ interface Props {
 const props = defineProps<Props>();
 const { loggedIn } = useUserSession();
 const { t } = useI18n();
-const runtimeConfig = useRuntimeConfig();
-const loginBackgroundSrc = computed(() => {
-  const url = String(runtimeConfig.public.backgroundImage ?? "").trim();
-  return url || "/background.jpg";
-});
+const { backgroundImage: loginBackgroundSrc } = useThemeSettings();
 const loginWithAuth0 = () => {
   window.location.href = "/api/auth/auth0";
 };
