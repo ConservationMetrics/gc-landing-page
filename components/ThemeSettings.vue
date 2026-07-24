@@ -10,18 +10,23 @@ import {
   Sparkles,
   XCircle,
 } from "lucide-vue-next";
+import {
+  THEME_SETTING_KEYS,
+  emptyThemeSettings,
+  type ThemeSettingKey,
+  type ThemeSettingsMap,
+} from "~/utils/themeSettings";
 
-type ThemeKey = "logo_url" | "background_image";
 type FieldStatus = "idle" | "saving" | "saved" | "error";
 
 interface ThemeSettingsResponse {
   success: boolean;
-  settings: Record<ThemeKey, string>;
+  settings: ThemeSettingsMap;
 }
 
 interface ThemeSaveResponse {
   success: boolean;
-  key: ThemeKey;
+  key: ThemeSettingKey;
   value: string;
 }
 
@@ -33,43 +38,33 @@ const { t } = useI18n();
 const loading = ref(true);
 const loadError = ref("");
 
-const fields = reactive<Record<ThemeKey, string>>({
-  logo_url: "",
-  background_image: "",
-});
+const fields = reactive(emptyThemeSettings());
+const saved = reactive(emptyThemeSettings());
+const status = reactive(
+  Object.fromEntries(
+    THEME_SETTING_KEYS.map((key) => [key, "idle" as FieldStatus]),
+  ) as Record<ThemeSettingKey, FieldStatus>,
+);
+const fieldErrors = reactive(emptyThemeSettings());
 
-const saved = reactive<Record<ThemeKey, string>>({
-  logo_url: "",
-  background_image: "",
-});
-
-const status = reactive<Record<ThemeKey, FieldStatus>>({
-  logo_url: "idle",
-  background_image: "idle",
-});
-
-const fieldErrors = reactive<Record<ThemeKey, string>>({
-  logo_url: "",
-  background_image: "",
-});
-
-const debounceTimers: Partial<Record<ThemeKey, ReturnType<typeof setTimeout>>> =
-  {};
-const savedFlashTimers: Partial<
-  Record<ThemeKey, ReturnType<typeof setTimeout>>
+const debounceTimers: Partial<
+  Record<ThemeSettingKey, ReturnType<typeof setTimeout>>
 > = {};
-const inFlight = new Map<ThemeKey, number>();
+const savedFlashTimers: Partial<
+  Record<ThemeSettingKey, ReturnType<typeof setTimeout>>
+> = {};
+const inFlight = new Map<ThemeSettingKey, number>();
 
 const fieldDefs = computed(() => [
   {
-    key: "logo_url" as const,
+    key: "logo_url" satisfies ThemeSettingKey,
     label: t("themeSettings.logoUrl"),
     hint: t("themeSettings.logoUrlHint"),
     placeholder: t("themeSettings.logoUrlPlaceholder"),
     icon: Sparkles,
   },
   {
-    key: "background_image" as const,
+    key: "background_image" satisfies ThemeSettingKey,
     label: t("themeSettings.backgroundImage"),
     hint: t("themeSettings.backgroundImageHint"),
     placeholder: t("themeSettings.backgroundImagePlaceholder"),
@@ -78,15 +73,13 @@ const fieldDefs = computed(() => [
 ]);
 
 const clearTimers = () => {
-  for (const key of Object.keys(debounceTimers) as ThemeKey[]) {
+  for (const key of THEME_SETTING_KEYS) {
     clearTimeout(debounceTimers[key]);
-  }
-  for (const key of Object.keys(savedFlashTimers) as ThemeKey[]) {
     clearTimeout(savedFlashTimers[key]);
   }
 };
 
-const flashSaved = (key: ThemeKey) => {
+const flashSaved = (key: ThemeSettingKey) => {
   status[key] = "saved";
   clearTimeout(savedFlashTimers[key]);
   savedFlashTimers[key] = setTimeout(() => {
@@ -94,7 +87,7 @@ const flashSaved = (key: ThemeKey) => {
   }, SAVED_FLASH_MS);
 };
 
-const saveField = async (key: ThemeKey) => {
+const saveField = async (key: ThemeSettingKey) => {
   const value = fields[key].trim();
   if (value === saved[key]) {
     fieldErrors[key] = "";
@@ -141,19 +134,19 @@ const saveField = async (key: ThemeKey) => {
   }
 };
 
-const scheduleSave = (key: ThemeKey) => {
+const scheduleSave = (key: ThemeSettingKey) => {
   clearTimeout(debounceTimers[key]);
   debounceTimers[key] = setTimeout(() => {
     void saveField(key);
   }, DEBOUNCE_MS);
 };
 
-const onInput = (key: ThemeKey) => {
+const onInput = (key: ThemeSettingKey) => {
   if (status[key] === "saved") status[key] = "idle";
   scheduleSave(key);
 };
 
-const onBlur = (key: ThemeKey) => {
+const onBlur = (key: ThemeSettingKey) => {
   clearTimeout(debounceTimers[key]);
   void saveField(key);
 };
@@ -165,7 +158,7 @@ const fetchSettings = async () => {
   try {
     const response = await $fetch<ThemeSettingsResponse>("/api/theme");
     if (response.success) {
-      for (const key of Object.keys(fields) as ThemeKey[]) {
+      for (const key of THEME_SETTING_KEYS) {
         const value = response.settings[key] ?? "";
         fields[key] = value;
         saved[key] = value;

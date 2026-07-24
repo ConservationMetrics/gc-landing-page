@@ -1,12 +1,10 @@
 import { computed } from "vue";
 import { useFetch } from "#imports";
+import type { ThemeSettingsMap } from "~/utils/themeSettings";
 
 interface ThemeSettingsResponse {
   success: boolean;
-  settings: {
-    logo_url: string;
-    background_image: string;
-  };
+  settings: ThemeSettingsMap;
 }
 
 const DEFAULT_BACKGROUND = "/background.jpg";
