@@ -14,6 +14,7 @@
     "signIn": "เข้าสู่ระบบหรือสมัครสมาชิก",
     "signOut": "ออกจากระบบ",
     "userManagement": "การจัดการผู้ใช้",
+    "themeSettings": "ธีม",
     "welcome": "ยินดีต้อนรับ {user}",
     "coCreatedBy": "ร่วมสร้างโดย",
     "andIndigenousPartners": "และพันธมิตรชนพื้นเมือง"
@@ -49,13 +50,32 @@
   "header": {
     "adminAccess": "การเข้าถึงผู้ดูแล",
     "languagePicker": "เลือกภาษา",
-    "themeToggle": "ธีม"
+    "themeToggle": "การแสดงผล"
   },
   "theme": {
     "light": "สว่าง",
     "dark": "มืด",
     "switchToLight": "เปลี่ยนเป็นโหมดสว่าง",
     "switchToDark": "เปลี่ยนเป็นโหมดมืด"
+  },
+  "themeSettings": {
+    "autosaveHint": "การเปลี่ยนแปลงจะถูกบันทึกอัตโนมัติหลังคุณหยุดพิมพ์ไม่นาน",
+    "backgroundImage": "URL รูปพื้นหลัง",
+    "backgroundImageHint": "ใช้ในหน้าเข้าสู่ระบบ เว้นว่างเพื่อใช้พื้นหลังเริ่มต้น",
+    "backgroundImagePlaceholder": "https://example.com/background.jpg",
+    "error": "ข้อผิดพลาด",
+    "failedToLoad": "โหลดการตั้งค่าธีมไม่สำเร็จ",
+    "failedToSave": "บันทึกไม่สำเร็จ ตรวจสอบ URL แล้วลองอีกครั้ง",
+    "loading": "กำลังโหลดการตั้งค่าธีม...",
+    "logoUrl": "URL โลโก้",
+    "logoUrlHint": "แสดงในหน้าแรก เว้นว่างเพื่อซ่อนโลโก้",
+    "logoUrlPlaceholder": "https://example.com/logo.png",
+    "preview": "ตัวอย่าง",
+    "returnToHomepage": "กลับหน้าแรก",
+    "saved": "บันทึกแล้ว",
+    "saving": "กำลังบันทึก…",
+    "subtitle": "ปรับแต่งแบรนด์ของชุมชนคุณ",
+    "title": "การตั้งค่าธีม"
   },
   "roles": {
     "admin": "ผู้ดูแล",

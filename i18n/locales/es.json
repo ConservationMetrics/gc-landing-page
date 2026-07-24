@@ -14,6 +14,7 @@
     "signIn": "Inicie sesión o regístrese",
     "signOut": "Cerrar Sesión",
     "userManagement": "Gestión de Usuarios",
+    "themeSettings": "Tema",
     "welcome": "Bienvenido, {user}",
     "coCreatedBy": "Cocreado por",
     "andIndigenousPartners": "y socios indígenas"
@@ -49,13 +50,32 @@
   "header": {
     "adminAccess": "Acceso de Administrador",
     "languagePicker": "Selector de Idioma",
-    "themeToggle": "Tema"
+    "themeToggle": "Pantalla"
   },
   "theme": {
     "light": "Claro",
     "dark": "Oscuro",
     "switchToLight": "Cambiar a modo claro",
     "switchToDark": "Cambiar a modo oscuro"
+  },
+  "themeSettings": {
+    "autosaveHint": "Los cambios se guardan automáticamente un momento después de dejar de escribir.",
+    "backgroundImage": "URL de la imagen de fondo",
+    "backgroundImageHint": "Se usa en la pantalla de inicio de sesión. Déjalo en blanco para usar el fondo predeterminado.",
+    "backgroundImagePlaceholder": "https://example.com/background.jpg",
+    "error": "Error",
+    "failedToLoad": "No se pudieron cargar los ajustes de tema",
+    "failedToSave": "No se pudo guardar. Revisa la URL e inténtalo de nuevo.",
+    "loading": "Cargando ajustes de tema...",
+    "logoUrl": "URL del logo",
+    "logoUrlHint": "Se muestra en la página de inicio. Déjalo en blanco para ocultar el logo.",
+    "logoUrlPlaceholder": "https://example.com/logo.png",
+    "preview": "Vista previa",
+    "returnToHomepage": "Volver al inicio",
+    "saved": "Guardado",
+    "saving": "Guardando…",
+    "subtitle": "Personaliza la marca de tu comunidad",
+    "title": "Ajustes de Tema"
   },
   "roles": {
     "admin": "Administrador",

@@ -14,6 +14,7 @@
     "signIn": "Ingia au jisajili",
     "signOut": "Toka",
     "userManagement": "Usimamizi wa Watumiaji",
+    "themeSettings": "Mandhari",
     "welcome": "Karibu, {user}",
     "coCreatedBy": "Iliundwa kwa pamoja na",
     "andIndigenousPartners": "na washirika wa asili"
@@ -26,13 +27,32 @@
   "header": {
     "adminAccess": "Ufikiaji wa Msimamizi",
     "languagePicker": "Chagua lugha",
-    "themeToggle": "Mandhari"
+    "themeToggle": "Onyesho"
   },
   "theme": {
     "light": "Mwangaza",
     "dark": "Giza",
     "switchToLight": "Badilisha kuwa hali ya mwanga",
     "switchToDark": "Badilisha kuwa hali ya giza"
+  },
+  "themeSettings": {
+    "autosaveHint": "Mabadiliko huhifadhiwa kiotomatiki muda mfupi baada ya kuacha kuandika.",
+    "backgroundImage": "URL ya picha ya mandhari",
+    "backgroundImageHint": "Inatumika kwenye skrini ya kuingia. Acha tupu kutumia mandhari chaguo-msingi.",
+    "backgroundImagePlaceholder": "https://example.com/background.jpg",
+    "error": "Hitilafu",
+    "failedToLoad": "Imeshindwa kupakia mipangilio ya mandhari",
+    "failedToSave": "Imeshindwa kuhifadhi. Angalia URL na ujaribu tena.",
+    "loading": "Inapakia mipangilio ya mandhari...",
+    "logoUrl": "URL ya nembo",
+    "logoUrlHint": "Inaonyeshwa kwenye ukurasa wa kuanza. Acha tupu kuficha nembo.",
+    "logoUrlPlaceholder": "https://example.com/logo.png",
+    "preview": "Hakiki",
+    "returnToHomepage": "Rudi kwenye ukurasa wa kuanza",
+    "saved": "Imehifadhiwa",
+    "saving": "Inahifadhi…",
+    "subtitle": "Binafsisha chapa ya jamii yako",
+    "title": "Mipangilio ya Mandhari"
   },
   "roles": {
     "admin": "Msimamizi",

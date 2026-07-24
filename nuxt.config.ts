@@ -60,13 +60,11 @@ export default defineNuxtConfig({
       domain: "guardianconnector.net",
       baseUrl: "http://localhost:8080",
       auth0Enabled: true,
-      logoUrl: "",
       // Service availability flags
       supersetEnabled: false,
       windmillEnabled: false,
       explorerEnabled: false,
       filebrowserEnabled: false,
-      backgroundImage: "",
     },
   },
 });

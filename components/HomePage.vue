@@ -3,6 +3,7 @@ import { useRuntimeConfig } from "#imports";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
 import DataSourcesGrid from "@/components/homepage/DataSourcesGrid.vue";
+import { useThemeSettings } from "@/composables/useThemeSettings";
 import { Workflow } from "lucide-vue-next";
 
 const props = defineProps<{
@@ -11,13 +12,13 @@ const props = defineProps<{
   shouldShowApp: boolean;
 }>();
 
-const emit = defineEmits<{
+defineEmits<{
   login: [];
 }>();
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
-const logoUrl = config.public.logoUrl as string | undefined;
+const { logoUrl } = useThemeSettings();
 const { t } = useI18n();
 </script>
 
