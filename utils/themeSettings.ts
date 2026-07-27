@@ -1,7 +1,4 @@
-export const THEME_SETTING_KEYS = [
-  "logo_url",
-  "background_image",
-] as const;
+export const THEME_SETTING_KEYS = ["logo_url", "background_image"] as const;
 
 export type ThemeSettingKey = (typeof THEME_SETTING_KEYS)[number];
 

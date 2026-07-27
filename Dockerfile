@@ -29,6 +29,9 @@ WORKDIR /app
 # Copy built application from builder stage
 COPY --from=builder /app/.output ./.output
 
+# Copy SQL migrations (migrate.ts Nitro plugin reads these from disk at runtime)
+COPY --from=builder /app/server/database/migrations ./server/database/migrations
+
 # Copy package files for runtime dependencies
 COPY package*.json ./
 
