@@ -15,9 +15,7 @@ export const useThemeSettings = () => {
     { key: "gc-theme-settings" },
   );
 
-  const logoUrl = computed(
-    () => data.value?.settings?.logo_url?.trim() || "",
-  );
+  const logoUrl = computed(() => data.value?.settings?.logo_url?.trim() || "");
 
   const backgroundImage = computed(() => {
     const url = data.value?.settings?.background_image?.trim() || "";
