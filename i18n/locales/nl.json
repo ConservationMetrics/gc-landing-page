@@ -59,7 +59,6 @@
     "switchToDark": "Schakel naar donkere modus"
   },
   "themeSettings": {
-    "autosaveHint": "Wijzigingen worden automatisch opgeslagen kort nadat je stopt met typen.",
     "backgroundImage": "URL van achtergrondafbeelding",
     "backgroundImageHint": "Gebruikt op het inlogscherm. Laat leeg om de standaardachtergrond te gebruiken.",
     "backgroundImagePlaceholder": "https://example.com/background.jpg",
@@ -72,6 +71,8 @@
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "preview": "Voorbeeld",
     "returnToHomepage": "Terug naar homepage",
+    "save": "Opslaan",
+    "saveHint": "Het voorbeeld werkt bij tijdens het typen. Klik op Opslaan om je wijzigingen toe te passen.",
     "saved": "Opgeslagen",
     "saving": "Opslaan…",
     "subtitle": "Pas de branding van je community aan",

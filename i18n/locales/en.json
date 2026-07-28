@@ -36,7 +36,6 @@
     "switchToDark": "Switch to dark mode"
   },
   "themeSettings": {
-    "autosaveHint": "Changes save automatically a moment after you stop typing.",
     "backgroundImage": "Background Image URL",
     "backgroundImageHint": "Used on the login screen. Leave blank to use the default background.",
     "backgroundImagePlaceholder": "https://example.com/background.jpg",
@@ -49,6 +48,8 @@
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "preview": "Preview",
     "returnToHomepage": "Return to Homepage",
+    "save": "Save",
+    "saveHint": "Preview updates as you type. Click Save to apply your changes.",
     "saved": "Saved",
     "saving": "Saving…",
     "subtitle": "Customize your community branding",

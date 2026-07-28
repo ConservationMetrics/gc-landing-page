@@ -59,7 +59,6 @@
     "switchToDark": "เปลี่ยนเป็นโหมดมืด"
   },
   "themeSettings": {
-    "autosaveHint": "การเปลี่ยนแปลงจะถูกบันทึกอัตโนมัติหลังคุณหยุดพิมพ์ไม่นาน",
     "backgroundImage": "URL รูปพื้นหลัง",
     "backgroundImageHint": "ใช้ในหน้าเข้าสู่ระบบ เว้นว่างเพื่อใช้พื้นหลังเริ่มต้น",
     "backgroundImagePlaceholder": "https://example.com/background.jpg",
@@ -72,6 +71,8 @@
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "preview": "ตัวอย่าง",
     "returnToHomepage": "กลับหน้าแรก",
+    "save": "บันทึก",
+    "saveHint": "ตัวอย่างจะอัปเดตขณะพิมพ์ กดบันทึกเพื่อใช้การเปลี่ยนแปลง",
     "saved": "บันทึกแล้ว",
     "saving": "กำลังบันทึก…",
     "subtitle": "ปรับแต่งแบรนด์ของชุมชนคุณ",

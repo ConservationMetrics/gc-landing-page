@@ -36,7 +36,6 @@
     "switchToDark": "Badilisha kuwa hali ya giza"
   },
   "themeSettings": {
-    "autosaveHint": "Mabadiliko huhifadhiwa kiotomatiki muda mfupi baada ya kuacha kuandika.",
     "backgroundImage": "URL ya picha ya mandhari",
     "backgroundImageHint": "Inatumika kwenye skrini ya kuingia. Acha tupu kutumia mandhari chaguo-msingi.",
     "backgroundImagePlaceholder": "https://example.com/background.jpg",
@@ -49,6 +48,8 @@
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "preview": "Hakiki",
     "returnToHomepage": "Rudi kwenye ukurasa wa kuanza",
+    "save": "Hifadhi",
+    "saveHint": "Hakiki inasasishwa unapoandika. Bofya Hifadhi kutekeleza mabadiliko yako.",
     "saved": "Imehifadhiwa",
     "saving": "Inahifadhi…",
     "subtitle": "Binafsisha chapa ya jamii yako",
