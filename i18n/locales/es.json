@@ -59,7 +59,6 @@
     "switchToDark": "Cambiar a modo oscuro"
   },
   "themeSettings": {
-    "autosaveHint": "Los cambios se guardan automáticamente un momento después de dejar de escribir.",
     "backgroundImage": "URL de la imagen de fondo",
     "backgroundImageHint": "Se usa en la pantalla de inicio de sesión. Déjalo en blanco para usar el fondo predeterminado.",
     "backgroundImagePlaceholder": "https://example.com/background.jpg",
@@ -72,6 +71,8 @@
     "logoUrlPlaceholder": "https://example.com/logo.png",
     "preview": "Vista previa",
     "returnToHomepage": "Volver al inicio",
+    "save": "Guardar",
+    "saveHint": "La vista previa se actualiza al escribir. Haz clic en Guardar para aplicar los cambios.",
     "saved": "Guardado",
     "saving": "Guardando…",
     "subtitle": "Personaliza la marca de tu comunidad",
