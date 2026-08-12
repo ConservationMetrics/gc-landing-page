@@ -1,10 +1,6 @@
 import { computed } from "vue";
 import { useFetch, useUserSession } from "#imports";
-import {
-  Role,
-  type CustomAppsResponse,
-  type User,
-} from "~/types/types";
+import { Role, type CustomAppsResponse, type User } from "~/types/types";
 import { CUSTOM_APP_MIN_ROLE, emptyCustomApps } from "~/utils/customApps";
 
 /**
