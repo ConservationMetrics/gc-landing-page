@@ -63,28 +63,34 @@ export const replaceCustomApps = async (
 ): Promise<CustomApp[]> => {
   const now = new Date();
 
-  await configDb.transaction(async (tx) => {
+  return configDb.transaction(async (tx) => {
     await tx.delete(schema.gcCustomApps);
 
-    if (apps.length === 0) return;
+    if (apps.length === 0) return emptyCustomApps();
 
-    await tx.insert(schema.gcCustomApps).values(
-      apps.map((app, index) => ({
-        id: app.id,
-        name: app.name,
-        description: app.description,
-        iconUrl: app.iconUrl,
-        tags: app.tags,
-        subdomain: app.subdomain,
-        enabled: app.enabled,
-        sortOrder: index,
-        createdAt: now,
-        updatedAt: now,
-      })),
-    );
+    const rows = await tx
+      .insert(schema.gcCustomApps)
+      .values(
+        apps.map((app, index) => ({
+          id: app.id,
+          name: app.name,
+          description: app.description,
+          iconUrl: app.iconUrl,
+          tags: app.tags,
+          subdomain: app.subdomain,
+          enabled: app.enabled,
+          sortOrder: index,
+          createdAt: now,
+          updatedAt: now,
+        })),
+      )
+      .returning();
+
+    // RETURNING order is unspecified; keep the same order as listCustomApps.
+    return rows
+      .sort((a, b) => a.sortOrder - b.sortOrder || a.id.localeCompare(b.id))
+      .map(mapCustomAppRow);
   });
-
-  return listCustomApps({ includeDisabled: true });
 };
 
 export const parseAndValidateCustomAppsBody = (
