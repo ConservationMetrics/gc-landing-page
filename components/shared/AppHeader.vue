@@ -9,6 +9,7 @@ import { translateRoleName } from "@/utils/roleTranslations";
 import { useAuthActions } from "@/composables/useAuth";
 import {
   BadgeCheck,
+  LayoutGrid,
   LogOut,
   Menu,
   Palette,
@@ -161,6 +162,25 @@ const { login, logout } = useAuthActions();
           </div>
         </div>
 
+        <!-- Custom Apps -->
+        <div
+          v-if="isAuth0Configured && loggedIn && isAdmin"
+          class="relative group"
+        >
+          <NuxtLink
+            to="/admin/apps"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
+          >
+            <LayoutGrid class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
+          </NuxtLink>
+          <!-- Tooltip -->
+          <div
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+          >
+            {{ t("auth.customApps") }}
+          </div>
+        </div>
+
         <!-- Display (light / dark) Toggle -->
         <div class="relative group">
           <ThemeToggle theme="white" variant="icon" />
@@ -272,6 +292,19 @@ const { login, logout } = useAuthActions();
         <Palette class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
         <span class="text-sm text-gray-700 dark:text-dusk-200">{{
           t("auth.themeSettings")
+        }}</span>
+      </NuxtLink>
+
+      <!-- Custom Apps (if admin) -->
+      <NuxtLink
+        v-if="isAdmin"
+        to="/admin/apps"
+        @click="mobileMenuOpen = false"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-violet-50 dark:hover:bg-dusk-700 transition-colors mb-2"
+      >
+        <LayoutGrid class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
+        <span class="text-sm text-gray-700 dark:text-dusk-200">{{
+          t("auth.customApps")
         }}</span>
       </NuxtLink>
 
