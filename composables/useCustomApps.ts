@@ -1,16 +1,11 @@
 import { computed } from "vue";
 import { useFetch, useUserSession } from "#imports";
-import { Role, type User } from "~/types/types";
 import {
-  CUSTOM_APP_MIN_ROLE,
-  emptyCustomApps,
-  type CustomApp,
-} from "~/utils/customApps";
-
-interface CustomAppsResponse {
-  success: boolean;
-  apps: CustomApp[];
-}
+  Role,
+  type CustomAppsResponse,
+  type User,
+} from "~/types/types";
+import { CUSTOM_APP_MIN_ROLE, emptyCustomApps } from "~/utils/customApps";
 
 /**
  * Fetches enabled custom apps for the homepage grid.
