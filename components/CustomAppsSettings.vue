@@ -18,6 +18,8 @@ import {
   Trash2,
   XCircle,
 } from "lucide-vue-next";
+// @ts-expect-error - vue-tags-input does not have types
+import { VueTagsInput } from "@vojtechlanka/vue-tags-input";
 import type { CustomApp, CustomAppsResponse } from "~/types/types";
 import {
   CUSTOM_APPS_MAX,
@@ -25,6 +27,7 @@ import {
   CUSTOM_APP_NAME_MAX,
   CUSTOM_APP_SUBDOMAIN_MAX,
   CUSTOM_APP_TAG_MAX_COUNT,
+  CUSTOM_APP_TAG_MAX_LENGTH,
   buildCustomAppUrl,
   emptyCustomApps,
   slugifyCustomAppId,
@@ -32,7 +35,8 @@ import {
 } from "~/utils/customApps";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
-type DraftApp = CustomApp & { clientKey: string };
+type Tag = { text: string };
+type DraftApp = CustomApp & { clientKey: string; tagDraft: string };
 
 const SAVED_FLASH_MS = 2000;
 const API_PATH = "/api/custom_apps/custom-apps";
@@ -61,14 +65,17 @@ const nextClientKey = () => {
 const toDraft = (app: CustomApp): DraftApp => ({
   ...app,
   clientKey: nextClientKey(),
+  tagDraft: "",
 });
 
 const serialize = (list: DraftApp[]) =>
   JSON.stringify(
-    list.map(({ clientKey: _clientKey, ...app }, index) => ({
-      ...app,
-      sortOrder: index,
-    })),
+    list.map(
+      ({ clientKey: _clientKey, tagDraft: _tagDraft, ...app }, index) => ({
+        ...app,
+        sortOrder: index,
+      }),
+    ),
   );
 
 const isDirty = computed(() => serialize(apps.value) !== savedSnapshot.value);
@@ -97,14 +104,14 @@ const getErrorMessage = (err: unknown) => {
   return t("customApps.failedToSave");
 };
 
-const tagsToInput = (tags: string[]) => tags.join(", ");
+const tagsToObjects = (tags: string[]): Tag[] => tags.map((text) => ({ text }));
 
-const inputToTags = (value: string) =>
-  value
-    .split(",")
-    .map((tag) => tag.trim())
+const onTagsChanged = (app: DraftApp, newTags: Tag[]) => {
+  app.tags = newTags
+    .map((tag) => tag.text.trim())
     .filter(Boolean)
     .slice(0, CUSTOM_APP_TAG_MAX_COUNT);
+};
 
 const previewUrl = (subdomain: string) => {
   const slug = subdomain.trim();
@@ -119,6 +126,7 @@ const createEmptyApp = (): DraftApp => ({
   description: "",
   iconUrl: "",
   tags: [],
+  tagDraft: "",
   subdomain: "",
   enabled: true,
   sortOrder: apps.value.length,
@@ -480,18 +488,15 @@ onBeforeUnmount(() => clearTimeout(savedFlashTimer));
               >
                 {{ t("customApps.tags") }}
               </label>
-              <input
+              <VueTagsInput
                 :id="`custom-app-tags-${app.clientKey}`"
-                :value="tagsToInput(app.tags)"
-                type="text"
-                autocomplete="off"
+                v-model="app.tagDraft"
+                class="tag-field"
+                :tags="tagsToObjects(app.tags)"
                 :placeholder="t('customApps.tagsPlaceholder')"
-                class="w-full px-3 py-2 text-sm sm:text-base bg-white dark:bg-dusk-700 text-gray-900 dark:text-dusk-100 placeholder-gray-400 dark:placeholder-dusk-500 border border-gray-300 dark:border-dusk-700 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                @input="
-                  app.tags = inputToTags(
-                    ($event.target as HTMLInputElement).value,
-                  )
-                "
+                :max-tags="CUSTOM_APP_TAG_MAX_COUNT"
+                :maxlength="CUSTOM_APP_TAG_MAX_LENGTH"
+                @tags-changed="(newTags: Tag[]) => onTagsChanged(app, newTags)"
               />
               <p class="text-xs text-gray-500 dark:text-dusk-400">
                 {{ t("customApps.tagsHint") }}
@@ -569,3 +574,17 @@ onBeforeUnmount(() => clearTimeout(savedFlashTimer));
     </div>
   </div>
 </template>
+
+<style scoped>
+.tag-field :deep(.ti-input) {
+  @apply w-full min-h-[42px] px-3 py-2 text-sm sm:text-base bg-white dark:bg-dusk-700 text-gray-900 dark:text-dusk-100 border border-gray-300 dark:border-dusk-700 rounded-lg;
+}
+
+.tag-field :deep(.ti-new-tag-input) {
+  @apply bg-transparent text-gray-900 dark:text-dusk-100 placeholder-gray-400 dark:placeholder-dusk-500;
+}
+
+.tag-field :deep(.ti-tag) {
+  @apply bg-violet-100 dark:bg-violet-950/50 text-violet-800 dark:text-violet-200 border border-violet-200 dark:border-violet-900;
+}
+</style>
