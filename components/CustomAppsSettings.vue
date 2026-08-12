@@ -20,7 +20,13 @@ import {
 } from "lucide-vue-next";
 // @ts-expect-error - vue-tags-input does not have types
 import { VueTagsInput } from "@vojtechlanka/vue-tags-input";
-import type { CustomApp, CustomAppsResponse } from "~/types/types";
+import type {
+  CustomApp,
+  CustomAppDraft,
+  CustomAppTag,
+  CustomAppsResponse,
+  SaveStatus,
+} from "~/types/types";
 import {
   CUSTOM_APPS_MAX,
   CUSTOM_APP_DESCRIPTION_MAX,
@@ -33,10 +39,6 @@ import {
   slugifyCustomAppId,
   validateCustomAppsPayload,
 } from "~/utils/customApps";
-
-type SaveStatus = "idle" | "saving" | "saved" | "error";
-type Tag = { text: string };
-type DraftApp = CustomApp & { clientKey: string; tagDraft: string };
 
 const SAVED_FLASH_MS = 2000;
 const API_PATH = "/api/custom_apps/custom-apps";
@@ -51,7 +53,7 @@ const loadError = ref("");
 const saveStatus = ref<SaveStatus>("idle");
 const saveError = ref("");
 
-const apps = ref<DraftApp[]>([]);
+const apps = ref<CustomAppDraft[]>([]);
 const savedSnapshot = ref("");
 
 let savedFlashTimer: ReturnType<typeof setTimeout> | undefined;
@@ -62,13 +64,13 @@ const nextClientKey = () => {
   return `draft-${clientKeySeq}`;
 };
 
-const toDraft = (app: CustomApp): DraftApp => ({
+const toDraft = (app: CustomApp): CustomAppDraft => ({
   ...app,
   clientKey: nextClientKey(),
   tagDraft: "",
 });
 
-const serialize = (list: DraftApp[]) =>
+const serialize = (list: CustomAppDraft[]) =>
   JSON.stringify(
     list.map(
       ({ clientKey: _clientKey, tagDraft: _tagDraft, ...app }, index) => ({
@@ -104,9 +106,10 @@ const getErrorMessage = (err: unknown) => {
   return t("customApps.failedToSave");
 };
 
-const tagsToObjects = (tags: string[]): Tag[] => tags.map((text) => ({ text }));
+const tagsToObjects = (tags: string[]): CustomAppTag[] =>
+  tags.map((text) => ({ text }));
 
-const onTagsChanged = (app: DraftApp, newTags: Tag[]) => {
+const onTagsChanged = (app: CustomAppDraft, newTags: CustomAppTag[]) => {
   app.tags = newTags
     .map((tag) => tag.text.trim())
     .filter(Boolean)
@@ -119,7 +122,7 @@ const previewUrl = (subdomain: string) => {
   return buildCustomAppUrl(slug, communityName, domain);
 };
 
-const createEmptyApp = (): DraftApp => ({
+const createEmptyApp = (): CustomAppDraft => ({
   clientKey: nextClientKey(),
   id: "",
   name: "",
@@ -150,7 +153,7 @@ const moveApp = (index: number, delta: number) => {
   apps.value = copy;
 };
 
-const onSubdomainInput = (app: DraftApp, value: string) => {
+const onSubdomainInput = (app: CustomAppDraft, value: string) => {
   app.subdomain = value.trim().toLowerCase();
   app.id = slugifyCustomAppId(app.subdomain);
 };
@@ -524,7 +527,9 @@ onBeforeUnmount(() => clearTimeout(savedFlashTimer));
                 :placeholder="t('customApps.tagsPlaceholder')"
                 :max-tags="CUSTOM_APP_TAG_MAX_COUNT"
                 :maxlength="CUSTOM_APP_TAG_MAX_LENGTH"
-                @tags-changed="(newTags: Tag[]) => onTagsChanged(app, newTags)"
+                @tags-changed="
+                  (newTags: CustomAppTag[]) => onTagsChanged(app, newTags)
+                "
               />
               <p class="text-xs text-gray-500 dark:text-dusk-400">
                 {{ t("customApps.tagsHint") }}
