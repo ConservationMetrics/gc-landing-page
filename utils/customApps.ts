@@ -1,4 +1,6 @@
-import { Role } from "~/types/types";
+import { Role, type CustomApp } from "~/types/types";
+
+export type { CustomApp };
 
 /**
  * Visibility for custom app cards on the homepage grid.
@@ -16,17 +18,6 @@ export const CUSTOM_APP_SUBDOMAIN_MAX = 63;
 
 export const CUSTOM_APP_SUBDOMAIN_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const CUSTOM_APP_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-
-export type CustomApp = {
-  id: string;
-  name: string;
-  description: string;
-  iconUrl: string;
-  tags: string[];
-  subdomain: string;
-  enabled: boolean;
-  sortOrder: number;
-};
 
 export type CustomAppInput = Omit<CustomApp, "sortOrder"> & {
   sortOrder?: number;

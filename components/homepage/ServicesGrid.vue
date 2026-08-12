@@ -2,26 +2,37 @@
 import { computed } from "vue";
 import { useI18n, useRuntimeConfig, useUserSession } from "#imports";
 import { Smile } from "lucide-vue-next";
+import { useCustomApps } from "~/composables/useCustomApps";
 import { Role, type User } from "~/types/types";
+import { buildCustomAppUrl, CUSTOM_APP_MIN_ROLE } from "~/utils/customApps";
+
+type ServiceCard = {
+  key: string;
+  name: string;
+  url: string;
+  icon: string;
+  iconUrl?: string;
+  description?: string;
+  tags: string[];
+  /** Built-in tags are i18n-mapped; custom app tags are freeform. */
+  translateTags: boolean;
+};
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
 const domain = config.public.domain;
 const { t } = useI18n();
 const { user } = useUserSession();
+const { apps: customApps } = useCustomApps();
 
 const availableServices = computed(() => {
-  const services: Array<{
-    name: string;
-    url: string;
-    icon: string;
-    tags: string[];
-  }> = [];
+  const services: ServiceCard[] = [];
   const typedUser = user.value as User | undefined;
   const userRole = typedUser?.userRole ?? Role.SignedIn;
 
   if (config.public.explorerEnabled && userRole >= Role.SignedIn) {
     services.push({
+      key: "explorer",
       name: "Explorer",
       url: `https://explorer.${communityName}.${domain}`,
       icon: "explorer",
@@ -31,34 +42,58 @@ const availableServices = computed(() => {
         "Wildlife Explorer",
         "Media Galleries",
       ],
+      translateTags: true,
     });
   }
 
   if (config.public.supersetEnabled && userRole >= Role.Guest) {
     services.push({
+      key: "superset",
       name: "Superset",
       url: `https://superset.${communityName}.${domain}`,
       icon: "superset",
       tags: ["Charts", "Analysis", "Visualizations", "Dashboards"],
+      translateTags: true,
     });
   }
 
   if (config.public.windmillEnabled && userRole >= Role.Admin) {
     services.push({
+      key: "windmill",
       name: "Windmill",
       url: `https://windmill.${communityName}.${domain}`,
       icon: "windmill",
       tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
+      translateTags: true,
     });
   }
 
   if (config.public.filebrowserEnabled && userRole >= Role.Member) {
     services.push({
+      key: "filebrowser",
       name: "Filebrowser",
       url: `https://files.${communityName}.${domain}`,
       icon: "filebrowser",
       tags: ["Files", "Raw Data", "Archives"],
+      translateTags: true,
     });
+  }
+
+  // Custom apps after built-ins; visibility hardcoded to Member (may become
+  // configurable later via CUSTOM_APP_MIN_ROLE).
+  if (userRole >= CUSTOM_APP_MIN_ROLE) {
+    for (const app of customApps.value) {
+      services.push({
+        key: `custom-${app.id}`,
+        name: app.name,
+        url: buildCustomAppUrl(app.subdomain, communityName, domain),
+        icon: "custom",
+        iconUrl: app.iconUrl,
+        description: app.description,
+        tags: app.tags,
+        translateTags: false,
+      });
+    }
   }
 
   return services;
@@ -72,7 +107,9 @@ const openService = (url: string) => {
   }
 };
 
-const getServiceDescription = (serviceName: string) => {
+const getServiceDescription = (service: ServiceCard) => {
+  if (service.description) return service.description;
+
   const descriptions = {
     Superset: t("services.supersetDescription"),
     Windmill: t("services.windmillDescription"),
@@ -80,7 +117,7 @@ const getServiceDescription = (serviceName: string) => {
     Filebrowser: t("services.filebrowserDescription"),
   };
   return (
-    descriptions[serviceName as keyof typeof descriptions] ||
+    descriptions[service.name as keyof typeof descriptions] ||
     t("services.communityService")
   );
 };
@@ -104,6 +141,9 @@ const translateTag = (tag: string) => {
   };
   return tagMap[tag] || tag;
 };
+
+const displayTag = (service: ServiceCard, tag: string) =>
+  service.translateTags ? translateTag(tag) : tag;
 </script>
 
 <template>
@@ -114,7 +154,7 @@ const translateTag = (tag: string) => {
     >
       <div
         v-for="service in availableServices"
-        :key="service.name"
+        :key="service.key"
         class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-violet-200 dark:border-violet-900 bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/40 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
         @click="openService(service.url)"
       >
@@ -159,6 +199,16 @@ const translateTag = (tag: string) => {
               class="h-[67px] w-[67px] object-contain"
             />
           </div>
+          <div
+            v-else-if="service.icon === 'custom' && service.iconUrl"
+            class="flex h-[67px] w-[67px] items-center justify-center"
+          >
+            <img
+              :src="service.iconUrl"
+              :alt="service.name"
+              class="h-[67px] w-[67px] object-contain"
+            />
+          </div>
         </div>
 
         <h3
@@ -170,7 +220,7 @@ const translateTag = (tag: string) => {
         <p
           class="mb-4 min-h-[3rem] text-center text-sm text-gray-600 dark:text-dusk-400"
         >
-          {{ getServiceDescription(service.name) }}
+          {{ getServiceDescription(service) }}
         </p>
 
         <div class="flex flex-wrap justify-center gap-2">
@@ -179,7 +229,7 @@ const translateTag = (tag: string) => {
             :key="tag"
             class="rounded-full border border-gray-200 dark:border-dusk-700 bg-white dark:bg-dusk-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-dusk-300"
           >
-            {{ translateTag(tag) }}
+            {{ displayTag(service, tag) }}
           </span>
         </div>
       </div>

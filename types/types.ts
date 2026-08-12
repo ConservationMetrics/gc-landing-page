@@ -62,5 +62,22 @@ export interface RolesResponse {
   roles: UserRole[];
 }
 
+// Custom Apps
+export type CustomApp = {
+  id: string;
+  name: string;
+  description: string;
+  iconUrl: string;
+  tags: string[];
+  subdomain: string;
+  enabled: boolean;
+  sortOrder: number;
+};
+
+export interface CustomAppsResponse {
+  success: boolean;
+  apps: CustomApp[];
+}
+
 // I18n Types
 export type SupportedLocale = "en" | "pt" | "es" | "nl";
