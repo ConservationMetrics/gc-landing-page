@@ -6,7 +6,6 @@ import {
 
 /**
  * Replace the full custom-apps list (admin Save).
- * minRole is not stored per app; grid visibility stays hardcoded to Member.
  */
 export default defineEventHandler(async (event) => {
   try {
