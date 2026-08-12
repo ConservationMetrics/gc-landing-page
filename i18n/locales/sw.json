@@ -92,7 +92,9 @@
     "title": "Programu maalum",
     "urlPreview": "URL",
     "urlPreviewEmpty": "Ingiza kikoa kidogo ili kuona URL",
-    "validationItem": "Programu {n}: {message}"
+    "validationItem": "Programu {n}: {message}",
+    "charsRemaining": "Herufi {n} zimesalia",
+    "tagsRemaining": "Lebo {n} zimesalia"
   },
   "roles": {
     "admin": "Msimamizi",

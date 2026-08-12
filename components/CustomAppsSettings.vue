@@ -427,12 +427,26 @@ onBeforeUnmount(() => clearTimeout(savedFlashTimer));
           </div>
 
           <div class="space-y-2">
-            <label
-              :for="`custom-app-description-${app.clientKey}`"
-              class="text-sm font-medium text-gray-900 dark:text-dusk-100"
-            >
-              {{ t("customApps.description") }}
-            </label>
+            <div class="flex items-center justify-between gap-2">
+              <label
+                :for="`custom-app-description-${app.clientKey}`"
+                class="text-sm font-medium text-gray-900 dark:text-dusk-100"
+              >
+                {{ t("customApps.description") }}
+              </label>
+              <span
+                class="text-xs text-gray-500 dark:text-dusk-400 tabular-nums"
+              >
+                {{
+                  t("customApps.charsRemaining", {
+                    n: Math.max(
+                      0,
+                      CUSTOM_APP_DESCRIPTION_MAX - app.description.length,
+                    ),
+                  })
+                }}
+              </span>
+            </div>
             <textarea
               :id="`custom-app-description-${app.clientKey}`"
               v-model="app.description"
@@ -482,12 +496,26 @@ onBeforeUnmount(() => clearTimeout(savedFlashTimer));
             </div>
 
             <div class="space-y-2">
-              <label
-                :for="`custom-app-tags-${app.clientKey}`"
-                class="text-sm font-medium text-gray-900 dark:text-dusk-100"
-              >
-                {{ t("customApps.tags") }}
-              </label>
+              <div class="flex items-center justify-between gap-2">
+                <label
+                  :for="`custom-app-tags-${app.clientKey}`"
+                  class="text-sm font-medium text-gray-900 dark:text-dusk-100"
+                >
+                  {{ t("customApps.tags") }}
+                </label>
+                <span
+                  class="text-xs text-gray-500 dark:text-dusk-400 tabular-nums"
+                >
+                  {{
+                    t("customApps.tagsRemaining", {
+                      n: Math.max(
+                        0,
+                        CUSTOM_APP_TAG_MAX_COUNT - app.tags.length,
+                      ),
+                    })
+                  }}
+                </span>
+              </div>
               <VueTagsInput
                 :id="`custom-app-tags-${app.clientKey}`"
                 v-model="app.tagDraft"

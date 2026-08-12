@@ -115,7 +115,9 @@
     "title": "แอปที่กำหนดเอง",
     "urlPreview": "URL",
     "urlPreviewEmpty": "ใส่ซับโดเมนเพื่อดูตัวอย่าง URL",
-    "validationItem": "แอป {n}: {message}"
+    "validationItem": "แอป {n}: {message}",
+    "charsRemaining": "เหลือ {n} ตัวอักษร",
+    "tagsRemaining": "เหลือ {n} แท็ก"
   },
   "roles": {
     "admin": "ผู้ดูแล",

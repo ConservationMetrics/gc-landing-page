@@ -115,7 +115,9 @@
     "title": "Apps personalizados",
     "urlPreview": "URL",
     "urlPreviewEmpty": "Digite um subdomínio para pré-visualizar a URL",
-    "validationItem": "App {n}: {message}"
+    "validationItem": "App {n}: {message}",
+    "charsRemaining": "{n} caracteres restantes",
+    "tagsRemaining": "{n} tags restantes"
   },
   "roles": {
     "admin": "Administrador",

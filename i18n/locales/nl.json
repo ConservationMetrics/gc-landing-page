@@ -115,7 +115,9 @@
     "title": "Aangepaste apps",
     "urlPreview": "URL",
     "urlPreviewEmpty": "Voer een subdomein in om de URL te bekijken",
-    "validationItem": "App {n}: {message}"
+    "validationItem": "App {n}: {message}",
+    "charsRemaining": "{n} tekens resterend",
+    "tagsRemaining": "{n} tags resterend"
   },
   "roles": {
     "admin": "Beheerder",

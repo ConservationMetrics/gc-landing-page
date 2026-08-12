@@ -10,8 +10,8 @@ export const CUSTOM_APP_MIN_ROLE = Role.Member;
 
 export const CUSTOM_APPS_MAX = 20;
 export const CUSTOM_APP_NAME_MAX = 80;
-export const CUSTOM_APP_DESCRIPTION_MAX = 280;
-export const CUSTOM_APP_TAG_MAX_COUNT = 8;
+export const CUSTOM_APP_DESCRIPTION_MAX = 87;
+export const CUSTOM_APP_TAG_MAX_COUNT = 5;
 export const CUSTOM_APP_TAG_MAX_LENGTH = 32;
 export const CUSTOM_APP_ID_MAX = 64;
 export const CUSTOM_APP_SUBDOMAIN_MAX = 63;
