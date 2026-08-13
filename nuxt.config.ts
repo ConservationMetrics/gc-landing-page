@@ -15,6 +15,13 @@ export default defineNuxtConfig({
 
   modules: ["nuxt-auth-utils", "@nuxtjs/i18n", "@nuxtjs/tailwindcss"],
 
+  // Let Vite process this package during SSR so its CSS import is handled.
+  vite: {
+    ssr: {
+      noExternal: ["@vojtechlanka/vue-tags-input"],
+    },
+  },
+
   i18n: {
     locales: [
       { code: "en", name: "English", language: "en-US", file: "en.json" },

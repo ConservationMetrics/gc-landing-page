@@ -1,6 +1,20 @@
-import { Role, type CustomApp } from "~/types/types";
+import {
+  Role,
+  type CustomApp,
+  type CustomAppValidationError,
+  type CustomAppsValidationResult,
+} from "~/types/types";
 
-export type { CustomApp };
+export type {
+  CustomApp,
+  CustomAppDraft,
+  CustomAppInput,
+  CustomAppTag,
+  CustomAppValidationError,
+  CustomAppsResponse,
+  CustomAppsValidationResult,
+  SaveStatus,
+} from "~/types/types";
 
 /**
  * Visibility for custom app cards on the homepage grid.
@@ -10,18 +24,14 @@ export const CUSTOM_APP_MIN_ROLE = Role.Member;
 
 export const CUSTOM_APPS_MAX = 20;
 export const CUSTOM_APP_NAME_MAX = 80;
-export const CUSTOM_APP_DESCRIPTION_MAX = 280;
-export const CUSTOM_APP_TAG_MAX_COUNT = 8;
+export const CUSTOM_APP_DESCRIPTION_MAX = 87;
+export const CUSTOM_APP_TAG_MAX_COUNT = 5;
 export const CUSTOM_APP_TAG_MAX_LENGTH = 32;
 export const CUSTOM_APP_ID_MAX = 64;
 export const CUSTOM_APP_SUBDOMAIN_MAX = 63;
 
 export const CUSTOM_APP_SUBDOMAIN_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const CUSTOM_APP_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-
-export type CustomAppInput = Omit<CustomApp, "sortOrder"> & {
-  sortOrder?: number;
-};
 
 export const emptyCustomApps = (): CustomApp[] => [];
 
@@ -92,15 +102,6 @@ const ALLOWED_KEYS = new Set([
   "enabled",
   "sortOrder",
 ]);
-
-export type CustomAppValidationError = {
-  index: number;
-  message: string;
-};
-
-export type CustomAppsValidationResult =
-  | { ok: true; apps: CustomApp[] }
-  | { ok: false; errors: CustomAppValidationError[] };
 
 /**
  * Validates and normalizes a full custom-apps payload for PUT replace.

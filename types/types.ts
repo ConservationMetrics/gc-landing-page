@@ -74,10 +74,32 @@ export type CustomApp = {
   sortOrder: number;
 };
 
+export type CustomAppInput = Omit<CustomApp, "sortOrder"> & {
+  sortOrder?: number;
+};
+
+export type CustomAppTag = { text: string };
+
+export type CustomAppDraft = CustomApp & {
+  clientKey: string;
+  tagDraft: string;
+};
+
+export type CustomAppValidationError = {
+  index: number;
+  message: string;
+};
+
+export type CustomAppsValidationResult =
+  | { ok: true; apps: CustomApp[] }
+  | { ok: false; errors: CustomAppValidationError[] };
+
 export interface CustomAppsResponse {
   success: boolean;
   apps: CustomApp[];
 }
+
+export type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 // I18n Types
 export type SupportedLocale = "en" | "pt" | "es" | "nl";
