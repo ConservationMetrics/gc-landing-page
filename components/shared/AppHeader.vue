@@ -24,12 +24,11 @@ interface User {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
+const isAuth0 = config.public.authStrategy === "auth0";
 const { t } = useI18n();
 
 // Auth state using nuxt-auth-utils
 const { loggedIn, user } = useUserSession();
-
-const isAuth0Configured = config.public.auth0Enabled;
 
 const isAdmin = computed(() => {
   const typedUser = user.value as User;
@@ -101,7 +100,7 @@ const { login, logout } = useAuthActions();
       <!-- Right: Action buttons -->
       <div class="flex items-center space-x-3 ml-auto mr-2">
         <!-- Auth controls -->
-        <div v-if="isAuth0Configured && !loggedIn">
+        <div v-if="isAuth0 && !loggedIn">
           <button
             @click="login"
             class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
@@ -111,10 +110,7 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Auth controls when logged in -->
-        <div
-          v-if="isAuth0Configured && loggedIn"
-          class="flex items-center space-x-3"
-        >
+        <div v-if="isAuth0 && loggedIn" class="flex items-center space-x-3">
           <button
             @click="logout"
             class="text-gray-600 hover:text-gray-900 dark:text-dusk-400 dark:hover:text-dusk-100 transition-colors text-sm max-[1200px]:text-xs"
@@ -124,10 +120,7 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- User Management -->
-        <div
-          v-if="isAuth0Configured && loggedIn && isAdmin"
-          class="relative group"
-        >
+        <div v-if="loggedIn && isAdmin" class="relative group">
           <NuxtLink
             to="/admin/users"
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
@@ -143,10 +136,7 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Theme Settings -->
-        <div
-          v-if="isAuth0Configured && loggedIn && isAdmin"
-          class="relative group"
-        >
+        <div v-if="loggedIn && isAdmin" class="relative group">
           <NuxtLink
             to="/admin/theme"
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
@@ -193,7 +183,7 @@ const { login, logout } = useAuthActions();
       <!-- Right: User Icon and Hamburger Menu -->
       <div class="flex items-center space-x-2">
         <!-- User Icon with Checkmark (if logged in) -->
-        <div v-if="isAuth0Configured && loggedIn" class="relative">
+        <div v-if="loggedIn" class="relative">
           <div
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 border-2 border-green-500 flex items-center justify-center relative"
           >
@@ -217,7 +207,7 @@ const { login, logout } = useAuthActions();
 
     <!-- Mobile Menu Dropdown -->
     <div
-      v-if="mobileMenuOpen && isAuth0Configured && loggedIn"
+      v-if="mobileMenuOpen && loggedIn"
       class="hidden max-[1000px]:block mt-4 p-4 bg-white dark:bg-dusk-800 rounded-lg border border-violet-200 dark:border-dusk-700 shadow-lg"
     >
       <!-- Welcome Message -->
@@ -283,6 +273,7 @@ const { login, logout } = useAuthActions();
 
       <!-- Sign Out -->
       <button
+        v-if="isAuth0"
         @click="
           logout();
           mobileMenuOpen = false;
@@ -297,10 +288,7 @@ const { login, logout } = useAuthActions();
     </div>
 
     <!-- Mobile Sign In Button (if not logged in) -->
-    <div
-      v-if="isAuth0Configured && !loggedIn"
-      class="hidden max-[1000px]:block mt-4"
-    >
+    <div v-if="isAuth0 && !loggedIn" class="hidden max-[1000px]:block mt-4">
       <button
         @click="login"
         class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"

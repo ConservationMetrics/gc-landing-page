@@ -7,13 +7,7 @@ import { useThemeSettings } from "@/composables/useThemeSettings";
 import { Workflow } from "lucide-vue-next";
 
 const props = defineProps<{
-  isAuth0Configured: boolean;
-  loggedIn: boolean;
   shouldShowApp: boolean;
-}>();
-
-defineEmits<{
-  login: [];
 }>();
 
 const config = useRuntimeConfig();
