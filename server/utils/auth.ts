@@ -9,14 +9,21 @@ import type { User } from "~/types/types";
  * @param {H3Event} event - Nuxt server event.
  * @param {Role} minRole - Minimum required role.
  * @returns {Promise<User>} The authenticated user from session.
- * @throws {Error} 401 when no session user exists.
+ * @throws {Error} 401 when no session user exists (skipped when authStrategy is "none").
  * @throws {Error} 403 when user is authenticated but below minRole.
  */
 const requireMinRoleSession = async (
   event: H3Event,
   minRole: Role,
 ): Promise<User> => {
+  const {
+    public: { authStrategy },
+  } = useRuntimeConfig();
   const session = await getUserSession(event);
+
+  if (authStrategy === "none") {
+    return session.user as User;
+  }
 
   if (!session.user) {
     throw createError({

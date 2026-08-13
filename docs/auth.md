@@ -182,7 +182,7 @@ curl --request GET \
 2. **"Management API configuration missing"**: Verify environment variables are set
 3. **"Failed to fetch user roles"**: Check Management API authorization and scopes
 4. **"Windmill not visible"**: Verify user has Admin role assigned
-5. **"Auth0 not working"**: Check if `NUXT_PUBLIC_AUTH0_ENABLED` is set to `true`
+5. **"Auth0 not working"**: Check if `NUXT_PUBLIC_AUTH_STRATEGY` is set to `auth0`
 6. **"Failed to remove user"**: Ensure the application is granted the `delete:users` scope on the Auth0 Management API.
 
 ### RBAC not working despite correct Auth0 configuration
@@ -193,4 +193,4 @@ If RBAC is not working despite correct Auth0 configuration, try restarting the a
 
 - **Windmill not showing**: Ensure user has "Admin" role assigned
 - **No services showing**: Check service availability flags in environment variables
-- **Authentication not working**: Verify Auth0 configuration and `auth0Enabled` flag
+- **Authentication not working**: Verify Auth0 configuration and that `NUXT_PUBLIC_AUTH_STRATEGY` is `auth0`

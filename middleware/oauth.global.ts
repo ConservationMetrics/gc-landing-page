@@ -1,10 +1,17 @@
-import { defineNuxtRouteMiddleware, navigateTo } from "#imports";
+import {
+  defineNuxtRouteMiddleware,
+  navigateTo,
+  useRuntimeConfig,
+} from "#imports";
 import type { User } from "~/types/types";
 import { Role } from "~/types/types";
 import { createError } from "h3";
 // Following example: https://github.com/atinux/atidone/blob/main/app/middleware/auth.ts
 export default defineNuxtRouteMiddleware(async (to) => {
   const { loggedIn, user } = useUserSession();
+  const {
+    public: { authStrategy },
+  } = useRuntimeConfig();
   const router = useRouter();
 
   // Handle logout flow
@@ -13,6 +20,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
     sessionCookie.value = null;
 
     return navigateTo("/");
+  }
+
+  if (authStrategy === "none") {
+    if (to.path === "/login") return router.push("/");
+    return;
   }
 
   // In order to redirect the user back to the page they were on when unauthenticated, we need to store the redirect url in session storage
@@ -30,7 +42,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     }
   }
 
-  if (!loggedIn.value && to.path !== "/login") {
+  if (authStrategy === "auth0" && !loggedIn.value && to.path !== "/login") {
     return router.push("/login");
   }
 
@@ -39,7 +51,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   // Admin route protection
-  if (loggedIn.value && to.path.startsWith("/admin")) {
+  if (
+    authStrategy === "auth0" &&
+    loggedIn.value &&
+    to.path.startsWith("/admin")
+  ) {
     const userRole = (user.value as User)?.userRole;
 
     if (!userRole || userRole < Role.Admin) {

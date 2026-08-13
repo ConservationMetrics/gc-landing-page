@@ -53,6 +53,11 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 
 ## Authentication
 
+Set `NUXT_PUBLIC_AUTH_STRATEGY` to `auth0` or `none`. See [docs/auth.md](docs/auth.md) for RBAC details.
+
+- **auth0** — Auth0 login + RBAC (production, or local work on auth). Requires the Auth0 env vars below.
+- **none** — Skip Auth0 and seed a local Admin session (recommended for everyday local/dev).
+
 ### Auth0 Setup
 
 1. **Create Auth0 Application**
@@ -62,9 +67,12 @@ docker run --env-file=.env -it -p 8080:8080 gc-landing-page:latest
 
 2. **Configure Environment Variables**
    ```bash
-   NUXT_AUTH0_DOMAIN=your-tenant.auth0.com
-   NUXT_AUTH0_CLIENT_ID=your-client-id
+   NUXT_PUBLIC_AUTH_STRATEGY=auth0
+   NUXT_OAUTH_AUTH0_DOMAIN=your-tenant.auth0.com
+   NUXT_OAUTH_AUTH0_CLIENT_ID=your-client-id
+   NUXT_OAUTH_AUTH0_CLIENT_SECRET=your-client-secret
    ```
+
 
 ## Service Configuration Details
 
