@@ -32,5 +32,7 @@ useHead({
 </script>
 
 <template>
-  <CustomAppsSettings />
+  <ClientOnly>
+    <CustomAppsSettings />
+  </ClientOnly>
 </template>
