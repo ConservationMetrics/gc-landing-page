@@ -153,10 +153,7 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Custom Apps -->
-        <div
-          v-if="isAuth0Configured && loggedIn && isAdmin"
-          class="relative group"
-        >
+        <div v-if="loggedIn && isAdmin" class="relative group">
           <NuxtLink
             to="/admin/apps"
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
