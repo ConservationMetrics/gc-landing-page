@@ -268,7 +268,7 @@
       "body": "Elige el logotipo y la imagen de fondo de tu instancia."
     },
     "adminUsers": {
-      "title": "Gestionar personas",
+      "title": "Gestionar usuarios",
       "body": "Aprueba nuevas cuentas y asigna los roles que controlan lo que cada persona puede ver."
     },
     "replay": {

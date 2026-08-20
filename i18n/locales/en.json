@@ -268,7 +268,7 @@
       "body": "Choose the logo and background image for your instance."
     },
     "adminUsers": {
-      "title": "Manage people",
+      "title": "Manage users",
       "body": "Approve new accounts and assign the roles that control what each person can see."
     },
     "replay": {
