@@ -9,6 +9,7 @@ import { translateRoleName } from "@/utils/roleTranslations";
 import { useAuthActions } from "@/composables/useAuth";
 import {
   BadgeCheck,
+  HelpCircle,
   LayoutGrid,
   LogOut,
   Menu,
@@ -16,6 +17,7 @@ import {
   User as UserIcon,
   Users,
 } from "lucide-vue-next";
+import { useCoachMarks } from "~/composables/useCoachMarks";
 
 interface User {
   auth0: string;
@@ -43,6 +45,11 @@ const toggleMobileMenu = () => {
 };
 
 const { login, logout } = useAuthActions();
+const { start: startCoachMarks } = useCoachMarks();
+
+const replayTour = () => {
+  void startCoachMarks({ force: true });
+};
 </script>
 
 <template>
@@ -188,6 +195,23 @@ const { login, logout } = useAuthActions();
             class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
           >
             {{ t("header.themeToggle") }}
+          </div>
+        </div>
+
+        <!-- Replay coach marks -->
+        <div data-tour="header-replay" class="relative group">
+          <button
+            type="button"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
+            :aria-label="t('coachMarks.restart')"
+            @click="replayTour"
+          >
+            <HelpCircle class="w-5 h-5 text-gray-600 dark:text-dusk-300" />
+          </button>
+          <div
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+          >
+            {{ t("coachMarks.restart") }}
           </div>
         </div>
 
