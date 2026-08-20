@@ -155,6 +155,7 @@ const displayTag = (service: ServiceCard, tag: string) =>
       <div
         v-for="service in availableServices"
         :key="service.key"
+        :data-tour="`service-${service.key}`"
         class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-violet-200 dark:border-violet-900 bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/40 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
         @click="openService(service.url)"
       >

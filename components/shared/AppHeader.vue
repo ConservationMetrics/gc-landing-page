@@ -121,7 +121,11 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- User Management -->
-        <div v-if="loggedIn && isAdmin" class="relative group">
+        <div
+          v-if="loggedIn && isAdmin"
+          data-tour="header-users"
+          class="relative group"
+        >
           <NuxtLink
             to="/admin/users"
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
@@ -137,7 +141,11 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Theme Settings -->
-        <div v-if="loggedIn && isAdmin" class="relative group">
+        <div
+          v-if="loggedIn && isAdmin"
+          data-tour="header-theme"
+          class="relative group"
+        >
           <NuxtLink
             to="/admin/theme"
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
@@ -153,7 +161,11 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Custom Apps -->
-        <div v-if="loggedIn && isAdmin" class="relative group">
+        <div
+          v-if="loggedIn && isAdmin"
+          data-tour="header-apps"
+          class="relative group"
+        >
           <NuxtLink
             to="/admin/apps"
             class="w-10 h-10 rounded-full bg-white dark:bg-dusk-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-dusk-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-dusk-800"
@@ -169,7 +181,7 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Display (light / dark) Toggle -->
-        <div class="relative group">
+        <div data-tour="header-display" class="relative group">
           <ThemeToggle theme="white" variant="icon" />
           <!-- Tooltip -->
           <div
@@ -180,7 +192,7 @@ const { login, logout } = useAuthActions();
         </div>
 
         <!-- Language Picker -->
-        <div class="relative group">
+        <div data-tour="header-language" class="relative group">
           <GlobeLanguagePicker theme="white" variant="icon" />
           <!-- Tooltip -->
           <div
