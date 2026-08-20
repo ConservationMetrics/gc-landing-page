@@ -220,6 +220,7 @@
     "skip": "Omitir recorrido",
     "close": "Cerrar recorrido",
     "restart": "Iniciar recorrido",
+    "adminOnly": "Solo admin",
     "stepLabel": "Paso {current} de {total}",
     "welcome": {
       "title": "¡Bienvenido a Guardian Connector!",

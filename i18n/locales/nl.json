@@ -220,6 +220,7 @@
     "skip": "Rondleiding overslaan",
     "close": "Rondleiding sluiten",
     "restart": "Rondleiding starten",
+    "adminOnly": "Alleen admin",
     "stepLabel": "Stap {current} van {total}",
     "welcome": {
       "title": "Welkom bij Guardian Connector!",

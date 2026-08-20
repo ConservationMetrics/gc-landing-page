@@ -220,6 +220,7 @@
     "skip": "Ruka mwongozo",
     "close": "Funga mwongozo",
     "restart": "Anza mwongozo",
+    "adminOnly": "Admin pekee",
     "stepLabel": "Hatua {current} kati ya {total}",
     "welcome": {
       "title": "Karibu kwenye Guardian Connector!",

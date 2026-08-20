@@ -19,6 +19,7 @@ import {
   LayoutGrid,
   Map,
   Palette,
+  Shield,
   Sparkles,
   SunMoon,
   Users,
@@ -26,6 +27,7 @@ import {
   X,
 } from "lucide-vue-next";
 import { useCoachMarks } from "~/composables/useCoachMarks";
+import { Role } from "~/types/types";
 import type { CoachMarkIcon, CoachMarkPlacement } from "~/utils/coachMarks";
 
 const PAD = 8;
@@ -70,6 +72,11 @@ const isFirst = computed(() => index.value === 0);
 const isLast = computed(() => index.value >= steps.value.length - 1);
 const isCentered = computed(() => currentStep.value?.placement === "center");
 const isWelcome = computed(() => currentStep.value?.key === "welcome");
+const isAdminStep = computed(
+  () => (currentStep.value?.minRole ?? 0) >= Role.Admin,
+);
+const isAdminStepAt = (i: number) =>
+  (steps.value[i]?.minRole ?? 0) >= Role.Admin;
 
 const title = computed(() =>
   currentStep.value ? t(`coachMarks.${currentStep.value.key}.title`) : "",
@@ -259,12 +266,15 @@ onBeforeUnmount(() => {
       <!-- Popover -->
       <div
         ref="popoverEl"
-        class="z-[101] max-w-[calc(100vw-2rem)] rounded-2xl border border-violet-200 bg-white p-5 shadow-xl dark:border-violet-900 dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
-        :class="
+        class="z-[101] max-w-[calc(100vw-2rem)] rounded-2xl border bg-white p-5 shadow-xl dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
+        :class="[
           isCentered
             ? 'fixed left-1/2 top-1/2 w-96 -translate-x-1/2 -translate-y-1/2'
-            : 'absolute w-80'
-        "
+            : 'absolute w-80',
+          isAdminStep
+            ? 'border-amber-300 dark:border-amber-800'
+            : 'border-violet-200 dark:border-violet-900',
+        ]"
         :style="
           isCentered
             ? undefined
@@ -278,12 +288,15 @@ onBeforeUnmount(() => {
         <!-- Arrow -->
         <div
           v-if="!isCentered"
-          class="pointer-events-none absolute left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-violet-200 bg-white dark:border-violet-900 dark:bg-dusk-800"
-          :class="
+          class="pointer-events-none absolute left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-white dark:bg-dusk-800"
+          :class="[
             popover.placement === 'bottom'
               ? '-top-1.5 border-l border-t'
-              : '-bottom-1.5 border-r border-b'
-          "
+              : '-bottom-1.5 border-r border-b',
+            isAdminStep
+              ? 'border-amber-300 dark:border-amber-800'
+              : 'border-violet-200 dark:border-violet-900',
+          ]"
           aria-hidden="true"
         ></div>
 
@@ -298,15 +311,41 @@ onBeforeUnmount(() => {
         </button>
 
         <div class="mb-3 flex items-start gap-3 pr-6">
-          <div
-            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet-50 dark:bg-dusk-700"
-          >
-            <component
-              :is="stepIcon"
-              class="h-5 w-5 text-violet-600 dark:text-violet-300"
-            />
+          <!-- Admin seal: amber chip + shield stamp -->
+          <div class="relative shrink-0">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-full"
+              :class="
+                isAdminStep
+                  ? 'bg-amber-50 dark:bg-amber-950/50'
+                  : 'bg-violet-50 dark:bg-dusk-700'
+              "
+            >
+              <component
+                :is="stepIcon"
+                class="h-5 w-5"
+                :class="
+                  isAdminStep
+                    ? 'text-amber-700 dark:text-amber-300'
+                    : 'text-violet-600 dark:text-violet-300'
+                "
+              />
+            </div>
+            <div
+              v-if="isAdminStep"
+              class="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-white shadow-sm ring-2 ring-white dark:bg-amber-600 dark:ring-dusk-800"
+              :title="t('coachMarks.adminOnly')"
+            >
+              <Shield class="h-2.5 w-2.5" aria-hidden="true" />
+            </div>
           </div>
           <div>
+            <p
+              v-if="isAdminStep"
+              class="mb-0.5 text-[11px] font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400"
+            >
+              {{ t("coachMarks.adminOnly") }}
+            </p>
             <h2
               :id="titleId"
               class="text-base font-bold text-gray-900 dark:text-dusk-100"
@@ -334,7 +373,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <!-- Progress dots -->
+        <!-- Progress dots (amber = upcoming/current admin steps) -->
         <div
           class="mb-4 flex items-center justify-center gap-1.5"
           :aria-label="
@@ -350,8 +389,12 @@ onBeforeUnmount(() => {
             class="h-1.5 w-1.5 rounded-full transition-colors"
             :class="
               i === index
-                ? 'bg-violet-600 dark:bg-violet-400'
-                : 'bg-gray-300 dark:bg-dusk-600'
+                ? isAdminStepAt(i)
+                  ? 'bg-amber-500 dark:bg-amber-400'
+                  : 'bg-violet-600 dark:bg-violet-400'
+                : isAdminStepAt(i)
+                  ? 'bg-amber-300 dark:bg-amber-800'
+                  : 'bg-gray-300 dark:bg-dusk-600'
             "
           ></span>
         </div>

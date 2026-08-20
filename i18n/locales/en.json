@@ -220,6 +220,7 @@
     "skip": "Skip tour",
     "close": "Close tour",
     "restart": "Start Tour",
+    "adminOnly": "Admin only",
     "stepLabel": "Step {current} of {total}",
     "welcome": {
       "title": "Welcome to Guardian Connector!",

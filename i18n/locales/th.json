@@ -220,6 +220,7 @@
     "skip": "ข้ามทัวร์",
     "close": "ปิดทัวร์",
     "restart": "เริ่มทัวร์",
+    "adminOnly": "สำหรับแอดมินเท่านั้น",
     "stepLabel": "ขั้นตอนที่ {current} จาก {total}",
     "welcome": {
       "title": "ยินดีต้อนรับสู่ Guardian Connector!",
