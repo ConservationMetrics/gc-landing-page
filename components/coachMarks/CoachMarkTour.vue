@@ -31,7 +31,6 @@ import type { CoachMarkIcon, CoachMarkPlacement } from "~/utils/coachMarks";
 const PAD = 8;
 const GUTTER = 16;
 const POPOVER_W = 320;
-const POPOVER_W_CENTER = 384;
 const ARROW = 8;
 
 const { t } = useI18n();
@@ -71,9 +70,6 @@ const isFirst = computed(() => index.value === 0);
 const isLast = computed(() => index.value >= steps.value.length - 1);
 const isCentered = computed(() => currentStep.value?.placement === "center");
 const isWelcome = computed(() => currentStep.value?.key === "welcome");
-const popoverWidth = computed(() =>
-  isCentered.value ? POPOVER_W_CENTER : POPOVER_W,
-);
 
 const title = computed(() =>
   currentStep.value ? t(`coachMarks.${currentStep.value.key}.title`) : "",
@@ -88,14 +84,8 @@ const getAnchor = (): HTMLElement | null => {
 };
 
 const measureCenter = () => {
-  const popH = popoverEl.value?.offsetHeight ?? 200;
-  const popW = popoverWidth.value;
   spotlight.value = { top: 0, left: 0, width: 0, height: 0 };
-  popover.value = {
-    top: Math.max(GUTTER, (window.innerHeight - popH) / 2),
-    left: Math.max(GUTTER, (window.innerWidth - popW) / 2),
-    placement: "center",
-  };
+  popover.value = { top: 0, left: 0, placement: "center" };
 };
 
 const measure = () => {
@@ -269,12 +259,20 @@ onBeforeUnmount(() => {
       <!-- Popover -->
       <div
         ref="popoverEl"
-        class="absolute z-[101] max-w-[calc(100vw-2rem)] rounded-2xl border border-violet-200 bg-white p-5 shadow-xl dark:border-violet-900 dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
-        :class="isCentered ? 'w-96' : 'w-80'"
-        :style="{
-          top: `${popover.top}px`,
-          left: `${popover.left}px`,
-        }"
+        class="z-[101] max-w-[calc(100vw-2rem)] rounded-2xl border border-violet-200 bg-white p-5 shadow-xl dark:border-violet-900 dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
+        :class="
+          isCentered
+            ? 'fixed left-1/2 top-1/2 w-96 -translate-x-1/2 -translate-y-1/2'
+            : 'absolute w-80'
+        "
+        :style="
+          isCentered
+            ? undefined
+            : {
+                top: `${popover.top}px`,
+                left: `${popover.left}px`,
+              }
+        "
         @click.stop
       >
         <!-- Arrow -->
@@ -382,8 +380,14 @@ onBeforeUnmount(() => {
               class="inline-flex items-center gap-1 rounded-lg bg-violet-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:focus:ring-offset-dusk-800"
               @click="next"
             >
-              {{ isLast ? t("coachMarks.done") : t("coachMarks.next") }}
-              <ChevronRight v-if="!isLast" class="h-4 w-4" />
+              {{
+                isLast
+                  ? t("coachMarks.done")
+                  : isWelcome
+                    ? t("coachMarks.restart")
+                    : t("coachMarks.next")
+              }}
+              <ChevronRight v-if="!isLast && !isWelcome" class="h-4 w-4" />
             </button>
           </div>
         </div>
