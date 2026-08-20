@@ -212,5 +212,62 @@
     "userRoles": "Gebruikersrollen",
     "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt",
     "you": "Jij"
+  },
+  "coachMarks": {
+    "next": "Volgende",
+    "back": "Terug",
+    "done": "Klaar",
+    "skip": "Rondleiding overslaan",
+    "close": "Rondleiding sluiten",
+    "restart": "Rondleiding herstarten",
+    "stepLabel": "Stap {current} van {total}",
+    "explorer": {
+      "title": "Explorer",
+      "body": "Open kaarten, waarschuwingen, wildweergaven en mediagalerijen voor de gegevens van je gemeenschap."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Bouw grafieken, analyses en dashboards vanuit je gegevens."
+    },
+    "filebrowser": {
+      "title": "Filebrowser",
+      "body": "Blader door, upload en deel bestanden en ruwe data veilig."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Automatiseer workflows, geplande taken en data-apps."
+    },
+    "customApp": {
+      "title": "Aangepaste apps",
+      "body": "Open community-apps die op je Guardian Connector-instantie worden gehost."
+    },
+    "dataSources": {
+      "title": "Er is meer hieronder",
+      "body": "Scroll omlaag voor de tools voor gegevensverzameling die Guardian Connector voeden, zoals CoMapeo, KoboToolbox en ODK."
+    },
+    "display": {
+      "title": "Lichte en donkere modus",
+      "body": "Schakel de weergave tussen licht en donker naar je voorkeur."
+    },
+    "language": {
+      "title": "Taal",
+      "body": "Wijzig de taal die op deze Guardian Connector-instantie wordt gebruikt."
+    },
+    "adminApps": {
+      "title": "Aangepaste apps toevoegen",
+      "body": "Voeg kaarten toe voor apps op je instantie zodat leden ze vanaf deze pagina kunnen openen."
+    },
+    "adminTheme": {
+      "title": "Stel je huisstijl in",
+      "body": "Kies het logo en de achtergrondafbeelding voor je instantie."
+    },
+    "adminUsers": {
+      "title": "Mensen beheren",
+      "body": "Keur nieuwe accounts goed en wijs de rollen toe die bepalen wat iedereen kan zien."
+    },
+    "replay": {
+      "title": "Deze rondleiding herhalen",
+      "body": "Je kunt deze tips altijd opnieuw starten via deze knop."
+    }
   }
 }

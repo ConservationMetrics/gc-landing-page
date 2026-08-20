@@ -212,5 +212,62 @@
     "userRoles": "Papéis do Usuário",
     "userUpdatedSuccessfully": "Usuário {email} atualizado com sucesso",
     "you": "Você"
+  },
+  "coachMarks": {
+    "next": "Seguinte",
+    "back": "Voltar",
+    "done": "Concluído",
+    "skip": "Ignorar percurso",
+    "close": "Fechar percurso",
+    "restart": "Reiniciar percurso",
+    "stepLabel": "Passo {current} de {total}",
+    "explorer": {
+      "title": "Explorer",
+      "body": "Abra mapas, alertas, vistas de vida selvagem e galerias de media dos dados da sua comunidade."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Crie gráficos, análises e painéis a partir dos seus dados."
+    },
+    "filebrowser": {
+      "title": "Filebrowser",
+      "body": "Navegue, carregue e partilhe ficheiros e dados em bruto de forma segura."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Automatize fluxos de trabalho, tarefas agendadas e aplicações de dados."
+    },
+    "customApp": {
+      "title": "Aplicações personalizadas",
+      "body": "Abra aplicações da comunidade alojadas na sua instância do Guardian Connector."
+    },
+    "dataSources": {
+      "title": "Há mais abaixo",
+      "body": "Desça para ver as ferramentas de recolha de dados que alimentam o Guardian Connector, como CoMapeo, KoboToolbox e ODK."
+    },
+    "display": {
+      "title": "Modo claro e escuro",
+      "body": "Alterne o ecrã entre claro e escuro conforme a sua preferência."
+    },
+    "language": {
+      "title": "Idioma",
+      "body": "Altere o idioma usado nesta instância do Guardian Connector."
+    },
+    "adminApps": {
+      "title": "Adicionar aplicações personalizadas",
+      "body": "Adicione cartões para aplicações alojadas na sua instância para que os membros as possam abrir nesta página."
+    },
+    "adminTheme": {
+      "title": "Defina a sua marca",
+      "body": "Escolha o logótipo e a imagem de fundo da sua instância."
+    },
+    "adminUsers": {
+      "title": "Gerir pessoas",
+      "body": "Aprove novas contas e atribua as funções que controlam o que cada pessoa pode ver."
+    },
+    "replay": {
+      "title": "Repetir este percurso",
+      "body": "Pode reiniciar estas dicas a qualquer momento a partir deste botão."
+    }
   }
 }

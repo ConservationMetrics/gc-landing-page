@@ -212,5 +212,62 @@
     "userRoles": "Majukumu ya Mtumiaji",
     "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio",
     "you": "Wewe"
+  },
+  "coachMarks": {
+    "next": "Ifuatayo",
+    "back": "Rudi",
+    "done": "Maliza",
+    "skip": "Ruka mwongozo",
+    "close": "Funga mwongozo",
+    "restart": "Anza upya mwongozo",
+    "stepLabel": "Hatua {current} kati ya {total}",
+    "explorer": {
+      "title": "Explorer",
+      "body": "Fungua ramani, arifa, maonyesho ya wanyama pori, na majumba ya picha kwa data ya jamii yako."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Tengeneza chati, uchambuzi, na dashibodi kutoka kwa data yako."
+    },
+    "filebrowser": {
+      "title": "Filebrowser",
+      "body": "Vinjari, pakia, na shiriki faili na data ghafi kwa usalama."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Weka otomatiki mtiririko wa kazi, kazi zilizopangwa, na programu za data."
+    },
+    "customApp": {
+      "title": "Programu maalum",
+      "body": "Fungua programu za jamii zilizohifadhiwa kwenye mfano wako wa Guardian Connector."
+    },
+    "dataSources": {
+      "title": "Kuna zaidi chini",
+      "body": "Sogeza chini kwa zana za kukusanya data zinazolipa Guardian Connector, kama CoMapeo, KoboToolbox, na ODK."
+    },
+    "display": {
+      "title": "Hali angavu na iliyokolea",
+      "body": "Badilisha onyesho kati ya angavu na iliyokolea kulingana na mapendeleo yako."
+    },
+    "language": {
+      "title": "Lugha",
+      "body": "Badilisha lugha inayotumika katika mfano huu wa Guardian Connector."
+    },
+    "adminApps": {
+      "title": "Ongeza programu maalum",
+      "body": "Ongeza kadi za programu zilizohifadhiwa kwenye mfano wako ili wanachama waweze kuzifungua kutoka ukurasa huu."
+    },
+    "adminTheme": {
+      "title": "Weka chapa yako",
+      "body": "Chagua nembo na picha ya chinichini ya mfano wako."
+    },
+    "adminUsers": {
+      "title": "Simamia watu",
+      "body": "Idhinisha akaunti mpya na ugawanye majukumu yanayodhibiti kile kila mtu anaweza kuona."
+    },
+    "replay": {
+      "title": "Rudia mwongozo huu",
+      "body": "Unaweza kuanzisha upya vidokezo hivi wakati wowote kutoka kwa kitufe hiki."
+    }
   }
 }
