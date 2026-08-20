@@ -12,6 +12,7 @@ export type CoachMarkStepKey =
   | "windmill"
   | "customApp"
   | "dataSources"
+  | "docs"
   | "display"
   | "language"
   | "adminApps"
@@ -27,6 +28,7 @@ export type CoachMarkIcon =
   | "wind"
   | "layoutGrid"
   | "database"
+  | "bookOpen"
   | "sunMoon"
   | "globe"
   | "palette"
@@ -43,7 +45,7 @@ export type CoachMarkStepDef = {
   minRole: number;
 };
 
-/** Welcome (centered), cards L→R, header L→R, data sources last. */
+/** Welcome (centered), cards L→R, header L→R, data sources, docs last. */
 export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
   {
     key: "welcome",
@@ -126,6 +128,13 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     anchor: '[data-tour="data-sources"]',
     icon: "database",
     placement: "bottom",
+    minRole: 0,
+  },
+  {
+    key: "docs",
+    anchor: '[data-tour="docs-help"]',
+    icon: "bookOpen",
+    placement: "top",
     minRole: 0,
   },
 ] as const;

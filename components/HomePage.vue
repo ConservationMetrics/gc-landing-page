@@ -139,7 +139,10 @@ watch(
         <DataSourcesGrid v-if="props.shouldShowApp" />
 
         <div v-if="props.shouldShowApp" class="mb-8 mt-8 text-center">
-          <p class="text-sm italic text-gray-600 dark:text-dusk-400">
+          <p
+            data-tour="docs-help"
+            class="inline-block text-sm italic text-gray-600 dark:text-dusk-400"
+          >
             {{ t("services.needHelp") }}
             <a
               href="https://docs.guardianconnector.net"

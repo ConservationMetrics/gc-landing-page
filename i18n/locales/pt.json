@@ -249,7 +249,11 @@
     },
     "dataSources": {
       "title": "Há mais abaixo",
-      "body": "Desça para ver as ferramentas de recolha de dados que alimentam o Guardian Connector, como CoMapeo, KoboToolbox e ODK."
+      "body": "Desça para conhecer uma seleção das ferramentas de recolha de dados que alimentam o Guardian Connector, como CoMapeo, KoboToolbox e ODK."
+    },
+    "docs": {
+      "title": "Precisa de ajuda?",
+      "body": "Se precisar de ajuda, consulte a nossa documentação."
     },
     "display": {
       "title": "Modo claro e escuro",

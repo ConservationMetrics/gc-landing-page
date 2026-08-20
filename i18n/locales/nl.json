@@ -249,7 +249,11 @@
     },
     "dataSources": {
       "title": "Er is meer hieronder",
-      "body": "Scroll omlaag voor de tools voor gegevensverzameling die Guardian Connector voeden, zoals CoMapeo, KoboToolbox en ODK."
+      "body": "Scroll omlaag om meer te leren over een selectie van de tools voor gegevensverzameling die Guardian Connector voeden, zoals CoMapeo, KoboToolbox en ODK."
+    },
+    "docs": {
+      "title": "Hulp nodig?",
+      "body": "Als je hulp nodig hebt, bekijk dan onze documentatie."
     },
     "display": {
       "title": "Lichte en donkere modus",

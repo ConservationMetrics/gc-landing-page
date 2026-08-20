@@ -249,7 +249,11 @@
     },
     "dataSources": {
       "title": "Kuna zaidi chini",
-      "body": "Sogeza chini kwa zana za kukusanya data zinazolipa Guardian Connector, kama CoMapeo, KoboToolbox, na ODK."
+      "body": "Sogeza chini ili ujifunze kuhusu uteuzi wa zana za kukusanya data zinazolisha Guardian Connector, kama CoMapeo, KoboToolbox, na ODK."
+    },
+    "docs": {
+      "title": "Unahitaji msaada?",
+      "body": "Ikiwa unahitaji msaada wowote, tafadhali angalia nyaraka zetu."
     },
     "display": {
       "title": "Hali angavu na iliyokolea",

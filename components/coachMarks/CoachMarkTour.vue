@@ -10,6 +10,7 @@ import {
 import { useI18n } from "#imports";
 import {
   BarChart3,
+  BookOpen,
   ChevronLeft,
   ChevronRight,
   Database,
@@ -47,6 +48,7 @@ const iconMap: Record<CoachMarkIcon, Component> = {
   wind: Wind,
   layoutGrid: LayoutGrid,
   database: Database,
+  bookOpen: BookOpen,
   sunMoon: SunMoon,
   globe: Globe,
   palette: Palette,
@@ -162,9 +164,12 @@ const scrollToAnchor = () => {
   if (currentStep.value?.placement === "center") return;
   const el = getAnchor();
   if (!el) return;
-  if (isFullyInView(el) && currentStep.value?.key !== "dataSources") return;
+  const forceScroll =
+    currentStep.value?.key === "dataSources" ||
+    currentStep.value?.key === "docs";
+  if (isFullyInView(el) && !forceScroll) return;
   el.scrollIntoView({
-    block: currentStep.value?.key === "dataSources" ? "start" : "nearest",
+    block: forceScroll ? "start" : "nearest",
     behavior: "smooth",
   });
 };
