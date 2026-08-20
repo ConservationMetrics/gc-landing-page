@@ -219,8 +219,13 @@
     "done": "Concluído",
     "skip": "Ignorar percurso",
     "close": "Fechar percurso",
-    "restart": "Reiniciar percurso",
+    "restart": "Iniciar percurso",
     "stepLabel": "Passo {current} de {total}",
+    "welcome": {
+      "title": "Bem-vindo ao Guardian Connector!",
+      "body": "Vamos fazer um percurso sobre como usar as ferramentas.",
+      "exit": "Pode sair deste percurso a qualquer momento — pode sempre reabri-lo com o ícone {icon} no canto superior direito do menu."
+    },
     "explorer": {
       "title": "Explorer",
       "body": "Abra mapas, alertas, vistas de vida selvagem e galerias de media dos dados da sua comunidade."

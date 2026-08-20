@@ -19,6 +19,7 @@ import {
   LayoutGrid,
   Map,
   Palette,
+  Sparkles,
   SunMoon,
   Users,
   Wind,
@@ -30,6 +31,7 @@ import type { CoachMarkIcon, CoachMarkPlacement } from "~/utils/coachMarks";
 const PAD = 8;
 const GUTTER = 16;
 const POPOVER_W = 320;
+const POPOVER_W_CENTER = 384;
 const ARROW = 8;
 
 const { t } = useI18n();
@@ -37,6 +39,7 @@ const { active, steps, index, currentStep, next, back, dismiss, cancel } =
   useCoachMarks();
 
 const iconMap: Record<CoachMarkIcon, Component> = {
+  sparkles: Sparkles,
   map: Map,
   chart: BarChart3,
   folder: FolderOpen,
@@ -66,6 +69,11 @@ const stepIcon = computed(() =>
 const titleId = "coach-mark-title";
 const isFirst = computed(() => index.value === 0);
 const isLast = computed(() => index.value >= steps.value.length - 1);
+const isCentered = computed(() => currentStep.value?.placement === "center");
+const isWelcome = computed(() => currentStep.value?.key === "welcome");
+const popoverWidth = computed(() =>
+  isCentered.value ? POPOVER_W_CENTER : POPOVER_W,
+);
 
 const title = computed(() =>
   currentStep.value ? t(`coachMarks.${currentStep.value.key}.title`) : "",
@@ -75,11 +83,27 @@ const body = computed(() =>
 );
 
 const getAnchor = (): HTMLElement | null => {
-  if (!currentStep.value || !import.meta.client) return null;
+  if (!currentStep.value?.anchor || !import.meta.client) return null;
   return document.querySelector(currentStep.value.anchor);
 };
 
+const measureCenter = () => {
+  const popH = popoverEl.value?.offsetHeight ?? 200;
+  const popW = popoverWidth.value;
+  spotlight.value = { top: 0, left: 0, width: 0, height: 0 };
+  popover.value = {
+    top: Math.max(GUTTER, (window.innerHeight - popH) / 2),
+    left: Math.max(GUTTER, (window.innerWidth - popW) / 2),
+    placement: "center",
+  };
+};
+
 const measure = () => {
+  if (currentStep.value?.placement === "center") {
+    measureCenter();
+    return;
+  }
+
   const el = getAnchor();
   if (!el) return;
 
@@ -117,18 +141,35 @@ const measure = () => {
     Math.min(left, window.innerWidth - POPOVER_W - GUTTER),
   );
 
-  const top =
+  let top =
     placement === "bottom"
       ? rect.bottom + PAD + ARROW
       : rect.top - PAD - ARROW - popH;
 
+  top = Math.max(GUTTER, Math.min(top, window.innerHeight - popH - GUTTER));
+
   popover.value = { top, left, placement };
 };
 
+const isFullyInView = (el: HTMLElement) => {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= GUTTER &&
+    rect.bottom <= window.innerHeight - GUTTER &&
+    rect.left >= 0 &&
+    rect.right <= window.innerWidth
+  );
+};
+
 const scrollToAnchor = () => {
+  if (currentStep.value?.placement === "center") return;
   const el = getAnchor();
   if (!el) return;
-  el.scrollIntoView({ block: "center", behavior: "smooth" });
+  if (isFullyInView(el) && currentStep.value?.key !== "dataSources") return;
+  el.scrollIntoView({
+    block: currentStep.value?.key === "dataSources" ? "start" : "nearest",
+    behavior: "smooth",
+  });
 };
 
 const onKeydown = (e: KeyboardEvent) => {
@@ -206,8 +247,9 @@ onBeforeUnmount(() => {
         @click="dismiss"
       ></div>
 
-      <!-- Spotlight hole -->
+      <!-- Spotlight hole (hidden for centered welcome) -->
       <div
+        v-if="!isCentered"
         class="pointer-events-none absolute rounded-2xl motion-reduce:transition-none transition-all duration-300"
         :style="{
           top: `${spotlight.top}px`,
@@ -218,11 +260,17 @@ onBeforeUnmount(() => {
         }"
         aria-hidden="true"
       ></div>
+      <div
+        v-else
+        class="pointer-events-none absolute inset-0 bg-[rgba(15,10,30,0.55)]"
+        aria-hidden="true"
+      ></div>
 
       <!-- Popover -->
       <div
         ref="popoverEl"
-        class="absolute z-[101] w-80 max-w-[calc(100vw-2rem)] rounded-2xl border border-violet-200 bg-white p-5 shadow-xl dark:border-violet-900 dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
+        class="absolute z-[101] max-w-[calc(100vw-2rem)] rounded-2xl border border-violet-200 bg-white p-5 shadow-xl dark:border-violet-900 dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
+        :class="isCentered ? 'w-96' : 'w-80'"
         :style="{
           top: `${popover.top}px`,
           left: `${popover.left}px`,
@@ -231,6 +279,7 @@ onBeforeUnmount(() => {
       >
         <!-- Arrow -->
         <div
+          v-if="!isCentered"
           class="pointer-events-none absolute left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-violet-200 bg-white dark:border-violet-900 dark:bg-dusk-800"
           :class="
             popover.placement === 'bottom'
@@ -266,7 +315,22 @@ onBeforeUnmount(() => {
             >
               {{ title }}
             </h2>
-            <p class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
+            <template v-if="isWelcome">
+              <p class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
+                {{ t("coachMarks.welcome.body") }}
+              </p>
+              <p class="mt-2 text-sm text-gray-600 dark:text-dusk-400">
+                <i18n-t keypath="coachMarks.welcome.exit" tag="span">
+                  <template #icon>
+                    <HelpCircle
+                      class="mx-0.5 inline h-3.5 w-3.5 -translate-y-px text-violet-600 dark:text-violet-300"
+                      aria-hidden="true"
+                    />
+                  </template>
+                </i18n-t>
+              </p>
+            </template>
+            <p v-else class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
               {{ body }}
             </p>
           </div>

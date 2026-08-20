@@ -2,9 +2,10 @@ export const COACH_MARKS_STORAGE_KEY = "gc-coach-marks";
 export const COACH_MARKS_VERSION = 1;
 export const COACH_MARKS_DESKTOP_MQ = "(min-width: 1001px)";
 
-export type CoachMarkPlacement = "top" | "bottom";
+export type CoachMarkPlacement = "top" | "bottom" | "center";
 
 export type CoachMarkStepKey =
+  | "welcome"
   | "explorer"
   | "superset"
   | "filebrowser"
@@ -19,6 +20,7 @@ export type CoachMarkStepKey =
   | "replay";
 
 export type CoachMarkIcon =
+  | "sparkles"
   | "map"
   | "chart"
   | "folder"
@@ -33,15 +35,22 @@ export type CoachMarkIcon =
 
 export type CoachMarkStepDef = {
   key: CoachMarkStepKey;
-  anchor: string;
+  /** CSS selector; omit for centered steps with no spotlight target. */
+  anchor?: string;
   icon: CoachMarkIcon;
   placement: CoachMarkPlacement;
   /** Minimum Role enum value; used when a user is promoted to show only new steps. */
   minRole: number;
 };
 
-/** Ordered by reading flow; filtered at runtime to anchors present in the DOM. */
+/** Welcome (centered), cards L→R, header L→R, data sources last. */
 export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
+  {
+    key: "welcome",
+    icon: "sparkles",
+    placement: "center",
+    minRole: 0,
+  },
   {
     key: "explorer",
     anchor: '[data-tour="service-explorer"]',
@@ -57,18 +66,18 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 1,
   },
   {
-    key: "filebrowser",
-    anchor: '[data-tour="service-filebrowser"]',
-    icon: "folder",
-    placement: "bottom",
-    minRole: 2,
-  },
-  {
     key: "windmill",
     anchor: '[data-tour="service-windmill"]',
     icon: "wind",
     placement: "bottom",
     minRole: 3,
+  },
+  {
+    key: "filebrowser",
+    anchor: '[data-tour="service-filebrowser"]',
+    icon: "folder",
+    placement: "bottom",
+    minRole: 2,
   },
   {
     key: "customApp",
@@ -78,30 +87,9 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 2,
   },
   {
-    key: "dataSources",
-    anchor: '[data-tour="data-sources"]',
-    icon: "database",
-    placement: "top",
-    minRole: 0,
-  },
-  {
-    key: "display",
-    anchor: '[data-tour="header-display"]',
-    icon: "sunMoon",
-    placement: "bottom",
-    minRole: 0,
-  },
-  {
-    key: "language",
-    anchor: '[data-tour="header-language"]',
-    icon: "globe",
-    placement: "bottom",
-    minRole: 0,
-  },
-  {
-    key: "adminApps",
-    anchor: '[data-tour="header-apps"]',
-    icon: "layoutGrid",
+    key: "adminUsers",
+    anchor: '[data-tour="header-users"]',
+    icon: "users",
     placement: "bottom",
     minRole: 3,
   },
@@ -113,16 +101,37 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 3,
   },
   {
-    key: "adminUsers",
-    anchor: '[data-tour="header-users"]',
-    icon: "users",
+    key: "adminApps",
+    anchor: '[data-tour="header-apps"]',
+    icon: "layoutGrid",
     placement: "bottom",
     minRole: 3,
+  },
+  {
+    key: "display",
+    anchor: '[data-tour="header-display"]',
+    icon: "sunMoon",
+    placement: "bottom",
+    minRole: 0,
   },
   {
     key: "replay",
     anchor: '[data-tour="header-replay"]',
     icon: "helpCircle",
+    placement: "bottom",
+    minRole: 0,
+  },
+  {
+    key: "language",
+    anchor: '[data-tour="header-language"]',
+    icon: "globe",
+    placement: "bottom",
+    minRole: 0,
+  },
+  {
+    key: "dataSources",
+    anchor: '[data-tour="data-sources"]',
+    icon: "database",
     placement: "bottom",
     minRole: 0,
   },
@@ -138,5 +147,10 @@ export const resolveCoachMarkSteps = (
   steps: readonly CoachMarkStepDef[] = COACH_MARK_STEPS,
 ): CoachMarkStepDef[] => {
   if (!import.meta.client) return [];
-  return steps.filter((step) => document.querySelector(step.anchor));
+  return steps.filter(
+    (step) =>
+      step.placement === "center" ||
+      !step.anchor ||
+      !!document.querySelector(step.anchor),
+  );
 };

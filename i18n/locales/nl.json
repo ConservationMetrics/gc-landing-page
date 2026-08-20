@@ -219,8 +219,13 @@
     "done": "Klaar",
     "skip": "Rondleiding overslaan",
     "close": "Rondleiding sluiten",
-    "restart": "Rondleiding herstarten",
+    "restart": "Rondleiding starten",
     "stepLabel": "Stap {current} van {total}",
+    "welcome": {
+      "title": "Welkom bij Guardian Connector!",
+      "body": "Laten we een rondleiding doen over hoe je de tools kunt gebruiken.",
+      "exit": "Je kunt deze rondleiding op elk moment afsluiten — je kunt hem altijd terugbrengen via het {icon}-pictogram rechtsboven in het menu."
+    },
     "explorer": {
       "title": "Explorer",
       "body": "Open kaarten, waarschuwingen, wildweergaven en mediagalerijen voor de gegevens van je gemeenschap."

@@ -219,8 +219,13 @@
     "done": "Done",
     "skip": "Skip tour",
     "close": "Close tour",
-    "restart": "Restart tour",
+    "restart": "Start Tour",
     "stepLabel": "Step {current} of {total}",
+    "welcome": {
+      "title": "Welcome to Guardian Connector!",
+      "body": "Let's take a tour of how you can use the tools.",
+      "exit": "Feel free to exit this tour at any time — you can always bring it back using the {icon} icon on the top right of the menu."
+    },
     "explorer": {
       "title": "Explorer",
       "body": "Open maps, alerts, wildlife views, and media galleries for your community data."

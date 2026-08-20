@@ -219,8 +219,13 @@
     "done": "Maliza",
     "skip": "Ruka mwongozo",
     "close": "Funga mwongozo",
-    "restart": "Anza upya mwongozo",
+    "restart": "Anza mwongozo",
     "stepLabel": "Hatua {current} kati ya {total}",
+    "welcome": {
+      "title": "Karibu kwenye Guardian Connector!",
+      "body": "Hebu tuchukue mwongozo wa jinsi unavyoweza kutumia zana.",
+      "exit": "Unaweza kuondoka kwenye mwongozo huu wakati wowote — unaweza kuurudisha kwa kutumia ikoni ya {icon} upande wa juu kulia wa menyu."
+    },
     "explorer": {
       "title": "Explorer",
       "body": "Fungua ramani, arifa, maonyesho ya wanyama pori, na majumba ya picha kwa data ya jamii yako."

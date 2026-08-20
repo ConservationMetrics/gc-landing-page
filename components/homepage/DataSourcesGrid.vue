@@ -51,8 +51,8 @@ const otherIntegrations = [
 </script>
 
 <template>
-  <section id="data-sources" data-tour="data-sources">
-    <div class="mb-8 text-center">
+  <section id="data-sources">
+    <div class="mb-8 text-center" data-tour="data-sources">
       <h2 class="mb-3 text-3xl font-bold text-gray-900 dark:text-dusk-100">
         {{ t("dataSources.heading") }}
       </h2>
