@@ -108,13 +108,6 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 3,
   },
   {
-    key: "display",
-    anchor: '[data-tour="header-display"]',
-    icon: "sunMoon",
-    placement: "bottom",
-    minRole: 0,
-  },
-  {
     key: "replay",
     anchor: '[data-tour="header-replay"]',
     icon: "helpCircle",
