@@ -132,7 +132,7 @@
   "services": {
     "documentationWebsite": "documentation website",
     "explorer": "Explorer",
-    "explorerDescription": "Map, gallery, alerts, wildlife, and other data exploration views",
+    "explorerDescription": "Map, gallery, alerts, and other data exploration views",
     "filebrowser": "Filebrowser",
     "filebrowserDescription": "Secure file management and sharing",
     "needHelp": "Need help? Visit the Guardian Connector",
@@ -155,7 +155,8 @@
       "rawData": "Raw Data",
       "scheduledJobs": "Scheduled Jobs",
       "visualizations": "Visualizations",
-      "wildlifeExplorer": "Wildlife Explorer"
+      "wildlifeExplorer": "Wildlife Explorer",
+      "sharing": "Sharing"
     },
     "windmill": "Windmill",
     "windmillDescription": "Workflow automation and script execution platform"
@@ -229,7 +230,7 @@
     },
     "explorer": {
       "title": "Explorer",
-      "body": "Open maps, alerts, wildlife views, and media galleries for your community data."
+      "body": "Open maps, alerts dashboards, and media galleries for your community data."
     },
     "superset": {
       "title": "Superset",
@@ -241,7 +242,7 @@
     },
     "windmill": {
       "title": "Windmill",
-      "body": "Automate workflows, scheduled jobs, and data apps."
+      "body": "Upload data, schedule data downloads, and automate workflows."
     },
     "customApp": {
       "title": "Custom apps",
@@ -249,7 +250,7 @@
     },
     "dataSources": {
       "title": "There's more below",
-      "body": "Scroll down to learn about a selection of the data collection tools that feed Guardian Connector, like CoMapeo, KoboToolbox, and ODK."
+      "body": "Scroll down to learn about a selection of the data collection tools that feed into Guardian Connector, like CoMapeo, KoboToolbox, and ODK."
     },
     "docs": {
       "title": "Need help?",

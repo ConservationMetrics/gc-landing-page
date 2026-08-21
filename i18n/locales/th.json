@@ -132,7 +132,7 @@
   "services": {
     "documentationWebsite": "เว็บไซต์เอกสาร",
     "explorer": "Explorer",
-    "explorerDescription": "มุมมองแผนที่ แกลเลอรี การแจ้งเตือน สัตว์ป่า และการสำรวจข้อมูลอื่น ๆ",
+    "explorerDescription": "มุมมองแผนที่ แกลเลอรี การแจ้งเตือน และการสำรวจข้อมูลอื่น ๆ",
     "filebrowser": "Filebrowser",
     "filebrowserDescription": "การจัดการและแชร์ไฟล์อย่างปลอดภัย",
     "needHelp": "ต้องการความช่วยเหลือ? เยี่ยมชม Guardian Connector",
@@ -155,7 +155,8 @@
       "rawData": "ข้อมูลดิบ",
       "scheduledJobs": "งานตามกำหนดเวลา",
       "visualizations": "การแสดงภาพ",
-      "wildlifeExplorer": "Wildlife Explorer"
+      "wildlifeExplorer": "Wildlife Explorer",
+      "sharing": "การแชร์"
     },
     "windmill": "Windmill",
     "windmillDescription": "แพลตฟอร์มระบบอัตโนมัติเวิร์กโฟลว์และรันสคริปต์"
@@ -229,7 +230,7 @@
     },
     "explorer": {
       "title": "Explorer",
-      "body": "เปิดแผนที่ การแจ้งเตือน มุมมองสัตว์ป่า และแกลเลอรีสื่อของข้อมูลชุมชนของคุณ"
+      "body": "เปิดแผนที่ แดชบอร์ดการแจ้งเตือน และแกลเลอรีสื่อของข้อมูลชุมชนของคุณ"
     },
     "superset": {
       "title": "Superset",
@@ -241,7 +242,7 @@
     },
     "windmill": {
       "title": "Windmill",
-      "body": "ทำให้เวิร์กโฟลว์ งานตามกำหนด และแอปข้อมูลทำงานอัตโนมัติ"
+      "body": "อัปโหลดข้อมูล กำหนดเวลาการดาวน์โหลดข้อมูล และทำให้เวิร์กโฟลว์ทำงานอัตโนมัติ"
     },
     "customApp": {
       "title": "แอปที่กำหนดเอง",
@@ -249,7 +250,7 @@
     },
     "dataSources": {
       "title": "มีเนื้อหาเพิ่มเติมด้านล่าง",
-      "body": "เลื่อนลงเพื่อเรียนรู้เกี่ยวกับเครื่องมือเก็บข้อมูลบางส่วนที่ป้อนเข้า Guardian Connector เช่น CoMapeo, KoboToolbox และ ODK"
+      "body": "เลื่อนลงเพื่อเรียนรู้เกี่ยวกับเครื่องมือเก็บข้อมูลบางส่วนที่ป้อนเข้าสู่ Guardian Connector เช่น CoMapeo, KoboToolbox และ ODK"
     },
     "docs": {
       "title": "ต้องการความช่วยเหลือ?",

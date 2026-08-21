@@ -36,12 +36,7 @@ const availableServices = computed(() => {
       name: "Explorer",
       url: `https://explorer.${communityName}.${domain}`,
       icon: "explorer",
-      tags: [
-        "Maps",
-        "Alerts Dashboard",
-        "Wildlife Explorer",
-        "Media Galleries",
-      ],
+      tags: ["Maps", "Alerts Dashboard", "Media Galleries"],
       translateTags: true,
     });
   }
@@ -74,7 +69,7 @@ const availableServices = computed(() => {
       name: "Filebrowser",
       url: `https://files.${communityName}.${domain}`,
       icon: "filebrowser",
-      tags: ["Files", "Raw Data", "Archives"],
+      tags: ["Files", "Raw Data", "Archives", "Sharing"],
       translateTags: true,
     });
   }
@@ -126,7 +121,6 @@ const translateTag = (tag: string) => {
   const tagMap: Record<string, string> = {
     Maps: t("services.tags.maps"),
     "Alerts Dashboard": t("services.tags.alertsDashboard"),
-    "Wildlife Explorer": t("services.tags.wildlifeExplorer"),
     "Media Galleries": t("services.tags.mediaGalleries"),
     Charts: t("services.tags.charts"),
     Analysis: t("services.tags.analysis"),
@@ -138,6 +132,7 @@ const translateTag = (tag: string) => {
     Files: t("services.tags.files"),
     "Raw Data": t("services.tags.rawData"),
     Archives: t("services.tags.archives"),
+    Sharing: t("services.tags.sharing"),
   };
   return tagMap[tag] || tag;
 };

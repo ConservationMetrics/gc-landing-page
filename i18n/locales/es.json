@@ -133,7 +133,7 @@
     "communityService": "Servicio de la comunidad",
     "documentationWebsite": "sitio web de documentación de Guardian Connector",
     "explorer": "Explorador",
-    "explorerDescription": "Herramientas de exploración y análisis de datos",
+    "explorerDescription": "Mapas, galería, alertas y otras vistas de exploración de datos",
     "filebrowser": "Navegador de Archivos",
     "filebrowserDescription": "Gestión y compartición segura de archivos",
     "needHelp": "¿Necesitas ayuda? Visita el",
@@ -155,7 +155,8 @@
       "rawData": "Datos Sin Procesar",
       "scheduledJobs": "Trabajos Programados",
       "visualizations": "Visualizaciones",
-      "wildlifeExplorer": "Explorador de Vida Silvestre"
+      "wildlifeExplorer": "Explorador de Vida Silvestre",
+      "sharing": "Compartir"
     },
     "windmill": "Windmill",
     "windmillDescription": "Plataforma de automatización de flujos de trabajo y ejecución de scripts"
@@ -229,7 +230,7 @@
     },
     "explorer": {
       "title": "Explorer",
-      "body": "Abre mapas, alertas, vistas de vida silvestre y galerías de medios de los datos de tu comunidad."
+      "body": "Abre mapas, paneles de alertas y galerías de medios de los datos de tu comunidad."
     },
     "superset": {
       "title": "Superset",
@@ -241,7 +242,7 @@
     },
     "windmill": {
       "title": "Windmill",
-      "body": "Automatiza flujos de trabajo, trabajos programados y aplicaciones de datos."
+      "body": "Sube datos, programa descargas de datos y automatiza flujos de trabajo."
     },
     "customApp": {
       "title": "Aplicaciones personalizadas",
@@ -249,7 +250,7 @@
     },
     "dataSources": {
       "title": "Hay más abajo",
-      "body": "Desplázate hacia abajo para conocer una selección de las herramientas de recolección de datos que alimentan Guardian Connector, como CoMapeo, KoboToolbox y ODK."
+      "body": "Desplázate hacia abajo para conocer una selección de las herramientas de recolección de datos que alimentan a Guardian Connector, como CoMapeo, KoboToolbox y ODK."
     },
     "docs": {
       "title": "¿Necesitas ayuda?",

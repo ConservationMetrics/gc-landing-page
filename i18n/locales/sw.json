@@ -132,7 +132,7 @@
   "services": {
     "documentationWebsite": "tovuti ya nyaraka",
     "explorer": "Explorer",
-    "explorerDescription": "Ramani, matunzio, tahadhari, wanyamapori, na mitazamo mingine ya kuchunguza data",
+    "explorerDescription": "Ramani, matunzio, tahadhari, na mitazamo mingine ya kuchunguza data",
     "filebrowser": "Filebrowser",
     "filebrowserDescription": "Usimamizi na kushiriki faili kwa usalama",
     "needHelp": "Unahitaji msaada? Tembelea Guardian Connector",
@@ -155,7 +155,8 @@
       "rawData": "Data Ghafi",
       "scheduledJobs": "Kazi Zilizopangwa",
       "visualizations": "Uonekanaji",
-      "wildlifeExplorer": "Wildlife Explorer"
+      "wildlifeExplorer": "Wildlife Explorer",
+      "sharing": "Kushiriki"
     },
     "windmill": "Windmill",
     "windmillDescription": "Jukwaa la otomatiki ya michakato na utekelezaji wa hati"
@@ -229,7 +230,7 @@
     },
     "explorer": {
       "title": "Explorer",
-      "body": "Fungua ramani, arifa, maonyesho ya wanyama pori, na majumba ya picha kwa data ya jamii yako."
+      "body": "Fungua ramani, dashibodi za arifa, na majumba ya picha kwa data ya jamii yako."
     },
     "superset": {
       "title": "Superset",
@@ -241,7 +242,7 @@
     },
     "windmill": {
       "title": "Windmill",
-      "body": "Weka otomatiki mtiririko wa kazi, kazi zilizopangwa, na programu za data."
+      "body": "Pakia data, panga upakuaji wa data, na weka otomatiki mtiririko wa kazi."
     },
     "customApp": {
       "title": "Programu maalum",
@@ -249,7 +250,7 @@
     },
     "dataSources": {
       "title": "Kuna zaidi chini",
-      "body": "Sogeza chini ili ujifunze kuhusu uteuzi wa zana za kukusanya data zinazolisha Guardian Connector, kama CoMapeo, KoboToolbox, na ODK."
+      "body": "Sogeza chini ili ujifunze kuhusu uteuzi wa zana za kukusanya data zinazolisha data katika Guardian Connector, kama CoMapeo, KoboToolbox, na ODK."
     },
     "docs": {
       "title": "Unahitaji msaada?",

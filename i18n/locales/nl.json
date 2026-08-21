@@ -133,7 +133,7 @@
     "communityService": "Gemeenschapsservice",
     "documentationWebsite": "Guardian Connector documentatie website",
     "explorer": "Verkenner",
-    "explorerDescription": "Data exploratie en analyse tools",
+    "explorerDescription": "Kaart, galerij, waarschuwingen en andere dataverkenningsweergaven",
     "filebrowser": "Bestandsbrowser",
     "filebrowserDescription": "Veilig bestandsbeheer en -deling",
     "needHelp": "Hulp nodig? Bezoek de",
@@ -155,7 +155,8 @@
       "rawData": "Ruwe Gegevens",
       "scheduledJobs": "Geplande Taken",
       "visualizations": "Visualisaties",
-      "wildlifeExplorer": "Wildlife Verkenner"
+      "wildlifeExplorer": "Wildlife Verkenner",
+      "sharing": "Delen"
     },
     "windmill": "Windmill",
     "windmillDescription": "Workflow automatisering en script uitvoering platform"
@@ -229,7 +230,7 @@
     },
     "explorer": {
       "title": "Explorer",
-      "body": "Open kaarten, waarschuwingen, wildweergaven en mediagalerijen voor de gegevens van je gemeenschap."
+      "body": "Open kaarten, waarschuwingsdashboards en mediagalerijen voor de gegevens van je gemeenschap."
     },
     "superset": {
       "title": "Superset",
@@ -241,7 +242,7 @@
     },
     "windmill": {
       "title": "Windmill",
-      "body": "Automatiseer workflows, geplande taken en data-apps."
+      "body": "Upload gegevens, plan gegevensdownloads en automatiseer workflows."
     },
     "customApp": {
       "title": "Aangepaste apps",
@@ -249,7 +250,7 @@
     },
     "dataSources": {
       "title": "Er is meer hieronder",
-      "body": "Scroll omlaag om meer te leren over een selectie van de tools voor gegevensverzameling die Guardian Connector voeden, zoals CoMapeo, KoboToolbox en ODK."
+      "body": "Scroll omlaag om meer te leren over een selectie van de tools voor gegevensverzameling die in Guardian Connector terechtkomen, zoals CoMapeo, KoboToolbox en ODK."
     },
     "docs": {
       "title": "Hulp nodig?",
