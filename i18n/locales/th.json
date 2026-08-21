@@ -133,7 +133,7 @@
     "documentationWebsite": "เว็บไซต์เอกสาร",
     "explorer": "Explorer",
     "explorerDescription": "มุมมองแผนที่ แกลเลอรี การแจ้งเตือน และการสำรวจข้อมูลอื่น ๆ",
-    "filebrowser": "Filebrowser",
+    "filebrowser": "File Browser",
     "filebrowserDescription": "การจัดการและแชร์ไฟล์อย่างปลอดภัย",
     "needHelp": "ต้องการความช่วยเหลือ? เยี่ยมชม Guardian Connector",
     "noServicesAvailable": "ไม่มีบริการที่ใช้ได้",
@@ -237,7 +237,7 @@
       "body": "สร้างแผนภูมิ การวิเคราะห์ และแดชบอร์ดจากข้อมูลของคุณ"
     },
     "filebrowser": {
-      "title": "Filebrowser",
+      "title": "File Browser",
       "body": "เรียกดู อัปโหลด และแชร์ไฟล์กับข้อมูลดิบอย่างปลอดภัย"
     },
     "windmill": {

@@ -72,20 +72,20 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 1,
   },
   {
-    key: "windmill",
-    anchor: '[data-tour="service-windmill"]',
-    icon: "wind",
-    image: "/screenshots/windmill.jpg",
-    placement: "bottom",
-    minRole: 3,
-  },
-  {
     key: "filebrowser",
     anchor: '[data-tour="service-filebrowser"]',
     icon: "folder",
     image: "/screenshots/filebrowser.jpg",
     placement: "bottom",
     minRole: 2,
+  },
+  {
+    key: "windmill",
+    anchor: '[data-tour="service-windmill"]',
+    icon: "wind",
+    image: "/screenshots/windmill.jpg",
+    placement: "bottom",
+    minRole: 3,
   },
   {
     key: "customApp",

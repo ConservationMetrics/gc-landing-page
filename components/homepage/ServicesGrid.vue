@@ -52,6 +52,17 @@ const availableServices = computed(() => {
     });
   }
 
+  if (config.public.filebrowserEnabled && userRole >= Role.Member) {
+    services.push({
+      key: "filebrowser",
+      name: t("services.filebrowser"),
+      url: `https://files.${communityName}.${domain}`,
+      icon: "filebrowser",
+      tags: ["Files", "Raw Data", "Archives", "Sharing"],
+      translateTags: true,
+    });
+  }
+
   if (config.public.windmillEnabled && userRole >= Role.Admin) {
     services.push({
       key: "windmill",
@@ -59,17 +70,6 @@ const availableServices = computed(() => {
       url: `https://windmill.${communityName}.${domain}`,
       icon: "windmill",
       tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
-      translateTags: true,
-    });
-  }
-
-  if (config.public.filebrowserEnabled && userRole >= Role.Member) {
-    services.push({
-      key: "filebrowser",
-      name: "Filebrowser",
-      url: `https://files.${communityName}.${domain}`,
-      icon: "filebrowser",
-      tags: ["Files", "Raw Data", "Archives", "Sharing"],
       translateTags: true,
     });
   }
@@ -105,16 +105,13 @@ const openService = (url: string) => {
 const getServiceDescription = (service: ServiceCard) => {
   if (service.description) return service.description;
 
-  const descriptions = {
-    Superset: t("services.supersetDescription"),
-    Windmill: t("services.windmillDescription"),
-    Explorer: t("services.explorerDescription"),
-    Filebrowser: t("services.filebrowserDescription"),
+  const descriptions: Record<string, string> = {
+    explorer: t("services.explorerDescription"),
+    superset: t("services.supersetDescription"),
+    windmill: t("services.windmillDescription"),
+    filebrowser: t("services.filebrowserDescription"),
   };
-  return (
-    descriptions[service.name as keyof typeof descriptions] ||
-    t("services.communityService")
-  );
+  return descriptions[service.key] || t("services.communityService");
 };
 
 const translateTag = (tag: string) => {

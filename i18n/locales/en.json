@@ -133,7 +133,7 @@
     "documentationWebsite": "documentation website",
     "explorer": "Explorer",
     "explorerDescription": "Map, gallery, alerts, and other data exploration views",
-    "filebrowser": "Filebrowser",
+    "filebrowser": "File Browser",
     "filebrowserDescription": "Secure file management and sharing",
     "needHelp": "Need help? Visit the Guardian Connector",
     "noServicesAvailable": "No Services Available",
@@ -237,7 +237,7 @@
       "body": "Build charts, analyses, and dashboards from your data."
     },
     "filebrowser": {
-      "title": "Filebrowser",
+      "title": "File Browser",
       "body": "Browse, upload, and share files and raw data securely."
     },
     "windmill": {
