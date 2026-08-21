@@ -34,6 +34,7 @@ import type { CoachMarkIcon, CoachMarkPlacement } from "~/utils/coachMarks";
 const PAD = 8;
 const GUTTER = 16;
 const POPOVER_W = 320;
+const POPOVER_W_IMAGE = 384;
 const ARROW = 8;
 
 const { t } = useI18n();
@@ -79,6 +80,11 @@ const isAdminStep = computed(
 );
 const isAdminStepAt = (i: number) =>
   (steps.value[i]?.minRole ?? 0) >= Role.Admin;
+const stepImage = computed(() => currentStep.value?.image ?? null);
+const hasImage = computed(() => !!stepImage.value);
+const popoverWidth = computed(() =>
+  hasImage.value ? POPOVER_W_IMAGE : POPOVER_W,
+);
 
 const title = computed(() =>
   currentStep.value ? t(`coachMarks.${currentStep.value.key}.title`) : "",
@@ -97,14 +103,14 @@ const measureCenter = () => {
   popover.value = { top: 0, left: 0, placement: "center" };
 };
 
-const measure = () => {
+const measure = (): boolean => {
   if (currentStep.value?.placement === "center") {
     measureCenter();
-    return;
+    return true;
   }
 
   const el = getAnchor();
-  if (!el) return;
+  if (!el) return false;
 
   const rect = el.getBoundingClientRect();
   spotlight.value = {
@@ -134,10 +140,10 @@ const measure = () => {
     placement = "bottom";
   }
 
-  let left = rect.left + rect.width / 2 - POPOVER_W / 2;
+  let left = rect.left + rect.width / 2 - popoverWidth.value / 2;
   left = Math.max(
     GUTTER,
-    Math.min(left, window.innerWidth - POPOVER_W - GUTTER),
+    Math.min(left, window.innerWidth - popoverWidth.value - GUTTER),
   );
 
   let top =
@@ -148,6 +154,16 @@ const measure = () => {
   top = Math.max(GUTTER, Math.min(top, window.innerHeight - popH - GUTTER));
 
   popover.value = { top, left, placement };
+  return true;
+};
+
+const measureWithRetry = async () => {
+  for (let i = 0; i < 15; i++) {
+    if (measure()) return;
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => resolve());
+    });
+  }
 };
 
 const isFullyInView = (el: HTMLElement) => {
@@ -175,7 +191,7 @@ const scrollToAnchor = () => {
 };
 
 const onKeydown = (e: KeyboardEvent) => {
-  if (!active.value) return;
+  if (!active.value || e.repeat) return;
   if (e.key === "Escape") {
     e.preventDefault();
     dismiss();
@@ -198,9 +214,11 @@ watch(
     if (!isActive) return;
     scrollToAnchor();
     await nextTick();
-    measure();
-    // Re-measure after smooth scroll settles
-    window.setTimeout(measure, 350);
+    await measureWithRetry();
+    // Re-measure after smooth scroll / screenshot layout settles
+    window.setTimeout(() => {
+      void measureWithRetry();
+    }, 350);
   },
 );
 
@@ -271,11 +289,13 @@ onBeforeUnmount(() => {
       <!-- Popover -->
       <div
         ref="popoverEl"
-        class="z-[101] max-w-[calc(100vw-2rem)] rounded-2xl border bg-white p-5 shadow-xl dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
+        class="z-[101] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border bg-white shadow-xl dark:bg-dusk-800 motion-reduce:transition-none transition-all duration-300"
         :class="[
           isCentered
             ? 'fixed left-1/2 top-1/2 w-96 -translate-x-1/2 -translate-y-1/2'
-            : 'absolute w-80',
+            : hasImage
+              ? 'absolute w-96'
+              : 'absolute w-80',
           isAdminStep
             ? 'border-amber-300 dark:border-amber-800'
             : 'border-violet-200 dark:border-violet-900',
@@ -308,135 +328,147 @@ onBeforeUnmount(() => {
         <button
           ref="closeBtn"
           type="button"
-          class="absolute right-3 top-3 rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-violet-500 dark:hover:bg-dusk-700 dark:hover:text-dusk-100 dark:focus:ring-offset-dusk-800"
+          class="absolute right-3 top-3 z-10 rounded-full p-1 text-gray-400 transition-colors hover:bg-white/90 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-violet-500 dark:hover:bg-dusk-700 dark:hover:text-dusk-100 dark:focus:ring-offset-dusk-800"
+          :class="hasImage ? 'bg-white/80 dark:bg-dusk-800/80' : ''"
           :aria-label="t('coachMarks.close')"
           @click="dismiss"
         >
           <X class="h-4 w-4" />
         </button>
 
-        <div class="mb-3 flex items-start gap-3 pr-6">
-          <!-- Admin seal: amber chip + shield stamp -->
-          <div class="relative shrink-0">
-            <div
-              class="flex h-10 w-10 items-center justify-center rounded-full"
-              :class="
-                isAdminStep
-                  ? 'bg-amber-50 dark:bg-amber-950/50'
-                  : 'bg-violet-50 dark:bg-dusk-700'
-              "
-            >
-              <component
-                :is="stepIcon"
-                class="h-5 w-5"
+        <img
+          v-if="stepImage"
+          :src="stepImage"
+          :alt="title"
+          class="h-36 w-full border-b border-dashed border-gray-300 object-cover object-top dark:border-dusk-600"
+          @load="measure"
+        />
+
+        <div class="p-5">
+          <div class="mb-3 flex items-start gap-3 pr-6">
+            <!-- Admin seal / step icon (hidden when screenshot leads) -->
+            <div v-if="!hasImage" class="relative shrink-0">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-full"
                 :class="
                   isAdminStep
-                    ? 'text-amber-700 dark:text-amber-300'
-                    : 'text-violet-600 dark:text-violet-300'
+                    ? 'bg-amber-50 dark:bg-amber-950/50'
+                    : 'bg-violet-50 dark:bg-dusk-700'
                 "
-              />
+              >
+                <component
+                  :is="stepIcon"
+                  class="h-5 w-5"
+                  :class="
+                    isAdminStep
+                      ? 'text-amber-700 dark:text-amber-300'
+                      : 'text-violet-600 dark:text-violet-300'
+                  "
+                />
+              </div>
+              <div
+                v-if="isAdminStep"
+                class="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-white shadow-sm ring-2 ring-white dark:bg-amber-600 dark:ring-dusk-800"
+                :title="t('coachMarks.adminOnly')"
+              >
+                <Shield class="h-2.5 w-2.5" aria-hidden="true" />
+              </div>
             </div>
-            <div
-              v-if="isAdminStep"
-              class="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-white shadow-sm ring-2 ring-white dark:bg-amber-600 dark:ring-dusk-800"
-              :title="t('coachMarks.adminOnly')"
-            >
-              <Shield class="h-2.5 w-2.5" aria-hidden="true" />
+            <div class="min-w-0 flex-1">
+              <p
+                v-if="isAdminStep"
+                class="mb-0.5 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400"
+              >
+                <Shield class="h-3 w-3" aria-hidden="true" />
+                {{ t("coachMarks.adminOnly") }}
+              </p>
+              <h2
+                :id="titleId"
+                class="text-base font-bold text-gray-900 dark:text-dusk-100"
+              >
+                {{ title }}
+              </h2>
+              <template v-if="isWelcome">
+                <p class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
+                  {{ t("coachMarks.welcome.body") }}
+                </p>
+                <p class="mt-2 text-sm text-gray-600 dark:text-dusk-400">
+                  <i18n-t keypath="coachMarks.welcome.exit" tag="span">
+                    <template #icon>
+                      <HelpCircle
+                        class="mx-0.5 inline h-3.5 w-3.5 -translate-y-px text-violet-600 dark:text-violet-300"
+                        aria-hidden="true"
+                      />
+                    </template>
+                  </i18n-t>
+                </p>
+              </template>
+              <p v-else class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
+                {{ body }}
+              </p>
             </div>
           </div>
-          <div>
-            <p
-              v-if="isAdminStep"
-              class="mb-0.5 text-[11px] font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400"
-            >
-              {{ t("coachMarks.adminOnly") }}
-            </p>
-            <h2
-              :id="titleId"
-              class="text-base font-bold text-gray-900 dark:text-dusk-100"
-            >
-              {{ title }}
-            </h2>
-            <template v-if="isWelcome">
-              <p class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
-                {{ t("coachMarks.welcome.body") }}
-              </p>
-              <p class="mt-2 text-sm text-gray-600 dark:text-dusk-400">
-                <i18n-t keypath="coachMarks.welcome.exit" tag="span">
-                  <template #icon>
-                    <HelpCircle
-                      class="mx-0.5 inline h-3.5 w-3.5 -translate-y-px text-violet-600 dark:text-violet-300"
-                      aria-hidden="true"
-                    />
-                  </template>
-                </i18n-t>
-              </p>
-            </template>
-            <p v-else class="mt-1 text-sm text-gray-600 dark:text-dusk-400">
-              {{ body }}
-            </p>
-          </div>
-        </div>
 
-        <!-- Progress dots (amber = upcoming/current admin steps) -->
-        <div
-          class="mb-4 flex items-center justify-center gap-1.5"
-          :aria-label="
-            t('coachMarks.stepLabel', {
-              current: index + 1,
-              total: steps.length,
-            })
-          "
-        >
-          <span
-            v-for="(_, i) in steps"
-            :key="i"
-            class="h-1.5 w-1.5 rounded-full transition-colors"
-            :class="
-              i === index
-                ? isAdminStepAt(i)
-                  ? 'bg-amber-500 dark:bg-amber-400'
-                  : 'bg-violet-600 dark:bg-violet-400'
-                : isAdminStepAt(i)
-                  ? 'bg-amber-300 dark:bg-amber-800'
-                  : 'bg-gray-300 dark:bg-dusk-600'
+          <!-- Progress dots (amber = upcoming/current admin steps) -->
+          <div
+            class="mb-4 flex items-center justify-center gap-1.5"
+            :aria-label="
+              t('coachMarks.stepLabel', {
+                current: index + 1,
+                total: steps.length,
+              })
             "
-          ></span>
-        </div>
-
-        <div class="flex items-center justify-between gap-2">
-          <button
-            type="button"
-            class="text-sm text-gray-500 underline-offset-2 transition-colors hover:text-gray-800 hover:underline dark:text-dusk-400 dark:hover:text-dusk-200"
-            @click="dismiss"
           >
-            {{ t("coachMarks.skip") }}
-          </button>
+            <span
+              v-for="(_, i) in steps"
+              :key="i"
+              class="h-1.5 w-1.5 rounded-full transition-colors"
+              :class="
+                i === index
+                  ? isAdminStepAt(i)
+                    ? 'bg-amber-500 dark:bg-amber-400'
+                    : 'bg-violet-600 dark:bg-violet-400'
+                  : isAdminStepAt(i)
+                    ? 'bg-amber-300 dark:bg-amber-800'
+                    : 'bg-gray-300 dark:bg-dusk-600'
+              "
+            ></span>
+          </div>
 
-          <div class="flex items-center gap-2">
-            <button
-              v-if="!isFirst"
-              type="button"
-              class="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500 dark:text-dusk-200 dark:hover:bg-dusk-700"
-              @click="back"
-            >
-              <ChevronLeft class="h-4 w-4" />
-              {{ t("coachMarks.back") }}
-            </button>
+          <div class="flex items-center justify-between gap-2">
             <button
               type="button"
-              class="inline-flex items-center gap-1 rounded-lg bg-violet-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:focus:ring-offset-dusk-800"
-              @click="next"
+              class="text-sm text-gray-500 underline-offset-2 transition-colors hover:text-gray-800 hover:underline dark:text-dusk-400 dark:hover:text-dusk-200"
+              @click="dismiss"
             >
-              {{
-                isLast
-                  ? t("coachMarks.done")
-                  : isWelcome
-                    ? t("coachMarks.restart")
-                    : t("coachMarks.next")
-              }}
-              <ChevronRight v-if="!isLast && !isWelcome" class="h-4 w-4" />
+              {{ t("coachMarks.skip") }}
             </button>
+
+            <div class="flex items-center gap-2">
+              <button
+                v-if="!isFirst"
+                type="button"
+                class="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500 dark:text-dusk-200 dark:hover:bg-dusk-700"
+                @click="back"
+              >
+                <ChevronLeft class="h-4 w-4" />
+                {{ t("coachMarks.back") }}
+              </button>
+              <button
+                type="button"
+                class="inline-flex items-center gap-1 rounded-lg bg-violet-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:focus:ring-offset-dusk-800"
+                @click="next"
+              >
+                {{
+                  isLast
+                    ? t("coachMarks.done")
+                    : isWelcome
+                      ? t("coachMarks.restart")
+                      : t("coachMarks.next")
+                }}
+                <ChevronRight v-if="!isLast && !isWelcome" class="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

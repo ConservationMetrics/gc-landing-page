@@ -75,8 +75,11 @@ onBeforeUnmount(() => {
 
 watch(
   () => [props.shouldShowApp, customAppsPending.value] as const,
-  ([show, pending]) => {
-    if (show && !pending) void tryAutostart();
+  async ([show, pending]) => {
+    if (!show || pending) return;
+    await nextTick();
+    await nextTick();
+    void tryAutostart();
   },
   { immediate: true },
 );

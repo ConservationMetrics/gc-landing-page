@@ -7,6 +7,7 @@ import {
   COACH_MARKS_STORAGE_KEY,
   COACH_MARKS_VERSION,
   resolveCoachMarkSteps,
+  waitForTourDom,
   type CoachMarkStepDef,
   type CoachMarksStorage,
 } from "~/utils/coachMarks";
@@ -15,6 +16,8 @@ const active = ref(false);
 const index = ref(0);
 const steps = ref<CoachMarkStepDef[]>([]);
 const startedOnce = ref(false);
+/** Prevents double-advancing from stacked click/keydown handlers. */
+let navLock = false;
 
 const readStorage = (): CoachMarksStorage | null => {
   if (!import.meta.client) return null;
@@ -51,6 +54,18 @@ const isDesktop = () =>
 const currentUserRole = (user: Ref<User | null | undefined>) =>
   computed(() => (user.value as User | undefined)?.userRole ?? Role.SignedIn);
 
+const withNavLock = (fn: () => void) => {
+  if (navLock) return;
+  navLock = true;
+  try {
+    fn();
+  } finally {
+    window.setTimeout(() => {
+      navLock = false;
+    }, 400);
+  }
+};
+
 /**
  * Module-level singleton so AppHeader (replay) and HomePage (autostart/overlay)
  * share the same tour state without a Pinia store.
@@ -66,7 +81,7 @@ export const useCoachMarks = () => {
   });
 
   const buildSteps = (opts?: { force?: boolean }): CoachMarkStepDef[] => {
-    const available = resolveCoachMarkSteps(COACH_MARK_STEPS);
+    const available = resolveCoachMarkSteps(COACH_MARK_STEPS, userRole.value);
     if (opts?.force) return available;
 
     const stored = readStorage();
@@ -88,6 +103,9 @@ export const useCoachMarks = () => {
     if (!opts?.force && hasSeen.value) return;
 
     await nextTick();
+    await waitForTourDom();
+    await nextTick();
+
     const resolved = buildSteps(opts);
     if (resolved.length === 0) return;
 
@@ -109,17 +127,21 @@ export const useCoachMarks = () => {
   };
 
   const next = () => {
-    if (!active.value) return;
-    if (index.value >= steps.value.length - 1) {
-      dismiss();
-      return;
-    }
-    index.value += 1;
+    withNavLock(() => {
+      if (!active.value) return;
+      if (index.value >= steps.value.length - 1) {
+        dismiss();
+        return;
+      }
+      index.value += 1;
+    });
   };
 
   const back = () => {
-    if (!active.value || index.value <= 0) return;
-    index.value -= 1;
+    withNavLock(() => {
+      if (!active.value || index.value <= 0) return;
+      index.value -= 1;
+    });
   };
 
   const currentStep = computed(() => steps.value[index.value] ?? null);
