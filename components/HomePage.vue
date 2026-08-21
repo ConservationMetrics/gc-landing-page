@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { useRuntimeConfig } from "#imports";
+import { computed } from "vue";
+import { useRuntimeConfig, useUserSession } from "#imports";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
 import DataSourcesGrid from "@/components/homepage/DataSourcesGrid.vue";
 import { useThemeSettings } from "@/composables/useThemeSettings";
+import { Role, type User } from "~/types/types";
 import { Workflow } from "lucide-vue-next";
 
 const props = defineProps<{
@@ -14,10 +16,16 @@ const config = useRuntimeConfig();
 const communityName = config.public.communityName;
 const { logoUrl } = useThemeSettings();
 const { t } = useI18n();
+const { user } = useUserSession();
+
+const canSeeDataSources = computed(() => {
+  const typedUser = user.value as User | undefined;
+  return (typedUser?.userRole ?? Role.SignedIn) >= Role.Member;
+});
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-white dark:bg-dusk-900">
+  <div class="flex flex-col bg-white dark:bg-dusk-900">
     <main class="mx-auto mt-10 max-w-7xl px-4 pb-12 pt-0 sm:px-6 lg:px-8">
       <div class="pt-0">
         <div v-if="logoUrl" class="mb-8 flex justify-center">
@@ -50,7 +58,7 @@ const { t } = useI18n();
         <ServicesGrid v-if="props.shouldShowApp" />
 
         <div
-          v-if="props.shouldShowApp"
+          v-if="props.shouldShowApp && canSeeDataSources"
           class="relative my-12"
           aria-hidden="true"
         >
@@ -68,7 +76,7 @@ const { t } = useI18n();
           </div>
         </div>
 
-        <DataSourcesGrid v-if="props.shouldShowApp" />
+        <DataSourcesGrid v-if="props.shouldShowApp && canSeeDataSources" />
 
         <div v-if="props.shouldShowApp" class="mb-8 mt-8 text-center">
           <p class="text-sm italic text-gray-600 dark:text-dusk-400">
