@@ -132,8 +132,8 @@
   "services": {
     "documentationWebsite": "documentation website",
     "explorer": "Explorer",
-    "explorerDescription": "Map, gallery, alerts, wildlife, and other data exploration views",
-    "filebrowser": "Filebrowser",
+    "explorerDescription": "Map, gallery, alerts, and other data exploration views",
+    "filebrowser": "File Browser",
     "filebrowserDescription": "Secure file management and sharing",
     "needHelp": "Need help? Visit the Guardian Connector",
     "noServicesAvailable": "No Services Available",
@@ -155,7 +155,8 @@
       "rawData": "Raw Data",
       "scheduledJobs": "Scheduled Jobs",
       "visualizations": "Visualizations",
-      "wildlifeExplorer": "Wildlife Explorer"
+      "wildlifeExplorer": "Wildlife Explorer",
+      "sharing": "Sharing"
     },
     "windmill": "Windmill",
     "windmillDescription": "Workflow automation and script execution platform"
@@ -212,5 +213,72 @@
     "userRoles": "User Roles",
     "userUpdatedSuccessfully": "User {email} updated successfully",
     "you": "You"
+  },
+  "coachMarks": {
+    "next": "Next",
+    "back": "Back",
+    "done": "Done",
+    "skip": "Skip tour",
+    "close": "Close tour",
+    "restart": "Start Tour",
+    "adminOnly": "Admin only",
+    "stepLabel": "Step {current} of {total}",
+    "welcome": {
+      "title": "Welcome to Guardian Connector!",
+      "body": "Let's take a tour of how you can use the tools.",
+      "exit": "Feel free to exit this tour at any time — you can always bring it back using the {icon} icon on the top right of the menu."
+    },
+    "explorer": {
+      "title": "Explorer",
+      "body": "Open maps, alerts dashboards, and media galleries for your community data."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Build charts, analyses, and dashboards from your data."
+    },
+    "filebrowser": {
+      "title": "File Browser",
+      "body": "Browse, upload, and share files and raw data securely."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Upload data, schedule data downloads, and automate workflows."
+    },
+    "customApp": {
+      "title": "Custom apps",
+      "body": "Open community apps hosted on your Guardian Connector instance."
+    },
+    "dataSources": {
+      "title": "There's more below",
+      "body": "Scroll down to learn about a selection of the data collection tools that feed into Guardian Connector, like CoMapeo, KoboToolbox, and ODK."
+    },
+    "docs": {
+      "title": "Need help?",
+      "body": "If you need any help, please see our documentation."
+    },
+    "display": {
+      "title": "Light and dark mode",
+      "body": "Switch the display between light and dark to match your preference."
+    },
+    "language": {
+      "title": "Language",
+      "body": "Change the language used across this Guardian Connector instance."
+    },
+    "adminApps": {
+      "title": "Add custom apps",
+      "body": "Add cards for apps hosted on your instance so members can open them from this page."
+    },
+    "adminTheme": {
+      "title": "Set your branding",
+      "body": "Choose the logo and background image for your instance."
+    },
+    "adminUsers": {
+      "title": "Manage users",
+      "body": "Approve new accounts and assign the roles that control what each person can see."
+    },
+    "replay": {
+      "title": "Replay this tour",
+      "body": "You can restart these tips anytime from this button."
+    }
   }
 }

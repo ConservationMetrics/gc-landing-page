@@ -133,7 +133,7 @@
     "communityService": "Gemeenschapsservice",
     "documentationWebsite": "Guardian Connector documentatie website",
     "explorer": "Verkenner",
-    "explorerDescription": "Data exploratie en analyse tools",
+    "explorerDescription": "Kaart, galerij, waarschuwingen en andere dataverkenningsweergaven",
     "filebrowser": "Bestandsbrowser",
     "filebrowserDescription": "Veilig bestandsbeheer en -deling",
     "needHelp": "Hulp nodig? Bezoek de",
@@ -155,7 +155,8 @@
       "rawData": "Ruwe Gegevens",
       "scheduledJobs": "Geplande Taken",
       "visualizations": "Visualisaties",
-      "wildlifeExplorer": "Wildlife Verkenner"
+      "wildlifeExplorer": "Wildlife Verkenner",
+      "sharing": "Delen"
     },
     "windmill": "Windmill",
     "windmillDescription": "Workflow automatisering en script uitvoering platform"
@@ -212,5 +213,72 @@
     "userRoles": "Gebruikersrollen",
     "userUpdatedSuccessfully": "Gebruiker {email} succesvol bijgewerkt",
     "you": "Jij"
+  },
+  "coachMarks": {
+    "next": "Volgende",
+    "back": "Terug",
+    "done": "Klaar",
+    "skip": "Rondleiding overslaan",
+    "close": "Rondleiding sluiten",
+    "restart": "Rondleiding starten",
+    "adminOnly": "Alleen admin",
+    "stepLabel": "Stap {current} van {total}",
+    "welcome": {
+      "title": "Welkom bij Guardian Connector!",
+      "body": "Laten we een rondleiding doen over hoe je de tools kunt gebruiken.",
+      "exit": "Je kunt deze rondleiding op elk moment afsluiten — je kunt hem altijd terugbrengen via het {icon}-pictogram rechtsboven in het menu."
+    },
+    "explorer": {
+      "title": "Explorer",
+      "body": "Open kaarten, waarschuwingsdashboards en mediagalerijen voor de gegevens van je gemeenschap."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Bouw grafieken, analyses en dashboards vanuit je gegevens."
+    },
+    "filebrowser": {
+      "title": "Bestandsbrowser",
+      "body": "Blader door, upload en deel bestanden en ruwe data veilig."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Upload gegevens, plan gegevensdownloads en automatiseer workflows."
+    },
+    "customApp": {
+      "title": "Aangepaste apps",
+      "body": "Open community-apps die op je Guardian Connector-instantie worden gehost."
+    },
+    "dataSources": {
+      "title": "Er is meer hieronder",
+      "body": "Scroll omlaag om meer te leren over een selectie van de tools voor gegevensverzameling die in Guardian Connector terechtkomen, zoals CoMapeo, KoboToolbox en ODK."
+    },
+    "docs": {
+      "title": "Hulp nodig?",
+      "body": "Als je hulp nodig hebt, bekijk dan onze documentatie."
+    },
+    "display": {
+      "title": "Lichte en donkere modus",
+      "body": "Schakel de weergave tussen licht en donker naar je voorkeur."
+    },
+    "language": {
+      "title": "Taal",
+      "body": "Wijzig de taal die op deze Guardian Connector-instantie wordt gebruikt."
+    },
+    "adminApps": {
+      "title": "Aangepaste apps toevoegen",
+      "body": "Voeg kaarten toe voor apps op je instantie zodat leden ze vanaf deze pagina kunnen openen."
+    },
+    "adminTheme": {
+      "title": "Stel je huisstijl in",
+      "body": "Kies het logo en de achtergrondafbeelding voor je instantie."
+    },
+    "adminUsers": {
+      "title": "Gebruikers beheren",
+      "body": "Keur nieuwe accounts goed en wijs de rollen toe die bepalen wat iedereen kan zien."
+    },
+    "replay": {
+      "title": "Deze rondleiding herhalen",
+      "body": "Je kunt deze tips altijd opnieuw starten via deze knop."
+    }
   }
 }

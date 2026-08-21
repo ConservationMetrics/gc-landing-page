@@ -133,7 +133,7 @@
     "communityService": "Servicio de la comunidad",
     "documentationWebsite": "sitio web de documentación de Guardian Connector",
     "explorer": "Explorador",
-    "explorerDescription": "Herramientas de exploración y análisis de datos",
+    "explorerDescription": "Mapas, galería, alertas y otras vistas de exploración de datos",
     "filebrowser": "Navegador de Archivos",
     "filebrowserDescription": "Gestión y compartición segura de archivos",
     "needHelp": "¿Necesitas ayuda? Visita el",
@@ -155,7 +155,8 @@
       "rawData": "Datos Sin Procesar",
       "scheduledJobs": "Trabajos Programados",
       "visualizations": "Visualizaciones",
-      "wildlifeExplorer": "Explorador de Vida Silvestre"
+      "wildlifeExplorer": "Explorador de Vida Silvestre",
+      "sharing": "Compartir"
     },
     "windmill": "Windmill",
     "windmillDescription": "Plataforma de automatización de flujos de trabajo y ejecución de scripts"
@@ -212,5 +213,72 @@
     "userRoles": "Roles de Usuario",
     "userUpdatedSuccessfully": "Usuario {email} actualizado exitosamente",
     "you": "Tú"
+  },
+  "coachMarks": {
+    "next": "Siguiente",
+    "back": "Atrás",
+    "done": "Listo",
+    "skip": "Omitir recorrido",
+    "close": "Cerrar recorrido",
+    "restart": "Iniciar recorrido",
+    "adminOnly": "Solo admin",
+    "stepLabel": "Paso {current} de {total}",
+    "welcome": {
+      "title": "¡Bienvenido a Guardian Connector!",
+      "body": "Hagamos un recorrido de cómo puedes usar las herramientas.",
+      "exit": "Puedes salir de este recorrido en cualquier momento — siempre puedes volver a abrirlo con el icono {icon} en la parte superior derecha del menú."
+    },
+    "explorer": {
+      "title": "Explorer",
+      "body": "Abre mapas, paneles de alertas y galerías de medios de los datos de tu comunidad."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Crea gráficos, análisis y paneles a partir de tus datos."
+    },
+    "filebrowser": {
+      "title": "Navegador de Archivos",
+      "body": "Explora, sube y comparte archivos y datos en bruto de forma segura."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Sube datos, programa descargas de datos y automatiza flujos de trabajo."
+    },
+    "customApp": {
+      "title": "Aplicaciones personalizadas",
+      "body": "Abre aplicaciones de la comunidad alojadas en tu instancia de Guardian Connector."
+    },
+    "dataSources": {
+      "title": "Hay más abajo",
+      "body": "Desplázate hacia abajo para conocer una selección de las herramientas de recolección de datos que alimentan a Guardian Connector, como CoMapeo, KoboToolbox y ODK."
+    },
+    "docs": {
+      "title": "¿Necesitas ayuda?",
+      "body": "Si necesitas ayuda, consulta nuestra documentación."
+    },
+    "display": {
+      "title": "Modo claro y oscuro",
+      "body": "Cambia la pantalla entre modo claro y oscuro según tu preferencia."
+    },
+    "language": {
+      "title": "Idioma",
+      "body": "Cambia el idioma usado en esta instancia de Guardian Connector."
+    },
+    "adminApps": {
+      "title": "Añadir aplicaciones personalizadas",
+      "body": "Añade tarjetas para aplicaciones alojadas en tu instancia para que los miembros puedan abrirlas desde esta página."
+    },
+    "adminTheme": {
+      "title": "Configura tu marca",
+      "body": "Elige el logotipo y la imagen de fondo de tu instancia."
+    },
+    "adminUsers": {
+      "title": "Gestionar usuarios",
+      "body": "Aprueba nuevas cuentas y asigna los roles que controlan lo que cada persona puede ver."
+    },
+    "replay": {
+      "title": "Repetir este recorrido",
+      "body": "Puedes reiniciar estos consejos en cualquier momento desde este botón."
+    }
   }
 }

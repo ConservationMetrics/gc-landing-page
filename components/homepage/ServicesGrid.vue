@@ -36,12 +36,7 @@ const availableServices = computed(() => {
       name: "Explorer",
       url: `https://explorer.${communityName}.${domain}`,
       icon: "explorer",
-      tags: [
-        "Maps",
-        "Alerts Dashboard",
-        "Wildlife Explorer",
-        "Media Galleries",
-      ],
+      tags: ["Maps", "Alerts Dashboard", "Media Galleries"],
       translateTags: true,
     });
   }
@@ -57,6 +52,17 @@ const availableServices = computed(() => {
     });
   }
 
+  if (config.public.filebrowserEnabled && userRole >= Role.Member) {
+    services.push({
+      key: "filebrowser",
+      name: t("services.filebrowser"),
+      url: `https://files.${communityName}.${domain}`,
+      icon: "filebrowser",
+      tags: ["Files", "Raw Data", "Archives", "Sharing"],
+      translateTags: true,
+    });
+  }
+
   if (config.public.windmillEnabled && userRole >= Role.Admin) {
     services.push({
       key: "windmill",
@@ -64,17 +70,6 @@ const availableServices = computed(() => {
       url: `https://windmill.${communityName}.${domain}`,
       icon: "windmill",
       tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
-      translateTags: true,
-    });
-  }
-
-  if (config.public.filebrowserEnabled && userRole >= Role.Member) {
-    services.push({
-      key: "filebrowser",
-      name: "Filebrowser",
-      url: `https://files.${communityName}.${domain}`,
-      icon: "filebrowser",
-      tags: ["Files", "Raw Data", "Archives"],
       translateTags: true,
     });
   }
@@ -110,23 +105,19 @@ const openService = (url: string) => {
 const getServiceDescription = (service: ServiceCard) => {
   if (service.description) return service.description;
 
-  const descriptions = {
-    Superset: t("services.supersetDescription"),
-    Windmill: t("services.windmillDescription"),
-    Explorer: t("services.explorerDescription"),
-    Filebrowser: t("services.filebrowserDescription"),
+  const descriptions: Record<string, string> = {
+    explorer: t("services.explorerDescription"),
+    superset: t("services.supersetDescription"),
+    windmill: t("services.windmillDescription"),
+    filebrowser: t("services.filebrowserDescription"),
   };
-  return (
-    descriptions[service.name as keyof typeof descriptions] ||
-    t("services.communityService")
-  );
+  return descriptions[service.key] || t("services.communityService");
 };
 
 const translateTag = (tag: string) => {
   const tagMap: Record<string, string> = {
     Maps: t("services.tags.maps"),
     "Alerts Dashboard": t("services.tags.alertsDashboard"),
-    "Wildlife Explorer": t("services.tags.wildlifeExplorer"),
     "Media Galleries": t("services.tags.mediaGalleries"),
     Charts: t("services.tags.charts"),
     Analysis: t("services.tags.analysis"),
@@ -138,6 +129,7 @@ const translateTag = (tag: string) => {
     Files: t("services.tags.files"),
     "Raw Data": t("services.tags.rawData"),
     Archives: t("services.tags.archives"),
+    Sharing: t("services.tags.sharing"),
   };
   return tagMap[tag] || tag;
 };
@@ -155,6 +147,7 @@ const displayTag = (service: ServiceCard, tag: string) =>
       <div
         v-for="service in availableServices"
         :key="service.key"
+        :data-tour="`service-${service.key}`"
         class="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl border border-violet-200 dark:border-violet-900 bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/40 p-6 transition-all duration-200 hover:shadow-lg md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
         @click="openService(service.url)"
       >
