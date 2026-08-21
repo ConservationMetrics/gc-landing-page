@@ -25,7 +25,7 @@ const canSeeDataSources = computed(() => {
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-white dark:bg-dusk-900">
+  <div class="flex flex-col bg-white dark:bg-dusk-900">
     <main class="mx-auto mt-10 max-w-7xl px-4 pb-12 pt-0 sm:px-6 lg:px-8">
       <div class="pt-0">
         <div v-if="logoUrl" class="mb-8 flex justify-center">
