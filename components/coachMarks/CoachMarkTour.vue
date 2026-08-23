@@ -28,8 +28,11 @@ import {
   X,
 } from "lucide-vue-next";
 import { useCoachMarks } from "~/composables/useCoachMarks";
-import { Role } from "~/types/types";
-import type { CoachMarkIcon, CoachMarkPlacement } from "~/utils/coachMarks";
+import {
+  Role,
+  type CoachMarkIcon,
+  type CoachMarkPlacement,
+} from "~/types/types";
 
 const PAD = 8;
 const GUTTER = 16;

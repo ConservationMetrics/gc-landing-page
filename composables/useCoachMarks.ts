@@ -1,6 +1,11 @@
 import { computed, nextTick, ref, type Ref } from "vue";
 import { useUserSession } from "#imports";
-import { Role, type User } from "~/types/types";
+import {
+  Role,
+  type CoachMarkStepDef,
+  type CoachMarksStorage,
+  type User,
+} from "~/types/types";
 import {
   COACH_MARK_STEPS,
   COACH_MARKS_DESKTOP_MQ,
@@ -8,8 +13,6 @@ import {
   COACH_MARKS_VERSION,
   resolveCoachMarkSteps,
   waitForTourDom,
-  type CoachMarkStepDef,
-  type CoachMarksStorage,
 } from "~/utils/coachMarks";
 
 const active = ref(false);

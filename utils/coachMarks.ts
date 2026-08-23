@@ -1,51 +1,8 @@
+import type { CoachMarkStepDef } from "~/types/types";
+
 export const COACH_MARKS_STORAGE_KEY = "gc-coach-marks";
 export const COACH_MARKS_VERSION = 2;
 export const COACH_MARKS_DESKTOP_MQ = "(min-width: 1001px)";
-
-export type CoachMarkPlacement = "top" | "bottom" | "center";
-
-export type CoachMarkStepKey =
-  | "welcome"
-  | "explorer"
-  | "superset"
-  | "filebrowser"
-  | "windmill"
-  | "customApp"
-  | "dataSources"
-  | "docs"
-  | "display"
-  | "language"
-  | "adminApps"
-  | "adminTheme"
-  | "adminUsers"
-  | "replay";
-
-export type CoachMarkIcon =
-  | "sparkles"
-  | "map"
-  | "chart"
-  | "folder"
-  | "wind"
-  | "layoutGrid"
-  | "database"
-  | "bookOpen"
-  | "sunMoon"
-  | "globe"
-  | "palette"
-  | "users"
-  | "helpCircle";
-
-export type CoachMarkStepDef = {
-  key: CoachMarkStepKey;
-  /** CSS selector; omit for centered steps with no spotlight target. */
-  anchor?: string;
-  icon: CoachMarkIcon;
-  /** Optional product screenshot shown in the tour card. */
-  image?: string;
-  placement: CoachMarkPlacement;
-  /** Minimum Role enum value; used when a user is promoted to show only new steps. */
-  minRole: number;
-};
 
 /** Welcome (centered), cards L→R, header L→R, data sources, docs last. */
 export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
@@ -144,12 +101,6 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 0,
   },
 ] as const;
-
-export type CoachMarksStorage = {
-  version: number;
-  dismissedAt: number;
-  maxRole: number;
-};
 
 const stepIsAvailable = (step: CoachMarkStepDef, userRole: number): boolean => {
   if (step.minRole > userRole) return false;
