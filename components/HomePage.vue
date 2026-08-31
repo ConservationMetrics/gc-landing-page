@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
-import { useI18n, useRuntimeConfig } from "#imports";
+import { useI18n, useRuntimeConfig, useUserSession } from "#imports";
 import HoverTooltip from "@/components/shared/HoverTooltip.vue";
 import ServicesGrid from "@/components/homepage/ServicesGrid.vue";
 import DataSourcesGrid from "@/components/homepage/DataSourcesGrid.vue";
@@ -8,6 +8,7 @@ import CoachMarkTour from "@/components/coachMarks/CoachMarkTour.vue";
 import { useThemeSettings } from "@/composables/useThemeSettings";
 import { useCustomApps } from "@/composables/useCustomApps";
 import { useCoachMarks } from "@/composables/useCoachMarks";
+import { Role, type User } from "~/types/types";
 import { ChevronDown } from "lucide-vue-next";
 
 const props = defineProps<{
@@ -18,14 +19,23 @@ const config = useRuntimeConfig();
 const communityName = config.public.communityName;
 const { logoUrl } = useThemeSettings();
 const { t } = useI18n();
+const { user } = useUserSession();
 const { pending: customAppsPending } = useCustomApps();
 const { tryAutostart } = useCoachMarks();
+
+const canSeeDataSources = computed(() => {
+  const typedUser = user.value as User | undefined;
+  return (typedUser?.userRole ?? Role.SignedIn) >= Role.Member;
+});
 
 const dataSourcesVisible = ref(false);
 let observer: IntersectionObserver | null = null;
 
 const showScrollCue = computed(
-  () => props.shouldShowApp && !dataSourcesVisible.value,
+  () =>
+    props.shouldShowApp &&
+    canSeeDataSources.value &&
+    !dataSourcesVisible.value,
 );
 
 const scrollToDataSources = () => {
@@ -55,9 +65,9 @@ const observeDataSources = () => {
 };
 
 watch(
-  () => props.shouldShowApp,
-  (show) => {
-    if (!show) {
+  () => [props.shouldShowApp, canSeeDataSources.value] as const,
+  ([show, canSee]) => {
+    if (!show || !canSee) {
       observer?.disconnect();
       observer = null;
       dataSourcesVisible.value = false;
@@ -86,7 +96,7 @@ watch(
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-white dark:bg-dusk-900">
+  <div class="flex flex-col bg-white dark:bg-dusk-900">
     <main class="mx-auto mt-10 max-w-7xl px-4 pb-12 pt-0 sm:px-6 lg:px-8">
       <div class="pt-0">
         <div v-if="logoUrl" class="mb-8 flex justify-center">
@@ -118,7 +128,10 @@ watch(
 
         <ServicesGrid v-if="props.shouldShowApp" />
 
-        <div v-if="props.shouldShowApp" class="relative my-12">
+        <div
+          v-if="props.shouldShowApp && canSeeDataSources"
+          class="relative my-12"
+        >
           <div class="absolute inset-0 flex items-center" aria-hidden="true">
             <div
               class="h-px w-full bg-gradient-to-r from-transparent via-gray-300 dark:via-dusk-700 to-transparent"
@@ -139,7 +152,7 @@ watch(
           </div>
         </div>
 
-        <DataSourcesGrid v-if="props.shouldShowApp" />
+        <DataSourcesGrid v-if="props.shouldShowApp && canSeeDataSources" />
 
         <div v-if="props.shouldShowApp" class="mb-8 mt-8 text-center">
           <p
