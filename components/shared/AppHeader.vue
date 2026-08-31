@@ -119,6 +119,21 @@ const replayTour = () => {
 
         <!-- Auth controls when logged in -->
         <div v-if="isAuth0 && loggedIn" class="flex items-center space-x-3">
+          <div
+            class="text-sm max-[1200px]:text-xs text-gray-700 dark:text-dusk-300"
+          >
+            {{ t("auth.welcome", { user: (user as User)?.auth0 || "User" }) }}
+            <span
+              v-if="(user as User)?.roles?.length"
+              class="text-xs max-[1200px]:text-[10px] text-gray-500 dark:text-dusk-400"
+            >
+              ({{
+                (user as User)?.roles
+                  ?.map((role) => translateRoleName(role.name, t))
+                  .join(", ")
+              }})
+            </span>
+          </div>
           <button
             @click="logout"
             class="text-gray-600 hover:text-gray-900 dark:text-dusk-400 dark:hover:text-dusk-100 transition-colors text-sm max-[1200px]:text-xs"
