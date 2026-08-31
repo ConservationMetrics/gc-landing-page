@@ -83,7 +83,7 @@ Set `NUXT_PUBLIC_AUTH_STRATEGY` to `auth0` or `none`. See [docs/auth.md](docs/au
 | `NUXT_PUBLIC_SUPERSET_ENABLED` | Superset | `https://superset.{community}.{domain}` |
 | `NUXT_PUBLIC_WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.{domain}` |
 | `NUXT_PUBLIC_EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.{domain}` |
-| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | Filebrowser | `https://files.{community}.{domain}` |
+| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | File Browser | `https://files.{community}.{domain}` |
 
 ### Multi-Tenant Support
 
