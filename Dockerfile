@@ -1,12 +1,12 @@
 # Ultra-optimized multi-stage build with distroless
 # Build stage
-FROM node:20.15.0-slim AS builder
+FROM node:22-slim AS builder
 
 # Set the working directory
 WORKDIR /app
 
 # Install pnpm
-RUN npm install -g pnpm@10.34.5
+RUN npm install -g pnpm@11.25.0
 
 # Copy package files
 COPY package*.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -21,7 +21,7 @@ COPY . .
 RUN pnpm run build
 
 # Production stage - using distroless for minimal size
-FROM gcr.io/distroless/nodejs20-debian12:nonroot AS production
+FROM gcr.io/distroless/nodejs22-debian13:nonroot AS production
 
 # Set the working directory
 WORKDIR /app
