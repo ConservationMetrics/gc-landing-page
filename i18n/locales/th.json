@@ -7,7 +7,7 @@
     "guardianConnectorTooltip": "Guardian Connector เป็นแพลตฟอร์มอธิปไตยข้อมูลของชนพื้นเมืองแบบโอเพนซอร์สและใช้งานฟรี สำหรับองค์กรชุมชนในการรวมศูนย์ เข้าถึง และสร้างข้อมูลเชิงลึกจากข้อมูลสิ่งแวดล้อมและวัฒนธรรมอย่างปลอดภัย"
   },
   "auth": {
-    "welcomeToGuardian Connector": "ยินดีต้อนรับสู่ Guardian Connector",
+    "welcomeToGuardianConnector": "ยินดีต้อนรับสู่ Guardian Connector",
     "pleaseSignIn": "กรุณาเข้าสู่ระบบเพื่อดำเนินการต่อ",
     "pleaseSignInToAccess": "กรุณาเข้าสู่ระบบเพื่อเข้าถึงเครื่องมือชุมชนของคุณ",
     "secureAccessRequired": "ต้องการการเข้าถึงที่ปลอดภัย",
