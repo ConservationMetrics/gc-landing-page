@@ -103,3 +103,55 @@ export type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 // I18n Types
 export type SupportedLocale = "en" | "pt" | "es" | "nl";
+
+// Coach Marks
+export type CoachMarkPlacement = "top" | "bottom" | "center";
+
+export type CoachMarkStepKey =
+  | "welcome"
+  | "explorer"
+  | "superset"
+  | "filebrowser"
+  | "windmill"
+  | "customApp"
+  | "dataSources"
+  | "docs"
+  | "display"
+  | "language"
+  | "adminApps"
+  | "adminTheme"
+  | "adminUsers"
+  | "replay";
+
+export type CoachMarkIcon =
+  | "sparkles"
+  | "map"
+  | "chart"
+  | "folder"
+  | "wind"
+  | "layoutGrid"
+  | "database"
+  | "bookOpen"
+  | "sunMoon"
+  | "globe"
+  | "palette"
+  | "users"
+  | "helpCircle";
+
+export type CoachMarkStepDef = {
+  key: CoachMarkStepKey;
+  /** CSS selector; omit for centered steps with no spotlight target. */
+  anchor?: string;
+  icon: CoachMarkIcon;
+  /** Optional product screenshot shown in the tour card. */
+  image?: string;
+  placement: CoachMarkPlacement;
+  /** Minimum Role enum value; used when a user is promoted to show only new steps. */
+  minRole: number;
+};
+
+export type CoachMarksStorage = {
+  version: number;
+  dismissedAt: number;
+  maxRole: number;
+};

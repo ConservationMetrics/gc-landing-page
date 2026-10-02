@@ -132,8 +132,8 @@
   "services": {
     "documentationWebsite": "tovuti ya nyaraka",
     "explorer": "Explorer",
-    "explorerDescription": "Ramani, matunzio, tahadhari, wanyamapori, na mitazamo mingine ya kuchunguza data",
-    "filebrowser": "Filebrowser",
+    "explorerDescription": "Ramani, matunzio, tahadhari, na mitazamo mingine ya kuchunguza data",
+    "filebrowser": "File Browser",
     "filebrowserDescription": "Usimamizi na kushiriki faili kwa usalama",
     "needHelp": "Unahitaji msaada? Tembelea Guardian Connector",
     "noServicesAvailable": "Hakuna Huduma Zinazopatikana",
@@ -155,7 +155,8 @@
       "rawData": "Data Ghafi",
       "scheduledJobs": "Kazi Zilizopangwa",
       "visualizations": "Uonekanaji",
-      "wildlifeExplorer": "Wildlife Explorer"
+      "wildlifeExplorer": "Wildlife Explorer",
+      "sharing": "Kushiriki"
     },
     "windmill": "Windmill",
     "windmillDescription": "Jukwaa la otomatiki ya michakato na utekelezaji wa hati"
@@ -212,5 +213,72 @@
     "userRoles": "Majukumu ya Mtumiaji",
     "userUpdatedSuccessfully": "Mtumiaji {email} amesasishwa kwa mafanikio",
     "you": "Wewe"
+  },
+  "coachMarks": {
+    "next": "Ifuatayo",
+    "back": "Rudi",
+    "done": "Maliza",
+    "skip": "Ruka mwongozo",
+    "close": "Funga mwongozo",
+    "restart": "Anza mwongozo",
+    "adminOnly": "Admin pekee",
+    "stepLabel": "Hatua {current} kati ya {total}",
+    "welcome": {
+      "title": "Karibu kwenye Guardian Connector!",
+      "body": "Hebu tuchukue mwongozo wa jinsi unavyoweza kutumia zana.",
+      "exit": "Unaweza kuondoka kwenye mwongozo huu wakati wowote — unaweza kuurudisha kwa kutumia ikoni ya {icon} upande wa juu kulia wa menyu."
+    },
+    "explorer": {
+      "title": "Explorer",
+      "body": "Fungua ramani, dashibodi za arifa, na majumba ya picha kwa data ya jamii yako."
+    },
+    "superset": {
+      "title": "Superset",
+      "body": "Tengeneza chati, uchambuzi, na dashibodi kutoka kwa data yako."
+    },
+    "filebrowser": {
+      "title": "File Browser",
+      "body": "Vinjari, pakia, na shiriki faili na data ghafi kwa usalama."
+    },
+    "windmill": {
+      "title": "Windmill",
+      "body": "Pakia data, panga upakuaji wa data, na weka otomatiki mtiririko wa kazi."
+    },
+    "customApp": {
+      "title": "Programu maalum",
+      "body": "Fungua programu za jamii zilizohifadhiwa kwenye mfano wako wa Guardian Connector."
+    },
+    "dataSources": {
+      "title": "Kuna zaidi chini",
+      "body": "Sogeza chini ili ujifunze kuhusu uteuzi wa zana za kukusanya data zinazolisha data katika Guardian Connector, kama CoMapeo, KoboToolbox, na ODK."
+    },
+    "docs": {
+      "title": "Unahitaji msaada?",
+      "body": "Ikiwa unahitaji msaada wowote, tafadhali angalia nyaraka zetu."
+    },
+    "display": {
+      "title": "Hali angavu na iliyokolea",
+      "body": "Badilisha onyesho kati ya angavu na iliyokolea kulingana na mapendeleo yako."
+    },
+    "language": {
+      "title": "Lugha",
+      "body": "Badilisha lugha inayotumika katika mfano huu wa Guardian Connector."
+    },
+    "adminApps": {
+      "title": "Ongeza programu maalum",
+      "body": "Ongeza kadi za programu zilizohifadhiwa kwenye mfano wako ili wanachama waweze kuzifungua kutoka ukurasa huu."
+    },
+    "adminTheme": {
+      "title": "Weka chapa yako",
+      "body": "Chagua nembo na picha ya chinichini ya mfano wako."
+    },
+    "adminUsers": {
+      "title": "Simamia watumiaji",
+      "body": "Idhinisha akaunti mpya na ugawanye majukumu yanayodhibiti kile kila mtu anaweza kuona."
+    },
+    "replay": {
+      "title": "Rudia mwongozo huu",
+      "body": "Unaweza kuanzisha upya vidokezo hivi wakati wowote kutoka kwa kitufe hiki."
+    }
   }
 }
