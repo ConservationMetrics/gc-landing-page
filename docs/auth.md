@@ -1,6 +1,6 @@
 # Role-Based Access Control (RBAC) with Auth0
 
-This document describes how Role-Based Access Control (RBAC) is implemented in the GuardianConnector Landing Page application using Auth0.
+This document describes how Role-Based Access Control (RBAC) is implemented in the Guardian Connector Landing Page application using Auth0.
 
 ## Overview
 
@@ -76,7 +76,7 @@ Before implementing RBAC, ensure:
    - Go to **Dashboard > Applications > APIs**
    - Click **"+ Create API"**
    - Provide API details:
-     - **Name**: Your API name (e.g., "GuardianConnector Landing")
+     - **Name**: Your API name (e.g., "Guardian Connector Landing")
      - **Identifier**: `https://your-domain.com` (unique identifier)
      - **Signing Algorithm**: HS256 (recommended)
    - Click **"Create"**
