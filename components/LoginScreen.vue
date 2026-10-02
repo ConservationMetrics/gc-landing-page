@@ -50,7 +50,7 @@ onMounted(() => {
           <h1
             class="text-balance text-center text-[1.65rem] font-medium leading-snug tracking-tight text-stone-800 dark:text-dusk-100 sm:text-3xl sm:leading-tight"
           >
-            {{ t("auth.welcomeToGuardianConnector") }}
+            {{ t("auth.welcomeToGuardian Connector") }}
           </h1>
           <div
             class="mx-auto mt-7 h-0.5 w-20 bg-gradient-to-r from-transparent via-teal-600/55 to-transparent"

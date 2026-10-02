@@ -7,7 +7,7 @@
     "guardianConnectorTooltip": "Guardian Connector is a free and open-source Indigenous data sovereignty platform for community organizations to securely centralize, access, and derive insights from their environmental and cultural data."
   },
   "auth": {
-    "welcomeToGuardianConnector": "Bem-vindo ao Guardian Connector",
+    "welcomeToGuardian Connector": "Bem-vindo ao Guardian Connector",
     "pleaseSignIn": "Por favor, entre para continuar.",
     "pleaseSignInToAccess": "Por favor, entre para acessar suas ferramentas da comunidade",
     "secureAccessRequired": "Acesso Seguro Necessário",

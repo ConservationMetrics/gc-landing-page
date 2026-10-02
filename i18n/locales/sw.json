@@ -7,7 +7,7 @@
     "guardianConnectorTooltip": "Guardian Connector ni jukwaa huru na chanzo-wazi la uhuru wa data ya asili kwa mashirika ya jamii kuweka kati, kufikia, na kupata maarifa kutoka kwa data yao ya mazingira na utamaduni kwa usalama."
   },
   "auth": {
-    "welcomeToGuardianConnector": "Karibu kwenye Guardian Connector",
+    "welcomeToGuardian Connector": "Karibu kwenye Guardian Connector",
     "pleaseSignIn": "Tafadhali ingia ili kuendelea.",
     "pleaseSignInToAccess": "Tafadhali ingia ili kufikia zana za jamii yako",
     "secureAccessRequired": "Ufikiaji Salama Unahitajika",
