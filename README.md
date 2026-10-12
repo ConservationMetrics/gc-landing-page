@@ -62,8 +62,8 @@ Set `NUXT_PUBLIC_AUTH_STRATEGY` to `auth0` or `none`. See [docs/auth.md](docs/au
 
 1. **Create Auth0 Application**
    - Application Type: Single Page Application
-   - Allowed Callback URLs: `http://localhost:3000/login` (dev), `https://your-domain.com/login` (prod)
-   - Allowed Logout URLs: `http://localhost:3000` (dev), `https://your-domain.com` (prod)
+   - Allowed Callback URLs: `http://localhost:8080/login` (dev), `https://<community>.<root-domain>/login` (prod)
+   - Allowed Logout URLs: `http://localhost:8080` (dev), `https://<community>.<root-domain>` (prod)
 
 2. **Configure Environment Variables**
    ```bash
@@ -80,23 +80,23 @@ Set `NUXT_PUBLIC_AUTH_STRATEGY` to `auth0` or `none`. See [docs/auth.md](docs/au
 
 | Flag | Service | URL Pattern |
 |------|---------|-------------|
-| `NUXT_PUBLIC_SUPERSET_ENABLED` | Superset | `https://superset.{community}.{domain}` |
-| `NUXT_PUBLIC_WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.{domain}` |
-| `NUXT_PUBLIC_EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.{domain}` |
-| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | File Browser | `https://files.{community}.{domain}` |
+| `NUXT_PUBLIC_SUPERSET_ENABLED` | Superset | `https://superset.{community}.{rootDomain}` |
+| `NUXT_PUBLIC_WINDMILL_ENABLED` | Windmill | `https://windmill.{community}.{rootDomain}` |
+| `NUXT_PUBLIC_EXPLORER_ENABLED` | Explorer | `https://explorer.{community}.{rootDomain}` |
+| `NUXT_PUBLIC_FILEBROWSER_ENABLED` | File Browser | `https://files.{community}.{rootDomain}` |
 
 ### Multi-Tenant Support
 
-Service URLs are dynamically configured based on `NUXT_PUBLIC_COMMUNITY_NAME`:
+Service URLs use `NUXT_PUBLIC_COMMUNITY_NAME` and `NUXT_PUBLIC_ROOT_DOMAIN` (the parent domain, for example `guardianconnector.net`):
 
 ```bash
-# Community: demo
-https://superset.demo.{domain}
-https://windmill.demo.{domain}
+# Community: demo, root domain: guardianconnector.net
+https://superset.demo.guardianconnector.net
+https://windmill.demo.guardianconnector.net
 
-# Community: acme
-https://superset.acme.{domain}
-https://windmill.acme.{domain}
+# Community: acme, root domain: example.net
+https://superset.acme.example.net
+https://windmill.acme.example.net
 ```
 
 ---
