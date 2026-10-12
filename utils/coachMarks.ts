@@ -87,6 +87,13 @@ export const COACH_MARK_STEPS: readonly CoachMarkStepDef[] = [
     minRole: 0,
   },
   {
+    key: "signOut",
+    anchor: '[data-tour="header-logout"]',
+    icon: "logOut",
+    placement: "bottom",
+    minRole: 0,
+  },
+  {
     key: "dataSources",
     anchor: '[data-tour="data-sources"]',
     icon: "database",

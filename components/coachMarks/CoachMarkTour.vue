@@ -18,6 +18,7 @@ import {
   Globe,
   HelpCircle,
   LayoutGrid,
+  LogOut,
   Map,
   Palette,
   Shield,
@@ -58,6 +59,7 @@ const iconMap: Record<CoachMarkIcon, Component> = {
   palette: Palette,
   users: Users,
   helpCircle: HelpCircle,
+  logOut: LogOut,
 };
 
 const spotlight = ref({ top: 0, left: 0, width: 0, height: 0 });

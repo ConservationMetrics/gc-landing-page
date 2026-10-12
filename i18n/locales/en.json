@@ -279,6 +279,10 @@
     "replay": {
       "title": "Replay this tour",
       "body": "You can restart these tips anytime from this button."
+    },
+    "signOut": {
+      "title": "Sign out",
+      "body": "End your session from here when you are finished."
     }
   }
 }
