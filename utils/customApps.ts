@@ -248,5 +248,5 @@ export const validateCustomAppsPayload = (
 export const buildCustomAppUrl = (
   subdomain: string,
   communityName: string,
-  domain: string,
-): string => `https://${subdomain}.${communityName}.${domain}`;
+  rootDomain: string,
+): string => `https://${subdomain}.${communityName}.${rootDomain}`;

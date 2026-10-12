@@ -1,5 +1,6 @@
 import type { H3Event } from "h3";
 import { useRuntimeConfig } from "#imports";
+import { landingBaseUrl } from "~/server/utils/baseUrl";
 import { Role } from "~/types/types";
 
 interface Auth0User {
@@ -235,7 +236,7 @@ const assignUserRoles = async (
 export default oauthAuth0EventHandler({
   config: {
     emailRequired: true,
-    redirectURL: `${useRuntimeConfig().public.baseUrl}/login`,
+    redirectURL: `${landingBaseUrl()}/login`,
   },
 
   /**
