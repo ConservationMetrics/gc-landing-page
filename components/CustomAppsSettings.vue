@@ -46,7 +46,7 @@ const API_PATH = "/api/custom_apps/custom-apps";
 const { t } = useI18n();
 const config = useRuntimeConfig();
 const communityName = config.public.communityName as string;
-const domain = config.public.domain as string;
+const rootDomain = config.public.rootDomain as string;
 
 const loading = ref(true);
 const loadError = ref("");
@@ -119,7 +119,7 @@ const onTagsChanged = (app: CustomAppDraft, newTags: CustomAppTag[]) => {
 const previewUrl = (subdomain: string) => {
   const slug = subdomain.trim();
   if (!slug) return "";
-  return buildCustomAppUrl(slug, communityName, domain);
+  return buildCustomAppUrl(slug, communityName, rootDomain);
 };
 
 const createEmptyApp = (): CustomAppDraft => ({

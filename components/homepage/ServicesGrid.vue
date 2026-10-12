@@ -20,7 +20,7 @@ type ServiceCard = {
 
 const config = useRuntimeConfig();
 const communityName = config.public.communityName;
-const domain = config.public.domain;
+const rootDomain = config.public.rootDomain;
 const { t } = useI18n();
 const { user } = useUserSession();
 const { apps: customApps } = useCustomApps();
@@ -34,7 +34,7 @@ const availableServices = computed(() => {
     services.push({
       key: "explorer",
       name: "Explorer",
-      url: `https://explorer.${communityName}.${domain}`,
+      url: `https://explorer.${communityName}.${rootDomain}`,
       icon: "explorer",
       tags: ["Maps", "Alerts Dashboard", "Media Galleries"],
       translateTags: true,
@@ -45,7 +45,7 @@ const availableServices = computed(() => {
     services.push({
       key: "superset",
       name: "Superset",
-      url: `https://superset.${communityName}.${domain}`,
+      url: `https://superset.${communityName}.${rootDomain}`,
       icon: "superset",
       tags: ["Charts", "Analysis", "Visualizations", "Dashboards"],
       translateTags: true,
@@ -56,7 +56,7 @@ const availableServices = computed(() => {
     services.push({
       key: "filebrowser",
       name: t("services.filebrowser"),
-      url: `https://files.${communityName}.${domain}`,
+      url: `https://files.${communityName}.${rootDomain}`,
       icon: "filebrowser",
       tags: ["Files", "Raw Data", "Archives", "Sharing"],
       translateTags: true,
@@ -67,7 +67,7 @@ const availableServices = computed(() => {
     services.push({
       key: "windmill",
       name: "Windmill",
-      url: `https://windmill.${communityName}.${domain}`,
+      url: `https://windmill.${communityName}.${rootDomain}`,
       icon: "windmill",
       tags: ["Data Flows", "Scheduled Jobs", "Data Apps"],
       translateTags: true,
@@ -81,7 +81,7 @@ const availableServices = computed(() => {
       services.push({
         key: `custom-${app.id}`,
         name: app.name,
-        url: buildCustomAppUrl(app.subdomain, communityName, domain),
+        url: buildCustomAppUrl(app.subdomain, communityName, rootDomain),
         icon: "custom",
         iconUrl: app.iconUrl,
         description: app.description,
