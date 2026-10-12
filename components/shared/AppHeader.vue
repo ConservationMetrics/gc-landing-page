@@ -33,10 +33,25 @@ const { t } = useI18n();
 // Auth state using nuxt-auth-utils
 const { loggedIn, user } = useUserSession();
 
-const isAdmin = computed(() => {
-  const typedUser = user.value as User;
-  return typedUser?.userRole && typedUser.userRole >= Role.Admin;
-});
+const sessionUser = computed(() => user.value as User | undefined);
+
+const isAdmin = computed(
+  () =>
+    !!sessionUser.value?.userRole && sessionUser.value.userRole >= Role.Admin,
+);
+
+const userLabel = computed(() => sessionUser.value?.auth0 || "User");
+
+const roleLabel = computed(
+  () =>
+    sessionUser.value?.roles
+      ?.map((role) => translateRoleName(role.name, t))
+      .join(", ") ?? "",
+);
+
+const accountTitle = computed(() =>
+  roleLabel.value ? `${userLabel.value} (${roleLabel.value})` : userLabel.value,
+);
 
 const mobileMenuOpen = ref(false);
 
@@ -57,56 +72,60 @@ const replayTour = () => {
     class="bg-gradient-to-r mb-2 from-violet-100 to-violet-50 dark:from-violet-950 dark:to-dusk-800 w-5/6 place-self-center mt-2 rounded-xl p-3"
   >
     <!-- Desktop Layout - show above 1000px -->
-    <div class="flex max-[1000px]:hidden relative items-end justify-around">
+    <div class="flex max-[1000px]:hidden items-end gap-3">
       <!-- Left: Guardian Connector Logo -->
-      <HeaderBrand />
+      <HeaderBrand class="shrink-0" />
 
-      <!-- Tab with Community Name -->
-      <div
-        class="tab-container flex absolute left-[32%] min-[1109px]:left-[29%] min-[1230px]:left-[27%] -bottom-3 flex-col items-center t-[32%]"
-      >
-        <NuxtLink to="/" class="tab-trigger active">
-          <svg
-            class="left-curve"
-            xmlns="http://www.w3.org/2000/svg"
-            xml:space="preserve"
-            style="
-              fill-rule: evenodd;
-              clip-rule: evenodd;
-              stroke-linejoin: round;
-              stroke-miterlimit: 2;
-            "
-            viewBox="0 0 608 647"
-          >
-            <path
-              d="M1347.436 2760H740v-646.902s200.986 16.142 313.006 311.678c104.814 276.525 231.346 327.558 294.43 335.224Z"
-              style="fill: currentColor"
-              transform="translate(-740 -2113.0982)"
-            />
-          </svg>
-          <span class="text-lg font-bold">{{ communityName }}</span>
-          <svg
-            class="right-curve"
-            xmlns="http://www.w3.org/2000/svg"
-            xml:space="preserve"
-            style="
-              fill-rule: evenodd;
-              clip-rule: evenodd;
-              stroke-linejoin: round;
-              stroke-miterlimit: 2;
-            "
-            viewBox="0 0 608 647"
-          >
-            <path
-              d="M1347.436 2760H740v-646.902s200.986 16.142 313.006 311.678c104.814 276.525 231.346 327.558 294.43 335.224Z"
-              style="fill: currentColor"
-              transform="translate(-740 -2113.0982)"
-            />
-          </svg>
-        </NuxtLink>
+      <!-- In-flow so the instance tab keeps its own lane and cannot cover the email -->
+      <div class="flex flex-1 items-end justify-center">
+        <div
+          class="tab-container relative mx-12 flex shrink-0 translate-y-3 flex-col items-center whitespace-nowrap"
+        >
+          <NuxtLink to="/" class="tab-trigger active">
+            <svg
+              class="left-curve"
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+              viewBox="0 0 608 647"
+            >
+              <path
+                d="M1347.436 2760H740v-646.902s200.986 16.142 313.006 311.678c104.814 276.525 231.346 327.558 294.43 335.224Z"
+                style="fill: currentColor"
+                transform="translate(-740 -2113.0982)"
+              />
+            </svg>
+            <span class="text-lg font-bold">{{ communityName }}</span>
+            <svg
+              class="right-curve"
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+              viewBox="0 0 608 647"
+            >
+              <path
+                d="M1347.436 2760H740v-646.902s200.986 16.142 313.006 311.678c104.814 276.525 231.346 327.558 294.43 335.224Z"
+                style="fill: currentColor"
+                transform="translate(-740 -2113.0982)"
+              />
+            </svg>
+          </NuxtLink>
+        </div>
       </div>
-      <!-- Right: Action buttons -->
-      <div class="flex items-center space-x-3 ml-auto mr-2">
+      <!-- Right: account and action buttons -->
+      <div
+        class="mr-2 flex min-w-0 items-center justify-end gap-3 [&>:not(p)]:shrink-0"
+      >
         <!-- Auth controls -->
         <div v-if="isAuth0 && !loggedIn">
           <button
@@ -117,30 +136,19 @@ const replayTour = () => {
           </button>
         </div>
 
-        <!-- Auth controls when logged in -->
-        <div v-if="isAuth0 && loggedIn" class="flex items-center space-x-3">
-          <div
-            class="text-sm max-[1200px]:text-xs text-gray-700 dark:text-dusk-300"
+        <p
+          v-if="isAuth0 && loggedIn"
+          class="min-w-0 truncate text-sm text-gray-700 max-[1200px]:text-xs dark:text-dusk-300"
+          :title="accountTitle"
+        >
+          {{ userLabel }}
+          <span
+            v-if="roleLabel"
+            class="text-xs text-gray-500 max-[1200px]:text-[10px] dark:text-dusk-400"
           >
-            {{ t("auth.welcome", { user: (user as User)?.auth0 || "User" }) }}
-            <span
-              v-if="(user as User)?.roles?.length"
-              class="text-xs max-[1200px]:text-[10px] text-gray-500 dark:text-dusk-400"
-            >
-              ({{
-                (user as User)?.roles
-                  ?.map((role) => translateRoleName(role.name, t))
-                  .join(", ")
-              }})
-            </span>
-          </div>
-          <button
-            @click="logout"
-            class="text-gray-600 hover:text-gray-900 dark:text-dusk-400 dark:hover:text-dusk-100 transition-colors text-sm max-[1200px]:text-xs"
-          >
-            {{ t("auth.signOut") }}
-          </button>
-        </div>
+            ({{ roleLabel }})
+          </span>
+        </p>
 
         <!-- User Management -->
         <div
@@ -240,6 +248,29 @@ const replayTour = () => {
             {{ t("header.languagePicker") }}
           </div>
         </div>
+
+        <!-- Sign out -->
+        <div
+          v-if="isAuth0 && loggedIn"
+          data-tour="header-logout"
+          class="relative group"
+        >
+          <button
+            type="button"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-dusk-700 dark:hover:bg-red-950/40 dark:focus:ring-offset-dusk-800"
+            :aria-label="t('auth.signOut')"
+            @click="logout"
+          >
+            <LogOut
+              class="h-5 w-5 text-gray-600 group-hover:text-red-600 dark:text-dusk-300 dark:group-hover:text-red-300"
+            />
+          </button>
+          <div
+            class="absolute right-0 mt-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-dusk-600 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap"
+          >
+            {{ t("auth.signOut") }}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -291,17 +322,13 @@ const replayTour = () => {
           </div>
           <div>
             <p class="text-sm font-semibold text-gray-900 dark:text-dusk-100">
-              {{ t("auth.welcome", { user: (user as User)?.auth0 || "User" }) }}
+              {{ userLabel }}
             </p>
             <p
-              v-if="(user as User)?.roles?.length"
+              v-if="roleLabel"
               class="text-xs text-gray-500 dark:text-dusk-400"
             >
-              {{
-                (user as User)?.roles
-                  ?.map((role) => translateRoleName(role.name, t))
-                  .join(", ")
-              }}
+              {{ roleLabel }}
             </p>
           </div>
         </div>

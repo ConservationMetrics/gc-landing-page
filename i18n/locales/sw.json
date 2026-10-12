@@ -279,6 +279,10 @@
     "replay": {
       "title": "Rudia mwongozo huu",
       "body": "Unaweza kuanzisha upya vidokezo hivi wakati wowote kutoka kwa kitufe hiki."
+    },
+    "signOut": {
+      "title": "Toka",
+      "body": "Maliza kipindi chako hapa ukimaliza."
     }
   }
 }

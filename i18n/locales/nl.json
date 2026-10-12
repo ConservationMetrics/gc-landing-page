@@ -279,6 +279,10 @@
     "replay": {
       "title": "Deze rondleiding herhalen",
       "body": "Je kunt deze tips altijd opnieuw starten via deze knop."
+    },
+    "signOut": {
+      "title": "Uitloggen",
+      "body": "Beëindig hier je sessie wanneer je klaar bent."
     }
   }
 }

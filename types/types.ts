@@ -121,7 +121,8 @@ export type CoachMarkStepKey =
   | "adminApps"
   | "adminTheme"
   | "adminUsers"
-  | "replay";
+  | "replay"
+  | "signOut";
 
 export type CoachMarkIcon =
   | "sparkles"
@@ -136,7 +137,8 @@ export type CoachMarkIcon =
   | "globe"
   | "palette"
   | "users"
-  | "helpCircle";
+  | "helpCircle"
+  | "logOut";
 
 export type CoachMarkStepDef = {
   key: CoachMarkStepKey;

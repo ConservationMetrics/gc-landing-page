@@ -279,6 +279,10 @@
     "replay": {
       "title": "Repetir este recorrido",
       "body": "Puedes reiniciar estos consejos en cualquier momento desde este botón."
+    },
+    "signOut": {
+      "title": "Cerrar sesión",
+      "body": "Termina tu sesión desde aquí cuando hayas acabado."
     }
   }
 }
