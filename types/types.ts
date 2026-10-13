@@ -155,3 +155,11 @@ export type CoachMarksStorage = {
   dismissedAt: number;
   maxRole: number;
 };
+
+/** `GET /_info`. `tag` is empty outside image builds. `startedAt` is process boot. */
+export interface DeployInfo {
+  tag: string;
+  commit: string;
+  buildId: string;
+  startedAt: string;
+}

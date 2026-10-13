@@ -17,6 +17,12 @@ RUN pnpm install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Stamp GET /_info. .git is not in the build context, so CI passes these.
+ARG GIT_COMMIT=""
+ARG IMAGE_TAG=""
+ENV GIT_COMMIT=$GIT_COMMIT
+ENV IMAGE_TAG=$IMAGE_TAG
+
 # Build the application
 RUN pnpm run build
 
