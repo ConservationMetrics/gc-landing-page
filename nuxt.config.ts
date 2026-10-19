@@ -1,6 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
 
+import { readBuildIdentity } from "./server/buildIdentity";
+
+const buildIdentity = readBuildIdentity();
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
@@ -44,6 +48,8 @@ export default defineNuxtConfig({
     dbPassword: "",
     dbPort: "",
     dbSsl: false,
+    // Build identity for GET /_info. Tag is the Docker image tag YYYYMMDD-<run>.
+    deploy: buildIdentity,
     // Session secret for nuxt-auth-utils
     sessionSecret: "your-session-secret-key-change-in-production",
     // OAuth configuration for nuxt-auth-utils and Auth0 management API
