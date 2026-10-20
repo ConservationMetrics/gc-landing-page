@@ -14,12 +14,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
   } = useRuntimeConfig();
   const router = useRouter();
 
-  // Handle logout flow
+  // Legacy logout query: prefer /api/auth/logout (clears Auth0 SSO too)
   if (to.query.logout === "true") {
-    const sessionCookie = useCookie("nuxt-session");
-    sessionCookie.value = null;
-
-    return navigateTo("/");
+    return navigateTo("/api/auth/logout", { external: true });
   }
 
   if (authStrategy === "none") {
@@ -27,26 +24,32 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return;
   }
 
-  // In order to redirect the user back to the page they were on when unauthenticated, we need to store the redirect url in session storage
-  // We use the window object to get where the user was before they were redirected to the login page
-  // Store it in the session storage and in the Auth0 component we grab and redirect
+  // Preserve post-login destination across silent Auth0 redirect and LoginScreen.
+  if (import.meta.client && !loggedIn.value && to.path !== "/login") {
+    sessionStorage.setItem("redirect_url", to.fullPath);
+  } else if (import.meta.client && to.path.includes("/login")) {
+    const back = window.history.state.back;
+    const current = window.history.state.current;
 
-  if (import.meta.client) {
-    if (to.path.includes("/login")) {
-      const back = window.history.state.back;
-      const current = window.history.state.current;
-
-      if (!current.includes("/login") && !back) {
-        sessionStorage.setItem("redirect_url", current);
-      }
+    if (!current.includes("/login") && !back) {
+      sessionStorage.setItem("redirect_url", current);
     }
   }
 
+  // Silent SSO: reuse Auth0 tenant session without showing LoginScreen first.
+  // On login_required, Auth0 redirects to /login and LoginScreen is shown.
   if (authStrategy === "auth0" && !loggedIn.value && to.path !== "/login") {
-    return router.push("/login");
+    return navigateTo("/api/auth/auth0?silent=1", { external: true });
   }
 
   if (loggedIn.value && to.path === "/login") {
+    if (import.meta.client) {
+      const redirectUrl = sessionStorage.getItem("redirect_url");
+      if (redirectUrl) {
+        sessionStorage.removeItem("redirect_url");
+        return navigateTo(redirectUrl);
+      }
+    }
     return router.push("/");
   }
 
