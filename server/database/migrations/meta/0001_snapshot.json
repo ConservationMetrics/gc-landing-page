@@ -102,7 +102,9 @@
         "gc_custom_apps_subdomain_unique": {
           "name": "gc_custom_apps_subdomain_unique",
           "nullsNotDistinct": false,
-          "columns": ["subdomain"]
+          "columns": [
+            "subdomain"
+          ]
         }
       },
       "policies": {},

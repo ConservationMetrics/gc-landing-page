@@ -33,7 +33,9 @@ let observer: IntersectionObserver | null = null;
 
 const showScrollCue = computed(
   () =>
-    props.shouldShowApp && canSeeDataSources.value && !dataSourcesVisible.value,
+    props.shouldShowApp &&
+    canSeeDataSources.value &&
+    !dataSourcesVisible.value,
 );
 
 const scrollToDataSources = () => {
