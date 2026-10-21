@@ -1,7 +1,13 @@
 import type { H3Event } from "h3";
+import { getQuery } from "h3";
 import { useRuntimeConfig } from "#imports";
 import { landingBaseUrl } from "~/server/utils/baseUrl";
 import { Role } from "~/types/types";
+import {
+  consumeAuthRedirect,
+  rememberAuthRedirect,
+  safeAuthRedirect,
+} from "~/utils/authRedirect";
 
 interface Auth0User {
   email: string;
@@ -244,6 +250,7 @@ const AUTH0_SSO_MAX_AGE_SECONDS = 2_592_000; // 30 days (Auth0 default)
  * @param {{user: Auth0User}} params - Object containing the authenticated user data
  */
 const onSuccess = async (event: H3Event, { user }: { user: Auth0User }) => {
+  let sessionSet = false;
   try {
     // If roles aren't in the user object, fetch them from Management API
     let userRoles: Array<{ id: string; name: string; description: string }> =
@@ -364,11 +371,12 @@ const onSuccess = async (event: H3Event, { user }: { user: Auth0User }) => {
       },
       loggedInAt: Date.now(),
     });
+    sessionSet = true;
   } catch (error) {
     console.error("🔍 Auth0 Error: Error setting user session", error);
   }
-  // Redirect directly to the target page instead of login
-  return sendRedirect(event, "/login");
+  const next = sessionSet ? (consumeAuthRedirect(event) ?? "/login") : "/login";
+  return sendRedirect(event, next);
 };
 
 const onError = (event: H3Event) => {
@@ -383,6 +391,11 @@ const onError = (event: H3Event) => {
 export default defineEventHandler((event) => {
   const query = getQuery(event);
   const silent = query.silent === "1" || query.silent === "true";
+  const redirect =
+    typeof query.redirect === "string"
+      ? safeAuthRedirect(query.redirect)
+      : null;
+  if (redirect) rememberAuthRedirect(event, redirect);
 
   return oauthAuth0EventHandler({
     config: {

@@ -3,6 +3,7 @@ import {
   navigateTo,
   useRuntimeConfig,
 } from "#imports";
+import { consumeAuthRedirect, safeAuthRedirect } from "~/utils/authRedirect";
 import type { User } from "~/types/types";
 import { Role } from "~/types/types";
 import { createError } from "h3";
@@ -14,7 +15,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   } = useRuntimeConfig();
   const router = useRouter();
 
-  // Legacy logout query: prefer /api/auth/logout (clears Auth0 SSO too)
+  // Handle logout flow
   if (to.query.logout === "true") {
     return navigateTo("/api/auth/logout", { external: true });
   }
@@ -24,14 +25,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return;
   }
 
-  // Preserve post-login destination across silent Auth0 redirect and LoginScreen.
-  if (import.meta.client && !loggedIn.value && to.path !== "/login") {
-    sessionStorage.setItem("redirect_url", to.fullPath);
-  } else if (import.meta.client && to.path.includes("/login")) {
+  // Preserve post-login destination. sessionStorage is client-only; the
+  // redirect query is stored as a cookie by /api/auth/auth0 so a full page
+  // load still returns to the original path.
+  if (import.meta.client && to.path.includes("/login")) {
     const back = window.history.state.back;
     const current = window.history.state.current;
 
-    if (!current.includes("/login") && !back) {
+    if (!current.includes("/login") && !back && safeAuthRedirect(current)) {
       sessionStorage.setItem("redirect_url", current);
     }
   }
@@ -39,16 +40,29 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // Silent SSO: reuse Auth0 tenant session without showing LoginScreen first.
   // On login_required, Auth0 redirects to /login and LoginScreen is shown.
   if (authStrategy === "auth0" && !loggedIn.value && to.path !== "/login") {
-    return navigateTo("/api/auth/auth0?silent=1", { external: true });
+    if (import.meta.client && safeAuthRedirect(to.fullPath)) {
+      sessionStorage.setItem("redirect_url", to.fullPath);
+    }
+    const redirect = encodeURIComponent(to.fullPath);
+    return navigateTo(`/api/auth/auth0?silent=1&redirect=${redirect}`, {
+      external: true,
+    });
   }
 
   if (loggedIn.value && to.path === "/login") {
     if (import.meta.client) {
-      const redirectUrl = sessionStorage.getItem("redirect_url");
+      const redirectUrl = safeAuthRedirect(
+        sessionStorage.getItem("redirect_url"),
+      );
       if (redirectUrl) {
         sessionStorage.removeItem("redirect_url");
         return navigateTo(redirectUrl);
       }
+    }
+    const event = useRequestEvent();
+    if (event) {
+      const target = consumeAuthRedirect(event);
+      if (target) return navigateTo(target);
     }
     return router.push("/");
   }
