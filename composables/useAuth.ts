@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { useRouter } from "#imports";
+import { safeAuthRedirect } from "~/utils/authRedirect";
 
 export const useAuth = (loggedIn: { value: boolean }) => {
   let errorMessage;
@@ -25,7 +26,13 @@ export const useAuth = (loggedIn: { value: boolean }) => {
   }
 
   if (loggedIn.value) {
-    router.push(redirectPath.value);
+    const stored = safeAuthRedirect(sessionStorage.getItem("redirect_url"));
+    if (stored) {
+      sessionStorage.removeItem("redirect_url");
+      window.location.href = stored;
+    } else {
+      router.push(redirectPath.value);
+    }
   }
 
   return errorMessage;
@@ -41,7 +48,7 @@ export const useAuthActions = () => {
   };
 
   const logout = () => {
-    window.location.href = "/?logout=true";
+    window.location.href = "/api/auth/logout";
   };
 
   return {
