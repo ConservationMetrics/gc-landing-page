@@ -397,7 +397,7 @@ export default defineEventHandler((event) => {
       : null;
   if (redirect) rememberAuthRedirect(event, redirect);
 
-  return oauthAuth0EventHandler({
+  return defineOAuthAuth0EventHandler({
     config: {
       emailRequired: true,
       redirectURL: `${landingBaseUrl()}/login`,
